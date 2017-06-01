@@ -28,11 +28,11 @@ function support_ping_intel82599_test()
             if [ $? -ne 0 ]
             then
                 echo "No, fail, ping intel82599 network ports about ${ethx} failed!"
-                return
+                return 1
             fi
 
         let num+=1
-        echo "Yes, scucceed, ping intel82599 network ports about ${ethx} successfully!"
+        writeFail "Yes, scucceed, ping intel82599 network ports about ${ethx} successfully!"
         fi
     done
     writePass
