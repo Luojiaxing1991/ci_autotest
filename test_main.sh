@@ -36,12 +36,7 @@ function board_run_back()
     set passwd '$SYSTEM_PASSWD'
     set server_user '$SERVER_USER'
     set server_passwd '$SERVER_PASSWD'
-    set test_run_script '$2'
     set SERVER_IP '$SERVER_IP'
-    set autotest_zip '${AUTOTEST_ZIP_FILE}'
-    set report_path '${REPORT_PATH}'
-    set report_file '${REPORT_FILE}'
-    set mode_report_file '$3'
     spawn board_connect ${boardno}
     send "\r"
     expect -re {Press any other key in [0-9]+ seconds to stop automatical booting}
@@ -161,9 +156,9 @@ function main()
     #SAS Module Main function call
     [ ${RUN_SAS} -eq 1 ] && board_run ${SAS_BORADNO} ${SAS_MAIN} ${SAS_REPORT_FILE} &
     #PXE Module Main function call
-    [ ${RUN_XGE} -eq 1 ] &&  board_run_back ${BACK_XGE_BORADNO} ${XGE_MAIN} ${XGE_REPORT_FILE}  && board_run ${XGE_BORADNO} ${XGE_MAIN} ${XGE_REPORT_FILE} &
+    [ ${RUN_XGE} -eq 1 ] &&  board_run_back ${BACK_XGE_BORADNO} && board_run ${XGE_BORADNO} ${XGE_MAIN} ${XGE_REPORT_FILE} &
     #PCIE Module Main function call
-    [ ${RUN_PCIE} -eq 1 ] && board_run ${PCIE_BORADNO} ${PCIE_MAIN} ${PCIE_REPORT_FILE} &	
+    [ ${RUN_PCIE} -eq 1 ] && board_run_back ${BACK_PCIE_BORADNO} && board_run ${PCIE_BORADNO} ${PCIE_MAIN} ${PCIE_REPORT_FILE} &	
 
     # Wait for all background processes to end
     wait
