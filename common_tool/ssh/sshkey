@@ -1,0 +1,74 @@
+#!/usr/bin/expect -f
+
+proc_my_exit { exit_code } {
+  send_log "\n----------------------------ssh-keygen---------exit\[${exit_code}]-----------------------\n"
+  exit ${exit_code}
+}
+
+if { ${argc} != 3 && ${argc} != 2 }  {
+    regsub ".*/" $argv0 "" name
+    send_user "\naccept at most parameters.\[${argv}\]\nUsage: ${name} \[logfile]\n"
+    my_exit 1
+}
+
+if { ${argc} == 3 }  {
+    set user [lindex $argv 0]
+    set homedir [lindex $argv 1]
+    set logfile [lindex $argv 2]
+	if { ! [ file exists ${logfile} ] } {
+	    exec touch ${logfile}
+	}
+	log_file ${logfile}
+}
+
+send_log "\n----------------------------ssh-keygen---------start----------------------\n"
+
+exec rm -rf ${homedir}/.ssh
+exec mkdir -p ${homedir}/.ssh
+if { [catch { spawn ssh-keygen -t dsa } error] } {
+	    send_log "\n fail to spawn ssh-keygen:  $error\n"
+		my_exit 1
+}
+
+set log_prefix "<<>>"
+set success 0
+while { 1 } {
+    expect {
+	    -nocase -re "Enter file .* to save the key" { send -- "${homedir}/.ssh/id_dsa\r"; send_log "\n ${log_prefix} send file name to save the key.\n" }
+		-nocase -re "passphrase.*:" { send -- "\r"; send_log "\n ${log_prefix} send password.\n" }
+		-nocase -re "passphrase.*again:" { send -- "\r"; send_log "\n ${log_prefix} send password again.\n" }
+		-nocase "public key has been saved" { send success 1; send_log "\n ${log_prefix} key has been saved.\n" }
+		-nocase "Overwrite" { send -- "y\r"; send_log "\n ${log_prefix} send yes to overwrite." }
+		timeout { send_log "\n ${log_prefix} timeout occurs.\n"; break }
+		eof {
+		    set ret [wait]
+			send_log "\npid:[lindex $ret 0]\nspawn id:[lindex $ret 1]\nsys error:[lindex $ret 2]\n\n"
+			set sys_err [lindex $ret 2]
+			if { ${sys_err} } {
+			    send_log "\nan operating system error occurred.\n"
+				my_exit 1
+			}
+			set proc_exit_code [lindex $ret 3]
+			if { $proc_exit_code == 0 } {
+			    set success 1
+			}
+			break
+		}
+	}
+}
+
+if { $success == 0 } {
+    my_exit 1
+}
+
+if { ! [ file exists ${homedir}/.ssh/id_dsa.pub ] } {
+    send_log "\n ${log_prefix} file \[ ${homedir}/.ssh/id_dsa.pub ] does not exist.\n"
+	my_exit 1
+}
+
+if { [catch { exec cat ${homedir}/.ssh/id_dsa.pub > ${homedir}/.ssh/authorized_keys} results] } {
+    send_log "\ncannot generate /root/.ssh/authorized_keys: $results \n"
+	my_exit 1
+}
+
+my_exit 0

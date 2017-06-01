@@ -1,0 +1,104 @@
+#!/bin/bash
+# 
+
+
+# Load configuration options
+. sas_autotest/config/sas_test_config
+. config/common_lib
+
+## Utility function
+#
+
+#  Get system disk partition information.
+#  IN : N/A
+#  OUT: N/A
+function get_all_disk_part()
+{
+    for name in `fdisk -l | grep -o "/dev/[a-z]d[a-z][1-9]"`
+    do
+        ALL_DISK_PART_NAME[${#ALL_DISK_PART_NAME[*]}]=$name
+    done
+}
+
+#  Mount the disk partition to the local.
+#  IN : $1 partition disk name
+#  OUT: N/A
+function mount_disk()
+{
+    disk_name=$1
+    echo "y" | mkfs.ext4 $disk_name 1>/dev/null
+    mount -t ext4 $disk_name /mnt 1>/dev/null
+    
+    temp_info=`mount | grep -w "^$disk_name"`
+    [ "$temp_info" = x"" ] && return 1
+    return 0
+}
+
+# Configure the FIO tool configuration file.
+# IN : N/A
+# OUT: N/A
+function fio_config()
+{
+    echo "$FIO_PARAMETER_LIST" > ${FIO_CONFG}
+    for dev in "${ALL_DISK_PART_NAME[@]}"
+    do
+        echo "[job1]" >> ${FIO_CONFG}
+        echo "filename=$dev" >> ${FIO_CONFG}
+    done
+}
+
+# Open and close operation on PHY port.
+# IN : $1 - Open or close phy.
+#      $2 - PHY port location.
+# OUT: N/A
+function phy_ops()
+{
+    case "$1" in
+        "close")
+            case "$2" in
+                [0-7])
+                    ${DEVMEM} ${PHY_ADDR_VALUE[$2]} -w 0x6
+                    ;;
+                "all")
+                    for phy in  ${PHY_ADDR_VALUE[@]}
+                    do
+                        ${DEVMEM} ${phy} -w 0x6
+                    done
+                    ;;
+            esac
+        ;;
+        "open")
+            case "$2" in
+                [0-7])
+                ${DEVMEM} ${PHY_ADDR_VALUE[$2]} -w 0x7
+                ;;
+            "all")
+                for phy in  ${PHY_ADDR_VALUE[@]}
+                do
+                    ${DEVMEM} ${phy} -w 0x7
+                done
+                ;;
+            esac
+        ;;
+    esac
+}
+
+# Reset file status.
+# IN : $1 - Reset file value.
+#      $2 - reset file.
+# OUT: N/A
+function change_sas_phy_file()
+{
+    for dir in `ls ${PHY_FILE_PATH}`
+    do
+        str=`cat ${PHY_FILE_PATH}/${dir}/device_type`
+        num=`echo "$dir" | awk -F":" '{print $NF}'`
+
+        if [ x"$str" == x"end device" ] && [ $num -le $EFFECTIVE_PHY_NUM ]
+        then
+            echo $1 > ${PHY_FILE_PATH}/${dir}/$2
+            sleep 5
+        fi
+    done
+}
+

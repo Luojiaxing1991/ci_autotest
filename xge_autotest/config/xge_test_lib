@@ -1,0 +1,10 @@
+#!/bin/bash
+# 
+
+
+# Load configuration options
+. xge_autotest/config/xge_test_config
+. config/common_lib
+
+## Utility function
+

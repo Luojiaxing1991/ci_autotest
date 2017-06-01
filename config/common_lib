@@ -1,0 +1,68 @@
+#!/bin/bash
+
+
+# Load configuration file
+. config/common_config
+
+#############################################################################################################
+# function list
+# new function write at end
+# 1 writeLog
+#############################################################################################################
+
+
+#  Output success test case log information
+#  IN : N/A
+#  OUT: N/A
+function writePass()
+{
+    local Test_Result="PASS"
+    echo "$Module_Name,""$JIRA_ID,""$Designed_Requirement_ID,""$Test_Case_ID,""$Test_Item,""$Test_Case_Title,""$Test_Result" >> ${REPORT_FILE}
+    return 0
+}
+
+#  Output fail test case log information
+#  IN : $1 Error log information
+#  OUT: N/A
+function writeFail()
+{
+    local Test_Result="FAIL"
+    local Remark="$1"
+    echo "$Module_Name,""$JIRA_ID,""$Designed_Requirement_ID,""$Test_Case_ID,""$Test_Item,""$Test_Case_Title,""$Test_Result,""$Remark" >> ${REPORT_FILE}
+    return 0
+}
+
+# Output log file header
+# IN : N/A
+# OUT: N/A
+function writeLogHeader
+{
+    echo "Module Name,JIRA ID,Designed Requirement ID,Test Case ID,Test Item,Test Case Title,Test Result,Remark" > ${REPORT_FILE}
+    return 0
+}
+
+# Set trust relationship for two boards
+# IN : N/A
+# OUT: N/A
+function setTrustRelation
+{
+    rm -f ~/.ssh/known_hosts
+    rm -f ~/.ssh/id_rsa*
+    rm -f ~/autotest/id_rsa* 
+    ssh-keygen -t rsa -N "" -f id_rsa
+    cp id_rsa* ~/.ssh 
+    apt-get install -y expect 1>/dev/null
+    expect -c '
+	set back_ip '$BACK_IP'
+        set timeout -1
+	spawn ssh-copy-id -i id_rsa.pub root@${back_ip}
+	expect "Are you sure you want to continue connecting (yes/no)?"
+	send "yes\r"
+        expect -re ".*password:"
+	send "root\r"
+	expect -re ".*$"
+    '
+
+    return 0
+}
+

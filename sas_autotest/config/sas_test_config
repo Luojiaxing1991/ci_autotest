@@ -1,0 +1,132 @@
+#!/bin/bash
+#
+#
+
+
+#  
+INFO=`cat /etc/hostname`
+if [ x"$INFO" = x"estuary" ]
+then
+    DEVMEM="devmem"
+else
+    DEVMEM="devmem2"
+fi
+
+#  Test case mapping table
+#  on - oepn test case, off - close test case, Default is on.
+declare -A case_map=(
+#  1 - The driver must support SSP.
+["driver_must_support_ssp"]="on"
+#  2 - Disk negotiated link rate query.
+["physical_data_rate"]="on"
+#  3 - File transfer stability test.
+["stable_2GB_file_transfer"]="on" 
+#  4 - Phy control through sysfs.
+#  "Be careful:This test case is used only in the environment where the board is connected directly to the disk."
+["phy_control_through_sysfs"]="off"
+#  5 - support all available sas cores in the Soc.
+["support_available_sas_cores"]="off"
+#  6 - support full sas function on all available phys.
+["support_full_sas_function_all_available_phys"]="on"
+#  7 - Support SAS Narrow and Wide Ports.
+["narrow_and_wide_ports"]="on"
+)
+
+
+#  log file
+ERROR_INFO="error_info.log"
+
+#  fio tools configuration file
+FIO_CONFG="fio.conf"
+
+#  Common tools directory path
+COMMON_TOOL_PATH="common_tool"
+
+#  Test case code directory path
+TEST_CASE_PATH="sas_autotest/case_script"
+
+#  phy path
+PHY_FILE_PATH="/sys/class/sas_phy"
+
+#  Save all disk partition names
+declare -a ALL_DISK_PART_NAME
+
+# FIO tools IO size
+FIO_BS=("4M" "4K" "512K" "512B")
+
+# FIO tools IO Read and write mode
+FIO_RW=("randread" "randwrite" "read" "write" "randrw")
+
+# FIO tool parameter list
+FIO_PARAMETER_LIST="
+[global]
+rw=read
+direct=1
+ramp_time=1
+#ioengine=libaio
+iodepth=64
+numjobs=1
+bs=4M
+;zero_buffers=1
+group_reporting=1
+;ioscheduler=noop
+;gtod_reduce=1
+;iodepth_batch=2
+;iodepth_batch_complete=2
+runtime=300
+;thread
+loops=10
+"
+
+#phy address
+PHY_ADDR_VALUE=(
+"0xa2002000" "0xa2002400"
+"0xa2002800" "0xa2002c00"
+"0xa2003000" "0xa2003400"
+"0xa2003800" "0xa2003c00"
+)
+
+
+### Test case parameter configuration.
+## 2 - physical_data_rate
+#  negotiated link rate value, Multiple please use the symbol "|" split, Default Value is '6|12', Unit: Gbit.
+DISK_NEGOTIATED_LINKRATE_VALUE='6|12'
+
+## 3 - stable_2GB_file_transfer
+#  Disk file data consistency test, File comparison times, Default Value is 500.
+COMPARISON_NUMBER=500
+
+## 4 - phy_control_through_sysfs
+#  loop Rate set up function switch,  1 - oepn test, 0 - close test, Default Value is 0.
+IS_LOOP_RATE_SET_UP=0
+#  loop Rate set up number, Default Value is 10000.
+LOOP_RATE_SET_UP_NUMBER=10000
+#  Maximum disk phy, Default Value is "6.0 Gbit".
+MAXIMUM_LINK_VALUE="6.0 Gbit"
+#  Minimum disk phy, Default Value is "3.0 Gbit".
+MINIMUM_LINK_VALUE="3.0 Gbit"
+
+## 5 - support_available_sas_cores
+#  Long time read / write disk, Default Value is 0.
+#IS_LONG_TIME_IO_READ_WRITE=0
+#  Long time read and write disk time, Default Value is 14400ms.
+FIO_LONG_RUN_TIME=14400
+#  Repeat read / write disk, Default Value is 0.
+#IS_REPEAT_IO_READ_WRITE=0
+#  Repeat read and write disks. Default value is 100 second.
+REPEAT_RW_NUMBER=100
+
+## 6 - support full sas function on all available phys
+#  Turn off phy loop count, Default value is 10.
+LOOP_PHY_COUNT=10
+#  
+LOOP_PHY_TIME=600
+
+## 7 - Support SAS Narrow and Wide Ports.
+#  phy file path.
+PHY_FILE_PATH="/sys/class/sas_phy/"
+#
+FIO_RESET_TIME=600
+#
+RESET_COUNT=2
+ 

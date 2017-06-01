@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+#
+
+
+# Test case mapping table
+declare -A case_map
+case_map=(
+["iperf_ge_port"]="on" 
+["iperf_xge_port"]="on"
+
+)
+
+#Number of threads
+thread=(1 3 5 10 20) 
+
+#iperf run time
+time=80
+
+# Common tools directory path
+COMMON_TOOL_PATH="common_tool"
+
+# Test case code directory path
+TEST_CASE_PATH="xge_autotest/case_script"
+
+# Start the machine environment IP
+BACK_IP=192.168.1.200
