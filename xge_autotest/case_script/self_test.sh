@@ -13,12 +13,12 @@ function self_test()
     upresult=`echo "$tmpup" | grep -o "PASS" | wc -l`
    # ssh root@$BACK_IP 'ifconfig eth1 down; ifconfig eth2 down; ifconfig eth3 down'
     ifconfig eth1 down; ifconfig eth2 down; ifconfig eth3 down
-	tmpdown=`ethtool -t eth0 | grep PASS && ethtool -t eth1 | grep PASS && ethtool -t eth2 | grep PASS && ethtool -t eth3 | grep PASS`
-	downresult=`echo "$tmpdown" | grep -o "PASS" | wc -l`
+    tmpdown=`ethtool -t eth0 | grep PASS && ethtool -t eth1 | grep PASS && ethtool -t eth2 | grep PASS && ethtool -t eth3 | grep PASS`
+    downresult=`echo "$tmpdown" | grep -o "PASS" | wc -l`
     if [ $upresult -eq 4 -a $downresult -eq 4 ];then 
-		writePass
+       writePass
     else
-		writeFail
+       writeFail
     fi
 }
 

@@ -37,8 +37,8 @@ function adaptive()
 function main()
 {
     JIRA_ID="PV-1500"
-    Test_Item="adaptive interrupt moderation support"
-    Designed_Requirement_ID="R.HNS.F018A"
+	Test_Item="adaptive interrupt moderation support"
+	Designed_Requirement_ID="R.HNS.F018A"
 	adaptive
 }
 

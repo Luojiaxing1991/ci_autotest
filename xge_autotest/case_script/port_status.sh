@@ -14,7 +14,7 @@ function port_status_query()
 
    for i in eth0 eth1 eth2 eth3
    do
-	ethtool $i  >> D03portstatus.txt
+     ethtool $i  >> D03portstatus.txt
    done
    linkvalue=`cat D03portstatus.txt | grep "Link detected" | cut -d : -f2 | wc -l`
    GEspeedvalue=`cat D03portstatus.txt | grep "Twisted Pair" -B 3 | grep "1000Mb/s"| wc -l`
@@ -24,9 +24,9 @@ function port_status_query()
    fi
 
    if [ $D03flag -eq 1 -a $D05flag -eq 1 ];then
-	     writePass
+      writePass
    else
-         writeFail
+      writeFail
    fi
 
 }
@@ -36,7 +36,7 @@ function main()
     JIRA_ID="PV-1506"
     Test_Item="support to query port status"
     Designed_Requirement_ID="R.HNS.F026A"
-	port_status_query
+    port_status_query
 }
 
 
