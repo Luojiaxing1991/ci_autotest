@@ -27,9 +27,9 @@ function adaptive()
    txframesdiff=`expr $txframes - $txframesinit`
    killall iperf
    if [ $rxusecsdiff -ne 0 -o $rxframesdiff -ne 0 -a $txusecsdiff -ne 0 -a $txframesdiff -eq 0 ];then
-	     writePass
+       writePass
    else
-         writeFail
+       writeFail
    fi
 
 }
@@ -37,9 +37,9 @@ function adaptive()
 function main()
 {
     JIRA_ID="PV-1500"
-	Test_Item="adaptive interrupt moderation support"
-	Designed_Requirement_ID="R.HNS.F018A"
-	adaptive
+    Test_Item="adaptive interrupt moderation support"
+    Designed_Requirement_ID="R.HNS.F018A"
+    adaptive
 }
 
 
