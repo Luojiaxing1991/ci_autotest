@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/bash
 
 # run the MSI interrupt feature by Intel 82599 network card
 # IN :N/A
