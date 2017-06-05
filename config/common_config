@@ -22,9 +22,9 @@ REPORT_PATH=~/autotest/report
 REPORT_FILE=report.csv
 AUTOTEST_ZIP_FILE=autotest.tar.gz
 # Setting up a single board default startup system.
-BOARD_GREB_DEFAULT=
+BOARD_GRUB_DEFAULT=
 # The SAS module does not need to be configured.
-BACK_BOARD_GREB_DEFAULT=
+BACK_BOARD_GRUB_DEFAULT=
 
 # SAS Module Configuration item.
 SAS_MAIN=sas_autotest/sas_main.sh
@@ -32,16 +32,16 @@ SAS_REPORT_FILE=sas_report.csv
 # Start single board number.
 SAS_BORADNO=
 
-# XGE Module configuration file.
+# HNS Module configuration file.
 XGE_MODULE_CFG_FILE="./xge_autotest/config/xge_test_config"
-# XGE Module Configuration item.
+# HNS Module Configuration item.
 XGE_MAIN=xge_autotest/xge_main.sh
 XGE_REPORT_FILE=xge_report.csv
 # Start single board number.
 XGE_BORADNO=
 BACK_XGE_BORADNO=
 
-# XGE Module configuration file.
+# PCIE Module configuration file.
 PCIE_MODULE_CFG_FILE="./pcie_autotest/config/pcie_test_config"
 # PCIE Module Configuration item.
 PCIE_MAIN=pcie_autotest/pcie_main.sh

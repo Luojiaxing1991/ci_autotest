@@ -8,6 +8,8 @@
 # Load configuration file
 . config/common_lib
 
+TOP_DIR=$(cd "`dirname $0`" ; pwd)
+
 # Update boot Image file
 # IN : N/A
 # OUT: N/A
@@ -26,7 +28,7 @@ function board_run_back()
 {
     #Setting up a single board default startup system.
     #cp ~/grub-back.cfg ~/grub.cfg
-    sed -i "{s/^set\ default=.*/set\ default=${BACK_BOARD_GREB_DEFAULT}/g;}" ~/grub.cfg
+    sed -i "{s/^set\ default=.*/set\ default=${BACK_BOARD_GRUB_DEFAULT}/g;}" ~/grub.cfg
     board_reboot $1
     [ $? != 0 ] && echo "board reboot failed." && return 1
     expect -c '
@@ -54,7 +56,7 @@ function board_run_back()
     # cp test script to server
     send "rm -f ~/.ssh/known_hosts\r"
     send "rm -f ~/.ssh/authorized_keys\r"
-    send "scp backIP.txt ${server_user}@${SERVER_IP}:~/autotest\r"
+    send "scp backIP.txt ${server_user}@${SERVER_IP}:${TOP_DIR}\r"
     expect -re "Are you sure you want to continue connecting (yes/no)?"
     send "yes\r"
     expect -re "password:"
@@ -67,9 +69,10 @@ function board_run_back()
     sed -i '/^BACK_IP.*/d' ${XGE_MODULE_CFG_FILE} && echo BACK_IP="$BACK_IP" >>${XGE_MODULE_CFG_FILE}
     sed -i '/^BACK_IP.*/d' ${PCIE_MODULE_CFG_FILE} && echo BACK_IP="$BACK_IP" >>${PCIE_MODULE_CFG_FILE}
     cd ~/
-    tar -zcvf  ${AUTOTEST_ZIP_FILE} autotest
+    tar -zcvf  ${AUTOTEST_ZIP_FILE} ${TOP_DIR}
     [ $? != 0 ] && echo "tar test script failed." && return 1
     #cp ~/grub-host.cfg ~/grub.cfg
+    cd ${TOP_DIR}
     return 0
 }
 
@@ -80,7 +83,7 @@ function board_run_back()
 function board_run()
 {
     #Setting up a single board default startup system.
-    sed -i "{s/^set\ default=.*/set\ default=${BOARD_GREB_DEFAULT}/g;}" ~/grub.cfg
+    sed -i "{s/^set\ default=.*/set\ default=${BOARD_GRUB_DEFAULT}/g;}" ~/grub.cfg
     board_reboot $1
     [ $? != 0 ] && echo "board reboot failed." && return 1
 	
@@ -140,13 +143,12 @@ function board_run()
 # OUT: N/A
 function main()
 {
-    TOP_DIR=$(cd "`dirname $0`" ; pwd)	
     #update image
     #update_image
     killall ipmitool >/dev/null
 
     cd ~/
-    tar -zcvf  ${AUTOTEST_ZIP_FILE} $TOP_DIR
+    tar -zcvf  ${AUTOTEST_ZIP_FILE} ${TOP_DIR}
     [ $? != 0 ] && echo "tar test script failed." && return 1
 
     cd ${TOP_DIR}
