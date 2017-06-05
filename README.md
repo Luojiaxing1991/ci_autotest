@@ -42,7 +42,7 @@ cases for the modules in target boards.
 
 <h2 id="2">Preparation</h2> 
   
-1. Configuring the common_config file.<br/>
+1. Configuring the “config/common_config” file.<br/>
 * All module public configuration items：
 ```bash
    SERVER_IP                         //  the automated script running environment's IP address.
