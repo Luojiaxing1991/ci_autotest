@@ -39,6 +39,7 @@ function board_run_back()
     set server_user '$SERVER_USER'
     set server_passwd '$SERVER_PASSWD'
     set SERVER_IP '$SERVER_IP'
+    set unzip_dir='${TOP_DIR}'
     spawn board_connect ${boardno}
     send "\r"
     expect -re {Press any other key in [0-9]+ seconds to stop automatical booting}
@@ -56,7 +57,7 @@ function board_run_back()
     # cp test script to server
     send "rm -f ~/.ssh/known_hosts\r"
     send "rm -f ~/.ssh/authorized_keys\r"
-    send "scp backIP.txt ${server_user}@${SERVER_IP}:${TOP_DIR}\r"
+    send "scp backIP.txt ${server_user}@${SERVER_IP}:${unzip_dir}\r"
     expect -re "Are you sure you want to continue connecting (yes/no)?"
     send "yes\r"
     expect -re "password:"
