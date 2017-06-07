@@ -27,9 +27,9 @@ declare -A case_map=(
 #  5 - support all available sas cores in the Soc.
 ["support_available_sas_cores"]="off"
 #  6 - support full sas function on all available phys.
-["support_full_sas_function_all_available_phys"]="on"
+["support_full_sas_function_all_available_phys"]="off"
 #  7 - Support SAS Narrow and Wide Ports.
-["narrow_and_wide_ports"]="on"
+["narrow_and_wide_ports"]="off"
 )
 
 
@@ -129,4 +129,5 @@ PHY_FILE_PATH="/sys/class/sas_phy/"
 FIO_RESET_TIME=600
 #
 RESET_COUNT=2
- 
+#
+EFFECTIVE_PHY_NUM=11 

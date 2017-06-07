@@ -92,9 +92,9 @@ function change_sas_phy_file()
     for dir in `ls ${PHY_FILE_PATH}`
     do
         str=`cat ${PHY_FILE_PATH}/${dir}/device_type`
-        num=`echo "$dir" | awk -F":" '{print $NF}'`
+        num=`echo "${dir}" | awk -F":" '{print $NF}'`
 
-        if [ x"$str" == x"end device" ] && [ $num -le $EFFECTIVE_PHY_NUM ]
+        if [ x"${str}" == x"end device" ] && [ ${num} -le ${EFFECTIVE_PHY_NUM} ]
         then
             echo $1 > ${PHY_FILE_PATH}/${dir}/$2
             sleep 5
