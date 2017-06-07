@@ -86,7 +86,8 @@ function board_run()
     sed -i "{s/^set\ default=.*/set\ default=${BOARD_GRUB_DEFAULT}/g;}" ~/grub.cfg
     board_reboot $1
     [ $? != 0 ] && echo "board reboot failed." && return 1
-	
+
+    unzip_dir=`echo ${TOP_DIR#*/}`
     expect -c '
     set timeout -1
     set boardno '$1'
@@ -97,9 +98,9 @@ function board_run()
     set test_run_script '$2'
     set SERVER_IP '$SERVER_IP'
     set autotest_zip '${AUTOTEST_ZIP_FILE}'
-    set report_path '${REPORT_PATH}'
     set report_file '${REPORT_FILE}'
     set mode_report_file '$3'
+    set unzip_dir '${unzip_dir}'
     spawn board_connect ${boardno}
     send "\r"
     expect -re {Press any other key in [0-9]+ seconds to stop automatical booting}
@@ -123,17 +124,17 @@ function board_run()
     expect -re ":.*#"
     send "tar -zxvf ${autotest_zip}\r"
     expect -re ":.*#"
-    send "cd ~/autotest;bash -x ${test_run_script}\r"
+    send "cd ~/${unzip_dir};bash -x ${test_run_script}\r"
     expect -re ":.*#"
     send "rm -f ~/.ssh/known_hosts\r"
-    send "scp ${report_file} ${server_user}@${SERVER_IP}:${report_path}/${mode_report_file}\r"
+    send "scp ${report_file} ${server_user}@${SERVER_IP}:/${unzip_dir}/report/${mode_report_file}\r"
     expect -re "Are you sure you want to continue connecting (yes/no)?"
     send "yes\r"
 
     expect -re "password:"
     send "${server_passwd}\r"
     expect -re ":.*#"
-    send "cd ~;rm -rf ~/autotest;rm -rf ${autotest_zip}\r"
+    send "cd ~;rm -rf ${unzip_dir};rm -rf ${autotest_zip}\r"
     expect -re ":.*#"
     '
 }

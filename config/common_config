@@ -2,27 +2,26 @@
 
 # Module test run switch, 1 - open test case, 0 - close test case, Default is 1.
 RUN_SAS=1
-RUN_XGE=1
-RUN_PCIE=1
+RUN_XGE=0
+RUN_PCIE=0
 
 # IMAGE Configuration item.
 IMAGE_FILE=common_tool/Image
 IMAGE_DIR_PATH=~/tftp
 
 ## Common Configuration item.
-SERVER_IP=
-SERVER_USER=
-SERVER_PASSWD=
+SERVER_IP=192.168.1.107
+SERVER_USER=chenliangfei
+SERVER_PASSWD=fly123
 # Single board environment username and password.
 SYSTEM_USER=root
 SYSTEM_PASSWD=root
 
 
-REPORT_PATH=~/autotest/report
 REPORT_FILE=report.csv
 AUTOTEST_ZIP_FILE=autotest.tar.gz
 # Setting up a single board default startup system.
-BOARD_GRUB_DEFAULT=
+BOARD_GRUB_DEFAULT=ubuntu-D05
 # The SAS module does not need to be configured.
 BACK_BOARD_GRUB_DEFAULT=
 
@@ -30,7 +29,7 @@ BACK_BOARD_GRUB_DEFAULT=
 SAS_MAIN=sas_autotest/sas_main.sh
 SAS_REPORT_FILE=sas_report.csv
 # Start single board number.
-SAS_BORADNO=
+SAS_BORADNO=6
 
 # HNS Module configuration file.
 XGE_MODULE_CFG_FILE="./xge_autotest/config/xge_test_config"
