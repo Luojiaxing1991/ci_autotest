@@ -5,6 +5,7 @@ RUN_SAS=0
 RUN_XGE=0
 RUN_PCIE=0
 
+
 # IMAGE Configuration item.
 IMAGE_FILE=common_tool/Image
 IMAGE_DIR_PATH=~/tftp

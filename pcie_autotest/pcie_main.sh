@@ -33,6 +33,9 @@ function main()
 #Output log file header
 writeLogHeader
 
+#
+setTrustRelation
+
 main
 
 # clean exit so lava-test can trust the results
