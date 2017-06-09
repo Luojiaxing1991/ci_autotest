@@ -123,7 +123,7 @@ function board_run()
     send "${server_passwd}\r"
 		
     expect -re ":.*#"
-    send "tar -zxvf ${autotest_zip}\r"
+    send "cd ~/;tar -zxvf ${autotest_zip}\r"
     expect -re ":.*#"
     send "cd ~/${unzip_dir};bash -x ${test_run_script}\r"
     expect -re ":.*#"
