@@ -23,6 +23,16 @@ declare -A case_map=(
 ["automatic_payload_size_support"]="on"
 #  10 -PCIe 1.0 and 2.0 backward compatibility (Hi161x)
 ["pcie_1.0_2.0_backward_compatibility"]="on"
+#  11 -ECAM support for non-RC devices (Hi161x)
+["ecam_for_non-rc_devices_support"]="on"
+#  12 -Multiple Root Complex support (Hi161x)
+["multiple_root_complex_support"]="on"
+#  13 -PCIe 3.0 support (Hi161x)
+["pcie_3.0_support"]="on"
+#  14 -PCIe ACPI Root Driver dependency (Hi161x)
+["pcie_acpi_root_driver_dependency_support"]="on"
+#  15 -PCIe Hisilicon PCIe re-use (Hi161x)
+["hisilicon_pcie_re-use_image"]="on"
 )
 
 # Common tools directory path
