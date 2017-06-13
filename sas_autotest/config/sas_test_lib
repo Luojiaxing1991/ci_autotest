@@ -62,7 +62,7 @@ function phy_ops()
                 "all")
                     for phy in  ${PHY_ADDR_VALUE[@]}
                     do
-                        ${DEVMEM} ${phy} -w 0x6
+                        ${DEVMEM} ${phy} w 0x6
                     done
                     ;;
             esac
@@ -75,7 +75,7 @@ function phy_ops()
             "all")
                 for phy in  ${PHY_ADDR_VALUE[@]}
                 do
-                    ${DEVMEM} ${phy} -w 0x7
+                    ${DEVMEM} ${phy} w 0x7
                 done
                 ;;
             esac
