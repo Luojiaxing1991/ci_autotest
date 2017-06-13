@@ -7,8 +7,8 @@ function support_hisilicon_pcie_re-use_image_test()
 {
     Test_Case_Title="support_hisilicon_pcie_re-use_image_test"
     Test_Case_ID="ST.FUNC.010/ST.FUNC.011"
-    main_version=`uname -a`
-    back_version=`ssh root@$BACK_IP 'uname -a'`
+    main_version=`uname -r`
+    back_version=`ssh root@$BACK_IP 'uname -r'`
     if [ x"${main_version}" != x"${back_version}" ]
     then
         writeFail "The AR requirement of $Hisilicon PCIe re-use Image about 1612&1616 chip failure."
