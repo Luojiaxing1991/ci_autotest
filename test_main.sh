@@ -34,12 +34,12 @@ function board_run_back()
     expect -c '
     set timeout -1
     set boardno '$1'
-    set user '$SYSTEM_USER'
-    set passwd '$SYSTEM_PASSWD'
-    set server_user '$SERVER_USER'
-    set server_passwd '$SERVER_PASSWD'
-    set SERVER_IP '$SERVER_IP'
-    set unzip_diri '${TOP_DIR}'
+    set user '${SYSTEM_USER}'
+    set passwd '${SYSTEM_PASSWD}'
+    set server_user '{$SERVER_USER}'
+    set server_passwd '${SERVER_PASSWD}'
+    set SERVER_IP '${SERVER_IP}'
+    set unzip_dir '${TOP_DIR}'
     spawn board_connect ${boardno}
     send "\r"
     expect -re {Press any other key in [0-9]+ seconds to stop automatical booting}
@@ -92,12 +92,12 @@ function board_run()
     expect -c '
     set timeout -1
     set boardno '$1'
-    set user '$SYSTEM_USER'
-    set passwd '$SYSTEM_PASSWD'
-    set server_user '$SERVER_USER'
-    set server_passwd '$SERVER_PASSWD'
+    set user '${SYSTEM_USER}'
+    set passwd '${SYSTEM_PASSWD}'
+    set server_user '{$SERVER_USER}'
+    set server_passwd '${SERVER_PASSWD}'
     set test_run_script '$2'
-    set SERVER_IP '$SERVER_IP'
+    set SERVER_IP '${SERVER_IP}'
     set autotest_zip '${AUTOTEST_ZIP_FILE}'
     set report_file '${REPORT_FILE}'
     set mode_report_file '$3'
