@@ -39,7 +39,7 @@ function board_run_back()
     set server_user '$SERVER_USER'
     set server_passwd '$SERVER_PASSWD'
     set SERVER_IP '$SERVER_IP'
-    set unzip_dir='${TOP_DIR}'
+    set unzip_diri '${TOP_DIR}'
     spawn board_connect ${boardno}
     send "\r"
     expect -re {Press any other key in [0-9]+ seconds to stop automatical booting}
