@@ -39,6 +39,7 @@ function support_pcie3.0_p3600_test()
     #fdisk & mount p3600
 
     #sudo mkfs.ext4 -f "$P3600_Disk_Path"
+
     echo "y" | mkfs.ext4 "$P3600_Disk_Path" 1>/dev/null
     mount -t ext4 "$P3600_Disk_Path" "$Mount_Path" 1>/dev/null
 
@@ -113,7 +114,7 @@ function support_pcie3.0_raid3008_test()
     fi
 
     cp ~/*.sh "$Mount_Path"
-    if [ x"$?" == x"1" ]
+    if [ $? -ne 0 ]
     then
         writeFail "The AR requirement of $RAID3008_NAME PCIe gen3 cp function failure."
         return 1
