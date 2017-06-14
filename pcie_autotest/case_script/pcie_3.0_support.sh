@@ -56,6 +56,7 @@ function support_pcie3.0_p3600_test()
         writeFail "The AR requirement of $P3600_NAME PCIe gen3 cp function failure."
         return 1
     fi
+    umount "$Mount_Path"
 
     fio --name=randread --numjobs=32 --filename=/dev/$P3600_Disk --rw=randread --iodepth=128 -ioengine=libaio \
     --direct=1 --sync=0 --norandommap --group_reporting --runtime=300 --time_base --bs=2M >/dev/null
