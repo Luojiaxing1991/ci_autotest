@@ -9,10 +9,6 @@ function channel_getting()
     Test_Case_ID="ST.SGE_GET_CHANNEL_000"
     :> D03channel.txt
     #D05flag=$(ssh root@$BACK_IP ':> D05channel.txt; ifconfig eth1 up; ifconfig eth2 up; ifconfig eth3 up; for i in eth0 eth1 eth2 eth3; do ethtool -l $i | egrep 'RX|TX' | awk -F: '{print $2}' | tr '\n' ' ' | sed 's/	//g' | sed 's/ //g' >> D05channel.txt;done; ifconfig eth1 down; ifconfig eth2 down; ifconfig eth3 down; for i in eth1 eth2 eth3; do ethtool -l $i | egrep 'RX|TX' | awk -F: '{print $2}' | tr '\n' ' ' | sed 's/	//g' | sed 's/ //g'` >> D05channel.txt;done; channelvalue=`cat D05channel.txt| grep -w "16161616" | wc -l`; if [ "$channelvalue" == "7" ];then D05flag=1;fi;echo D05flag;')
-	#for i in 0 1 2 3
-	#do
-    #eth$iup=`ethtool -l eth$i | egrep 'RX|TX' | awk -F: '{print $2}' | tr '\n' ' ' | sed 's/   //g' | sed 's/ //g'`
-	#done
     ifconfig eth1 up; ifconfig eth2 up; ifconfig eth3 up
     for i in eth0 eth1 eth2 eth3
     do
