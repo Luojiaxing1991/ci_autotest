@@ -57,7 +57,7 @@ function phy_ops()
         "close")
             case "$2" in
                 [0-7])
-                    ${DEVMEM} ${PHY_ADDR_VALUE[$2]} -w 0x6
+                    ${DEVMEM} ${PHY_ADDR_VALUE[$2]} w 0x6
                     ;;
                 "all")
                     for phy in  ${PHY_ADDR_VALUE[@]}
@@ -70,7 +70,7 @@ function phy_ops()
         "open")
             case "$2" in
                 [0-7])
-                ${DEVMEM} ${PHY_ADDR_VALUE[$2]} -w 0x7
+                ${DEVMEM} ${PHY_ADDR_VALUE[$2]} w 0x7
                 ;;
             "all")
                 for phy in  ${PHY_ADDR_VALUE[@]}
