@@ -16,7 +16,7 @@ function adaptive()
    txframesinit=$(ethtool -c eth2 | grep -Po "(?<=tx-frames: )([0-9]*)")
    iperf -s &
    ssh root@$BACK_IP 'ifconfig eth2 up; ifconfig eth2 192.168.7.200;sleep 10; iperf -c 192.168.7.212 -i 3 -t 30;sleep 20;'
-   sleep 20
+   sleep 30
    rxusecs=$(ethtool -c eth2 | grep -Po "(?<=rx-usecs: )([0-9]*)")
    rxframes=$(ethtool -c eth2 | grep -Po "(?<=rx-frames: )([0-9]*)")
    txusecs=$(ethtool -c eth2 | grep -Po "(?<=tx-usecs: )([0-9]*)")

@@ -18,8 +18,8 @@ function ifconfigtest()
        ifconfig $i >> D03ifconfig.txt
    done
    noerrorcount=`cat D03ifconfig.txt | grep "RX packets:" | grep -o "errors:0" | wc -l`
-   nodropcount=`cat D03ifconfig.txt | grep "RX packets:" | grep -o "dropped:0" | wc -l`
-   if [ $noerrorcount -eq 4 -a $nodropcount -eq 4 ];then
+   #nodropcount=`cat D03ifconfig.txt | grep "RX packets:" | grep -o "dropped:0" | wc -l`
+   if [ $noerrorcount -eq 4 ];then
       D03flag=1;
    fi
 

@@ -13,9 +13,9 @@ function ping6_GE_test()
     cat ping6_GE.txt | grep "0% packet loss"
     result=`echo $?`
     if [ "$result" -eq 0 ];then 
-		writePass
+       writePass
     else
-		writeFail
+       writeFail
     fi
     rm -f ping6_GE.txt
 }

@@ -1,0 +1,1281 @@
++ return 0
++ main
++ Module_Name=XGE
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ commd=self_test.sh
++ source xge_autotest/case_script/self_test.sh
+++ main
+++ JIRA_ID=PV-1511
+++ Test_Item='GE/XGE self test'
+++ Designed_Requirement_ID=R.HNS.F032A
+++ self_test
+++ Test_Case_Title='self_test function normally'
+++ Test_Case_ID=ST.GE_SELF_TEST_000
+++ ifconfig eth1 up
+++ ifconfig eth2 up
+++ ifconfig eth3 up
++++ ethtool -t eth0
++++ grep PASS
++++ ethtool -t eth1
++++ grep PASS
++++ ethtool -t eth2
++++ grep PASS
++++ ethtool -t eth3
++++ grep PASS
+++ tmpup='The test result is PASS
+The test result is PASS
+The test result is PASS
+The test result is PASS'
++++ echo 'The test result is PASS
+The test result is PASS
+The test result is PASS
+The test result is PASS'
++++ grep -o PASS
++++ wc -l
+++ upresult=4
+++ ifconfig eth1 down
+++ ifconfig eth2 down
+++ ifconfig eth3 down
++++ ethtool -t eth0
++++ grep PASS
++++ ethtool -t eth1
++++ grep PASS
++++ ethtool -t eth2
++++ grep PASS
++++ ethtool -t eth3
++++ grep PASS
+++ tmpdown='The test result is PASS
+The test result is PASS
+The test result is PASS
+The test result is PASS'
++++ echo 'The test result is PASS
+The test result is PASS
+The test result is PASS
+The test result is PASS'
++++ grep -o PASS
++++ wc -l
+++ downresult=4
+++ '[' 4 -eq 4 -a 4 -eq 4 ']'
+++ writePass
+++ local Test_Result=PASS
+++ echo 'XGE,PV-1511,R.HNS.F032A,ST.GE_SELF_TEST_000,GE/XGE self test,self_test function normally,PASS'
+++ return 0
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ commd=port_statistic.sh
++ source xge_autotest/case_script/port_statistic.sh
+++ main
+++ JIRA_ID=PV-1510
+++ Test_Item='support of getting interface statistics through ethtool'
+++ Designed_Requirement_ID=R.HNS.F031A
+++ port_statistic
+++ Test_Case_Title='query GE interface statistics after HNS information'
+++ Test_Case_ID=ST_ETHTOOL_GET_STATS_000
+++ killall iperf
+iperf: no process found
+++ sleep 20
+++ :
+++ ifconfig eth1 up
+++ ifconfig eth1 192.168.100.212
+++ ssh root@192.168.1.210 ':>D05iperf.txt; ifconfig eth1 up; ifconfig eth1 192.168.100.200;iperf -c 192.168.100.212 -i 3 -t 30 > D05iperf.txt &'
+++ iperf -s
+------------------------------------------------------------
+Server listening on TCP port 5001
+TCP window size: 85.3 KByte (default)
+------------------------------------------------------------
+++ sleep 10
+[  4] local 192.168.100.212 port 5001 connected with 192.168.100.200 port 39476
+++ ethtool -S eth1
++++ cat D03portstatistic.txt
++++ grep -Po '(?<=rx_errors: )([0-9]*)'
+++ rx_error=0
++++ cat D03portstatistic.txt
++++ grep -Po '(?<=tx_errors: )([0-9]*)'
+++ tx_error=0
++++ grep -w rx_dropped
++++ cat D03portstatistic.txt
++++ grep -Po '(?<=rx_dropped: )([0-9]*)'
+++ rx_drop=2
++++ cat D03portstatistic.txt
++++ grep -w tx_dropped
++++ grep -Po '(?<=tx_dropped: )([0-9]*)'
+++ tx_drop=0
+++ '[' 0 -eq 0 -a 0 -eq 0 -a 2 -eq 0 -a 0 -eq 0 ']'
+++ writeFail
+++ local Test_Result=FAIL
+++ local Remark=
+++ echo 'XGE,PV-1510,R.HNS.F031A,ST_ETHTOOL_GET_STATS_000,support of getting interface statistics through ethtool,query GE interface statistics after HNS information,FAIL,'
+++ return 0
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ commd=tso.sh
++ source xge_autotest/case_script/tso.sh
+++ main
+++ JIRA_ID=PV-1498
+++ Test_Item='support of tso'
+++ Designed_Requirement_ID=R.HNS.F015A
+++ tso
+++ Test_Case_Title='tso function'
+++ Test_Case_ID=ST_SUPPORT_TSO_000
+++ :
+++ :
+++ ifconfig eth1 up
+++ ifconfig eth1 192.168.100.212
+++ ethtool -K eth1 gro on
+++ killall iperf
+Waiting for server threads to complete. Interrupt again to force quit.
+++ ssh root@192.168.1.210 ':>D05iperf.txt; ifconfig eth1 up; ifconfig eth1 192.168.100.200; ethtool -K eth1 gso off; ethtool -K eth1 tso on; iperf -c 192.168.100.212 -i 3 -t 33 > D05iperf.txt &'
+++ tcpdump -ei eth1 src 192.168.100.200 -c 103
+++ iperf -s
+bind failed: Address already in use
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+listening on eth1, link-type EN10MB (Ethernet), capture size 262144 bytes
+103 packets captured
+258 packets received by filter
+96 packets dropped by kernel
+++ sleep 15
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-30.1 sec  1.33 GBytes   380 Mbits/sec
+++ sed -i 1,3d tcpdump.txt
+++ cat tcpdump.txt
+++ grep -Po '(?<=length )([0-9]*)(?=:)'
+++ export count=0
+++ count=0
+++ read LINE
+++ '[' 55090 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 24682 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 20338 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 7306 -gt 16000 ']'
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 7306 -gt 16000 ']'
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 57986 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 52194 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 40610 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 14546 -gt 16000 ']'
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 50746 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 21786 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 5858 -gt 16000 ']'
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 1514 -gt 16000 ']'
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 63778 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 8754 -gt 16000 ']'
+++ read LINE
+++ '[' 55090 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 29026 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 15994 -gt 16000 ']'
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 11650 -gt 16000 ']'
+++ read LINE
+++ '[' 60882 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 31922 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 23234 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 4410 -gt 16000 ']'
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 2962 -gt 16000 ']'
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 1514 -gt 16000 ']'
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 5858 -gt 16000 ']'
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 59434 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 13098 -gt 16000 ']'
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 14546 -gt 16000 ']'
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 20338 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 7306 -gt 16000 ']'
+++ read LINE
+++ '[' 20338 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 7306 -gt 16000 ']'
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 7306 -gt 16000 ']'
+++ read LINE
+++ '[' 20338 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 34818 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 57986 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 14546 -gt 16000 ']'
+++ read LINE
+++ '[' 13098 -gt 16000 ']'
+++ read LINE
+++ '[' 42058 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 50746 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 21786 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 5858 -gt 16000 ']'
+++ read LINE
+++ '[' 21786 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 5858 -gt 16000 ']'
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 1514 -gt 16000 ']'
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 63778 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 8754 -gt 16000 ']'
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 56538 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 65226 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 27578 -gt 16000 ']'
+++ (( count++ ))
+++ read LINE
+++ '[' 15994 -gt 16000 ']'
+++ read LINE
+++ '[' 76 -gt 60 ']'
+++ writePass
+++ local Test_Result=PASS
+++ echo 'XGE,PV-1498,R.HNS.F015A,ST_SUPPORT_TSO_000,support of tso,tso function,PASS'
+++ return 0
+++ rm -rf tcpdump.txt
+++ rm -rf length.txt
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ commd=ifconfigtest.sh
++ source xge_autotest/case_script/ifconfigtest.sh
+++ main
+++ JIRA_ID=PV-1495
+++ Test_Item='getting base information'
+++ Designed_Requirement_ID=R.HNS.F012A
+++ ifconfigtest
+++ Test_Case_Title='ifconfig get base information'
+++ Test_Case_ID=ST_SHNS_BASE_INFORMATION_000
+++ :
+++ ifconfig eth1 up
+++ ifconfig eth2 up
+++ ifconfig eth3 up
+++ for i in eth0 eth1 eth2 eth3
+++ ifconfig eth0
+++ for i in eth0 eth1 eth2 eth3
+++ ifconfig eth1
+++ for i in eth0 eth1 eth2 eth3
+++ ifconfig eth2
+++ for i in eth0 eth1 eth2 eth3
+++ ifconfig eth3
++++ cat D03ifconfig.txt
++++ grep 'RX packets:'
++++ grep -o errors:0
++++ wc -l
+++ noerrorcount=4
+++ '[' 4 -eq 4 ']'
+++ D03flag=1
+++ '[' 1 -eq 1 ']'
+++ writePass
+++ local Test_Result=PASS
+++ echo 'XGE,PV-1495,R.HNS.F012A,ST_SHNS_BASE_INFORMATION_000,getting base information,ifconfig get base information,PASS'
+++ return 0
+++ rm -rf D03ifconfig.txt
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ commd=query_dump.sh
++ source xge_autotest/case_script/query_dump.sh
+++ main
+++ JIRA_ID=PV-1518
+++ Test_Item='support to dump registers'
+++ Designed_Requirement_ID=R.HNS.R027A
+++ dump_register
+++ Test_Case_Title='support to dump registers'
+++ Test_Case_ID=ST.GE/XGE_GET_REGS_000
+++ ifconfig eth1 up
+++ ifconfig eth2 up
+++ ifconfig eth3 up
++++ ethtool -d eth0
++++ tail -n 1
++++ awk -F: '{print $2}'
++++ sed 's/	//g'
++++ sed 's/ //g'
+++ eth0=dddddddddddddddddddddddddddddddd
++++ ethtool -d eth1
++++ tail -n 1
++++ awk -F: '{print $2}'
++++ sed 's/	//g'
++++ sed 's/ //g'
+++ eth1up=dddddddddddddddddddddddddddddddd
++++ ethtool -d eth2
++++ awk -F: '{print $2}'
++++ tail -n 1
++++ sed 's/	//g'
++++ sed 's/ //g'
+++ eth2up=dddddddddddddddd
++++ ethtool -d eth3
++++ tail -n 1
++++ awk -F: '{print $2}'
++++ sed 's/	//g'
++++ sed 's/ //g'
+++ eth3up=dddddddddddddddd
+++ ifconfig eth1 down
+++ ifconfig eth2 down
+++ ifconfig eth3 down
++++ ethtool -d eth1
++++ tail -n 1
++++ awk -F: '{print $2}'
++++ sed 's/	//g'
++++ sed 's/ //g'
+++ eth1down=dddddddddddddddddddddddddddddddd
++++ ethtool -d eth2
++++ tail -n 1
++++ awk -F: '{print $2}'
++++ sed 's/	//g'
++++ sed 's/ //g'
+++ eth2down=dddddddddddddddd
++++ ethtool -d eth3
++++ tail -n 1
++++ awk -F: '{print $2}'
++++ sed 's/	//g'
++++ sed 's/ //g'
+++ eth3down=dddddddddddddddd
+++ '[' dddddddddddddddddddddddddddddddd = dddddddddddddddddddddddddddddddd -a dddddddddddddddddddddddddddddddd = dddddddddddddddddddddddddddddddd -a dddddddddddddddddddddddddddddddd = dddddddddddddddddddddddddddddddd -a dddddddddddddddd = dddddddddddddddd -a dddddddddddddddd = dddddddddddddddd -a dddddddddddddddd = dddddddddddddddd -a dddddddddddddddd = dddddddddddddddd ']'
+++ writePass
+++ local Test_Result=PASS
+++ echo 'XGE,PV-1518,R.HNS.R027A,ST.GE/XGE_GET_REGS_000,suppo[  392.828200] hns_dsaf HISI00B2:00: error: coalesce_usecs setting supports 1~1023us
+rt to dump registers,support to dump registers,PASS'
+++ return 0
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ commd=coalesce.sh
++ source xge_autotest/case_script/coalesce.sh
+++ main
+++ JIRA_ID=PV-1501
+++ Test_Item='interrupt coalesce support'
+++ Designed_Requirement_ID=R.HNS.F019A
+++ coalesce
+++ Test_Case_Title='set waterline and time of interrupt coalesce'
+++ Test_Case_ID=ST_SHNS_COALESCE_000
+++ :
+++ ifconfig eth2 up
+++ ifconfig eth2 192.168.7.212
+++ ethtool -C eth2 tx-usecs 1023 rx-usecs 1023
+++ ethtool -C eth2 tx-frames 1 rx-frames 1023
+tx-frames unmodified, ignoring
++++ ethtool -c eth2
++++ grep -Po '(?<=tx-usecs: )([0-9]*)'
+++ tx_usecs=1023
++++ ethtool -c eth2
++++ grep -Po '(?<=rx-usecs: )([0-9]*)'
+++ rx_usecs=1023
++++ ethtool -c eth2
++++ grep -Po '(?<=tx-frames: )([0-9]*)'
+++ tx_frames=1
++++ ethtool -c eth2
++++ grep -Po '(?<=rx-frames: )([0-9]*)'
+++ rx_frames=1023
+++ '[' 1023 -eq 1023 -a 1023 -eq 1023 -a 1 -eq 1 -a 1023 -eq 1023 ']'
+++ setflag=1
+++ ethtool -C eth2 tx-usecs 1024 rx-usecs 1024
+++ ethtool -C eth2 tx-frames 1024 rx-frames 1024
++++ cat coalesce.txt
++++ grep -o 'Cannot set'
++++ wc -l
+++ cannotsetflag=2
+++ '[' 1 -eq 1 -a 2 -eq 2 ']'
+++ writePass
+++ local Test_Result=PASS
+++ echo 'XGE,PV-1501,R.HNS.F019A,ST_SHNS_COALESCE_000,interrupt coalesce support,set waterline and time of interrupt coalesce,PASS'
+++ return 0
+++ ethtool -C eth2 tx-usecs 30 rx-usecs 30
+++ ethtool -C eth2 tx-frames 1 rx-frames 50
+tx-frames unmodified, ignoring
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ commd=ping6_GE.sh
++ source xge_autotest/case_script/ping6_GE.sh
+++ main
+++ JIRA_ID=PV-1496
+++ Test_Item='IPV6 testing'
+++ Designed_Requirement_ID=R.HNS.F013A
+++ ping6_GE_test
+++ Test_Case_Title='GE support to IPV6'
+++ Test_Case_ID=ST.FUNC.049/ST.FUNC.050
++++ ssh root@192.168.1.210 'ifconfig -a | grep "eth0" -A 2 | grep "inet6 addr" |  grep -Po "(?<=: )([^/]*)"'
+++ IPV6=fe80::c2a8:1ff:feb3:4
+++ sleep 15
+++ ping6 fe80::c2a8:1ff:feb3:4%eth0 -c 5
+++ cat ping6_GE.txt
+++ grep '0% packet loss'
+5 packets transmitted, 5 received, 0% packet loss, time 4063ms
++++ echo 0
+++ result=0
+++ '[' 0 -eq 0 ']'
+++ writePass
+++ local Test_Result=PASS
+++ echo 'XGE,PV-1496,R.HNS.F013A,ST.FUNC.049/ST.FUNC.050,IPV6 testing,GE support to IPV6,PASS'
+++ return 0
+++ rm -f ping6_GE.txt
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ commd=checksum_offload.sh
++ source xge_autotest/case_script/checksum_offload.sh
+++ main
+++ JIRA_ID=PV-1502
+++ Test_Item='checksum offload'
+++ Designed_Requirement_ID=R.HNS.F020A
+++ checksum_offload
+++ Test_Case_Title='set checksum offload(TX/RX)'
+++ Test_Case_ID=ST_XGE_CHECKSUM_OFFLOAD_000
+++ :
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -K eth0 rx on tx on
+++ ethtool -k eth0
+++ head -n 8
+++ ethtool -K eth0 rx off tx off
+Actual changes:
+rx-checksumming: off
+tx-checksumming: off
+	tx-checksum-ipv4: off
+	tx-checksum-ipv6: off
+tcp-segmentation-offload: off
+	tx-tcp-segmentation: off [requested on]
+	tx-tcp6-segmentation: off [requested on]
+++ ethtool -k eth0
+++ head -n 8
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -K eth1 rx on tx on
+++ ethtool -k eth1
+++ head -n 8
+++ ethtool -K eth1 rx off tx off
+Actual changes:
+rx-checksumming: off
+tx-checksumming: off
+	tx-checksum-ipv4: off
+	tx-checksum-ipv6: off
+tcp-segmentation-offload: off
+	tx-tcp-segmentation: off [requested on]
+	tx-tcp6-segmentation: off [requested on]
+++ ethtool -k eth1
+++ head -n 8
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -K eth2 rx on tx on
+++ ethtool -k eth2
+++ head -n 8
+++ ethtool -K eth2 rx off tx off
+Actual changes:
+rx-checksumming: off
+tx-checksumming: off
+	tx-checksum-ipv4: off
+	tx-checksum-ipv6: off
+tcp-segmentation-offload: off
+	tx-tcp-segmentation: off [requested on]
+	tx-tcp6-segmentation: off [requested on]
+++ ethtool -k eth2
+++ head -n 8
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -K eth3 rx on tx on
+++ ethtool -k eth3
+++ head -n 8
+++ ethtool -K eth3 rx off tx off
+Actual changes:
+rx-checksumming: off
+tx-checksumming: off
+	tx-checksum-ipv4: off
+	tx-checksum-ipv6: off
+tcp-segmentation-offload: off
+	tx-tcp-segmentation: off [requested on]
+	tx-tcp6-segmentation: off [requested on]
+++ ethtool -k eth3
+++ head -n 8
++++ cat D03checksum.txt
++++ grep 'rx-checksumming: on'
++++ wc -l
+++ rxonvalue=4
++++ cat D03checksum.txt
++++ grep 'tx-checksumming: on'
++++ wc -l
+++ txonvalue=4
++++ cat D03checksum.txt
++++ grep 'rx-checksumming: off'
++++ wc -l
+++ rxoffvalue=4
++++ cat D03checksum.txt
++++ grep 'tx-checksumming: off'
++++ wc -l
+++ txoffvalue=4
+++ '[' 4 -eq 4 -a 4 -eq 4 -a 4 -eq 4 -a 4 -eq 4 ']'
+++ D03flag=1
+++ '[' 1 -eq 1 ']'
+++ writePass
+++ local Test_Result=PASS
+++ echo 'XGE,PV-1502,R.HNS.F020A,ST_XGE_CHECKSUM_OFFLOAD_000,checksum offload,set checksum offload(TX/RX),PASS'
+++ return 0
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ commd=multicast.sh
++ source xge_autotest/case_script/multicast.sh
+++ main
+++ JIRA_ID=PV-1489
+++ Test_Item='multicast traffic support'
+++ Designed_Requirement_ID=R.HNS.F004A
+++ multicast
+++ Test_Case_Title='use the omping tool to test multicast'
+++ Test_Case_ID=ST_XGE_MULTICAST_004
+++ :
+++ ifconfig eth1 up
+++ ifconfig eth1 192.168.100.212
+++ ssh root@192.168.1.210 'ifconfig eth1 up; ifconfig eth1 192.168.100.200; sleep 10; omping 192.168.100.200 192.168.100.212 -m 232.43.211.23 -c 10 > D05omping.txt &'
+++ sleep 20
+++ sleep 20
+++ omping 192.168.100.200 192.168.100.212 -m 232.43.211.23 -c 10
+++ cat D03omping.txt
+++ grep '192.168.100.200 :   unicast' -A 1
+++ grep '192.168.100.200 : multicast'
+++ '[' 0 -eq 0 ']'
+++ D03flag=1
+++ '[' 1 -eq 1 ']'
+++ writePass
+++ local Test_Result=PASS
+++ echo 'XGE,PV-1489,R.HNS.F004A,ST_XGE_MULTICAST_004,multicast traffic support,use the omping tool to test multicast,PASS'
+++ return 0
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ commd=channel_getting.sh
++ source xge_autotest/case_script/channel_getting.sh
+++ main
+++ JIRA_ID=PV-1513
+++ Test_Item='support of channel gettings'
+++ Designed_Requirement_ID=R.HNS.F033A
+++ channel_getting
+++ Test_Case_Title='query channel parameters of each port'
+++ Test_Case_ID=ST.SGE_GET_CHANNEL_000
+++ :
+++ ifconfig eth1 up
+++ ifconfig eth2 up
+++ ifconfig eth3 up
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -l eth0
+++ egrep 'RX|TX'
+++ awk -F: '{print $2}'
+++ tr '\n' ' '
+++ sed 's/	//g'
+++ sed 's/ //g'
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -l eth1
+++ egrep 'RX|TX'
+++ awk -F: '{print $2}'
+++ tr '\n' ' '
+++ sed 's/	//g'
+++ sed 's/ //g'
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -l eth2
+++ egrep 'RX|TX'
+++ awk -F: '{print $2}'
+++ tr '\n' ' '
+++ sed 's/	//g'
+++ sed 's/ //g'
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -l eth3
+++ egrep 'RX|TX'
+++ awk -F: '{print $2}'
+++ tr '\n' ' '
+++ sed 's/	//g'
+++ sed 's/ //g'
+++ ifconfig eth1 down
+++ ifconfig eth2 down
+++ ifconfig eth3 down
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -l eth0
+++ egrep 'RX|TX'
+++ awk -F: '{print $2}'
+++ tr '\n' ' '
+++ sed 's/	//g'
+++ sed 's/ //g'
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -l eth1
+++ egrep 'RX|TX'
+++ tr '\n' ' '
+++ sed 's/	//g'
+++ awk -F: '{print $2}'
+++ sed 's/ //g'
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -l eth2
+++ egrep 'RX|TX'
+++ tr '\n' ' '
+++ sed 's/	//g'
+++ awk -F: '{print $2}'
+++ sed 's/ //g'
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -l eth3
+++ egrep 'RX|TX'
+++ awk -F: '{print $2}'
+++ tr '\n' ' '
+++ sed 's/	//g'
+++ sed 's/ //g'
++++ cat D03channel.txt
++++ grep -o 16161616
++++ wc -l
+++ channelvalue=8
+++ '[' 8 == 8 ']'
+++ D03flag=1
+++ rm -rf D03channel.txt
+++ '[' 1 == 1 ']'
+++ writePass
+++ local Test_Result=PASS
+++ echo 'XGE,PV-1513,R.HNS.F033A,ST.SGE_GET_CHANNEL_000,support of channel gettings,query channel parameters of each port,PASS'
+++ return 0
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ commd=rss.sh
++ source xge_autotest/case_script/rss.sh
+++ main
+++ JIRA_ID=PV-1503
+++ Test_Item='set rx flow hash configuration'
+++ Designed_Requirement_ID=R.HNS.F021A
+++ rss
+++ Test_Case_Title='set rx flow hash configuration'
+++ Test_Case_ID=ST_XGE_HKEY_000
+++ :
+++ ifconfig eth2 up
+++ ifconfig eth2 192.168.7.212
+++ ethtool -X eth2 equal 16
+++ ethtool -X eth2 hkey 31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31
+++ ethtool -x eth2
++++ cat rss.txt
++++ tail -n 1
+++ hkeyvalue=31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31
++++ cat rss.txt
++++ grep -w 15
++++ wc -l
+++ ringvalue=16
+++ '[' 31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31 == 31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31:31 -a 16 -eq 16 ']'
+++ writePass
+++ local Test_Result=PASS
+++ echo 'XGE,PV-1503,R.HNS.F021A,ST_XGE_HKEY_000,set rx flow hash configuration,set rx flow hash configuration,PASS'
+++ return 0
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ commd=query_ring.sh
++ source xge_autotest/case_script/query_ring.sh
+++ main
+++ JIRA_ID=PV-1509
+++ Test_Item='support of ring parameter gettings'
+++ Designed_Requirement_ID=R.HNS.F029A
+++ ring_query
+++ Test_Case_Title='query ring parameter'
+++ Test_Case_ID=ST_SGE_GET_RINGBD_000
+++ :
+++ ifconfig eth1 up
+++ ifconfig eth2 up
+++ ifconfig eth3 up
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -g eth0
+++ grep -Po '(?<=TX:|RX:)(.*)'
+++ sed 's/	//g'
+++ tr '\n' ' '
+++ sed 's/ //g'
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -g eth1
+++ grep -Po '(?<=TX:|RX:)(.*)'
+++ sed 's/	//g'
+++ tr '\n' ' '
+++ sed 's/ //g'
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -g eth2
+++ grep -Po '(?<=TX:|RX:)(.*)'
+++ sed 's/	//g'
+++ tr '\n' ' '
+++ sed 's/ //g'
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -g eth3
+++ grep -Po '(?<=TX:|RX:)(.*)'
+++ sed 's/	//g'
+++ tr '\n' ' '
+++ sed 's/ //g'
+++ ifconfig eth1 down
+++ ifconfig eth2 down
+++ ifconfig eth3 down
+++ for i in eth0 eth1 eth2 eth3
+++ grep -Po '(?<=TX:|RX:)(.*)'
+++ ethtool -g eth0
+++ sed 's/	//g'
+++ sed 's/ //g'
+++ tr '\n' ' '
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -g eth1
+++ grep -Po '(?<=TX:|RX:)(.*)'
+++ sed 's/	//g'
+++ tr '\n' ' '
+++ sed 's/ //g'
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -g eth2
+++ grep -Po '(?<=TX:|RX:)(.*)'
+++ sed 's/	//g'
+++ tr '\n' ' '
+++ sed 's/ //g'
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -g eth3
+++ grep -Po '(?<=TX:|RX:)(.*)'
+++ sed 's/	//g'
+++ tr '\n' ' '
+++ sed 's/ //g'
++++ cat D03ring.txt
++++ grep -o 1024102410241024
++++ wc -l
+++ ringvalue=8
+++ '[' 8 -eq 8 ']'
+++ D03flag=1
+++ '[' 1 == 1 ']'
+++ writePass
+++ local Test_Result=PASS
+++ echo 'XGE,PV-1509,R.HNS.F029A,ST_SGE_GET_RINGBD_000,support of ring parameter gettings,query ring parameter,PASS'
+++ return 0
+++ rm -rf D03ring.txt
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ commd=port_status.sh
++ source xge_autotest/case_script/port_status.sh
+++ main
+++ JIRA_ID=PV-1506
+++ Test_Item='support to query port status'
+++ Designed_Requirement_ID=R.HNS.F026A
+++ port_status_query
+++ Test_Case_Title='GE/XGE ports'\'' basic configuration query'
+++ Test_Case_ID=ST_GE_GET_SETTINGS_000/ST_XGE_GET_SETTINGS_005
+++ :
+++ ifconfig eth1 up
+++ ifconfig eth2 up
+++ ifconfig eth3 up
++++ ssh root@192.168.1.210 ':> D05portstatus.txt; ifconfig eth1 up; ifconfig eth2 up; ifconfig eth3 up; sleep 20; for i in eth0 eth1 eth2 eth3; do ethtool $i  >> D05portstatus.txt; done; linkvalue=`cat D05portstatus.txt | grep "Link detected" | cut -d : -f2 | wc -l`;GEspeedvalue=`cat D05portstatus.txt | grep "Twisted Pair" -B 3 | grep "1000Mb/s"| wc -l`;XGEspeedvalue=`cat D05portstatus.txt | grep "Port: FIBRE" -B 3 | grep "10000Mb/s"| wc -l`; if [ $linkvalue -eq 4 -a $GEspeedvalue -eq 2 -a $XGEspeedvalue -eq 2 ];then D05flag=1;fi; echo $D05flag ; rm -rf D05portstatus.txt'
+++ D05flag=1
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool eth0
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool eth1
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool eth2
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool eth3
++++ cat D03portstatus.txt
++++ grep 'Link detected'
++++ cut -d : -f2
++++ wc -l
+++ linkvalue=4
++++ cat D03portstatus.txt
++++ grep 'Twisted Pair' -B 3
++++ grep 1000Mb/s
++++ wc -l
+++ GEspeedvalue=2
++++ cat D03portstatus.txt
++++ grep 'Port: FIBRE' -B 3
++++ grep 10000Mb/s
++++ wc -l
+++ XGEspeedvalue=2
+++ '[' 4 -eq 4 -a 2 -eq 2 -a 2 -eq 2 ']'
+++ D03flag=1
+++ '[' 1 -eq 1 -a 1 -eq 1 ']'
+++ writePass
+++ local Test_Result=PASS
+++ echo 'XGE,PV-1506,R.HNS.F026A,ST_GE_GET_SETTINGS_000/ST_XGE_GET_SETTINGS_005,support to query port status,GE/XGE ports'\'' basic configuration query,PASS'
+++ return 0
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ commd=iperf_ge_port.sh
++ source xge_autotest/case_script/iperf_ge_port.sh
+++ main
+++ JIRA_ID=PV-456
+++ Test_Item='Iperf transfer(GE port)'
+++ Designed_Requirement_ID=R.HNS.P001.A
+++ iperf_transfer_test
+++ Test_Case_Title=iperf_transfer_test
+++ Test_Case_ID=ST.FUNC.049/ST.FUNC.050
+++ type=m
+++ ge_bandwidth=900
+++ ifconfig eth1 192.168.3.1
+++ ssh root@192.168.1.210 'ifconfig eth1 192.168.3.2;iperf -s 1>/dev/null &'
+++ sleep 5
+++ for num in '${thread[*]}'
+++ iperf -c 192.168.3.2 -t 5 -P 1 -f m
++++ tail -1 1.log
++++ awk '{print $(NF-1)}'
+++ bandwidth=260
+++ '[' 260 -gt 900 ']'
+++ echo 'P=1 Fail,bandwidth is 260M.'
+++ for num in '${thread[*]}'
+++ iperf -c 192.168.3.2 -t 5 -P 3 -f m
++++ tail -1 3.log
++++ awk '{print $(NF-1)}'
+++ bandwidth=713
+++ '[' 713 -gt 900 ']'
+++ echo 'P=3 Fail,bandwidth is 713M.'
+++ for num in '${thread[*]}'
+++ iperf -c 192.168.3.2 -t 5 -P 5 -f m
++++ tail -1 5.log
++++ awk '{print $(NF-1)}'
+++ bandwidth=413
+++ '[' 413 -gt 900 ']'
+++ echo 'P=5 Fail,bandwidth is 413M.'
+++ for num in '${thread[*]}'
+++ iperf -c 192.168.3.2 -t 5 -P 10 -f m
++++ tail -1 10.log
++++ awk '{print $(NF-1)}'
+++ bandwidth=674
+++ '[' 674 -gt 900 ']'
+++ echo 'P=10 Fail,bandwidth is 674M.'
+++ for num in '${thread[*]}'
+++ iperf -c 192.168.3.2 -t 5 -P 20 -f m
++++ tail -1 20.log
++++ awk '{print $(NF-1)}'
+++ bandwidth=700
+++ '[' 700 -gt 900 ']'
+++ echo 'P=20 Fail,bandwidth is 700M.'
++++ cat iperf.txt
++++ grep -w Pass
++++ wc -l
+++ pass=0
++++ cat iperf.txt
++++ grep -w Fail
++++ awk '{print $1}'
++++ tr '\n' '|'
+++ fail='P=1|P=3|P=5|P=10|P=20|'
+++ '[' 0 -eq 5 ']'
+++ writeFail 'P=1|P=3|P=5|P=10|P=20|Bandwidth did not meet the requirement.'
+++ local Test_Result=FAIL
+++ local 'Remark=P=1|P=3|P=5|P=10|P=20|Bandwidth did not meet the requirement.'
+++ echo 'XGE,PV-456,R.HNS.P001.A,ST.FUNC.049/ST.FUNC.050,Iperf transfer(GE port),iperf_transfer_test,FAIL,P=1|P=3|P=5|P=10|P=20|Bandwidth did not meet the requirement.'
+++ return 0
+++ rm -f iperf.txt
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ commd=ping6_XGE.sh
++ source xge_autotest/case_script/ping6_XGE.sh
+++ main
+++ JIRA_ID=PV-1496
+++ Test_Item='IPV6 testing'
+++ Designed_Requirement_ID=R.HNS.F013A
+++ ping6_XGE_test
+++ Test_Case_Title='XGE support to IPV6'
+++ Test_Case_ID=ST.FUNC.049/ST.FUNC.050
++++ ssh root@192.168.1.210 'ifconfig eth3 up; sleep 10; ifconfig -a | grep "eth3" -A 4 | grep "inet6 addr" |  grep -Po "(?<=: )([^/]*)"'
+++ IPV6=fe80::c2a8:1ff:feb3:1
+++ sleep 15
+++ ping6 fe80::c2a8:1ff:feb3:1%eth3 -c 5
+++ cat ping6_XGE.txt
+++ grep '0% packet loss'
+5 packets transmitted, 5 received, 0% packet loss, time 4053ms
++++ echo 0
+++ result=0
+++ '[' 0 -eq 0 ']'
+++ writePass
+++ local Test_Result=PASS
+++ echo 'XGE,PV-1496,R.HNS.F013A,ST.FUNC.049/ST.FUNC.050,IPV6 testing,XGE support to IPV6,PASS'
+++ return 0
+++ rm -f ping6_XGE.txt
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ commd=iperf_xge_port.sh
++ source xge_autotest/case_script/iperf_xge_port.sh
+++ main
+++ JIRA_ID=PV-456
+++ Test_Item='Iperf transfer(XGE port)'
+++ Designed_Requirement_ID=R.HNS.P001.A
+++ iperf_transfer_xge
+++ Test_Case_Title=iperf_transfer_xge
+++ Test_Case_ID=ST.FUNC.049/ST.FUNC.050
+++ type=m
+++ ge_bandwidth=9000
+++ ifconfig eth3 192.168.5.1
+++ ssh root@192.168.1.210 'ifconfig eth3 192.168.5.2;iperf -s 1>/dev/null &'
+++ sleep 5
+++ for num in '${thread[*]}'
+++ iperf -c 192.168.5.2 -t 5 -P 1 -f m
++++ tail -1 1.log
++++ awk '{print $(NF-1)}'
+++ bandwidth=263
+++ '[' 263 -gt 9000 ']'
+++ echo 'P=1 Fail,bandwidth is 263M.'
+++ for num in '${thread[*]}'
+++ iperf -c 192.168.5.2 -t 5 -P 3 -f m
++++ tail -1 3.log
++++ awk '{print $(NF-1)}'
+++ bandwidth=448
+++ '[' 448 -gt 9000 ']'
+++ echo 'P=3 Fail,bandwidth is 448M.'
+++ for num in '${thread[*]}'
+++ iperf -c 192.168.5.2 -t 5 -P 5 -f m
++++ tail -1 5.log
++++ awk '{print $(NF-1)}'
+++ bandwidth=770
+++ '[' 770 -gt 9000 ']'
+++ echo 'P=5 Fail,bandwidth is 770M.'
+++ for num in '${thread[*]}'
+++ iperf -c 192.168.5.2 -t 5 -P 10 -f m
++++ tail -1 10.log
++++ awk '{print $(NF-1)}'
+++ bandwidth=842
+++ '[' 842 -gt 9000 ']'
+++ echo 'P=10 Fail,bandwidth is 842M.'
+++ for num in '${thread[*]}'
+++ iperf -c 192.168.5.2 -t 5 -P 20 -f m
++++ tail -1 20.log
++++ awk '{print $(NF-1)}'
+++ bandwidth=606
+++ '[' 606 -gt 9000 ']'
+++ echo 'P=20 Fail,bandwidth is 606M.'
++++ cat iperf.txt
++++ grep -w Pass
++++ wc -l
+++ pass=0
++++ cat iperf.txt
++++ grep -w Fail
++++ awk '{print $1}'
++++ tr '\n' '|'
+++ fail='P=1|P=3|P=5|P=10|P=20|'
+++ '[' 0 -eq 5 ']'
+++ writeFail 'P=1|P=3|P=5|P=10|P=20|Bandwidth did not meet the requirement.'
+++ local Test_Result=FAIL
+++ local 'Remark=P=1|P=3|P=5|P=10|P=20|Bandwidth did not meet the requirement.'
+++ echo 'XGE,PV-456,R.HNS.P001.A,ST.FUNC.049/ST.FUNC.050,Iperf transfer(XGE port),iperf_transfer_xge,FAIL,P=1|P=3|P=5|P=10|P=20|Bandwidth did not meet the requirement.'
+++ return 0
+++ rm -f iperf.txt
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ commd=enable_and_disable_interface.sh
++ source xge_autotest/case_script/enable_and_disable_interface.sh
+++ main
+++ JIRA_ID=PV-1488
+++ Test_Item='enable and disable of interface'
+++ Designed_Requirement_ID=R.HNS.F001A
+++ enable_and_disable_interface
+++ Test_Case_Title='enable and disable GE ports'
+++ Test_Case_ID=ST_GE_PORT_CTRL_000
+++ :
+++ ifconfig eth1 up
+++ ifconfig eth1 192.168.100.212
+++ ssh root@192.168.1.210 'ifconfig eth1 up; ifconfig eth1 192.168.100.200; sleep 10;'
+++ sleep 10
+++ ping 192.168.100.200 -c 5
+++ cat D03ping.txt
+++ grep '0% packet loss'
+++ '[' 0 -eq 0 ']'
+++ enableok=1
+++ ssh root@192.168.1.210 'ifconfig eth1 down;'
+++ sleep 10
+++ ping 192.168.100.200 -c 5
+++ cat D03ping.txt
+++ grep '0% packet loss'
+++ '[' 1 -eq 1 ']'
+++ disableok=1
+++ '[' 1 -eq 1 -a 1 -eq 1 ']'
+++ writePass
+++ local Test_Result=PASS
+++ echo 'XGE,PV-1488,R.HNS.F001A,ST_GE_PORT_CTRL_000,enable and disable of interface,enable and disable GE ports,PASS'
+++ return 0
+++ rm -f D03ping.txt
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ commd=driver_info.sh
++ source xge_autotest/case_script/driver_info.sh
+++ main
+++ JIRA_ID=PV-1507
+++ Test_Item='support to get driver informations'
+++ Designed_Requirement_ID=R.HNS.F028A
+++ driver_info_query
+++ Test_Case_Title='The network port driver version information is correct'
+++ Test_Case_ID=ST_SGE_GET_DRVINFO_000
++++ ssh root@192.168.1.210 ':> D05driverinfo.txt; ifconfig eth1 up; ifconfig eth2 up; ifconfig eth3 up ; for i in eth0 eth1 eth2 eth3 ; do ethtool -i $i >> D05driverinfo.txt ; done; ifconfig eth1 down; ifconfig eth2 down; ifconfig eth3 down ; for i in eth0 eth1 eth2 eth3; do ethtool -i $i >> D05driverinfo.txt ; done; drivervalue=`cat D05driverinfo.txt | grep -w "hns" | wc -l`; versionvalue=`cat D05driverinfo.txt | grep -w "2.0" | wc -l`; if [ $drivervalue -eq 8 -a $versionvalue -eq 8 ];then D05flag=1;fi; echo $D05flag ; rm -rf D05driverinfo.txt'
+++ D05flag=1
+++ :
+++ ifconfig eth1 up
+++ ifconfig eth2 up
+++ ifconfig eth3 up
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -i eth0
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -i eth1
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -i eth2
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -i eth3
+++ ifconfig eth1 down
+++ ifconfig eth2 down
+++ ifconfig eth3 down
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -i eth0
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -i eth1
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -i eth2
+++ for i in eth0 eth1 eth2 eth3
+++ ethtool -i eth3
++++ cat D03driverinfo.txt
++++ grep -w hns
++++ wc -l
+++ drivervalue=8
++++ cat D03driverinfo.txt
++++ grep -w 2.0
++++ wc -l
+++ versionvalue=8
+++ '[' 8 -eq 8 -a 8 -eq 8 ']'
+++ D03flag=1
+++ '[' 1 -eq 1 -a 1 -eq 1 ']'
+++ writePass
+++ local Test_Result=PASS
+++ echo 'XGE,PV-1507,R.HNS.F028A,ST_SGE_GET_DRVINFO_000,support to get driver informations,The network port driver version information is correct,PASS'
+++ return 0
++ for key in '"${!case_map[@]}"'
++ case "${case_map[$key]}" in
++ commd=vlan.sh
++ source xge_autotest/case_script/vlan.sh
+++ main
+++ JIRA_ID=PV-1490
+++ Test_Item='VLAN Tagged Traffic support'
+++ Designed_Requirement_ID=R.HNS.F005A
+++ vlantest
+++ Test_Case_Title='vlan ping funciton'
+++ Test_Case_ID=ST_GE_VLAN_000
+++ :
+++ zcat /proc/config.gz
+++ grep -w CONFIG_VLAN_8021Q
+CONFIG_VLAN_8021Q=y
+++ '[' 0 -eq 1 ']'
+++ ifconfig eth1 up
+++ ip link add link eth1 name eth1.401 type vlan id 401
+++ ifconfig eth1.401 up
+++ ifconfig eth1.401 192.168.101.212
+++ sleep 10
+++ ssh root@192.168.1.210 'ifconfig eth1 up; sleep 10; ip link add link eth1 name eth1.401 type vlan id 401; ifconfig eth1.401 up; ifconfig eth1.401 192.168.101.200; sleep 20;'
+++ sleep 10
+++ ping 192.168.101.200 -c 5
+++ cat pingvlan.txt
+++ grep '0% packet loss'
+5 packets transmitted, 5 received, 0% packet loss, time 4036ms
++++ echo 0
+++ result=0
+++ '[' 0 -eq 0 ']'
+++ writePass
+++ local Test_Result=PASS
+++ echo 'XGE,PV-1490,R.HNS.F005A,ST_GE_VLAN_000,VLAN Tagged Traffic support,vlan ping funciton,PASS'
+++ return 0
+++ rm -rf pingvlan.txt
++ exit 0
+root@ubuntu-d03:~/autotest# rm -f ~/.ssh/known_hosts
+jiaoling/autotest/report/xge_report.csv report.csv tianjiaoling@192.168.1.107:/home/tian 
+The authenticity of host '192.168.1.107 (192.168.1.107)' can't be established.
+ECDSA key fingerprint is SHA256:fe9aZD6c4Ue2SWU/RKA/rPliBnVfImpUcMTen40OVgQ.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '192.168.1.107' (ECDSA) to the list of known hosts.
+tianjiaoling@192.168.1.107's password: 
+report.csv                                    100% 2298     2.2KB/s   00:00    
+root@ubuntu-d03:~/autotest# cd ~;rm -rf ~/autotest;rm -rf autotest.tar.gz
+root@ubuntu-d03:~# tianjiaoling@BoardServer1:~/autotest$ cat report/xge_report.csv 
+Module Name,JIRA ID,Designed Requirement ID,Test Case ID,Test Item,Test Case Title,Test Result,Remark
+XGE,PV-1511,R.HNS.F032A,ST.GE_SELF_TEST_000,GE/XGE self test,self_test function normally,PASS
+XGE,PV-1510,R.HNS.F031A,ST_ETHTOOL_GET_STATS_000,support of getting interface statistics through ethtool,query GE interface statistics after HNS information,FAIL,
+XGE,PV-1498,R.HNS.F015A,ST_SUPPORT_TSO_000,support of tso,tso function,PASS
+XGE,PV-1495,R.HNS.F012A,ST_SHNS_BASE_INFORMATION_000,getting base information,ifconfig get base information,PASS
+XGE,PV-1518,R.HNS.R027A,ST.GE/XGE_GET_REGS_000,support to dump registers,support to dump registers,PASS
+XGE,PV-1501,R.HNS.F019A,ST_SHNS_COALESCE_000,interrupt coalesce support,set waterline and time of interrupt coalesce,PASS
+XGE,PV-1496,R.HNS.F013A,ST.FUNC.049/ST.FUNC.050,IPV6 testing,GE support to IPV6,PASS
+XGE,PV-1502,R.HNS.F020A,ST_XGE_CHECKSUM_OFFLOAD_000,checksum offload,set checksum offload(TX/RX),PASS
+XGE,PV-1489,R.HNS.F004A,ST_XGE_MULTICAST_004,multicast traffic support,use the omping tool to test multicast,PASS
+XGE,PV-1513,R.HNS.F033A,ST.SGE_GET_CHANNEL_000,support of channel gettings,query channel parameters of each port,PASS
+XGE,PV-1503,R.HNS.F021A,ST_XGE_HKEY_000,set rx flow hash configuration,set rx flow hash configuration,PASS
+XGE,PV-1509,R.HNS.F029A,ST_SGE_GET_RINGBD_000,support of ring parameter gettings,query ring parameter,PASS
+XGE,PV-1506,R.HNS.F026A,ST_GE_GET_SETTINGS_000/ST_XGE_GET_SETTINGS_005,support to query port status,GE/XGE ports' basic configuration query,PASS
+XGE,PV-456,R.HNS.P001.A,ST.FUNC.049/ST.FUNC.050,Iperf transfer(GE port),iperf_transfer_test,FAIL,P=1|P=3|P=5|P=10|P=20|Bandwidth did not meet the requirement.
+XGE,PV-1496,R.HNS.F013A,ST.FUNC.049/ST.FUNC.050,IPV6 testing,XGE support to IPV6,PASS
+XGE,PV-456,R.HNS.P001.A,ST.FUNC.049/ST.FUNC.050,Iperf transfer(XGE port),iperf_transfer_xge,FAIL,P=1|P=3|P=5|P=10|P=20|Bandwidth did not meet the requirement.
+XGE,PV-1488,R.HNS.F001A,ST_GE_PORT_CTRL_000,enable and disable of interface,enable and disable GE ports,PASS
+XGE,PV-1507,R.HNS.F028A,ST_SGE_GET_DRVINFO_000,support to get driver informations,The network port driver version information is correct,PASS
+XGE,PV-1490,R.HNS.F005A,ST_GE_VLAN_000,VLAN Tagged Traffic support,vlan ping funciton,PASS
+
