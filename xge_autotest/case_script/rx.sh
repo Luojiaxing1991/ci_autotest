@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # rx functionality
 # IN :N/A
 # OUT:N/A

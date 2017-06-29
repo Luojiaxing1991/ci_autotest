@@ -8,7 +8,7 @@ function ring_query()
     Test_Case_Title="query ring parameter"
     Test_Case_ID="ST_SGE_GET_RINGBD_000"
     :> D03ring.txt
-	#D05flag=$(ssh root@$BACK_IP ':> D05ring.txt; ifconfig eth1 up; ifconfig eth2 up; ifconfig eth3 up; for i in eth0 eth1 eth2 eth3; do ethtool -g $i | grep -Po "(?<=TX:|RX:)(.*)" | sed \'s/	//g\' | tr \'\n\' \' \'| sed \'s/ //g\' >> D05ring.txt; done; ifconfig eth1 down; ifconfig eth2 down; ifconfig eth3 down; for i in eth0 eth1 eth2 eth3; do ethtool -g $i | grep -Po "(?<=TX:|RX:)(.*)" | sed \'s/	//g\' | tr \'\n\' \' \' | sed \'s/ //g\' >> D05ring.txt; done; ringvalue=`cat D05ring.txt | grep -w "1024102410241024"| wc -l`; if [ $ringvalue -eq 8 ];then D05flag=1;fi;echo $D05flag;')
+    #D05flag=$(ssh root@$BACK_IP ':> D05ring.txt; ifconfig eth1 up; ifconfig eth2 up; ifconfig eth3 up; for i in eth0 eth1 eth2 eth3; do ethtool -g $i | grep -Po "(?<=TX:|RX:)(.*)" | sed \'s/	//g\' | tr \'\n\' \' \'| sed \'s/ //g\' >> D05ring.txt; done; ifconfig eth1 down; ifconfig eth2 down; ifconfig eth3 down; for i in eth0 eth1 eth2 eth3; do ethtool -g $i | grep -Po "(?<=TX:|RX:)(.*)" | sed \'s/	//g\' | tr \'\n\' \' \' | sed \'s/ //g\' >> D05ring.txt; done; ringvalue=`cat D05ring.txt | grep -w "1024102410241024"| wc -l`; if [ $ringvalue -eq 8 ];then D05flag=1;fi;echo $D05flag;')
 
     ifconfig eth1 up; ifconfig eth2 up; ifconfig eth3 up
     for i in eth0 eth1 eth2 eth3

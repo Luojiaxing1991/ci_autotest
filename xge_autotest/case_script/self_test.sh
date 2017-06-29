@@ -11,7 +11,7 @@ function self_test()
     ifconfig eth1 up; ifconfig eth2 up; ifconfig eth3 up
     tmpup=`ethtool -t eth0 | grep PASS && ethtool -t eth1 | grep PASS  && ethtool -t eth2 | grep PASS  && ethtool -t eth3 | grep PASS`
     upresult=`echo "$tmpup" | grep -o "PASS" | wc -l`
-   # ssh root@$BACK_IP 'ifconfig eth1 down; ifconfig eth2 down; ifconfig eth3 down'
+    #ssh root@$BACK_IP 'ifconfig eth1 down; ifconfig eth2 down; ifconfig eth3 down'
     ifconfig eth1 down; ifconfig eth2 down; ifconfig eth3 down
     tmpdown=`ethtool -t eth0 | grep PASS && ethtool -t eth1 | grep PASS && ethtool -t eth2 | grep PASS && ethtool -t eth3 | grep PASS`
     downresult=`echo "$tmpdown" | grep -o "PASS" | wc -l`
