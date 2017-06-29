@@ -14,14 +14,21 @@ function disk_negotiated_link_rate_query()
         [ x"$type" != x"end device" ] && continue
         
         rate_value=`cat ${PHY_FILE_PATH}/${dir}/negotiated_linkrate | awk -F '.' '{print $1}'`
+        BRate=1
         for rate in `echo $DISK_NEGOTIATED_LINKRATE_VALUE | sed 's/|/ /g'`
         do
-            if [ $rate_value -ne $rate ]
+            if [ $rate_value -eq $rate ]
             then
-                writeFail "\"${dir}\" negotiated link rate query ERROR."
-                return 1
+                BRate=0
+                break
             fi
         done
+
+        if [ $BRate -eq 1 ]
+        then
+            writeFail "\"${dir}\" negotiated link rate query ERROR."
+            return 1
+        fi
     done
     writePass
 }

@@ -3,8 +3,8 @@
 
 
 # Load configuration options
-. sas_autotest/config/sas_test_config
-. config/common_lib
+#. ${SAS_TOP_DIR}/config/sas_test_config
+#. ${SAS_TOP_DIR}/../config/common_lib
 
 ## Utility function
 #

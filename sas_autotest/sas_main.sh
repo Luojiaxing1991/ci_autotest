@@ -1,10 +1,12 @@
 #!/bin/bash
 
 
+SAS_TOP_DIR=$(cd "`dirname $0`" ; pwd)
 
 # Load common function
-. sas_autotest/config/sas_test_lib
-
+. ${SAS_TOP_DIR}/config/sas_test_lib
+. ${SAS_TOP_DIR}/config/sas_test_config
+. ${SAS_TOP_DIR}/../config/common_lib
 
 # Main operation function
 # IN : N/A
@@ -19,7 +21,7 @@ function main()
         case "${case_map[$key]}" in
             on)
                 commd="${key}.sh"
-                source $TEST_CASE_PATH/$commd
+                source ${SAS_TOP_DIR}/case_script/$commd
             ;;
             off)
             ;;

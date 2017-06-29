@@ -45,10 +45,6 @@ function switch_phy_info_query()
 
     flag=0
     init_count=`dmesg | grep "Start/Stop Unit failed" | wc -l`
-    #for phy in ${PHY_ADDR_VALUE}
-    #do
-    #    ${DEVMEM} ${phy} -w 0x6
-    #done
     phy_ops close all
     sleep 5
     end_count=`dmesg | grep "Start/Stop Unit failed" | wc -l`

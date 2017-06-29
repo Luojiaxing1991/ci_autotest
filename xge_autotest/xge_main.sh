@@ -1,8 +1,12 @@
 #!/bin/bash
 
-# Load common function
-. xge_autotest/config/xge_test_lib
 
+XGE_TOP_DIR=$(cd "`dirname $0`" ; pwd)
+
+# Load common function
+. ${XGE_TOP_DIR}/config/xge_test_lib
+. ${XGE_TOP_DIR}/config/xge_test_config
+. ${XGE_TOP_DIR}/../config/common_lib
 
 # Main operation function
 # IN : N/A
@@ -16,7 +20,7 @@ function main()
         case "${case_map[$key]}" in
             on)
                 commd="${key}.sh"
-                source $TEST_CASE_PATH/$commd
+                source ${XGE_TOP_DIR}/case_script/$commd
             ;;
             off)
             ;;

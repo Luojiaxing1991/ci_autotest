@@ -1,8 +1,12 @@
 #!/bin/bash
 
-# Load common function
-. pcie_autotest/config/pcie_test_lib
 
+PCIE_TOP_DIR=$(cd "`dirname $0`" ; pwd)
+
+# Load common function
+. ${PCIE_TOP_DIR}/config/pcie_test_lib
+. ${PCIE_TOP_DIR}/config/pcie_test_config
+. ${PCIE_TOP_DIR}/../config/common_lib
 
 # Main operation function
 # IN : N/A
@@ -16,7 +20,7 @@ function main()
         case "${case_map[$key]}" in
             on)
                 commd="${key}.sh"
-                source $TEST_CASE_PATH/$commd
+                source ${PCIE_TOP_DIR}/case_script/$commd
             ;;
             off)
             ;;

@@ -31,6 +31,7 @@ function board_run_back()
     sed -i "{s/^set\ default=.*/set\ default=${BACK_BOARD_GRUB_DEFAULT}/g;}" ~/grub.cfg
     board_reboot $1
     [ $? != 0 ] && echo "board reboot failed." && return 1
+    
     expect -c '
     set timeout -1
     set boardno '$1'
