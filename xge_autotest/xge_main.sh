@@ -4,9 +4,13 @@
 XGE_TOP_DIR=$(cd "`dirname $0`" ; pwd)
 
 # Load common function
-. ${XGE_TOP_DIR}/config/xge_test_lib
 . ${XGE_TOP_DIR}/config/xge_test_config
+. ${XGE_TOP_DIR}/config/xge_test_lib
+
+# Load the public configuration library
+. ${XGE_TOP_DIR}/../config/common_config
 . ${XGE_TOP_DIR}/../config/common_lib
+
 
 # Main operation function
 # IN : N/A

@@ -4,11 +4,12 @@
 # the main entry, use to run all test work.
 ###########################################
 
+TOP_DIR=$(cd "`dirname $0`" ; pwd)
 
 # Load configuration file
+. config/common_config
 . config/common_lib
 
-TOP_DIR=$(cd "`dirname $0`" ; pwd)
 
 # Update boot Image file
 # IN : N/A

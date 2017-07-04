@@ -4,9 +4,13 @@
 PCIE_TOP_DIR=$(cd "`dirname $0`" ; pwd)
 
 # Load common function
-. ${PCIE_TOP_DIR}/config/pcie_test_lib
 . ${PCIE_TOP_DIR}/config/pcie_test_config
+. ${PCIE_TOP_DIR}/config/pcie_test_lib
+
+# Load the public configuration library
+. ${PCIE_TOP_DIR}/../config/common_config
 . ${PCIE_TOP_DIR}/../config/common_lib
+
 
 # Main operation function
 # IN : N/A

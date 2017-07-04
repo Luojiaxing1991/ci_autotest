@@ -1,9 +1,6 @@
 #!/bin/bash
 
 
-# Load configuration options
-. pcie_autotest/config/pcie_test_config
-. config/common_lib
 
 ## Utility function
 

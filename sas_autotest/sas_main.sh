@@ -3,10 +3,14 @@
 
 SAS_TOP_DIR=$(cd "`dirname $0`" ; pwd)
 
-# Load common function
-. ${SAS_TOP_DIR}/config/sas_test_lib
+# Load module configuration library
 . ${SAS_TOP_DIR}/config/sas_test_config
+. ${SAS_TOP_DIR}/config/sas_test_lib
+
+# Load the public configuration library
+. ${SAS_TOP_DIR}/../config/common_config
 . ${SAS_TOP_DIR}/../config/common_lib
+
 
 # Main operation function
 # IN : N/A

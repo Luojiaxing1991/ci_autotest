@@ -1,9 +1,6 @@
 #!/bin/bash
 
 
-# Load configuration file
-. config/common_config
-
 #############################################################################################################
 # function list
 # new function write at end
