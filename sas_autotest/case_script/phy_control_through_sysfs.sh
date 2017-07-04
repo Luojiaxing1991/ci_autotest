@@ -12,13 +12,13 @@ function set_rate_link()
         then
             echo $MINIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/minimum_link
             echo $MAXIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/maximum_link
-            [ $? -ne 0 ] && writeFail "Failed to set the maximum rate of \"$dir\" greater than the minimum rate." && return 1
+            [ $? -ne 0 ] && writeFail "Failed to set the maximum rate of \"${dir}\" greater than the minimum rate." && return 1
 
             echo $MINIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/maximum_link 
-            [ $? -ne 0 ] && writeFail "Failed to set the \"$dir\" maximum rate equal to the minimum rate." && return 1
+            [ $? -ne 0 ] && writeFail "Failed to set the \"${dir}\" maximum rate equal to the minimum rate." && return 1
 
             echo $MAXIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/minimum_link
-            [ $? -eq 0 ] && writeFail "Failed to set the \"$dir\" maximum rate less than the minimum rate." && return 1
+            [ $? -eq 0 ] && writeFail "Failed to set the \"${dir}\" maximum rate less than the minimum rate." && return 1
         fi
     done
     return 0

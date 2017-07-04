@@ -10,7 +10,7 @@ function polling_switch_phy()
     Test_Case_Title="polling_switch_phy"
     Test_Case_ID="ST.FUNC.063/ST.FUNC.064"
 
-    sed -i "{s/^runtime=.*/runtime=$LOOP_PHY_TIME/g;}" fio.conf
+    sed -i "{s/^runtime=.*/runtime=${LOOP_PHY_TIME}/g;}" fio.conf
     ./${COMMON_TOOL_PATH}/fio fio.conf &
     
     for i in `seq ${LOOP_PHY_COUNT}`
@@ -24,13 +24,11 @@ function polling_switch_phy()
         done
     done
 
-    #time=`grep 'runtime' fio.conf | awk -F '=' '{print $2}'`
-    #sleep $time
     sleep ${LOOP_PHY_TIME}
 
     #
     count=`ps -ef | grep fio | grep -v grep | grep -v vfio-irqfd-clea | wc -l`
-    [ $count -ne 0 ] && writeFail "Failed to turn off phy in loop " && return 1
+    [ ${count} -ne 0 ] && writeFail "Failed to turn off phy in loop " && return 1
 
     writePass
 }
@@ -52,17 +50,14 @@ function switch_phy_info_query()
     [ ${init_count} -ne ${end_count} ] && writeFail "Close all phy and use dmesg to query the disk log event failed." && flag=1
 
     init_count=`dmesg | grep "Write Protect is off" | wc -l`
-    #for phy in ${PHY_ADDR_VALUE}
-    #do
-    #    ${DEVMEM} ${phy} -w 0x7
-    #done
     phy_ops open all
     sleep 5
     end_count=`dmesg | grep "Write Protect is off" | wc -l`
  
     [ ${init_count} -ne ${end_count} ] && writeFail "Open all phy and use dmesg to query the disk log event failed." && flag=1
 
-    [ ${flag} -le 0 ] && writePass    
+    [ ${flag} -eq 0 ] && writePass
+  
 }
 
 # Disk operation, Multiple PHY frequent flash off.
@@ -73,7 +68,7 @@ function multiple_phy_frequent_off()
     Test_Case_Title="multiple_phy_frequent_off"
     Test_Case_ID="ST.FUNC.068/ST.FUNC.069"
 
-    sed -i "{s/^runtime=.*/runtime=$LOOP_PHY_TIME/g;}" fio.conf
+    sed -i "{s/^runtime=.*/runtime=${LOOP_PHY_TIME}/g;}" fio.conf
     ./${COMMON_TOOL_PATH}/fio fio.conf &
 
     for i in `seq ${LOOP_PHY_COUNT}`
@@ -95,9 +90,9 @@ function multiple_phy_frequent_off()
         sleep 2
     done
 
-    sleep $LOOP_PHY_TIME
+    sleep ${LOOP_PHY_TIME}
     count=`ps -ef | grep fio | grep -v grep | grep -v vfio-irqfd-clea | wc -l`
-    [ $count -ne 0 ] && writeFail "multiple PHY frequent flash failure." && return 1
+    [ ${count} -ne 0 ] && writeFail "multiple PHY frequent flash failure." && return 1
 
     writePass
 }
@@ -110,14 +105,14 @@ function disk_IO_all_PHYS_off()
     Test_Case_Title="disk_IO_all_PHYS_off"
     Test_Case_ID="ST.FUNC.070/ST.FUNC.071"
 
-    sed -i "{s/^runtime=.*/runtime=$LOOP_PHY_TIME/g;}" fio.conf
+    sed -i "{s/^runtime=.*/runtime=${LOOP_PHY_TIME}/g;}" fio.conf
     ./${COMMON_TOOL_PATH}/fio fio.conf &
 
     phy_ops clsoe all
-    sleep $LOOP_PHY_TIME
+    sleep ${LOOP_PHY_TIME}
 
     count=`ps -ef | grep fio | grep -v grep | grep -v vfio-irqfd-clea | wc -l`
-    [ $count -ne 0 ] && writeFail "Disk operation, closing all PHY failed." && phy_ops open all && return 1
+    [ ${count} -ne 0 ] && writeFail "Disk operation, closing all PHY failed." && phy_ops open all && return 1
 
     phy_ops open all
     writePass

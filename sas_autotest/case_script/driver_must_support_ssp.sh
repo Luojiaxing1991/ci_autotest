@@ -15,17 +15,19 @@ function driver_supports_ssp()
         mount_disk ${disk_name}
         if [ $? -ne 0 ] 
         then
-            writeFail "Mount "$disk_name" disk failure."
+            umount ${disk_name}
+            writeFail "Mount "${disk_name}" disk failure."
             return 1
         fi
 
         time dd if=/dev/zero of=/mnt/test.img bs=4M count=200 conv=fsync 1>/dev/null
         if [ $? -ne 0 ]
         then
-            umount $disk_name
-            writeFail "dd tools read data error."
+            umount ${disk_name}
+            writeFail "dd tools read ${disk_name} error."
             return 1
         fi
+        umount ${disk_name}
     done
 
     writePass

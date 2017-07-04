@@ -13,22 +13,23 @@ function iozne_file_transfer_stability_test()
         mount_disk ${disk_name} 
         if [ $? -ne 0 ]
         then
-            writeFail "Mount "$disk_name" disk failure."
+            umount ${disk_name}
+            writeFail "Mount "${disk_name}" disk failure."
             return 1
         fi
 
-        ./$COMMON_TOOL_PATH/iozone -a -n 1g -g 10g -i 0 -i 1 -i 2 -f /mnt/iozone -V 5aa51ff1 1 > $ERROR_INFO 2>&1
+        ./${COMMON_TOOL_PATH}/iozone -a -n 1g -g 10g -i 0 -i 1 -i 2 -f /mnt/iozone -V 5aa51ff1 1 > ${ERROR_INFO} 2>&1
         status=$?
-        info=`grep -iw 'error' $ERROR_INFO`
-        if [ x"$info" == x"" ] && [ $status -ne 0 ]
+        info=`grep -iw 'error' ${ERROR_INFO}`
+        if [ x"${info}" == x"" ] && [ ${status} -ne 0 ]
         then
             writeFail "File transfer stability test,IO read and write exception."
-            umount $disk_name
+            umount ${disk_name}
             return 1
         fi
 
-        umount $disk_name
-        rm -f $ERROR_INFO
+        umount ${disk_name}
+        rm -f ${ERROR_INFO}
     done
 
     writePass 
@@ -51,25 +52,27 @@ function disk_file_data_consistency_test()
         mount_disk ${disk_name}
         if [ $? -ne 0 ]
         then
-            writeFail "Mount "$disk_name" disk failure."
+            umount ${disk_name}
+            writeFail "Mount "${disk_name}" disk failure."
             return 1
         fi
         
-        for i in `seq $COMPARISON_NUMBER`
+        for i in `seq ${COMPARISON_NUMBER}`
         do
             cp /opt/test.img /mnt/test.img.$i
             md5_curr_value=`md5sum /mnt/test.img.$i | awk -F ' ' '{print $1}'`
 
-            if [ x"$md5_init_value" != x"$md5_curr_value" ]
+            if [ x"${md5_init_value}" != x"${md5_curr_value}" ]
             then
                 rm -f /opt/test.img
-                umount $disk_name
-                writeFail "The test.img($init_value) file is not equal to the MD5 value of the /mnt/test.img.$i($value) file."
+                umount ${disk_name}
+                writeFail "The test.img(${init_value}) file is not equal to the MD5 value of the /mnt/test.img.${i}(${value}) file."
                 return 1
             fi
             rm -f /mnt/test.img.$i
         done
-        umount $disk_name
+
+        umount ${disk_name}
     done
 
     writePass

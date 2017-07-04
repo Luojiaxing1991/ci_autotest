@@ -9,11 +9,11 @@ function IO_read_write()
 {
     for bs in "${FIO_BS[@]}"
     do
-        sed -i "{s/^rw=.*/rw=$bs/g;}" fio.conf
+        sed -i "{s/^rw=.*/rw=${bs}/g;}" fio.conf
         for rw in "${FIO_RW[@]}"
         do
-            sed -i "{s/^rw=.*/rw=$rw/g;}" fio.conf
-            ./$COMMON_TOOL_PATH/fio fio.conf
+            sed -i "{s/^rw=.*/rw=${rw}/g;}" fio.conf
+            ./${COMMON_TOOL_PATH}/fio fio.conf
             if [ $? -ne 0 ]
             then
                 writeFail "FIO tool in \"${bs}\" disk operation, error."
@@ -32,7 +32,7 @@ function loog_time_IO_read_write()
     Test_Case_Title="loog_time_IO_read_write"
     Test_Case_ID="ST.FUNC.055/ST.FUNC.057/ST.FUNC.058"
   
-    sed -i "{s/^runtime=.*/runtime=$FIO_LONG_RUN_TIME/g;}" fio.conf
+    sed -i "{s/^runtime=.*/runtime=${FIO_LONG_RUN_TIME}/g;}" fio.conf
     IO_read_write
     [ $? -eq 1 ] && writeFail "FIO tool long read and write disk failure." && return 1
     writePass
@@ -46,7 +46,7 @@ function repeat_IO_read_write()
     Test_Case_Title="repeat_IO_read_write"
     Test_Case_ID="ST.FUNC.056"
 
-    for num in `seq $REPEAT_RW_NUMBER`
+    for num in `seq ${REPEAT_RW_NUMBER}`
     do
         IO_read_write
         [ $? -eq 1 ] && writeFail "FIO tool repeatedly read and write disk failure." && return 1

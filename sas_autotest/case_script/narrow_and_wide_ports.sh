@@ -41,7 +41,7 @@ function IO_operation_multiple_hard()
 
    sleep ${FIO_RESET_TIME}
    count=`ps -ef | grep fio | grep -v grep | grep -v vfio-irqfd-clea | wc -l`
-   [ $count -ne 0 ] && writeFail "Disk operation, multiple hard_reset failed." && return 1
+   [ ${count} -ne 0 ] && writeFail "Disk operation, multiple hard_reset failed." && return 1
 
    writePass
 }
@@ -61,7 +61,7 @@ function IO_operation_link()
     
     sleep ${FIO_RESET_TIME}
     count=`ps -ef | grep fio | grep -v grep | grep -v vfio-irqfd-clea | wc -l`
-    [ $count -ne 0 ] && writeFail "Disk operation, link_reset failed." && return 1
+    [ ${count} -ne 0 ] && writeFail "Disk operation, link_reset failed." && return 1
 
     writePass
 }
