@@ -56,7 +56,7 @@ function support_pcie3.0_equalization_p3600_test()
         return 1
     fi
 
-    fio --name=randread --numjobs=32 --filename=/dev/$P3600_Disk --rw=randread --iodepth=128 -ioengine=libaio \
+     ./${PCIE_TOP_DIR}/../common_tool/fio --name=randread --numjobs=32 --filename=/dev/$P3600_Disk --rw=randread --iodepth=128 -ioengine=libaio \
     --direct=1 --sync=0 --norandommap --group_reporting --runtime=300 --time_base --bs=2M >/dev/null
     if [ $? -ne 0 ]
     then

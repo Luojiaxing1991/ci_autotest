@@ -1,0 +1,5 @@
+Module Name,JIRA ID,Designed Requirement ID,Test Case ID,Test Item,Test Case Title,Test Result,Remark
+SAS,PV-2,R.SAS.F001.A,ST.FUNC.001,The driver must support SSP,driver_supports_ssp,PASS
+SAS,PV-66/PV-69,R.SAS.F001.A,ST.FUNC.002/ST.FUNC.003,physical data rate,disk_negotiated_link_rate_query,PASS
+SAS,PV-926,R.SAS.N007.A,ST.FUNC.049/ST.FUNC.050,Stable 2GB file transfer,iozne_file_transfer_stability_test,PASS
+SAS,PV-926,R.SAS.N007.A,ST.FUNC.051/ST.FUNC.052,Stable 2GB file transfer,disk_file_data_consistency_test,FAIL,dd tools read data error.

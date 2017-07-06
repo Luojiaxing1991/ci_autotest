@@ -18,13 +18,13 @@ function iozne_file_transfer_stability_test()
             return 1
         fi
 
-        ./${COMMON_TOOL_PATH}/iozone -a -n 1g -g 10g -i 0 -i 1 -i 2 -f /mnt/iozone -V 5aa51ff1 1 > ${ERROR_INFO} 2>&1
+        ./${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/iozone -a -n 1g -g 10g -i 0 -i 1 -i 2 -f /mnt/iozone -V 5aa51ff1 1 > ${ERROR_INFO} 2>&1
         status=$?
         info=`grep -iw 'error' ${ERROR_INFO}`
         if [ x"${info}" == x"" ] && [ ${status} -ne 0 ]
         then
-            writeFail "File transfer stability test,IO read and write exception."
             umount ${disk_name}
+            writeFail "File transfer stability test,IO read and write exception."
             return 1
         fi
 

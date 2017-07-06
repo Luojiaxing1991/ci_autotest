@@ -11,7 +11,7 @@ function IO_operation_hard()
     Test_Case_ID="ST.FUNC.062"
 
     sed -i "{s/^runtime=.*/runtime=${FIO_RESET_TIME}/g;}" fio.conf
-    ./${COMMON_TOOL_PATH}/fio fio.conf &
+    ./${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
     change_sas_phy_file 1 "hard_reset"
 
     sleep ${FIO_RESET_TIME}
@@ -31,7 +31,7 @@ function IO_operation_multiple_hard()
    Test_Case_ID="ST.FUNC.062"
  
    sed -i "{s/^runtime=.*/runtime=${FIO_RESET_TIME}/g;}" fio.conf
-   ./${COMMON_TOOL_PATH}/fio fio.conf &
+   ./${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
 
    for i in `seq ${RESET_COUNT}`
    do
@@ -55,7 +55,7 @@ function IO_operation_link()
     Test_Case_ID=""
 
     sed -i "{s/^runtime=.*/runtime=${FIO_RESET_TIME}/g;}" fio.conf
-    ./${COMMON_TOOL_PATH}/fio fio.conf &
+    ./${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
 
     change_sas_phy_file 1 "link_reset"
     
@@ -75,7 +75,7 @@ function IO_operation_multiple_link()
     Test_Case_ID=""
 
     sed -i "{s/^runtime=.*/runtime=${FIO_RESET_TIME}/g;}" fio.conf
-    ./${COMMON_TOOL_PATH}/fio fio.conf &
+    ./${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
 
     for i in `seq ${RESET_COUNT}`
     do
@@ -99,7 +99,7 @@ function IO_operation_enable()
     Test_Case_ID=""
 
     sed -i "{s/^runtime=.*/runtime=${FIO_RESET_TIME}/g;}" fio.conf
-    ./${COMMON_TOOL_PATH}/fio fio.conf &
+    ./${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
 
     change_sas_phy_file 0 "enable"
 

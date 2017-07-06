@@ -13,7 +13,7 @@ function IO_read_write()
         for rw in "${FIO_RW[@]}"
         do
             sed -i "{s/^rw=.*/rw=${rw}/g;}" fio.conf
-            ./${COMMON_TOOL_PATH}/fio fio.conf
+            ./${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf
             if [ $? -ne 0 ]
             then
                 writeFail "FIO tool in \"${bs}\" disk operation, error."

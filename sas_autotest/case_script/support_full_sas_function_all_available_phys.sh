@@ -11,7 +11,7 @@ function polling_switch_phy()
     Test_Case_ID="ST.FUNC.063/ST.FUNC.064"
 
     sed -i "{s/^runtime=.*/runtime=${LOOP_PHY_TIME}/g;}" fio.conf
-    ./${COMMON_TOOL_PATH}/fio fio.conf &
+    ./${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
     
     for i in `seq ${LOOP_PHY_COUNT}`
     do
@@ -69,7 +69,7 @@ function multiple_phy_frequent_off()
     Test_Case_ID="ST.FUNC.068/ST.FUNC.069"
 
     sed -i "{s/^runtime=.*/runtime=${LOOP_PHY_TIME}/g;}" fio.conf
-    ./${COMMON_TOOL_PATH}/fio fio.conf &
+    ./${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
 
     for i in `seq ${LOOP_PHY_COUNT}`
     do
@@ -106,7 +106,7 @@ function disk_IO_all_PHYS_off()
     Test_Case_ID="ST.FUNC.070/ST.FUNC.071"
 
     sed -i "{s/^runtime=.*/runtime=${LOOP_PHY_TIME}/g;}" fio.conf
-    ./${COMMON_TOOL_PATH}/fio fio.conf &
+    ./${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
 
     phy_ops clsoe all
     sleep ${LOOP_PHY_TIME}
