@@ -117,15 +117,12 @@ b. Execute command“bash -x test_main.sh”.<br/><br/>
 
 <h3 id="2.2">Automation scripts via board Environmentt</h3>
 a. Start the board that needs to be tested and upload the autotest script tarball to the board.<br/>
-e.g.:<br/>
 ```bash
 
 scp plinth_autotest.tar.gz root@192.168.1.243:~/
 
 ```
-
 b. Run the main script of the module that needs to be tested.<br/>
-e.g.: <br/>
 ```bash
 
 root@ubuntu:~# tar -zxvf plinth_autotest.tar.gz
