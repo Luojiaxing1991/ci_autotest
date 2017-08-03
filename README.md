@@ -48,7 +48,6 @@ cases for the modules in target boards.
 
 a. Configuring the “config/common_config” file.<br/>
 * All module public configuration items：<br/>
- e.g.: <br/>
 ```bash
    SERVER_IP                         //  the automated script running environment's IP address.
    SERVER_USER                       //  automatic script runing environment's user name.
@@ -57,13 +56,11 @@ a. Configuring the “config/common_config” file.<br/>
    BACK_BOARD_GRUB_DEFAULT           //  According to the startup item in 'grub.cfg' file,Configure the backup board boot environment
 ```
 * SAS module configuration item：<br/>
- e.g.: <br/>
 ```bash
    RUN_SAS                           //  config 1 to run sas test case, 0 to cancle sas test case, Default is 1.
    SAS_BORADNO                       //  the host board number for board_connect.
 ```
 * HNS module configuration item：<br/>
- e.g.: <br/>
 ```bash
    RUN_XGE                           //  config 1 to run hns test case, 0 to cancle hns test case, Default is 1.
    XGE_BORADNO                       //  the host board number for board_connect.
@@ -71,7 +68,6 @@ a. Configuring the “config/common_config” file.<br/>
 ``` 
 
 * PCIE module configuration item：<br/>
- e.g.: <br/>
 ```bash
    RUN_PCIE                          //  config 1 to run pcie test case, 0 to cancle pcie test case, Default is 1.
    PCIE_BORADNO                      //  the host board number for board_connect.
@@ -79,6 +75,7 @@ a. Configuring the “config/common_config” file.<br/>
 ```
 
 * Configuration sample：<br/>
+e.g.: <br/>
 ```bash 
 
 #!/bin/bash
@@ -118,16 +115,19 @@ SAS_BORADNO=2
 ```
 2. Execute command“bash -x test_main.sh”.<br/><br/>
 <h3 id="2.2">Automation scripts via board Environmentt</h3>
-a. 启动需要测试的单板，将自动化脚本压缩包上传到单板。<br/>
+a. Start the board that needs to be tested and upload the autotest script tarball to the board.<br/>
 e.g.: <br/>
 ```bash
-scp xxx.tar.gz root@IP:~/
+
+scp plinth_autotest.tar.gz root@192.168.1.243:~/
+
 ```
-b. 执行需要测试模块的入口脚本。<br/>
+b. Run the main script of the module that needs to be tested.<br/>
+e.g.: <br/>
 ```bash
+
 root@ubuntu:~# tar -zxvf plinth_autotest.tar.gz
 root@ubuntu:~# cd plinth-autotest/sas_autotest/
 root@ubuntu:~/plinth-autotest/sas_autotest# bash -x sas_main.sh
+
 ```
-
-
