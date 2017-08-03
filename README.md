@@ -1,6 +1,8 @@
-   
-* [Introduction](#1)  
-* [Preparation](#2)        
+* [Introduction](#1)
+* [Preparation](#2)
+   * [Automation scripts via openlab Environment](#2.1)
+   * [Automation scripts via board Environment](#2.2)
+
 <br/><br/>
 
 <h2 id="1">Introduction</h2> 
@@ -41,9 +43,12 @@ cases for the modules in target boards.
 
 
 <h2 id="2">Preparation</h2> 
-  
-1. Configuring the “config/common_config” file.<br/>
-* All module public configuration items：
+
+<h3 id="2.1">Automation scripts via openlab Environment</h3>
+
+a. Configuring the “config/common_config” file.<br/>
+* All module public configuration items：<br/>
+ e.g.: <br/>
 ```bash
    SERVER_IP                         //  the automated script running environment's IP address.
    SERVER_USER                       //  automatic script runing environment's user name.
@@ -51,26 +56,29 @@ cases for the modules in target boards.
    BOARD_GRUB_DEFAULT                //  According to the startup item in 'grub.cfg' file,Configure the host board boot environment
    BACK_BOARD_GRUB_DEFAULT           //  According to the startup item in 'grub.cfg' file,Configure the backup board boot environment
 ```
-* SAS module configuration item：
+* SAS module configuration item：<br/>
+ e.g.: <br/>
 ```bash
    RUN_SAS                           //  config 1 to run sas test case, 0 to cancle sas test case, Default is 1.
    SAS_BORADNO                       //  the host board number for board_connect.
 ```
-* HNS module configuration item：
+* HNS module configuration item：<br/>
+ e.g.: <br/>
 ```bash
    RUN_XGE                           //  config 1 to run hns test case, 0 to cancle hns test case, Default is 1.
    XGE_BORADNO                       //  the host board number for board_connect.
    BACK_XGE_BORADNO                  //  the backup board number for board_connect.
 ``` 
 
-* PCIE module configuration item：
+* PCIE module configuration item：<br/>
+ e.g.: <br/>
 ```bash
    RUN_PCIE                          //  config 1 to run pcie test case, 0 to cancle pcie test case, Default is 1.
    PCIE_BORADNO                      //  the host board number for board_connect.
    BACK_PCIE_BORADNO                 //  the backup board number for board_connect.
 ```
 
-* Configuration sample：
+* Configuration sample：<br/>
 ```bash 
 
 #!/bin/bash
@@ -109,4 +117,17 @@ SAS_BORADNO=2
 
 ```
 2. Execute command“bash -x test_main.sh”.<br/><br/>
+<h3 id="2.2">Automation scripts via board Environmentt</h3>
+a. 启动需要测试的单板，将自动化脚本压缩包上传到单板。<br/>
+e.g.: <br/>
+```bash
+scp xxx.tar.gz root@IP:~/
+```
+b. 执行需要测试模块的入口脚本。<br/>
+```bash
+root@ubuntu:~# tar -zxvf plinth_autotest.tar.gz
+root@ubuntu:~# cd plinth-autotest/sas_autotest/
+root@ubuntu:~/plinth-autotest/sas_autotest# bash -x sas_main.sh
+```
+
 
