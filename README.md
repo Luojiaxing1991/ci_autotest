@@ -1,7 +1,9 @@
 * [Introduction](#1)
 * [Preparation](#2)
-   * [Automation scripts via openlab Environment](#2.1)
-   * [Automation scripts via board Environment](#2.2)
+   * [Board start mode](#2.1)
+* [Automated script startup mode](#3)
+   * [Automation scripts via openlab Environment](#3.1)
+   * [Automation scripts via board Environment](#3.2)
 
 <br/><br/>
 
@@ -44,7 +46,51 @@ cases for the modules in target boards.
 
 <h2 id="2">Preparation</h2> 
 
-<h3 id="2.1">Automation scripts via openlab Environment</h3>
+<h3 id="2.1">Board start mode</h3>
+Local network: To connect hardware boards and host machine, so that they can communicate each other.
+
+Serial cable: To connect hardware board’s serial port to host machine, so that you can access the target board’s UART in host machine.
+
+methods are provided to connect the board's UART port to a host machine, connect the board's UART in openlab environment:
+
+1. Use `board_reboot` command to reset the board.(Details please refer to `board_reboot --help`)
+2. Use `board_connect` command.(Details please refer to `board_connect --help`)
+3. When system showing "Press Any key in 10 seconds to stop automatical booting...", press any key except "enter" key to enter UEFI main menu, select the operating system according to grub menu.
+
+### UEFI menu introduction
+
+  UEFI main menu option is showed as follow:
+  ```bash
+  continue
+  select Language            <standard English>
+  >Boot Manager
+  >Device Manager
+  >Boot Maintenance Manager
+  ```
+  Choose "Boot Manager" and enter into Boot option menu:
+  ```bash
+  EFI Misc Device
+  EFI Network
+  EFI Network 1
+  EFI Network 2
+  EFI Network 3
+  EFI Internal Shell
+  ESL Start OS
+  Embedded Boot Loader(EBL)
+  ```
+  Please select "EFI Network 2" when booting boards via PXE with openlab environment. 
+  
+### GRUB menu introduction
+  ```bash
+  minilinux-D05
+  ubuntu-D05
+  Fedora                                                               
+  ```
+  Use the ^ and v keys to select which entry is highlighted, Press enter to boot the selected ubuntu OS.
+
+<h2 id="3">Automated script startup mode</h2>
+
+<h3 id="3.1">Automation scripts via openlab Environment</h3>
 
 a. Configuring the “config/common_config” file.<br/>
 * All module public configuration items：<br/>
@@ -115,7 +161,7 @@ SAS_BORADNO=2
 ```
 b. Execute command“bash -x test_main.sh”.<br/><br/>
 
-<h3 id="2.2">Automation scripts via board Environmentt</h3>
+<h3 id="3.2">Automation scripts via board Environmentt</h3>
 
 a. Start the board that needs to be tested and upload the autotest script tarball to the board.<br/>
 e.g.: <br/>
