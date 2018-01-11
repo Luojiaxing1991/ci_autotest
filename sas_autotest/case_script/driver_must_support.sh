@@ -2,18 +2,18 @@
 
 
 
-# The driver must support SSP 
+# The driver must support SSP / The driver must support SMP
 # IN : N/A
 # OUT: N/A
-function driver_supports_ssp()
+function driver_supports()
 {
-    Test_Case_Title="driver_supports_ssp"
-    Test_Case_ID="ST.FUNC.001"
+    Test_Case_Title="driver_supports"
+    Test_Case_ID="ST.FUNC.001/ST.FUNC.002/ST.FUNC.003"
 
     for disk_name in "${ALL_DISK_PART_NAME[@]}"
     do
         mount_disk ${disk_name}
-        if [ $? -ne 0 ] 
+        if [ $? -ne 0 ]
         then
             umount ${disk_name}
             writeFail "Mount "${disk_name}" disk failure."
@@ -35,11 +35,11 @@ function driver_supports_ssp()
 
 function main()
 {
-    JIRA_ID="PV-2"
-    Test_Item="The driver must support SSP"
-    Designed_Requirement_ID="R.SAS.F001.A"
-   
-    driver_supports_ssp
+    JIRA_ID="PV-1587/PV-1588"
+    Test_Item="The driver must support SSP/The driver must support SMP/The driver must support STP"
+    Designed_Requirement_ID="R.SAS.F001.A/R.SAS.F002.A/R.SAS.F003.A"
+
+    driver_supports
 }
 
 main

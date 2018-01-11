@@ -159,12 +159,19 @@ function main()
     #Output log file header
     #echo "Module Name,JIRA ID,Test Item,Test Case Title,Test Result,Remark" > ${REPORT_FILE}
 
-    #SAS Module Main function call
-    [ ${RUN_SAS} -eq 1 ] && board_run ${SAS_BORADNO} ${SAS_MAIN} ${SAS_REPORT_FILE} &
-    #PXE Module Main function call
-    [ ${RUN_XGE} -eq 1 ] &&  board_run_back ${BACK_XGE_BORADNO} && board_run ${XGE_BORADNO} ${XGE_MAIN} ${XGE_REPORT_FILE} &
-    #PCIE Module Main function call
-    [ ${RUN_PCIE} -eq 1 ] && board_run_back ${BACK_PCIE_BORADNO} && board_run ${PCIE_BORADNO} ${PCIE_MAIN} ${PCIE_REPORT_FILE} &	
+    if [ ${RUNING_ENV_TYPE} -eq 1 ]
+    then
+        #SAS Module Main function call
+        [ ${RUN_SAS} -eq 1 ] && board_run ${SAS_BORADNO} ${SAS_MAIN} ${SAS_REPORT_FILE} &
+        #PXE Module Main function call
+        [ ${RUN_XGE} -eq 1 ] &&  board_run_back ${BACK_XGE_BORADNO} && board_run ${XGE_BORADNO} ${XGE_MAIN} ${XGE_REPORT_FILE} &
+        #PCIE Module Main function call
+        [ ${RUN_PCIE} -eq 1 ] && board_run_back ${BACK_PCIE_BORADNO} && board_run ${PCIE_BORADNO} ${PCIE_MAIN} ${PCIE_REPORT_FILE} &	
+    else
+        bash -x ${SAS_MAIN} ${SAS_REPORT_FILE} &
+	bash -x ${XGE_MAIN} ${XGE_REPORT_FILE} &
+	bash -x ${PCIE_MAIN} ${PCIE_REPORT_FILE} &	
+    fi
 
     # Wait for all background processes to end
     wait

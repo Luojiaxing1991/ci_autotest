@@ -29,7 +29,7 @@ function mount_disk()
     echo "y" | mkfs.ext4 ${disk_name} 1>/dev/null
     mount -t ext4 ${disk_name} /mnt 1>/dev/null
     [ $? -ne 0 ] && return 1
-    
+
     info=`mount | grep -w "^${disk_name}"`
     [ "${info}" = x"" ] && return 1
     return 0
@@ -46,6 +46,28 @@ function fio_config()
         echo "[job1]" >> ${FIO_CONFG}
         echo "filename=$dev" >> ${FIO_CONFG}
     done
+}
+
+# FIO read and write disk
+# IN : N/A
+# OUT: N/A
+function IO_read_write()
+{
+    for bs in "${FIO_BS[@]}"
+    do
+        sed -i "{s/^bs=.*/bs=${bs}/g;}" fio.conf
+        for rw in "${FIO_RW[@]}"
+        do
+            sed -i "{s/^rw=.*/rw=${rw}/g;}" fio.conf
+            ${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf
+            if [ $? -ne 0 ]
+            then
+                writeFail "FIO tool in \"${bs}\" disk operation, error."
+                return 1
+            fi
+        done
+    done
+    return 0
 }
 
 # Open and close operation on PHY port.
@@ -92,10 +114,10 @@ function change_sas_phy_file()
 {
     for dir in `ls ${PHY_FILE_PATH}`
     do
-        str=`cat ${PHY_FILE_PATH}/${dir}/device_type`
+        str=`cat ${PHY_FILE_PATH}/${dir}/target_port_protocols`
         num=`echo "${dir}" | awk -F":" '{print $NF}'`
 
-        if [ x"${str}" == x"end device" ] && [ ${num} -le ${EFFECTIVE_PHY_NUM} ]
+        if [ x"${str}" != x"none" ] && [ ${num} -le ${EFFECTIVE_PHY_NUM} ]
         then
             echo $1 > ${PHY_FILE_PATH}/${dir}/$2
             sleep 5

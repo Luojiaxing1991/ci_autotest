@@ -80,20 +80,8 @@ methods are provided to connect the board's UART port to a host machine, connect
   ```
   Please select "EFI Network 2" when booting boards via PXE with openlab environment. 
   
-### GRUB menu introduction
-  ```bash
-  minilinux-D05
-  ubuntu-D05
-  Fedora                                                               
-  ```
-  Use the ^ and v keys to select which entry is highlighted, Press enter to boot the selected ubuntu OS.
-
-<h2 id="3">Automated script startup mode</h2>
-
-<h3 id="3.1">Automation scripts via openlab Environment</h3>
-
-a. Configuring the “config/common_config” file.<br/>
-* All module public configuration items：<br/>
+1. Configuring the “config/common_config” file.<br/>
+* All module public configuration items：
 ```bash
    SERVER_IP                         //  the automated script running environment's IP address.
    SERVER_USER                       //  automatic script runing environment's user name.
@@ -101,27 +89,26 @@ a. Configuring the “config/common_config” file.<br/>
    BOARD_GRUB_DEFAULT                //  According to the startup item in 'grub.cfg' file,Configure the host board boot environment
    BACK_BOARD_GRUB_DEFAULT           //  According to the startup item in 'grub.cfg' file,Configure the backup board boot environment
 ```
-* SAS module configuration item：<br/>
+* SAS module configuration item：
 ```bash
    RUN_SAS                           //  config 1 to run sas test case, 0 to cancle sas test case, Default is 1.
    SAS_BORADNO                       //  the host board number for board_connect.
 ```
-* HNS module configuration item：<br/>
+* HNS module configuration item：
 ```bash
    RUN_XGE                           //  config 1 to run hns test case, 0 to cancle hns test case, Default is 1.
    XGE_BORADNO                       //  the host board number for board_connect.
    BACK_XGE_BORADNO                  //  the backup board number for board_connect.
 ``` 
 
-* PCIE module configuration item：<br/>
+* PCIE module configuration item：
 ```bash
    RUN_PCIE                          //  config 1 to run pcie test case, 0 to cancle pcie test case, Default is 1.
    PCIE_BORADNO                      //  the host board number for board_connect.
    BACK_PCIE_BORADNO                 //  the backup board number for board_connect.
 ```
 
-* Configuration sample：<br/>
-e.g.: <br/>
+* Configuration sample：
 ```bash 
 
 #!/bin/bash
@@ -159,7 +146,7 @@ SAS_REPORT_FILE=sas_report.csv
 SAS_BORADNO=2
 
 ```
-b. Execute command“bash -x test_main.sh”.<br/><br/>
+2. Execute command“bash -x test_main.sh”.<br/><br/>
 
 <h3 id="3.2">Automation scripts via board Environmentt</h3>
 

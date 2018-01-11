@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Automated script execution environment, 1 - Laboratory environment, 0 - board environment, Default is 1
+RUNING_ENV_TYPE=1
+
 # Module test run switch, 1 - open test case, 0 - close test case, Default is 0.
 RUN_SAS=0
 RUN_XGE=0
