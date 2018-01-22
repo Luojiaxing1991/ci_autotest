@@ -1,0 +1,69 @@
+
+#############################################################################################################
+# function list
+# new function write at end
+# 1 writeLog
+#############################################################################################################
+
+
+#  Output success test case log information
+#  IN : N/A
+#  OUT: N/A
+function writePass()
+{
+    local Test_Result="PASS"
+    echo "$Module_Name,""$JIRA_ID,""$Designed_Requirement_ID,""$Test_Case_ID,""$Test_Item,""$Test_Case_Title,""$Test_Result" >> ${REPORT_FILE}
+    return 0
+}
+
+#  Output fail test case log information
+#  IN : $1 Error log information
+#  OUT: N/A
+function writeFail()
+{
+    local Test_Result="FAIL"
+    local Remark="$1"
+    echo "$Module_Name,""$JIRA_ID,""$Designed_Requirement_ID,""$Test_Case_ID,""$Test_Item,""$Test_Case_Title,""$Test_Result,""$Remark" >> ${REPORT_FILE}
+    return 0
+}
+
+# Output log file header
+# IN : N/A
+# OUT: N/A
+function writeLogHeader
+{
+    echo "Module Name,JIRA ID,Designed Requirement ID,Test Case ID,Test Item,Test Case Title,Test Result,Remark" > ${REPORT_FILE}
+    return 0
+}
+
+# Set trust relationship for two boards
+# IN : N/A
+# OUT: N/A
+function setTrustRelation
+{
+    rm -f ~/.ssh/*
+    expect -c '
+        set timeout -1
+        set back_ip '${BACK_IP}'
+        spawn ssh-keygen -t rsa
+        expect {
+        "*save the key*id_rsa*" { send "\r"; exp_continue }
+        "*verwrite*y/n*" { send "y\r"; exp_continue }
+        "*passphrase*passphrase*" { send "\r"; exp_continue }
+        "*same passphrase*" { send "\r" }
+        }
+
+        spawn scp -r /root/.ssh/id_rsa.pub root@${back_ip}:/root/.ssh/authorized_keys
+        expect "Are you sure you want to continue connecting (yes/no)?"
+        send "yes\r"
+        sleep 10
+        expect -re ".*password:"
+        send "root\r"
+
+        expect eof
+        exit 0
+    '
+
+    return 0
+}
+

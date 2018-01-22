@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Module test run switch, 1 - open test case, 0 - close test case, Default is 0.
+RUN_SAS=0
+RUN_XGE=0
+RUN_PCIE=0
+
+
+# IMAGE Configuration item.
+IMAGE_FILE=common_tool/Image
+IMAGE_DIR_PATH=~/tftp
+
+## Common Configuration item.
+SERVER_IP=
+SERVER_USER=
+SERVER_PASSWD=
+# Single board environment username and password.
+SYSTEM_USER=root
+SYSTEM_PASSWD=root
+
+
+REPORT_FILE=report.csv
+AUTOTEST_ZIP_FILE=autotest.tar.gz
+# Setting up a single board default startup system.
+BOARD_GRUB_DEFAULT=
+# The SAS module does not need to be configured.
+BACK_BOARD_GRUB_DEFAULT=
+
+# SAS Module Configuration item.
+SAS_MAIN=sas_autotest/sas_main.sh
+SAS_REPORT_FILE=sas_report.csv
+# Start single board number.
+SAS_BORADNO=
+
+# HNS Module configuration file.
+XGE_MODULE_CFG_FILE="./xge_autotest/config/xge_test_config"
+# HNS Module Configuration item.
+XGE_MAIN=xge_autotest/xge_main.sh
+XGE_REPORT_FILE=xge_report.csv
+# Start single board number.
+XGE_BORADNO=
+BACK_XGE_BORADNO=
+
+# PCIE Module configuration file.
+PCIE_MODULE_CFG_FILE="./pcie_autotest/config/pcie_test_config"
+# PCIE Module Configuration item.
+PCIE_MAIN=pcie_autotest/pcie_main.sh
+PCIE_REPORT_FILE=pcie_report.csv
+# Start single board number.
+PCIE_BORADNO=
+BACK_PCIE_BORADNO=
+
