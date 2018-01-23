@@ -18,6 +18,8 @@ case_map=(
 ["SupportMR"]="off"
 ["platformdev"]="on"
 ["SupportXGE"]="on"
+["Load_Unload_kernel_driver"]="off"
+["CM_connect"]="off"
 )
 # code case index
 START_INDEX=0
