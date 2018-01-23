@@ -1,0 +1,83 @@
+#!/bin/bash
+# 
+
+
+# Load configuration options
+. roce_autotest/config/roce_test_config
+. config/common_lib
+
+## Utility function
+
+# Establish a relationship of mutual trust between two boards
+# IN : $1 The IP of eth0 in the board as client.
+# OUT: N/A
+function TrustRelation()
+{
+	which expect
+	[ $? != 0 ] && apt-get install -y expect 1>/dev/null
+	rm -f ~/.ssh/*
+	ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+	#/usr/bin/expect << -EOF			#嵌套expect
+	expect -c '
+		set timeout -1
+		set eth0ip '$1'
+		spawn ssh-copy-id root@${eth0ip}
+		expect {
+			"(yes/no)" { send "yes\r";exp_continue }
+			"*password:" { send "root\r"}
+			}
+		expect -re ":.*#"
+		'
+	#EOF						#嵌套结束
+	return 0
+}
+
+function copy_tool_so()
+{
+	if [ ! -d /lib64 ]
+	then
+		ln -s /lib /lib64
+	fi
+
+	ssh root@${BACK_IP} " if [ ! -d /lib64 ]; then ln -s /lib /lib64; fi;\
+						  if [ ! -d ${CASEPATH} ]; then mkdir ${CASEPATH}; fi "
+	wait
+
+	pushd ${TEST_CASE_PATH}
+
+	pushd so
+	cp -a * /lib/
+
+	rsync -l * root@${BACK_IP}:/lib/
+	popd
+
+	scp roce-test client-auto-5-2 root@${BACK_IP}:${CASEPATH}/
+
+	pushd test
+	scp * root@${BACK_IP}:${CASEPATH}/
+	popd
+
+
+	pushd perftest
+	scp * root@${BACK_IP}:${CASEPATH}/
+	popd
+
+	popd
+
+#config for the roce's kernel driver	
+	if [ ! -d /usr/local/etc/libibverbs.d ]; 
+	then 
+		mkdir -p /usr/local/etc/libibverbs.d
+		echo "driver hns" > /usr/local/etc/libibverbs.d/hns.driver
+	fi
+
+    ssh root@${BACK_IP} " if [ ! -d /usr/local/etc/libibverbs.d ]; \
+	then \
+		mkdir -p /usr/local/etc/libibverbs.d; \
+		echo "driver hns" > /usr/local/etc/libibverbs.d/hns.driver; \
+	fi; "
+    wait
+
+	return 0
+
+}

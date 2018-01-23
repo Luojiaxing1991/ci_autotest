@@ -1,0 +1,35 @@
+#!/bin/bash
+#
+#
+
+
+# Test case mapping table
+declare -A case_map
+case_map=(
+["codecase"]="off" 
+["gid-ip"]="off" 
+["gid-mac"]="off" 
+["RoceSend"]="off" 
+["RdmaRead"]="off" 
+["RdmaWrite"]="off" 
+["SupportPD"]="off" 
+["SupportQP"]="off" 
+["SupportCQ"]="off" 
+["SupportMR"]="off"
+["platformdev"]="on"
+["SupportXGE"]="on" 
+)
+# code case index
+START_INDEX=0
+END_INDEX=3
+
+
+# Common tools directory path
+COMMON_TOOL_PATH="common_tool"
+
+# Test case code directory path
+TEST_CASE_PATH="roce_autotest/case_script"
+CASEPATH="roce-test"
+
+# Start the machine environment IP
+BACK_IP=192.168.1.250
