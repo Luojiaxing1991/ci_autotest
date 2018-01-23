@@ -6,14 +6,14 @@
 function codecase()
 {
 	for index in `seq ${START_INDEX} ${END_INDEX}`
-	do 
+	do
 		./${TEST_CASE_PATH}/server-auto-5-2 ${index} 5 > code_server_${index} &
 		ssh root@${BACK_IP} " ./${CASEPATH}/client-auto-5-2 ${index} 5 > code_client_${index} "
 		wait
 
 		scp root@${BACK_IP}:code_client_${index} ./
 		ssh root@${BACK_IP} " rm code_client_${index} "
-		
+
 		local case_id=`expr $index + 1`
 		Test_Case_ID="ST-ROCE-${case_id}"
 		if [ $index == 0 ]

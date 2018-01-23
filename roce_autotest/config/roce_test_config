@@ -6,18 +6,18 @@
 # Test case mapping table
 declare -A case_map
 case_map=(
-["codecase"]="off" 
-["gid-ip"]="off" 
-["gid-mac"]="off" 
-["RoceSend"]="off" 
-["RdmaRead"]="off" 
-["RdmaWrite"]="off" 
-["SupportPD"]="off" 
-["SupportQP"]="off" 
-["SupportCQ"]="off" 
+["codecase"]="off"
+["gid-ip"]="off"
+["gid-mac"]="off"
+["RoceSend"]="off"
+["RdmaRead"]="off"
+["RdmaWrite"]="off"
+["SupportPD"]="off"
+["SupportQP"]="off"
+["SupportCQ"]="off"
 ["SupportMR"]="off"
 ["platformdev"]="on"
-["SupportXGE"]="on" 
+["SupportXGE"]="on"
 )
 # code case index
 START_INDEX=0

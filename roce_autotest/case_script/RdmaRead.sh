@@ -5,9 +5,9 @@
 #OUT:N/A
 function RdmaRead()
 {
-	./${TEST_CASE_PATH}/roce-test -m 2 -s 5 -e 7 -r -f ${TEST_CASE_PATH}/test/test_case_list_server > ${FUNCNAME}_server.log &                                                                                          
+	./${TEST_CASE_PATH}/roce-test -m 2 -s 5 -e 7 -r -f ${TEST_CASE_PATH}/test/test_case_list_server > ${FUNCNAME}_server.log &
 	ClientFlag=`ssh root@${BACK_IP} "cd ${CASEPATH}/; ./roce-test -m 2 -s 5 -e 7 -r -f test_case_list_client > ../${FUNCNAME}_client.log; cd ../; grep -c \"\-test case success\" ${FUNCNAME}_client.log " `
-	wait 
+	wait
 	ServerFlag=`grep -c "\-test case success" ${FUNCNAME}_server.log`
 
 	if [ $ServerFlag == 3 -a $ClientFlag == 3 ]

@@ -11,7 +11,7 @@ function gid-ip()
 
 	local ip1=`printf %02x $(echo $roceip | awk -F '.' '{print $1}')`
 	local ip2=`printf %02x $(echo $roceip | awk -F '.' '{print $2}')`
-	local ip3=`printf %02x $(echo $roceip | awk -F '.' '{print $3}')`                        
+	local ip3=`printf %02x $(echo $roceip | awk -F '.' '{print $3}')`
 	local ip4=`printf %02x $(echo $roceip | awk -F '.' '{print $4}')`
 
 	if [ $gid7 == ${ip1}${ip2} -a $gid8 == ${ip3}${ip4} ]

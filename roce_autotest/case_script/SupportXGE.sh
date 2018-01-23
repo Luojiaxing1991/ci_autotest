@@ -19,17 +19,17 @@ function SupportXGE()
 	./${TEST_CASE_PATH}/perftest/ib_send_bw -i 2 > /dev/null 2>&1 &
 	SendFlag=`ssh root@${BACK_IP} "./${CASEPATH}/ib_send_bw -i 2 ${HOSTIP} | grep -c "65536" " `
 	if [ $SendFlag == 1 ]
-	then 
+	then
 		writePass "send on XGE port OK!"
 	else
-		writeFail "send on XGE port fail!"		
+		writeFail "send on XGE port fail!"
 	fi
 
 	#echo "RDMA read on XGE port"
 	./${TEST_CASE_PATH}/perftest/ib_read_bw -i 2 > /dev/null 2>&1 &
 	ReadFlag=`ssh root@${BACK_IP} "./${CASEPATH}/ib_read_bw -i 2 ${HOSTIP} | grep -c "65536" " `
 	if [ $ReadFlag == 1 ]
-	then 
+	then
 		writePass "read on XGE port OK!"
 	else
 		writeFail "read on XGE port fail!"
@@ -39,7 +39,7 @@ function SupportXGE()
 	./${TEST_CASE_PATH}/perftest/ib_write_bw -i 2 > /dev/null 2>&1 &
 	WriteFlag=`ssh root@${BACK_IP} "./${CASEPATH}/ib_write_bw -i 2 ${HOSTIP} | grep -c "65536" " `
 	if [ $WriteFlag == 1 ]
-	then 
+	then
 		writePass "write on XGE port OK!"
 	else
 		writeFail "write on XGE port fail!"

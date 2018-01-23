@@ -1,5 +1,5 @@
 #!/bin/bash
-# 
+#
 
 
 # Load configuration options
@@ -64,9 +64,9 @@ function copy_tool_so()
 
 	popd
 
-#config for the roce's kernel driver	
-	if [ ! -d /usr/local/etc/libibverbs.d ]; 
-	then 
+#config for the roce's kernel driver
+	if [ ! -d /usr/local/etc/libibverbs.d ]
+	then
 		mkdir -p /usr/local/etc/libibverbs.d
 		echo "driver hns" > /usr/local/etc/libibverbs.d/hns.driver
 	fi

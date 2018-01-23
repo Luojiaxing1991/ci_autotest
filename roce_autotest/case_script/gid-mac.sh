@@ -30,7 +30,7 @@ function main()
 	Test_Case_ID="ST-ROCE-78"
 	Test_Item="Configure  GID according to MAC"
 	Test_Case_Title=""
-	
+
 	gid-mac
 }
 
