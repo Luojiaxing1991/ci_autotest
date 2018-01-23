@@ -7,7 +7,7 @@ RUNING_ENV_TYPE=1
 RUN_SAS=0
 RUN_XGE=0
 RUN_PCIE=0
-
+RUN_ROCE=0
 
 # IMAGE Configuration item.
 IMAGE_FILE=common_tool/Image
@@ -52,4 +52,13 @@ PCIE_REPORT_FILE=pcie_report.csv
 # Start single board number.
 PCIE_BORADNO=
 BACK_PCIE_BORADNO=
+
+# RoCE Module configuration file.
+ROCE_MODULE_CFG_FILE="./roce_autotest/config/roce_test_config"
+# RoCE Module Configuration item.
+ROCE_MAIN=roce_autotest/roce_main.sh
+ROCE_REPORT_FILE=roce_report.csv
+# Start single board number.
+ROCE_BORADNO=
+BACK_ROCE_BORADNO=
 
