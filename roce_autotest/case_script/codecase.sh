@@ -7,7 +7,7 @@ function codecase()
 {
 	for index in `seq ${START_INDEX} ${END_INDEX}`
 	do
-		./${TEST_CASE_PATH}/server-auto-5-2 ${index} 5 > code_server_${index} &
+		${ROCE_TOP_DIR}/case_script/server-auto-5-2 ${index} 5 > code_server_${index} &
 		ssh root@${BACK_IP} " ./${CASEPATH}/client-auto-5-2 ${index} 5 > code_client_${index} "
 		wait
 

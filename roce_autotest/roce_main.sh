@@ -1,7 +1,14 @@
 #!/bin/bash
 
-# Load common function
-. roce_autotest/config/roce_test_lib
+ROCE_TOP_DIR=$( cd "`dirname $0`" ; pwd )
+
+# Load module configuration library
+. ${ROCE_TOP_DIR}/config/roce_test_config
+. ${ROCE_TOP_DIR}/config/roce_test_lib
+
+# Load the public configuration library
+. ${ROCE_TOP_DIR}/../config/common_config
+. ${ROCE_TOP_DIR}/../config/common_lib
 
 
 # Main operation function
@@ -16,7 +23,7 @@ function main()
         case "${case_map[$key]}" in
             on)
                 commd="${key}.sh"
-                source $TEST_CASE_PATH/$commd
+                source ${ROCE_TOP_DIR}/case_script/$commd
             ;;
             off)
             ;;
@@ -35,9 +42,12 @@ writeLogHeader
 
 TrustRelation ${BACK_IP}
 copy_tool_so
+
 main
 
+# These characters are used to mark the end
 echo "testmain finish"
+
 # clean exit so lava-test can trust the results
 exit 0
 

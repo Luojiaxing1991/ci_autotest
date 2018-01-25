@@ -29,8 +29,7 @@ END_INDEX=3
 # Common tools directory path
 COMMON_TOOL_PATH="common_tool"
 
-# Test case code directory path
-TEST_CASE_PATH="roce_autotest/case_script"
+# Test case tool directory path
 CASEPATH="roce-test"
 
 # Start the machine environment IP

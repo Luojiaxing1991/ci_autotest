@@ -16,7 +16,7 @@ function SupportXGE()
 	[ $? != 0 ] && writeFail "The eth3 on Client isn't XGE!" && return 1
 
 	#echo "send on XGE port"
-	./${TEST_CASE_PATH}/perftest/ib_send_bw -i 2 > /dev/null 2>&1 &
+	${ROCE_TOP_DIR}/case_script/perftest/ib_send_bw -i 2 > /dev/null 2>&1 &
 	SendFlag=`ssh root@${BACK_IP} "./${CASEPATH}/ib_send_bw -i 2 ${HOSTIP} | grep -c "65536" " `
 	if [ $SendFlag == 1 ]
 	then
@@ -26,7 +26,7 @@ function SupportXGE()
 	fi
 
 	#echo "RDMA read on XGE port"
-	./${TEST_CASE_PATH}/perftest/ib_read_bw -i 2 > /dev/null 2>&1 &
+	${ROCE_TOP_DIR}/case_script/perftest/ib_read_bw -i 2 > /dev/null 2>&1 &
 	ReadFlag=`ssh root@${BACK_IP} "./${CASEPATH}/ib_read_bw -i 2 ${HOSTIP} | grep -c "65536" " `
 	if [ $ReadFlag == 1 ]
 	then
@@ -36,7 +36,7 @@ function SupportXGE()
 	fi
 
 	#echo "RDMA write on XGE port"
-	./${TEST_CASE_PATH}/perftest/ib_write_bw -i 2 > /dev/null 2>&1 &
+	${ROCE_TOP_DIR}/case_script/perftest/ib_write_bw -i 2 > /dev/null 2>&1 &
 	WriteFlag=`ssh root@${BACK_IP} "./${CASEPATH}/ib_write_bw -i 2 ${HOSTIP} | grep -c "65536" " `
 	if [ $WriteFlag == 1 ]
 	then

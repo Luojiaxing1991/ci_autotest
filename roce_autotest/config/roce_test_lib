@@ -2,10 +2,6 @@
 #
 
 
-# Load configuration options
-. roce_autotest/config/roce_test_config
-. config/common_lib
-
 ## Utility function
 
 # Establish a relationship of mutual trust between two boards
@@ -43,7 +39,7 @@ function copy_tool_so()
 						  if [ ! -d ${CASEPATH} ]; then mkdir ${CASEPATH}; fi "
 	wait
 
-	pushd ${TEST_CASE_PATH}
+	pushd ${ROCE_TOP_DIR}/case_script
 
 	pushd so
 	cp -a * /lib/
