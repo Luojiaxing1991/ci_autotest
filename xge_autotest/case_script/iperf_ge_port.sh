@@ -11,8 +11,8 @@ function iperf_transfer_test()
     # set ip for two boards
     type=m
     ge_bandwidth=900
-    ifconfig eth1 192.168.3.1
-    ssh root@$BACK_IP 'ifconfig eth1 192.168.3.2;iperf -s 1>/dev/null &'
+    ifconfig $local_eth1 192.168.3.1
+    ssh root@$BACK_IP 'ifconfig $remote_eth1 192.168.3.2;iperf -s 1>/dev/null &'
     sleep 5
     for num in ${thread[*]} ;do
         iperf -c 192.168.3.2 -t $time  -P $num -f $type > $num.log

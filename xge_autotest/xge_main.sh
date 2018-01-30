@@ -37,6 +37,8 @@ function main()
        esac
     done
 }
+init_net_ip
+init_net_export
 
 # Output log file header
 writeLogHeader

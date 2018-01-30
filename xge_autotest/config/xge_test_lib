@@ -3,4 +3,34 @@
 
 
 ## Utility function
+function init_net_ip()
+{
+    LOCAL_IP=`ifconfig eth0 | grep 'inet addr:' | awk '{print $2}' | awk -F':' '{print $2}'`
+
+    for tmpip in ${!ip_map[@]}
+    do
+        if [ "$tmpip"x = "$LOCAL_IP"x ];then
+            BACK_IP=${ip_map[$tmpip]}
+            echo $BACK_IP
+        fi
+    done
+}
+
+function init_net_export()
+{
+    declare -a local_netport_list
+    local_netport_list=($(ifconfig -a | grep 'eth' | awk '{print $1}'))
+    local_eth0=${local_netport_list[0]}
+    local_eth1=${local_netport_list[1]}
+    local_eth2=${local_netport_list[2]}
+    local_eth3=${local_netport_list[3]}
+
+    #remote netport
+    declare -a remote_netport_list
+    remote_netport_list=($(ssh root@$BACK_IP ifconfig -a | grep 'eth' | awk '{print $1}'))
+    remote_eth0=${remote_netport_list[0]}
+    remote_eth1=${remote_netport_list[1]}
+    remote_eth2=${remote_netport_list[2]}
+    remote_eth3=${remote_netport_list[3]}
+}
 
