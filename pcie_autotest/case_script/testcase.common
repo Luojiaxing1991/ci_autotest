@@ -1,0 +1,272 @@
+
+g_flParent="${BASH_SOURCE[1]}"
+g_fnCur=$(basename "${BASH_SOURCE[0]}")
+g_dpCur=$(dirname  "${BASH_SOURCE[0]}")
+drCur0=${PWD}
+cd "${g_dpCur}" >/dev/null
+g_dpCur=${PWD}
+cd "${drCur0}" >/dev/null
+g_pfnCur=${g_dpCur}/${g_fnCur}
+export g_fn_testcase_common=${g_fnCur}
+export g_dp_testcase_common=${g_dpCur}
+
+#####################
+#check load from command line
+if [ -z "${g_flParent}" ]; then
+    #if at the command line, support reload the source file
+    #delete it first
+    g_defSourceFiles=$(grep -vF "${g_pfnCur}" <<< "${g_defSourceFiles}")
+    #bug: export g_defSourceFiles=${g_defSourceFiles}${g_pfnCur}$'\n'
+    #will delete the end line \n
+fi
+
+#check loaded already
+sPF1=$(grep -F "${g_pfnCur}" <<< "${g_defSourceFiles}")
+if [ $? -eq 0 ]; then
+    #then [ "${sPF1}" == "${g_pfnCur}" ]
+    #path file name is only one in file system.
+	return 100
+fi
+
+export g_defSourceFiles=${g_defSourceFiles}$'\n'${g_pfnCur}
+printf "%s[%3d]%5s: Load [${g_pfnCur}] call by [${g_flParent}]\n" "${FUNCNAME[0]}" ${LINENO} "Info"
+
+#####################
+#Load Public functions
+drCur1=${g_dp_testcase_common}
+fsrc1=funcs.common
+flPub1=${drCur1}/${fsrc1}
+if [ ! -f "${flPub1}" ]; then
+    s1=$(find ${drCur1}/.. -type f -name "${fsrc1}")
+    if [ -z "${s1}" ]; then
+        s1=$(find ${drCur1}/../.. -type f -name "${fsrc1}")
+        if [ -z "${s1}" ]; then
+            printf "%s[%3d]%5s: Not found ${fsrc1}\n" "${FUNCNAME[0]}" ${LINENO} "Error" >&2
+            exit 1
+        fi
+    fi
+    flPub1=${s1}
+fi
+$(sed "s#^#. #" <<< "${flPub1}")
+
+#####################
+#Load config
+flLoad1=${g_fn_testcase_common%%.*}.cfg
+LoadSourceFileParent "${g_dp_testcase_common}" "${flLoad1}" flPath1 true
+$(sed "s#^#. #" <<< "${flPath1}")
+
+LoadSourceFileParent "${g_dp_testcase_common}" "${g_flTCsList}" g_flTCsList true
+LoadSourceFileParent "${g_dp_testcase_common}" "${g_flTCRun}" g_flTCRun true
+
+#####################
+#init
+export g_flList=$(echo "${g_flList}" |sed "/^[ \t]*#/d;/^[ \t]*\$/d;s@^[ \t]\+@@;s@[ \t]\+\$@@")
+
+export g_flBaseLog=${g_drTmp}/${g_fn_testcase_common%%.*}
+if [ -d "${g_flBaseLog}_bak" ]; then
+    rm -rf "${g_flBaseLog}_bak"
+fi
+mkdir -p "${g_flBaseLog}_bak"
+
+export g_flLog=${g_flBaseLog}.log
+sList=$(ls -d "${g_flBaseLog}".* 2>/dev/null)
+if [ -n "${sList}" ]; then
+    mv ${sList} "${g_flBaseLog}_bak"
+fi
+
+###########
+export g_sErrCur=
+
+#####################
+#Alone Functions
+CmdACPI()
+{
+    grep -q " acpi=force " /proc/cmdline
+    if [ $? -ne 0 ]; then
+        g_sErrCur="not have acpi=force in cmdline"
+        printf "%s[%3d]%5s: ${g_sErrCur}\n" "${FUNCNAME[0]}" ${LINENO} "Error" >> "${g_flLog}"
+        return 1
+    fi
+    return 0
+}
+export -f CmdACPI
+
+CheckCard2KeysBA()
+{
+    local sKey1=${1}
+    local sKey2=${2}
+    local nB=${3:-0}
+    local nA=${4:-0}
+
+    local bdfA
+    bdfA=$(lspci -k |grep -i -B${nB} -A${nA} "${sKey1}" |grep -o "^[0-9A-Fa-f:.]\+")
+    if [ -z "${bdfA}" ]; then
+        g_sErrCur="not have ${sKey1}"
+        printf "%s[%3d]%5s: ${g_sErrCur}\n" "${FUNCNAME[0]}" ${LINENO} "Error" >> "${g_flLog}"
+        return 1
+    fi
+
+    bdf1=$(echo "${bdfA}" |sed -n '1p')
+    lspci -s ${bdf1} -vvv |grep -q "${sKey2}"
+    if [ $? -ne 0 ]; then
+        g_sErrCur="not have ${sKey2}"
+        printf "%s[%3d]%5s: ${g_sErrCur}\n" "${FUNCNAME[0]}" ${LINENO} "Error" >> "${g_flLog}"
+        return 1
+    fi
+
+    return 0
+}
+export -f CheckCard2KeysBA
+
+DmesgCard2KeyBA()
+{
+    local sKey1=${1}
+    local sKey2=${2}
+    local nB=${3:-0}
+    local nA=${4:-0}
+
+    local bdfA
+    bdfA=$(lspci -k |grep -i -B${nB} -A${nA} "${sKey1}" |grep -o "^[0-9A-Fa-f:.]\+")
+    if [ -z "${bdfA}" ]; then
+        g_sErrCur="not have ${sKey1}"
+        printf "%s[%3d]%5s: ${g_sErrCur}\n" "${FUNCNAME[0]}" ${LINENO} "Error" >> "${g_flLog}"
+        return 1
+    fi
+
+    bdf1=$(echo "${bdfA}" |sed -n '1p')
+    dmesg |grep "${bdf1}" |grep -iq "${sKey2}"
+    if [ $? -ne 0 ]; then
+        g_sErrCur="not have ${sKey2}"
+        printf "%s[%3d]%5s: ${g_sErrCur}\n" "${FUNCNAME[0]}" ${LINENO} "Error" >> "${g_flLog}"
+        return 1
+    fi
+
+    return 0
+}
+export -f DmesgCard2KeyBA
+
+##########
+#Complex Functions
+ACPICard()
+{
+    local sKey1=${1}
+    local nB=${2:-0}
+    local nA=${3:-0}
+
+    local bdfA
+    bdfA=$(lspci -k |grep -i -B${nB} -A${nA} "${sKey1}" |grep -o "^[0-9A-Fa-f:.]\+")
+    if [ -z "${bdfA}" ]; then
+        g_sErrCur="not have ${sKey1}"
+        printf "%s[%3d]%5s: ${g_sErrCur}\n" "${FUNCNAME[0]}" ${LINENO} "Error" >> "${g_flLog}"
+        return 1
+    fi
+
+    CmdACPI
+}
+export -f ACPICard
+
+CmdACPI82599()
+{
+    ACPICard 82599
+}
+export -f CmdACPI82599
+
+CmdACPIP3600()
+{
+    ACPICard "P3600 SSD" 1
+}
+export -f CmdACPIP3600
+
+CmdACPII350()
+{
+    ACPICard I350
+}
+export -f CmdACPII350
+
+MSIx82599()
+{
+    CheckCard2KeysBA 82599 "MSI-X: Enable+"
+}
+export -f MSIx82599
+
+MSIxP3600()
+{
+    CheckCard2KeysBA "P3600 SSD" "MSI-X: Enable+" 1
+}
+export -f MSIxP3600
+
+MSIxI350()
+{
+    CheckCard2KeysBA I350 "MSI-X: Enable+"
+}
+export -f MSIxI350
+
+Prefetch32b82599()
+{
+    DmesgCard2KeyBA "82599" 'BAR [0-9]\+: assigned \[mem [a-fxA-FX0-9-]\+ pref\]'
+}
+export -f Prefetch32b82599
+
+Prefetch64b82599()
+{
+    DmesgCard2KeyBA "82599" 'BAR [0-9]\+: assigned \[mem [a-fxA-FX0-9-]\+ 64bit pref\]'
+}
+export -f Prefetch64b82599
+
+Prefetch32bP3600()
+{
+    DmesgCard2KeyBA "P3600 SSD" 'BAR [0-9]\+: assigned \[mem [a-fxA-FX0-9-]\+ pref\]'
+}
+export -f Prefetch32bP3600
+
+Prefetch64bP3600()
+{
+    DmesgCard2KeyBA "P3600 SSD" 'BAR [0-9]\+: assigned \[mem [a-fxA-FX0-9-]\+ 64bit pref\]'
+}
+export -f Prefetch64bP3600
+
+Nonprefetch32bI350()
+{
+    DmesgCard2KeyBA "I350" 'BAR [0-9]\+: assigned \[mem [a-fxA-FX0-9-]\+\]'
+}
+export -f Nonprefetch32bI350
+
+Nonprefetch32bVGA()
+{
+    DmesgCard2KeyBA "VGA" 'BAR [0-9]\+: assigned \[mem [a-fxA-FX0-9-]\+\]'
+}
+export -f Nonprefetch32bVGA
+
+DoAll()
+{
+    local varDicKeys=${1}
+
+    local f_sTCsList sKs1 
+    eval sKs1=\${!${varDicKeys}[*]}
+    f_sTCsList=${g_flBaseLog}_${g_flStatusTable}
+    echo "${sKs1}" |grep -q "\(^\|[ ${g__t}]\)${g_sResetSymbol}\(\$\|[ ${g__t}]\)"
+    if [ $? -eq 0 ]; then
+        if [ -f "${f_sTCsList}" ]; then
+            rm -f "${f_sTCsList}"
+        fi
+    fi
+
+    local k1 s1 sStatus1 s2
+    for k1 in ${sKs1}; do
+        sStatus1=${g_statusFail}
+        g_sErrCur=
+        ${k1}
+        if [ $? -eq 0 ]; then
+            sStatus1=${g_statusPass}
+        fi
+        eval s1=\${${varDicKeys}[${k1}]}
+        echo "${sStatus1}${g_sSplit}${s1}${g_sSplit}${g_sErrCur}" >> "${f_sTCsList}"
+    done
+}
+export -f DoAll
+
+#####################
+#init2
+
+#####################
+

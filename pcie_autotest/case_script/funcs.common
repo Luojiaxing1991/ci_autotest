@@ -1,0 +1,92 @@
+
+g_flParent="${BASH_SOURCE[1]}"
+g_fnCur=$(basename "${BASH_SOURCE[0]}")
+g_dpCur=$(dirname  "${BASH_SOURCE[0]}")
+drCur0=${PWD}
+cd "${g_dpCur}" >/dev/null
+g_dpCur=${PWD}
+cd "${drCur0}" >/dev/null
+g_pfnCur=${g_dpCur}/${g_fnCur}
+export g_fn_funcs_common=${g_fnCur}
+export g_dp_funcs_common=${g_dpCur}
+
+#####################
+#check load from command line
+if [ -z "${g_flParent}" ]; then
+    #if at the command line, support reload the source file
+    #delete it first
+    g_defSourceFiles=$(grep -vF "${g_pfnCur}" <<< "${g_defSourceFiles}")
+    #bug: export g_defSourceFiles=${g_defSourceFiles}${g_pfnCur}$'\n'
+    #will delete the end line \n
+fi
+
+#check loaded already
+sPF1=$(grep -F "${g_pfnCur}" <<< "${g_defSourceFiles}")
+if [ $? -eq 0 ]; then
+    #then [ "${sPF1}" == "${g_pfnCur}" ]
+    #path file name is only one in file system.
+	return 100
+fi
+
+export g_defSourceFiles=${g_defSourceFiles}$'\n'${g_pfnCur}
+printf "%s[%3d]%5s: Load [${g_pfnCur}] call by [${g_flParent}]\n" "${FUNCNAME[0]}" ${LINENO} "Info"
+
+#####################
+#Load Public functions
+
+#####################
+#Load config
+#LoadSourceFileParent "${g_dp_funcs_common}" "olmcim.common" flPath1
+#$(sed "s#^#. #" <<< "${flPath1}")
+
+#. ${g_dp_funcs_common}/${g_fn_funcs_common%%.*}.cfg
+
+#####################
+#init
+export g_IFS0=${IFS}
+export g__t=$'\t'
+export g__n=$'\n'
+export g__r=$'\r'
+export g_namePreDiff="_set_cfg__"
+export g_IPPro=$(ip a |grep "inet[ \t]\+" |grep -v "inet 127\.0\.0\.1" |sed "s/^[ \t]*inet[ \t]\+\([0-9\.]\+\).\+$/\1/")
+export g_reName='\<[A-Za-z_]\+[0-9A-Za-z_]*\>'
+export g_sshFlag="-o ConnectTimeout=60 -o ServerAliveInterval=60 -o ServerAliveCountMax=2"
+
+export g_defVariablesOneTime=
+
+export g_drTmp=~/tmp
+mkdir -p ${g_drTmp}
+
+#####################
+#Alone Functions
+LoadSourceFileParent()
+{
+    local drCur1=${1}
+    local flFind1=${2}
+    local varPaths=${3}
+    local bExitErr=${4:-true}
+
+    flPub1=${drCur1}/${flFind1}
+    if [ ! -f "${flPub1}" ]; then
+        s1=$(find ${drCur1}/.. -type f -name "${flFind1}")
+        if [ -z "${s1}" ]; then
+            if [ "${bExitErr}" == "true" ]; then
+                printf "%s[%3d]%5s: Not found ${flFind1}\n" "${FUNCNAME[0]}" ${LINENO} "Info"
+                exit 1
+            fi
+        fi
+        flPub1=${s1}
+    fi
+    eval ${varPaths}=\${flPub1}
+}
+export -f LoadSourceFileParent
+
+
+##########
+#Complex Functions
+
+#####################
+#init2
+
+#####################
+
