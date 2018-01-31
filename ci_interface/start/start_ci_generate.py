@@ -22,5 +22,5 @@ if os.path.exists('%s/%s'%(target,runfile)):
 else:
     print('py file is not exist!')
 
-os.system('rm -fr %'%runfile)
+os.system('rm -fr %s'%runfile)
 

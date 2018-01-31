@@ -18,7 +18,7 @@ pwd = os.path.split(os.path.realpath(__file__))[0]
 os.chdir(pwd)
 
 #get the CI test case repo
-gitrepo = 'https://github.com/hisilicon/plinth-autotest'
+gitrepo = 'https://github.com/hisilicon/plinth-autotest.git'
 
 print(gitrepo.split("/")[-1][:-4])
 
@@ -57,14 +57,11 @@ os.system('cp -rf %s/%s/ci_interface/if/gitclone.sh gitclone.sh'%(pwd,RepoDir))
 os.system('rm -rf  %s'%RepoDir)
 
 #git clone
-#os.system('git clone %s'%gitrepo)
-
 os.system('expect gitclone.sh %s'%gitrepo)
 
 os.system('rm -fr gitclone.sh')
 
 #cd to the git/ci_testcase 
-#os.system('cd %s/ci_testcase'%RepoDir)
 os.chdir(RepoDir)
 
 print(os.getcwd())
