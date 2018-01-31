@@ -25,7 +25,7 @@ print(gitrepo.split("/")[-1][:-4])
 #get the repo dir name when clone into current dir
 RepoDir = gitrepo.split("/")[-1][:-4]
 
-os.chdir('%s/ci_testcase'%RepoDir)
+os.chdir(RepoDir)
 
 #we find out if the Repo is update within 30 minutes
 #if so ,we need to update the CI
@@ -42,23 +42,30 @@ tmpunit = loginfo.split(" ")[1]
 if tmpunit == 'minutes':
     if tmpvalue > 30:
         print('Repo is not updated,Stop')
-        sys.exit(0)
+      #  sys.exit(0)
 elif tmpunit != 'seconds':
     print('Repo is not updated,Stop')
-    sys.exit(0)
+   # sys.exit(0)
 
 print('Repo is updated,Keep running!')
 
 #we get back to root to delete the old repo and download the new one
 os.chdir(pwd)
+
+os.system('cp -rf %s/%s/ci_interface/if/gitclone.sh gitclone.sh'%(pwd,RepoDir))
+
 os.system('rm -rf  %s'%RepoDir)
 
 #git clone
-os.system('git clone %s'%gitrepo)
+#os.system('git clone %s'%gitrepo)
+
+os.system('expect gitclone.sh %s'%gitrepo)
+
+os.system('rm -fr gitclone.sh')
 
 #cd to the git/ci_testcase 
 #os.system('cd %s/ci_testcase'%RepoDir)
-os.chdir('%s/ci_testcase'%RepoDir)
+os.chdir(RepoDir)
 
 print(os.getcwd())
 
@@ -68,7 +75,7 @@ print(time.strftime('%Y-%m-%d',time.localtime(time.time())))
 
 os.system('git commit -m \'ci test case new generate:%s\' '%time.strftime('%Y-%m-%d',time.localtime(time.time())))
 
-os.system('expect ci_interface/if/github.sh')
+#os.system('expect ci_interface/if/github.sh')
 
 os.chdir(pwd)
 
