@@ -42,10 +42,10 @@ tmpunit = loginfo.split(" ")[1]
 if tmpunit == 'minutes':
     if tmpvalue > 30:
         print('Repo is not updated,Stop')
-      #  sys.exit(0)
+        sys.exit(0)
 elif tmpunit != 'seconds':
     print('Repo is not updated,Stop')
-   # sys.exit(0)
+     sys.exit(0)
 
 print('Repo is updated,Keep running!')
 
@@ -72,7 +72,7 @@ print(time.strftime('%Y-%m-%d',time.localtime(time.time())))
 
 os.system('git commit -m \'ci test case new generate:%s\' '%time.strftime('%Y-%m-%d',time.localtime(time.time())))
 
-#os.system('expect ci_interface/if/github.sh')
+os.system('expect ci_interface/if/github.sh')
 
 os.chdir(pwd)
 
