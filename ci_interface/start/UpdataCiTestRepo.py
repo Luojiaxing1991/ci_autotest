@@ -45,7 +45,7 @@ if tmpunit == 'minutes':
         sys.exit(0)
 elif tmpunit != 'seconds':
     print('Repo is not updated,Stop')
-     sys.exit(0)
+    sys.exit(0)
 
 print('Repo is updated,Keep running!')
 
