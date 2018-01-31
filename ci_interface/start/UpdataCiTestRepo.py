@@ -18,7 +18,7 @@ pwd = os.path.split(os.path.realpath(__file__))[0]
 os.chdir(pwd)
 
 #get the CI test case repo
-gitrepo = 'https://github.com/Luojiaxing1991/luo_driver_ci_testcase.git'
+gitrepo = 'https://github.com/hisilicon/plinth-autotest'
 
 print(gitrepo.split("/")[-1][:-4])
 
