@@ -193,7 +193,7 @@ ECC_1BIT_REG_INJECT1_VALUE=(
 "0x1" "0x4" "0x10" "0x40" "0x100" "0x400" "0x1000" "0x4000" "0x10000"
 )
 # 2bit error injection, injection CFG_ECCERR_INJECT1_EN register value.
-ECC_2BIT_REG_INJECT1_VALUE=(
+ECC_3BIT_REG_INJECT1_VALUE=(
 "0x2" "0x8" "0x20" "0x80" "0x200" "0x800" "0x2000" "0x8000" "0x20000"
 )
 # Value of SAS_ECCERR_MASK0 register address
