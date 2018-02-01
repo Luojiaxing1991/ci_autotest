@@ -62,3 +62,41 @@ ROCE_REPORT_FILE=roce_report.csv
 ROCE_BORADNO=
 BACK_ROCE_BORADNO=
 
+####################################################################################
+#add by hezhongyan
+##################
+#init
+export g__t=$'\t'
+export g__n=$'\n'
+export g__r=$'\r'
+
+export g_argFindMaxDepth="-maxdepth 5"
+
+export g_defVariablesOneTime=
+
+export g_drTmp=~/tmp
+mkdir -p ${g_drTmp}
+
+###########
+export g_sSplit=$'\t'
+export g_statusPass=[Pass]
+export g_nPass=0
+export g_statusFail=[Fail]
+export g_nFail=1
+export g_statusBlock=[Block]
+export g_nBlock=2
+export g_statusNone=[None]
+export g_nNone=10
+export g_statusClose=[Close]
+export g_statusUndef=[Undef]
+
+######
+#删除状态表, 重新生成;
+export g_bTCsReset=true
+
+export g_sLevelRun="
+    on
+"
+
+####################################################################################
+
