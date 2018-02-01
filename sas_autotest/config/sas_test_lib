@@ -1,17 +1,28 @@
 #!/bin/bash
-# 
+#
 
 
 
 ## Utility function
 #
 
+#  Judge the current environment, directly connected environment or expander environment.
+#  IN : N/A
+#  OUT: N/A
+function judgment_network_env()
+{
+    info=`${DEVMEM} ${CURR_ENV_REG_ADDR} w`
+    [ x"${info}" == x"0x00000000" ] && return 0
+
+    return 1
+}
+
 #  Get system disk partition information.
 #  IN : N/A
 #  OUT: N/A
 function get_all_disk_part()
 {
-    for name in `fdisk -l | grep -o "/dev/[a-z]d[a-z][1-9]"`
+    for name in `fdisk -l | grep -o "/dev/[a-z]d[a-z][1-9]" | grep -Ev "${NOT_TEST_DISK_LIST}"`
     do
         ALL_DISK_PART_NAME[${#ALL_DISK_PART_NAME[*]}]=$name
     done
@@ -120,7 +131,7 @@ function change_sas_phy_file()
         if [ x"${str}" != x"none" ] && [ ${num} -le ${EFFECTIVE_PHY_NUM} ]
         then
             echo $1 > ${PHY_FILE_PATH}/${dir}/$2
-            sleep 5
+            sleep 2
         fi
     done
 }

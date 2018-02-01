@@ -2,109 +2,131 @@
 
 
 
-# Disk operation, Reset the hard_reset file status.
+# disk running business, Reset the hard_reset file status.
 # IN : N/A
 # OUT: N/A
-function IO_operation_hard()
+function fio_single_hard_reset_phy()
 {
-    Test_Case_Title="IO_operation_hard"
-    Test_Case_ID="ST.FUNC.062"
+    Test_Case_Title="fio_single_hard_reset_phy"
+    Test_Case_ID="ST.FUNC.110/ST.FUNC.119/ST.FUNC.130/ST.FUNC.141"
 
+    beg_count=`fdisk -l | grep /dev/sd | wc -l`
     sed -i "{s/^runtime=.*/runtime=${FIO_RESET_TIME}/g;}" fio.conf
     ${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
     change_sas_phy_file 1 "hard_reset"
 
-    let "FIO_RESET_TIME*=2"
-    sleep ${FIO_RESET_TIME}
-    count=`ps -ef | grep fio | grep -v grep | grep -v vfio-irqfd-clea | wc -l`
-    [ $count -ne 0 ] && writeFail "Disk operation, hard_reset failed." && return 1
-    
+    wait
+    end_count=`fdisk -l | grep /dev/sd | wc -l`
+    if [ ${beg_count} -ne ${end_count}  ]
+    then
+        writeFail "disk running business, hard_reset remote phy, the number of disks is missing."
+        return 1
+    fi
     writePass
-
 }
 
-# Disk operation, Multiple reset the hard_reset file status.
+# disk running business, cycle reset the hard_reset file status.
 # IN : N/A
 # OUT: N/A
-function IO_operation_multiple_hard()
+function fio_cycle_hard_reset_phy()
 {
-   Test_Case_Title="IO_operation_multiple_hard"
-   Test_Case_ID="ST.FUNC.062"
- 
-   sed -i "{s/^runtime=.*/runtime=${FIO_RESET_TIME}/g;}" fio.conf
-   ${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
+    Test_Case_Title="fio_cycle_hard_reset_phy"
+    Test_Case_ID="ST.FUNC.111/ST.FUNC.112/ST.FUNC.120/ST.FUNC.121/ST.FUNC131/ST.FUNC.132/ST.FUNC.142/ST.FUNC.143"
 
-   for i in `seq ${RESET_COUNT}`
-   do
-       change_sas_phy_file 1 "hard_reset"
-       sleep 2
-   done
+    beg_count=`fdisk -l | grep /dev/sd | wc -l`
+    sed -i "{s/^runtime=.*/runtime=${FIO_RESET_TIME}/g;}" fio.conf
+    ${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
 
-   let "FIO_RESET_TIME*=2"
-   sleep ${FIO_RESET_TIME}
-   count=`ps -ef | grep fio | grep -v grep | grep -v vfio-irqfd-clea | wc -l`
-   [ ${count} -ne 0 ] && writeFail "Disk operation, multiple hard_reset failed." && return 1
+    for i in `seq ${FIO_RESET_COUNT}`
+    do
+        change_sas_phy_file 1 "hard_reset"
+        sleep 2
+    done
 
-   writePass
+    wait
+    end_count=`fdisk -l | grep /dev/sd | wc -l`
+    if [ ${beg_count} -ne ${end_count}  ]
+    then
+        writeFail "disk running business, cycle hard_reset remote phy, the number of disks is missing."
+        return 1
+    fi
+    writePass
 }
 
-# Disk operation, Reset the link_reset file status.
+# disk running business, Reset the link_reset file status.
 # IN : N/A
 # OUT: N/A
-function IO_operation_link()
+function fio_single_link_reset_phy()
 {
-    Test_Case_Title="IO_operation_link"
-    Test_Case_ID=""
+    Test_Case_Title="fio_single_link_reset_phy"
+    Test_Case_ID="ST.FUNC.108/ST.FUNC.117/ST.FUNC.128/ST.FUNC.139"
 
+    beg_count=`fdisk -l | grep /dev/sd | wc -l`
     sed -i "{s/^runtime=.*/runtime=${FIO_RESET_TIME}/g;}" fio.conf
     ${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
 
     change_sas_phy_file 1 "link_reset"
-    
-    let "FIO_RESET_TIME*=2"
-    sleep ${FIO_RESET_TIME}
-    count=`ps -ef | grep fio | grep -v grep | grep -v vfio-irqfd-clea | wc -l`
-    [ ${count} -ne 0 ] && writeFail "Disk operation, link_reset failed." && return 1
+
+    wait
+    end_count=`fdisk -l | grep /dev/sd | wc -l`
+    if [ ${beg_count} -ne ${end_count}  ]
+    then
+        writeFail "disk running business, link_reset remote phy, the number of disks is missing."
+        return 1
+    fi
 
     writePass
 }
 
-# Disk operation, Multiple reset the hard_reset file status.
+# disk running business, cycle reset the link_reset file status.
 # IN : N/A
 # OUT: N/A
-function IO_operation_multiple_link()
+function fio_cycle_link_reset_phy()
 {
-    Test_Case_Title="IO_operation_multiple_link"
-    Test_Case_ID=""
+    Test_Case_Title="fio_cycle_link_reset_phy"
+    Test_Case_ID="ST.FUNC.109/ST.FUNC.118/ST.FUNC.129/ST.FUNC.140"
 
+    beg_count=`fdisk -l | grep /dev/sd | wc -l`
     sed -i "{s/^runtime=.*/runtime=${FIO_RESET_TIME}/g;}" fio.conf
     ${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
 
-    for i in `seq ${RESET_COUNT}`
+    for i in `seq ${FIO_RESET_COUNT}`
     do
         change_sas_phy_file 1 "link_reset"
         sleep 2
     done
 
-    let "FIO_RESET_TIME*=2"
-    sleep ${FIO_RESET_TIME}
-    count=`ps -ef | grep fio | grep -v grep | grep -v vfio-irqfd-clea | wc -l`
-    [ $count -ne 0 ] && writeFail "Disk operation, multiple link_reset failed." && return 1
+    wait
+    end_count=`fdisk -l | grep /dev/sd | wc -l`
+    if [ ${beg_count} -ne ${end_count}  ]
+    then
+        writeFail "disk running business, cycle link_reset remote phy, the number of disks is missing."
+        return 1
+    fi
 
     writePass
 }
 
 function main()
 {
-    JIRA_ID="PV-72"
+    JIRA_ID="PV-1606"
     Test_Item="R.SAS.F008.A"
     Designed_Requirement_ID="Support SAS Narrow and Wide Ports"
 
+    #Get system disk partition information.
     fio_config
-    IO_operation_hard
-    IO_operation_multiple_hard
-    IO_operation_link
-    IO_operation_multiple_link
+
+    #disk running business, Reset the hard_reset file status.
+    fio_single_hard_reset_phy
+
+    #disk running business, cycle reset the hard_reset file status.
+    fio_cycle_hard_reset_phy
+
+    #disk running business, Reset the link_reset file status.
+    fio_single_link_reset_phy
+
+    #disk running business, cycle reset the link_reset file status.
+    fio_cycle_link_reset_phy
 }
 
 main

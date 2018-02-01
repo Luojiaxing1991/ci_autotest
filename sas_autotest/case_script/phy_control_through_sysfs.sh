@@ -62,9 +62,14 @@ function main()
     Test_Item="Phy control through sysfs"
     Designed_Requirement_ID="R.SAS.F017.A"
 
-    rate_set_up
+    judgment_network_env
+    return_num=$?
+    if [ ${return_num} -eq 1 ]
+    then
+        rate_set_up
 
-    [ ${IS_LOOP_RATE_SET_UP} -eq 1 ] && loop_rate_set_up
+        [ ${IS_LOOP_RATE_SET_UP} -eq 1 ] && loop_rate_set_up
+    fi
 }
 
 main

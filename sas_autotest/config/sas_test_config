@@ -3,6 +3,10 @@
 #
 
 
+#do not test the disk list,Default value is NULL.
+#configure multiple values, in the format of "/dev/sda|/dev/sdb".
+NOT_TEST_DISK_LIST=""
+
 #
 INFO=`cat /etc/hostname`
 if [ x"${INFO}" = x"estuary" ]
@@ -11,6 +15,7 @@ then
 else
     DEVMEM="devmem2"
 fi
+
 
 #  Test case mapping table
 #  on - oepn test case, off - close test case, Default is on.
@@ -25,23 +30,27 @@ declare -A case_map=(
 ["no_cable_unplug_oops"]="on"
 #  5 - Phy control through sysfs.
 #  "Be careful:This test case is used only in the environment where the board is connected directly to the disk."
-["phy_control_through_sysfs"]="off"
+["phy_control_through_sysfs"]="on"
 #  6 - support all available sas cores in the Soc.
 ["support_available_sas_cores"]="on"
 #  7 - support full sas function on all available phys.
-["support_full_sas_function_all_available_phys"]="off"
+["support_full_sas_function_all_available_phys"]="on"
 #  8 - Support SAS Narrow and Wide Ports.
-["narrow_and_wide_ports"]="off"
+["narrow_and_wide_ports"]="on"
 #  9 - support hotplug
-["support_hotplug"]="off"
+["support_hotplug"]="on"
 # 10 - support SMART
-["get_sata_SMART_info"]="on"
+["support_smart"]="on"
 # 11 - support sata NCQ
-["sata_ncq_query"]="on"
+["support_sata_ncq"]="on"
 # 12 - support Max devices
 ["support_max_devices"]="on"
 # 13 - RAS support
-["ras_support"]="on"
+["support_ras"]="on"
+# 14 - support module load and uninstall
+["support_module_load"]="off"
+# 15 - the driver should support 700k iops per controller
+["support_700k_iops"]="on"
 )
 
 #  The PHY number of the controller
@@ -69,7 +78,7 @@ declare -a ALL_DISK_PART_NAME
 FIO_BS=("4M" "4K" "512B")
 
 # FIO tools IO Read and write mode
-FIO_RW=("randread" "randwrite" "read" "write" "rw,readwrite" "randrw")
+FIO_RW=("randread" "randwrite" "read" "write" "randrw")
 
 # FIO tools mixed read and write ratio.
 IO_RATIO=("10" "50" "90")
@@ -83,7 +92,7 @@ ramp_time=1
 ioengine=psync
 iodepth=64
 numjobs=1
-bs=4M
+bs=4k
 ;zero_buffers=1
 group_reporting=1
 ;ioscheduler=noop
@@ -102,6 +111,9 @@ PHY_ADDR_VALUE=(
 "0xa2003000" "0xa2003400"
 "0xa2003800" "0xa2003c00"
 )
+
+#Judge the current environment, directly connected environment or expander environment register address.
+CURR_ENV_REG_ADDR="0xa2000028"
 
 
 ### Test case parameter configuration.
@@ -142,41 +154,54 @@ BSRANGE="4k-4M"
 BSSPLIT="4k/30:8k/40:16k/30"
 
 ## 7 - support full sas function on all available phys
-#  Turn off phy loop count, Default value is 10.
-LOOP_PHY_COUNT=10
-#
+#  cycle the number of all proximal phy switches, Default value is 100.
+LOOP_PHY_COUNT=100
+#  cycle reset distal phy number, Default value is 1000.
+REST_PHY_COUNT=1000
+#  fio tool business run time.
 LOOP_PHY_TIME=300
 
 ## 8 - Support SAS Narrow and Wide Ports.
-#
+# fio tool business run time.
 FIO_RESET_TIME=300
 #  Reset the number of Hart_rest or link_reset
-RESET_COUNT=5
+FIO_RESET_COUNT=5
 
 ## 9 - support hotplug
-#
+# fio tool business run time.
 FIO_ENABLE_TIME=300
 
+## 10 - support smart
+# query enable smart keyword.
+SUPPORT_SMART_KEYWORD="Available - device has SMART capability"
+DISABLED_SMART_KEYWORD="Exceptions (SMART) disabled"
+ENABLED_SMART_KEYWORD="Exceptions (SMART) enabled"
+STATUS_SMART_KEYWORD="SMART Health Status: OK"
+
 ## 12 - support Max devices
-#
+# The number of disks.
 MAX_DEV_NUM=12
 
 ## 13 - RAS support
-#
-1BIT_ECC_REG_VALUE=(
-"0x1" "0x2" "0x4" "0x8" "0x10" "0x20" "0x40" "0x80"
-"0x100" "0x200" "0x400" "0x800" "0x1000" "0x2000" "0x4000" "0x8000"
-"0x10000" "0x20000" "0x40000" "0x80000"
-"0x100000" "0x200000" "0x400000" "0x800000"
+# 1bit error injection, injection CFG_ECCERR_INJECT0_EN register value.
+ECC_1BIT_REG_INJECT0_VALUE=(
+"0x1" "0x2" "0x4" "0x8" "0x10" "0x20" "0x40" "0x80" "0x100" "0x200" "0x400""0x800"
+"0x1000" "0x2000" "0x4000" "0x8000" "0x10000" "0x20000" "0x40000" "0x80000" "0x100000"
 )
-#
-2BIT_ECC_REG_VALUE=(
+# 1bit error injection, injection CFG_ECCERR_INJECT1_EN register value.
+ECC_1BIT_REG_INJECT1_VALUE=(
+"0x1" "0x4" "0x10" "0x40" "0x100" "0x400" "0x1000" "0x4000" "0x10000"
+)
+# 2bit error injection, injection CFG_ECCERR_INJECT1_EN register value.
+ECC_2BIT_REG_INJECT1_VALUE=(
 "0x2" "0x8" "0x20" "0x80" "0x200" "0x800" "0x2000" "0x8000" "0x20000"
 )
 # Value of SAS_ECCERR_MASK0 register address
 MASK_REG_ADDR_VALUE="0xa20001F0"
 # Value of CFG_ECCERR_INJECT0_EN register address
-INJECT_REG_ADDR_VALUE="0xa2000200"
+INJECT0_REG_ADDR_VALUE="0xa2000200"
+# Value of CFG_ECCERR_INJECT1_EN register address
+INJECT1_REG_ADDR_VALUE="0xa2000204"
 #
 CNT_REG_ADDR_VALUE="0xa2006014"
 #
@@ -185,3 +210,15 @@ TRSHDC_REG_ADDR_VALUE="0xa2006018"
 BIT_ECC_TIME=30
 #
 ECC_INFO_KEY_QUERIES="hgc_dqe_acc1b_intr"
+
+## 14 - support module load and uninstall.
+# Need to load the ko file name, multiple ko file format "a.ko|b.ko", default is empty, that does not load.
+MODULE_KO_FILE=""
+# load ko after the success of the test disk file, for example "/dev/sda1", default is empty.
+MODULE_DISK_FILE=""
+
+## 15 -  the driver should support 700k iops per controller.
+#
+FIO_IOPS_IODEPTH="1024"
+#
+IOPS_THRESHOLD="700"

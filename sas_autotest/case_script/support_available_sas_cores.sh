@@ -76,14 +76,15 @@ function main()
     Test_Item="SAS 2.0/SAS 3.0"
     Designed_Requirement_ID="R.SAS.N003A/R.SAS.F005.A"
 
-
+    # fio tool to read and write disk.
     FIO_IO_read_write
 
+    # fio tools mixed io read and write
     FIO_IO_RAIO_randrw
 
+    # fio tools only io read-only write.
     FIO_IO_RAIO_read_write
 }
 
 main
-
 

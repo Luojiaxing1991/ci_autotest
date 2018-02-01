@@ -41,6 +41,7 @@ function main()
     Test_Item="Stable 2GB file transfer"
     Designed_Requirement_ID="R.SAS.N007.A"
 
+    # File transfer stability test
     iozne_file_transfer_stability_test
 }
 
