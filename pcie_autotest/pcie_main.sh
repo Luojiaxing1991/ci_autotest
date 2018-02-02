@@ -9,8 +9,10 @@ g_drPro=$(dirname "${g_pfn}")
 
 . ${g_drPro}/config/pcie_test_lib
 
+echo ${g_drPro}
 #####################
 #do
+echo "begin to run pcie test"
 RunTable "${g_flTCsTable}" "${g_flStatusTable}" "${g_dp_pcie_test_common}" "${g_flLog}"
 
 writeLogHeader
