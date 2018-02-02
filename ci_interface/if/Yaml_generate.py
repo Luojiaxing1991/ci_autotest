@@ -83,7 +83,7 @@ for mainfile in filelist:
         break
  
 
-dir_run = {'steps':['bash ./ci_testcase/%s/%s'%(tmpDirName,mainfile)]}
+dir_run = {'steps':['bash ./%s/%s'%(tmpDirName,mainfile)]}
 
 dir_parse = {'pattern':"(?P<test_case_id>[ /a-zA-Z0-9]+): (?P<result>[A-Z]+)"}
 
