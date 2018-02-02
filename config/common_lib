@@ -15,6 +15,8 @@ function writePass()
 {
     local Test_Result="PASS"
     echo "$Module_Name,""$JIRA_ID,""$Designed_Requirement_ID,""$Test_Case_ID,""$Test_Item,""$Test_Case_Title,""$Test_Result" >> ${REPORT_FILE}
+    #This cmd used to report pass result to lava server
+    lava-test-case ${Module_Name}":"${Test_Case_Title} --result pass
     return 0
 }
 
@@ -26,6 +28,8 @@ function writeFail()
     local Test_Result="FAIL"
     local Remark="$1"
     echo "$Module_Name,""$JIRA_ID,""$Designed_Requirement_ID,""$Test_Case_ID,""$Test_Item,""$Test_Case_Title,""$Test_Result,""$Remark" >> ${REPORT_FILE}
+    #This cmd used to report fail result to lava server
+    lava-test-case ${Module_Name}":"${Test_Case_Title} --result fail
     return 0
 }
 

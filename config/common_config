@@ -99,4 +99,15 @@ export g_sLevelRun="
 "
 
 ####################################################################################
+#add by luojiaxing
+##################
+#add lava-test-case into bin path
+
+#get the script path of this file.like lava-d03/tests/0_98feter/config
+#the target file is lacate in  lava-d03/tests/0_98feter/ci_interface/if/AddPath.py
+CONFIG_LIB_TMP=$(cd "`dirname $0`" ; pwd)
+echo ${CONFIG_LIB_TMP}
+python ${CONFIG_LIB_TMP}/../ci_interface/if/AddPath.py
+
+####################################################################################
 
