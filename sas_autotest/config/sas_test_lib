@@ -49,7 +49,7 @@ function get_all_disk_part()
     do
         for dev_name in `mount | grep "/dev/[a-z]d[a-z][1-9]" | awk -F ' ' '{print $1}'`
         do
-            if [ x"$name" != x"${dev_name}" ]
+            if [ x"$name" == x"${dev_name}" ]
             then
                 continue
             fi
