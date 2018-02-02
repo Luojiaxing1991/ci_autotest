@@ -1,0 +1,72 @@
+#!/usr/bin/expect -f
+proc_my_exit { exit_code } {
+  send_log "\n----------------------------sshcp---------exit\[${exit_code}]-----------------------\n"
+  exit ${exit_code}
+}
+
+if { ${argc} != 4 && ${argc} != 5 }  {
+    regsub ".*/" $argv0 "" name
+    send_user "\naccept only 4 or 5 parameters.\[${argv}\]\nUsage: ${name} user password target_host local_file remote_path \[logfile]\n"
+    my_exit 1
+}
+
+set user [lindex $argv 0]
+set passwd [lindex $argv 1]
+set target [lindex $argv 2]
+set local_file [lindex $argv 3]
+set remote_path [lindex $argv 4]
+
+if { ${argc} == 6 }  {
+    set logfile [lindex $argv 5]
+	if { ! [ file exists ${logfile} ] } {
+	    exec touch ${logfile}
+	}
+	log_file ${logfile}
+}
+
+send_log "\n----------------------------sshcp---------start----------------------\n"
+
+send_log "${argv}"
+
+send_log "\nuser:${user}\npassword:${passwd}\ntarget:${target}\nlocal file:${local_file}\nremote path:${remote_path}\n"
+
+spawn scp ${local_file} ${user}@${target}:${remote_path}
+send_log "\nspawn id is:${spawn_id}\n"
+set done 0
+set first_passwd 1
+while { !${done} } {
+    send_log "\nenter while\n"
+	expect {
+	    -nocase -re "yes/no" {
+	    send_log "send yes."
+	    send -- "yes\r"
+	}
+	-nocase -re "password:" {
+	  if { !${first_passwd} } {
+	    send_log "\npassword is incorrect.\n"
+		close
+		my_exit 1
+	  }
+	  send -- "${passwd}\r"
+	  set first_passwd 0
+  }
+  eof {
+     set ret [wait]
+	 send_log "\npid:[lindex $ret 0]\nspawn id:[lindex $ret 1]\nsys error:[lindex $ret 2]\n\n"
+	 set sys_err [lindex $ret 2]
+	 if { ${sys_err} } {
+	    send_log "\nan operating system error occurred.\n"
+		my_exit 1
+	 }
+	 set proc_exit_code [lindex $ret 3]
+	 send_log "\nprocess exit code is:${proc_exit_code}\n"
+	 my_exit ${proc_exit_code}
+    }  
+  }
+}
+
+
+send_log "\nend\n"
+my_exit 0
+
+

@@ -1,0 +1,15 @@
+
+###########stable
+
+###########often
+export g_flTCsTable="testcases.table"
+export g_flStatusTable="status.table"
+
+######
+export g_sKeyP3600="P3600 SSD"
+export g_sKeyP3600="Intel Corporation Device 0953"
+
+BACK_IP=192.168.1.248
+
+###########
+

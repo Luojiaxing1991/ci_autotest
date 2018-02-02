@@ -1,0 +1,16 @@
+#!/usr/bin/expect -f
+
+proc genSshPubKey {} {
+    if { [catch { spawn ssh-keygen -t dsa } error] } {
+	    send_error "Error: $error\n"
+		exit 1
+	}
+	
+	expect {
+	    -nocase -re "\(.*\):" {send -- "\r"; exp_continue;}
+		-nocase -re "Overwrite.*" {send -- "y\r"; exp_continue;}
+	}
+	send_user "ok!\n"
+}
+
+genSshPubKey

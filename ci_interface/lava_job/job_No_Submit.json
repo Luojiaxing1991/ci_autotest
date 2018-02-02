@@ -1,0 +1,108 @@
+{
+    "actions": [
+        {
+            "command": "deploy_linaro_kernel",
+            "metadata": {
+                "boot.type": "ACPI",
+                "image.type": "kernel-ci",
+                "image.url": "http://localhost:8083/plinth/release-plinth-4.15.0+_+300e39166a78fb18af5231a5631bfbc500db55ee/arm64-defconfig+plinth-config/",
+                "kernel.defconfig": "arm64-defconfig+plinth-config",
+                "kernel.endian": "little",
+                "kernel.tree": "plinth",
+                "kernel.version": "release-plinth-4.15.0+_+300e39166a78fb18af5231a5631bfbc500db55ee",
+                "platform.fastboot": "false",
+                "test.plan": "SAS_Test"
+            },
+            "parameters": {
+                "bootloadertype": "ipxe",
+                "dtb": "http://localhost:8083/plinth/release-plinth-4.15.0+_+300e39166a78fb18af5231a5631bfbc500db55ee/arm64-defconfig+plinth-config/dtbs/hisilicon/hip06-d03.dtb",
+                "kernel": "http://localhost:8083/plinth/release-plinth-4.15.0+_+300e39166a78fb18af5231a5631bfbc500db55ee/arm64-defconfig+plinth-config/Image",
+                "target_type": "ubuntu"
+            }
+        },
+        {
+            "command": "boot_linaro_image",
+            "parameters": {
+                "options": [
+                    "boot_cmds=boot_cmds_disc_acpi"
+                ]
+            }
+        },
+ 
+        {
+            "command": "lava_test_shell",
+            "parameters": {
+                "testdef_repos": [
+                    {
+                        "git-repo": "https://github.com/Luojiaxing1991/luo_driver_ci_testcase.git",
+			"parameters":{
+			     "Maintainer": "Luojiaxing"
+			},
+			"testdef": "ci_testcase/sas_autotest/sas_autotest.yaml"
+                    }
+                ],
+                "timeout": 172800
+            }
+        },
+        {
+            "command": "lava_test_shell",
+            "parameters": {
+                "testdef_repos": [
+                    {
+                        "git-repo": "https://github.com/Luojiaxing1991/luo_driver_ci_testcase.git",
+			"parameters":{
+			     "Maintainer": "Fangjian"
+			},
+			"testdef": "ci_testcase/pcie_autotest/pcie_autotest.yaml"
+                    }
+                ],
+                "timeout": 172800
+            }
+        },
+	{
+            "command": "lava_test_shell",
+            "parameters": {
+                "testdef_repos": [
+                    {
+                        "git-repo": "https://github.com/Luojiaxing1991/luo_driver_ci_testcase.git",
+			"parameters":{
+			     "Maintainer": "Fangjian"
+			},
+			"testdef": "ci_testcase/roce_autotest/roce_autotest.yaml"
+                    }
+                ],
+                "timeout": 172800
+            }
+        },
+	{
+            "command": "lava_test_shell",
+            "parameters": {
+                "testdef_repos": [
+                    {
+                        "git-repo": "https://github.com/Luojiaxing1991/luo_driver_ci_testcase.git",
+			"parameters":{
+			     "Maintainer": "Fangjian"
+			},
+			"testdef": "ci_testcase/xge_autotest/xge_autotest.yaml"
+                    }
+                ],
+                "timeout": 172800
+            }
+        },
+	
+
+
+	{
+	    "command": "submit_results",
+	    "parameters": {
+	         "server": "http://localhost:8089/RPC2/",
+		 "stream": "/anonymous/plinth/"
+	    }
+	}
+    ],
+    "device_type": "hip06-d03",
+    "job_name": "plinth-release-plinth-4.15.0+_+300e39166a78fb18af5231a5631bfbc500db55ee-arm64-SAS_Test",
+    "logging_level": "DEBUG",
+    "priority": "high",
+    "timeout": 172800
+}
