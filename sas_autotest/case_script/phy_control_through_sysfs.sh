@@ -12,13 +12,13 @@ function set_rate_link()
         then
             echo $MINIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/minimum_linkrate
             echo $MAXIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/maximum_linkrate
-            [ $? -ne 0 ] && writeFail "Failed to set the maximum rate of \"${dir}\" greater than the minimum rate." && return 1
+            [ $? -ne 0 ] && MESSAGE="FAIL\tFailed to set the maximum rate of \"${dir}\" greater than the minimum rate." && return 1
 
             echo $MINIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/maximum_linkrate
-            [ $? -ne 0 ] && writeFail "Failed to set the \"${dir}\" maximum rate equal to the minimum rate." && return 1
+            [ $? -ne 0 ] && MESSAGE="FAIL\tFailed to set the \"${dir}\" maximum rate equal to the minimum rate." && return 1
 
             echo $MAXIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/minimum_linkrate
-            [ $? -eq 0 ] && writeFail "Failed to set the \"${dir}\" maximum rate less than the minimum rate." && return 1
+            [ $? -eq 0 ] && MESSAGE="FAIL\tFailed to set the \"${dir}\" maximum rate less than the minimum rate." && return 1
         fi
         sleep 5
     done
@@ -31,12 +31,11 @@ function set_rate_link()
 function rate_set_up()
 {
     Test_Case_Title="rate_set_up"
-    Test_Case_ID="ST.FUNC.007/ST.FUNC.008"
 
     set_rate_link
     [ $? -ne 0 ] && return 1
 
-    writePass
+    MESSAGE="PASS"
 }
 
 # Loop rate set up
@@ -45,31 +44,20 @@ function rate_set_up()
 function loop_rate_set_up()
 {
     Test_Case_Title="loop_rate_set_up"
-    Test_Case_ID="ST.FUNC.009"
 
     for num in ${LOOP_RATE_SET_UP_NUMBER}
     do
         set_rate_link
-        [ $? -ne 0 ] && "The loop setting PHY rate value failed" && return 1
+        [ $? -ne 0 ] && MESSAGE="FAIL\tThe loop setting PHY rate value failed" && return 1
         sleep 2
     done
-    writePass
+    MESSAGE="PASS"
 }
 
 function main()
 {
-    JIRA_ID="PV-1603"
-    Test_Item="Phy control through sysfs"
-    Designed_Requirement_ID="R.SAS.F017.A"
-
-    judgment_network_env
-    return_num=$?
-    if [ ${return_num} -eq 1 ]
-    then
-        rate_set_up
-
-        [ ${IS_LOOP_RATE_SET_UP} -eq 1 ] && loop_rate_set_up
-    fi
+    # call the implementation of the automation use cases
+    test_case_function_run
 }
 
 main

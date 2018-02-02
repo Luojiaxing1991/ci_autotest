@@ -8,7 +8,6 @@
 function driver_supports()
 {
     Test_Case_Title="driver_supports"
-    Test_Case_ID="ST.FUNC.001/ST.FUNC.002/ST.FUNC.003"
 
     for disk_name in "${ALL_DISK_PART_NAME[@]}"
     do
@@ -16,7 +15,7 @@ function driver_supports()
         if [ $? -ne 0 ]
         then
             umount ${disk_name}
-            writeFail "Mount "${disk_name}" disk failure."
+            MESSAGE="FAIL\tMount "${disk_name}" disk failure."
             return 1
         fi
 
@@ -24,22 +23,19 @@ function driver_supports()
         if [ $? -ne 0 ]
         then
             umount ${disk_name}
-            writeFail "dd tools read ${disk_name} error."
+            MESSAGE="FAIL\tdd tools read ${disk_name} error."
             return 1
         fi
         umount ${disk_name}
     done
 
-    writePass
+    MESSAGE="PASS"
 }
 
 function main()
 {
-    JIRA_ID="PV-1587/PV-1588"
-    Test_Item="The driver must support SSP/The driver must support SMP/The driver must support STP"
-    Designed_Requirement_ID="R.SAS.F001.A/R.SAS.F002.A/R.SAS.F003.A"
-
-    driver_supports
+    # call the implementation of the automation use cases
+    test_case_function_run
 }
 
 main

@@ -8,10 +8,9 @@
 function support_max_devices()
 {
     Test_Case_Title="support_max_devices"
-    Test_Case_ID="ST.FUNC.004"
 
     num=${#ALL_DISK_PART_NAME[@]}
-    [ ${num} -ne ${MAX_DEV_NUM} ] && writeFail "expander not fully loaded." && return 1
+    [ ${num} -ne ${MAX_DEV_NUM} ] && MESSAGE="FAIL\texpander not fully loaded." && return 1
 
     count=0
     for disk_name in "${ALL_DISK_PART_NAME[@]}"
@@ -21,10 +20,10 @@ function support_max_devices()
         mount -t ext4 ${disk_name} /mnt/${count} 1>/dev/null
 
         info=`mount | grep -w "^${disk_name}"`
-        [ "${info}" = x"" ] && writeFail "Mount "${disk_name}" disk failure." && return 1
+        [ "${info}" = x"" ] && MESSAGE="FAIL\tMount "${disk_name}" disk failure." && return 1
 
         time dd if=${disk_name} of=/mnt/${count}/test.img bs=1M count=1000 conv=fsync 1>/dev/null &
-        [ $? -ne 0 ] && umount ${disk_name} && writeFail "dd tools read ${disk_name} error." && return 1
+        [ $? -ne 0 ] && umount ${disk_name} && MESSAGE="FAIL\tdd tools read ${disk_name} error." && return 1
         let count+=1
     done
 
@@ -34,16 +33,13 @@ function support_max_devices()
         umount /mnt/${dir}
         rm -rf /mnt/${dir}
     done
-    writePass
+    MESSAGE="PASS"
 }
 
 function main()
 {
-    JIRA_ID="PV-1945"
-    Test_Item="R.SAS.F004.A"
-    Designed_Requirement_ID="Support Max Devices"
-
-    support_max_devices
+    # call the implementation of the automation use cases
+    test_case_function_run
 }
 
 main

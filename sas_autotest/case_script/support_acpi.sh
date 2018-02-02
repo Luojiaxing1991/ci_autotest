@@ -8,22 +8,16 @@
 function check_acpi_start()
 {
     Test_Case_Title="check_acpi_start"
-    Test_Case_ID="ST.FUNC.202"
 
     info=`cat /proc/cmdline | grep ${ACPI_KEY_INFO}`
-    [ x"${info}" == x"" ] weiteFail "The current system is not acpi way to start." && return 1
-
-    writePass
+    [ x"${info}" == x"" ] MESSAGE="FAIL\tThe current system is not acpi way to start." && return 1
+    MESSAGE="PASS"
 }
 
 function main()
 {
-    JIRA_ID="PV-1946"
-    Test_Item="R.SAS.F018.A"
-    Designed_Requirement_ID="support ACPI for probe and reset"
-
-    # check the system startup method.
-    check_acpi_start
+    # call the implementation of the automation use cases
+    test_case_function_run
 }
 
 main

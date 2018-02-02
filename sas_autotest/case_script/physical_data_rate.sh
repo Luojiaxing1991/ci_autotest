@@ -6,7 +6,6 @@
 function disk_negotiated_link_rate_query()
 {
     Test_Case_Title="disk_negotiated_link_rate_query"
-    Test_Case_ID="ST.FUNC.005/ST.FUNC.006"
 
     for dir in `ls ${PHY_FILE_PATH}`
     do
@@ -26,21 +25,17 @@ function disk_negotiated_link_rate_query()
 
         if [ $BRate -eq 1 ]
         then
-            writeFail "\"${dir}\" negotiated link rate query ERROR."
+            MESSAGE="FAIL\t\"${dir}\" negotiated link rate query ERROR."
             return 1
         fi
     done
-    writePass
+    MESSAGE="PASS"
 }
 
 function main()
 {
-    JIRA_ID="PV-1597/PV-1604"
-    Test_Item="physical data rate"
-    Designed_Requirement_ID="R.SAS.F006/R.SAS.F007"
-
-    disk_negotiated_link_rate_query
+    # call the implementation of the automation use cases
+    test_case_function_run
 }
 
 main
-

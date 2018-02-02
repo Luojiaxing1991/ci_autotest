@@ -2,10 +2,20 @@
 #
 #
 
+#Automated data files exported in test cases.
+TEST_CASE_DB_FILE="data/sas_test_case.table"
+#
+OUTPUT_TEST_DB_FILE="data/report.csv"
+#
+TEST_CASE_FUNCTION_SWITCH=""
+#
+TEST_CASE_FUNCTION_NAME=""
+#
+MESSAGE=""
 
 #do not test the disk list,Default value is NULL.
 #configure multiple values, in the format of "/dev/sda|/dev/sdb".
-NOT_TEST_DISK_LIST=""
+NOT_TEST_DISK_LIST="N/A"
 
 #
 INFO=`cat /etc/hostname`
@@ -15,43 +25,6 @@ then
 else
     DEVMEM="devmem2"
 fi
-
-
-#  Test case mapping table
-#  on - oepn test case, off - close test case, Default is on.
-declare -A case_map=(
-#  1 - The driver must support SSP / The driver must support SMP.
-["driver_must_support"]="on"
-#  2 - Disk negotiated link rate query.
-["physical_data_rate"]="on"
-#  3 - File transfer stability test.
-["stable_2GB_file_transfer"]="on"
-#  4 - No cable unplug OOPs
-["no_cable_unplug_oops"]="on"
-#  5 - Phy control through sysfs.
-#  "Be careful:This test case is used only in the environment where the board is connected directly to the disk."
-["phy_control_through_sysfs"]="on"
-#  6 - support all available sas cores in the Soc.
-["support_available_sas_cores"]="on"
-#  7 - support full sas function on all available phys.
-["support_full_sas_function_all_available_phys"]="on"
-#  8 - Support SAS Narrow and Wide Ports.
-["narrow_and_wide_ports"]="on"
-#  9 - support hotplug
-["support_hotplug"]="on"
-# 10 - support SMART
-["support_smart"]="on"
-# 11 - support sata NCQ
-["support_sata_ncq"]="on"
-# 12 - support Max devices
-["support_max_devices"]="on"
-# 13 - RAS support
-["support_ras"]="on"
-# 14 - support module load and uninstall
-["support_module_load"]="off"
-# 15 - the driver should support 700k iops per controller
-["support_700k_iops"]="on"
-)
 
 #  The PHY number of the controller
 EFFECTIVE_PHY_NUM=11
@@ -127,11 +100,11 @@ COMPARISON_NUMBER=500
 
 ## 4 - No cable unplug OOPs
 #  Long time read / write disk, Default Value is 0.
-IS_LONG_TIME_IO_READ_WRITE=0
+#IS_LONG_TIME_IO_READ_WRITE=0
 #  Long time read and write disk time, Default Value is 14400ms.
 FIO_LONG_RUN_TIME=14400
 #  Repeat read / write disk, Default Value is 0.
-IS_REPEAT_IO_READ_WRITE=0
+#IS_REPEAT_IO_READ_WRITE=0
 #  Repeat read and write disks. Default value is 100 second.
 REPEAT_RW_NUMBER=100
 #  FIO tool to read the cycle time.
@@ -139,7 +112,7 @@ REPEAT_RM_TIME=10
 
 ## 5 - phy_control_through_sysfs
 #  loop Rate set up function switch,  1 - oepn test, 0 - close test, Default Value is 0.
-IS_LOOP_RATE_SET_UP=0
+#IS_LOOP_RATE_SET_UP=0
 #  loop Rate set up number, Default Value is 10000.
 LOOP_RATE_SET_UP_NUMBER=10000
 #  Maximum disk phy, Default Value is "6.0 Gbit".

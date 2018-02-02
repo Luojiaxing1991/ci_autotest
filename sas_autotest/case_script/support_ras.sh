@@ -64,13 +64,13 @@ function output_ecc_info()
 
     case "${REG_RETURN_VALUE}" in
         0)
-             writePass
+            MESSAGE="PASS"
             ;;
         1)
-            writeFail "${REG_ADDR_VALUE} register address setting ${reg}, no error message is reported."
+            MESSAGE="FAIL\t${REG_ADDR_VALUE} register address setting ${reg}, no error message is reported."
             ;;
         2)
-            writeFail "${REG_ADDR_VALUE} register address setting ${reg}, shutdown error repoted log failed."
+            MESSAGE="FAIL\t${REG_ADDR_VALUE} register address setting ${reg}, shutdown error repoted log failed."
             ;;
     esac
 }
@@ -81,7 +81,6 @@ function output_ecc_info()
 function 1bit_ecc_injection()
 {
     Test_Case_Title="1bit_ecc_injection"
-    Test_Case_ID="ST.FUNC.047~ST.FUNC.080"
 
     for reg in ${ECC_1BIT_REG_INJECT0_VALUE[@]}
     do
@@ -110,7 +109,6 @@ function 1bit_ecc_injection()
 function 2bit_ecc_injection()
 {
     Test_Case_Title="2bit_ecc_injection"
-    Test_Case_ID="ST.FUNC.081~ST.FUNC.089"
 
     for reg in ${ECC_2BIT_REG_INJECT1_VALUE[@]}
     do
@@ -128,13 +126,8 @@ function 2bit_ecc_injection()
 
 function main()
 {
-    JIRA_ID="PV-1330"
-    Test_Item="RAS support"
-    Designed_Requirement_ID="R.SAS.F025A"
-
-    1bit_ecc_injection
-    2bit_ecc_injection
+    # call the implementation of the automation use cases
+    test_case_function_run
 }
 
 main
-
