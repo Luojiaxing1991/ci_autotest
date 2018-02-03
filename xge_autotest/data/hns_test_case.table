@@ -1,0 +1,1 @@
+.F001.A	ST_GE_PORT_CTRL_000	GE网口的打开和关闭接口	GE初始化后打开和关闭网口	enable_and_disable_interface.sh	enable_and_disable_interface	on

@@ -1,0 +1,197 @@
+#!/bin/bash
+#
+#
+
+#Automated data files exported in test cases.
+TEST_CASE_DB_FILE="data/sas_test_case.table"
+#
+OUTPUT_TEST_DB_FILE="data/report.csv"
+#
+TEST_CASE_FUNCTION_SWITCH=""
+#
+TEST_CASE_FUNCTION_NAME=""
+#
+MESSAGE=""
+
+#do not test the disk list,Default value is NULL.
+#configure multiple values, in the format of "/dev/sda|/dev/sdb".
+NOT_TEST_DISK_LIST="N/A"
+
+#
+INFO=`cat /etc/hostname`
+if [ x"${INFO}" = x"estuary" ]
+then
+    DEVMEM="devmem"
+else
+    DEVMEM="devmem2"
+fi
+
+#  The PHY number of the controller
+EFFECTIVE_PHY_NUM=11
+
+#  log file
+ERROR_INFO="error_info.log"
+
+#  fio tools configuration file
+FIO_CONFG="fio.conf"
+
+#  Common tools directory path
+COMMON_TOOL_PATH="common_tool"
+
+#  Test case code directory path
+TEST_CASE_PATH="sas_autotest/case_script"
+
+#  phy path
+PHY_FILE_PATH="/sys/class/sas_phy"
+
+#  Save all disk partition names
+declare -a ALL_DISK_PART_NAME
+
+# FIO tools IO size
+FIO_BS=("4M" "4K" "512B")
+
+# FIO tools IO Read and write mode
+FIO_RW=("randread" "randwrite" "read" "write" "randrw")
+
+# FIO tools mixed read and write ratio.
+IO_RATIO=("10" "50" "90")
+
+# FIO tool parameter list
+FIO_PARAMETER_LIST="
+[global]
+rw=read
+direct=1
+ramp_time=1
+ioengine=psync
+iodepth=64
+numjobs=1
+bs=4k
+;zero_buffers=1
+group_reporting=1
+;ioscheduler=noop
+;gtod_reduce=1
+;iodepth_batch=2
+;iodepth_batch_complete=2
+runtime=300
+;thread
+loops=10
+"
+
+#phy address
+PHY_ADDR_VALUE=(
+"0xa2002000" "0xa2002400"
+"0xa2002800" "0xa2002c00"
+"0xa2003000" "0xa2003400"
+"0xa2003800" "0xa2003c00"
+)
+
+#Judge the current environment, directly connected environment or expander environment register address.
+CURR_ENV_REG_ADDR="0xa2000028"
+
+
+### Test case parameter configuration.
+## 2 - physical_data_rate
+#  negotiated link rate value, Multiple please use the symbol "|" split, Default Value is '1.5|3|6|12', Unit: Gbit.
+DISK_NEGOTIATED_LINKRATE_VALUE='1.5|3|6|12'
+
+## 3 - stable_2GB_file_transfer
+#  Disk file data consistency test, File comparison times, Default Value is 500.
+COMPARISON_NUMBER=500
+
+## 4 - No cable unplug OOPs
+#  Long time read / write disk, Default Value is 0.
+#IS_LONG_TIME_IO_READ_WRITE=0
+#  Long time read and write disk time, Default Value is 14400ms.
+FIO_LONG_RUN_TIME=14400
+#  Repeat read / write disk, Default Value is 0.
+#IS_REPEAT_IO_READ_WRITE=0
+#  Repeat read and write disks. Default value is 100 second.
+REPEAT_RW_NUMBER=100
+#  FIO tool to read the cycle time.
+REPEAT_RM_TIME=10
+
+## 5 - phy_control_through_sysfs
+#  loop Rate set up function switch,  1 - oepn test, 0 - close test, Default Value is 0.
+#IS_LOOP_RATE_SET_UP=0
+#  loop Rate set up number, Default Value is 10000.
+LOOP_RATE_SET_UP_NUMBER=10000
+#  Maximum disk phy, Default Value is "6.0 Gbit".
+MAXIMUM_LINK_VALUE="6.0 Gbit"
+#  Minimum disk phy, Default Value is "3.0 Gbit".
+MINIMUM_LINK_VALUE="3.0 Gbit"
+
+## 6 - support_available_sas_cores
+#
+BSRANGE="4k-4M"
+#
+BSSPLIT="4k/30:8k/40:16k/30"
+
+## 7 - support full sas function on all available phys
+#  cycle the number of all proximal phy switches, Default value is 100.
+LOOP_PHY_COUNT=100
+#  cycle reset distal phy number, Default value is 1000.
+REST_PHY_COUNT=1000
+#  fio tool business run time.
+LOOP_PHY_TIME=300
+
+## 8 - Support SAS Narrow and Wide Ports.
+# fio tool business run time.
+FIO_RESET_TIME=300
+#  Reset the number of Hart_rest or link_reset
+FIO_RESET_COUNT=5
+
+## 9 - support hotplug
+# fio tool business run time.
+FIO_ENABLE_TIME=300
+
+## 10 - support smart
+# query enable smart keyword.
+SUPPORT_SMART_KEYWORD="Available - device has SMART capability"
+DISABLED_SMART_KEYWORD="Exceptions (SMART) disabled"
+ENABLED_SMART_KEYWORD="Exceptions (SMART) enabled"
+STATUS_SMART_KEYWORD="SMART Health Status: OK"
+
+## 12 - support Max devices
+# The number of disks.
+MAX_DEV_NUM=12
+
+## 13 - RAS support
+# 1bit error injection, injection CFG_ECCERR_INJECT0_EN register value.
+ECC_1BIT_REG_INJECT0_VALUE=(
+"0x1" "0x2" "0x4" "0x8" "0x10" "0x20" "0x40" "0x80" "0x100" "0x200" "0x400""0x800"
+"0x1000" "0x2000" "0x4000" "0x8000" "0x10000" "0x20000" "0x40000" "0x80000" "0x100000"
+)
+# 1bit error injection, injection CFG_ECCERR_INJECT1_EN register value.
+ECC_1BIT_REG_INJECT1_VALUE=(
+"0x1" "0x4" "0x10" "0x40" "0x100" "0x400" "0x1000" "0x4000" "0x10000"
+)
+# 2bit error injection, injection CFG_ECCERR_INJECT1_EN register value.
+ECC_3BIT_REG_INJECT1_VALUE=(
+"0x2" "0x8" "0x20" "0x80" "0x200" "0x800" "0x2000" "0x8000" "0x20000"
+)
+# Value of SAS_ECCERR_MASK0 register address
+MASK_REG_ADDR_VALUE="0xa20001F0"
+# Value of CFG_ECCERR_INJECT0_EN register address
+INJECT0_REG_ADDR_VALUE="0xa2000200"
+# Value of CFG_ECCERR_INJECT1_EN register address
+INJECT1_REG_ADDR_VALUE="0xa2000204"
+#
+CNT_REG_ADDR_VALUE="0xa2006014"
+#
+TRSHDC_REG_ADDR_VALUE="0xa2006018"
+#
+BIT_ECC_TIME=30
+#
+ECC_INFO_KEY_QUERIES="hgc_dqe_acc1b_intr"
+
+## 14 - support module load and uninstall.
+# Need to load the ko file name, multiple ko file format "a.ko|b.ko", default is empty, that does not load.
+MODULE_KO_FILE=""
+# load ko after the success of the test disk file, for example "/dev/sda1", default is empty.
+MODULE_DISK_FILE=""
+
+## 15 -  the driver should support 700k iops per controller.
+#
+FIO_IOPS_IODEPTH="1024"
+#
+IOPS_THRESHOLD="700"

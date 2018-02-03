@@ -77,8 +77,8 @@ export g_sErrCur=
 #Alone Functions
 ArgInCmdLine()
 {
-    local sKey1=${1}
-
+    local sKey1=${1}    
+    echo "Begin to run ArgInCmdLine "${sKey1}
     grep -q "\(^\| \)${sKey1}\( \|\$\)" /proc/cmdline
     if [ $? -ne 0 ]; then
         g_sErrCur="not have ${sKey1} in cmdline"
@@ -93,7 +93,9 @@ LspcikKeysiBA()
     local bIC=${2:-false}
     local nB=${3:-0}
     local nA=${4:-0}
-
+   
+    echo "Begin to run LspcikKeysiBA"${sKey1}  
+  
     local argic
     argic=
     if [ "${bIC}" == "true" ]; then
@@ -102,6 +104,7 @@ LspcikKeysiBA()
     lspci -k |grep ${argic} -B${nB} -A${nA} -q "${sKey1}"
     if [ $? -ne 0 ]; then
         g_sErrCur="not have ${sKey1}"
+        echo "lspci cmd is not success in LspcikKeysiBA "${sKey1} 
         printf "%s[%3d]%5s: ${g_sErrCur}\n" "${FUNCNAME[0]}" ${LINENO} "Error" >> "${g_flLog}"
         return 1
     fi

@@ -1,0 +1,168 @@
+#!/bin/bash
+#
+
+
+
+## Utility function
+#
+
+
+#  call the implementation of the automation use cases
+#  IN : N/A
+#  OUT: N/A
+function test_case_function_run()
+{
+    if [ x"${TEST_CASE_FUNCTION_SWITCH}" == x"on" ]
+    then
+        ${TEST_CASE_FUNCTION_NAME}
+    else
+        MESSAGE="BLOCK\tno automated use cases were implemented."
+    fi
+}
+
+# Output log file header
+# IN : N/A
+# OUT: N/A
+function writeLogHeader
+{
+    echo -e "Designed Requirement ID\tTest Case ID\tTest Item\tTest Case Title\tAutomated scripts\tRealize the function\tSwitch\tResult\tReason" > ${OUTPUT_TEST_DB_FILE}
+    return 0
+}
+
+#  Judge the current environment, directly connected environment or expander environment.
+#  IN : N/A
+#  OUT: N/A
+function judgment_network_env()
+{
+    info=`${DEVMEM} ${CURR_ENV_REG_ADDR} w`
+    [ x"${info}" == x"0x00000000" ] && return 0
+
+    return 1
+}
+
+#  Get system disk partition information.
+#  IN : N/A
+#  OUT: N/A
+function get_all_disk_part()
+{
+    for name in `fdisk -l | grep -o "/dev/[a-z]d[a-z][1-9]"`
+    do
+        for dev_name in `mount | grep "/dev/[a-z]d[a-z][1-9]" | awk -F ' ' '{print $1}'`
+        do
+            if [ x"$name" == x"${dev_name}" ]
+            then
+                continue
+            fi
+        done
+        ALL_DISK_PART_NAME[${#ALL_DISK_PART_NAME[*]}]=$name
+    done
+}
+
+#  Mount the disk partition to the local.
+#  IN : $1 partition disk name
+#  OUT: N/A
+function mount_disk()
+{
+    disk_name=$1
+    info=`mount | grep -w "^${disk_name}"`
+    [ x"${info}" != x"" ] && umount ${disk_name}
+
+    echo "y" | mkfs.ext4 ${disk_name} 1>/dev/null
+    mount -t ext4 ${disk_name} /mnt 1>/dev/null
+    [ $? -ne 0 ] && return 1
+
+    info=`mount | grep -w "^${disk_name}"`
+    [ "${info}" = x"" ] && return 1
+    return 0
+}
+
+# Configure the FIO tool configuration file.
+# IN : N/A
+# OUT: N/A
+function fio_config()
+{
+    echo "$FIO_PARAMETER_LIST" > ${FIO_CONFG}
+    for dev in "${ALL_DISK_PART_NAME[@]}"
+    do
+        echo "[job1]" >> ${FIO_CONFG}
+        echo "filename=$dev" >> ${FIO_CONFG}
+    done
+}
+
+# FIO read and write disk
+# IN : N/A
+# OUT: N/A
+function IO_read_write()
+{
+    for bs in "${FIO_BS[@]}"
+    do
+        sed -i "{s/^bs=.*/bs=${bs}/g;}" fio.conf
+        for rw in "${FIO_RW[@]}"
+        do
+            sed -i "{s/^rw=.*/rw=${rw}/g;}" fio.conf
+            ${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf
+            if [ $? -ne 0 ]
+            then
+                MESSAGE="FAIL\tFIO tool in \"${bs}\" disk operation, error."
+                return 1
+            fi
+        done
+    done
+    return 0
+}
+
+# Open and close operation on PHY port.
+# IN : $1 - Open or close phy.
+#      $2 - PHY port location.
+# OUT: N/A
+function phy_ops()
+{
+    case "$1" in
+        "close")
+            case "$2" in
+                [0-7])
+                    ${DEVMEM} ${PHY_ADDR_VALUE[$2]} w 0x6
+                    ;;
+                "all")
+                    for phy in  ${PHY_ADDR_VALUE[@]}
+                    do
+                        ${DEVMEM} ${phy} w 0x6
+                    done
+                    ;;
+            esac
+        ;;
+        "open")
+            case "$2" in
+                [0-7])
+                ${DEVMEM} ${PHY_ADDR_VALUE[$2]} w 0x7
+                ;;
+            "all")
+                for phy in  ${PHY_ADDR_VALUE[@]}
+                do
+                    ${DEVMEM} ${phy} w 0x7
+                done
+                ;;
+            esac
+        ;;
+    esac
+}
+
+# Reset file status.
+# IN : $1 - Reset file value.
+#      $2 - reset file.
+# OUT: N/A
+function change_sas_phy_file()
+{
+    for dir in `ls ${PHY_FILE_PATH}`
+    do
+        str=`cat ${PHY_FILE_PATH}/${dir}/target_port_protocols`
+        num=`echo "${dir}" | awk -F":" '{print $NF}'`
+
+        if [ x"${str}" != x"none" ] && [ ${num} -le ${EFFECTIVE_PHY_NUM} ]
+        then
+            echo $1 > ${PHY_FILE_PATH}/${dir}/$2
+            sleep 2
+        fi
+    done
+}
+
