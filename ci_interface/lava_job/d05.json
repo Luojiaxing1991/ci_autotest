@@ -10,7 +10,7 @@
                 "kernel.tree": "plinth",
                 "kernel.version": "release-plinth-4.15.0+_+300e39166a78fb18af5231a5631bfbc500db55ee",
                 "platform.fastboot": "false",
-                "test.plan": "weekly-testing"
+                "test.plan": "sas roce pcie hns debug test"
             },
             "parameters": {
                 "bootloadertype": "ipxe",
@@ -33,11 +33,11 @@
             "parameters": {
                 "testdef_repos": [
                     {
-                        "git-repo": "https://github.com/Luojiaxing1991/luo_driver_ci_testcase.git",
+                        "git-repo": "https://github.com/Luojiaxing1991/ci_autotest.git",
 			"parameters":{
 			     "Maintainer": "Luojiaxing"
 			},
-			"testdef": "ci_testcase/sas_autotest/sas_autotest.yaml"
+			"testdef": "sas_autotest/sas_autotest.yaml"
 
 
                     }
@@ -45,25 +45,6 @@
                 "timeout": 172800
             }
         },
-
-        {
-            "command": "lava_test_shell",
-            "parameters": {
-                "testdef_repos": [
-                    {
-                        "git-repo": "https://github.com/Luojiaxing1991/luo_driver_ci_testcase.git",
-			"parameters":{
-			     "Maintainer": "Luojiaxing"
-			},
-			"testdef": "ci_testcase/xge_autotest/xge_autotest.yaml"
-
-
-                    }
-                ],
-                "timeout": 172800
-            }
-        },
-
 
         {
             "command": "submit_results",
@@ -74,7 +55,7 @@
         }
     ],
     "device_type": "hip07-d05",
-    "job_name": "plinth-release-plinth-4.15.0+_+300e39166a78fb18af5231a5631bfbc500db55ee-arm64-defconfig+plinth-config-hip07-d05.dtb_SAS_Test",
+    "job_name": "SAS,PCIE,ROCE,HNS Test",
     "logging_level": "DEBUG",
     "priority": "high",
     "timeout": 172800

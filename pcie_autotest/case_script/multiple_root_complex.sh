@@ -34,6 +34,7 @@ printf "%s[%3d]%5s: Load [${g_pfnCur}] call by [${g_flParent}]\n" "${FUNCNAME[0]
 ####################################################################################
 MultipleRootComplex()
 {
+    echo "begin to run MultipleRootComplex()"
     ArgInCmdLine "acpi=force"
     if [ $? -ne 0 ]; then
         return 1
