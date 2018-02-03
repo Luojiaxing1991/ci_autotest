@@ -48,7 +48,7 @@ function get_all_disk_part()
     echo "Begin to get_all_disk_part"
 
     maindisk=`mount | grep -w 'on /'`
-    maindisk=`echo ${miandisk%% *}`
+    maindisk=`echo ${maindisk%% *}`
 
     echo "The system disk is "${maindisk}
 
@@ -63,8 +63,15 @@ function get_all_disk_part()
         done
 	if [ $name != $maindisk ]
 	then
-        	ALL_DISK_PART_NAME[${#ALL_DISK_PART_NAME[*]}]=$name
-		echo $name
+		tmp=`fdisk -l | grep $name`
+		tmp=`echo $tmp | grep "Linux filesystem"`
+		if [ x"${tmp}" == x"" ]
+		then
+			echo $name" type is not Linux filesystem,skip."
+		else
+        		ALL_DISK_PART_NAME[${#ALL_DISK_PART_NAME[*]}]=$name
+			echo $name
+		fi
         fi
     done
 }

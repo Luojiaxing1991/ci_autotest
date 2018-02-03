@@ -17,7 +17,7 @@ SAS_TOP_DIR=$(cd "`dirname $0`" ; pwd)
 function main()
 {
     echo "Begin to Run SAS Test!"
-    cat ${TEST_CASE_DB_FILE} | while read line
+    cat ${SAS_TOP_DIR}/${TEST_CASE_DB_FILE} | while read line
     do
         exec_script=`echo "${line}" | awk -F '\t' '{print $5}'`
         TEST_CASE_FUNCTION_NAME=`echo "${line}" | awk -F '\t' '{print $6}'`
@@ -42,7 +42,7 @@ function main()
 		fi
             fi
         fi
-        echo -e "${line}\t${MESSAGE}" >> ${OUTPUT_TEST_DB_FILE}
+        echo -e "${line}\t${MESSAGE}" >> ${SAS_TOP_DIR}/${OUTPUT_TEST_DB_FILE}
         MESSAGE=""
     done
     echo "Finish to Run SAS Test"
