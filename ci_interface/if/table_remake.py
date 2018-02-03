@@ -5,13 +5,6 @@ import io
 import os
 import sys
 
-def deal_line(file_name):
-    with open(filename,'r') as f:
-        for line in f:
-            str=line.replace('\t','  ').rstrip()
-            str = str + "\n"
-
-
 #this python is to remake the table file which in same dir
 #if there is no table fiel or more than one table file ,return false
 
