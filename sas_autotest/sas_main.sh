@@ -36,7 +36,7 @@ function main()
 		if [ x"$TEST_CASE_FUNCTION_SWITCH" == x"on" ]
 		then
 			echo "Begin to run script: "${exec_script}
-                	#source case_script/${exec_script}
+                	source case_script/${exec_script}
 		else
 			echo "Skip the Scirpt: "${exec_script}
 		fi

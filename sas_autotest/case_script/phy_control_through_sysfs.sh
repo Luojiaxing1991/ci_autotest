@@ -10,15 +10,29 @@ function set_rate_link()
         type=`cat ${PHY_FILE_PATH}/${dir}/target_port_protocols`
         if [ x"$type" != x"none" ]
         then
-            echo $MINIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/minimum_linkrate
-            echo $MAXIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/maximum_linkrate
-            [ $? -ne 0 ] && MESSAGE="FAIL\tFailed to set the maximum rate of \"${dir}\" greater than the minimum rate." && return 1
+            #this function will destroy the setting value of disk speed
+	    #so may be we should save the value first,then recove it after test
+            tmp_min=`cat ${PHY_FILE_PATH}/${dir}/minimum_linkrate | awk "{printf $0}"`
+	    echo $tmp_min
+            tmp_max=`cat ${PHY_FILE_PATH}/${dir}/maximum_linkrate | awk "{printf $0}"`
+	    echo $tmp_max
+            #echo $MINIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/minimum_linkrate
+	    cat ${PHY_FILE_PATH}/${dir}/minimum_linkrate
 
-            echo $MINIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/maximum_linkrate
-            [ $? -ne 0 ] && MESSAGE="FAIL\tFailed to set the \"${dir}\" maximum rate equal to the minimum rate." && return 1
+            #echo $MAXIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/maximum_linkrate
+            #[ $? -ne 0 ] && MESSAGE="FAIL\tFailed to set the maximum rate of \"${dir}\" greater than the minimum rate." && return 1
 
-            echo $MAXIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/minimum_linkrate
-            [ $? -eq 0 ] && MESSAGE="FAIL\tFailed to set the \"${dir}\" maximum rate less than the minimum rate." && return 1
+            #echo $MINIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/maximum_linkrate
+            #[ $? -ne 0 ] && MESSAGE="FAIL\tFailed to set the \"${dir}\" maximum rate equal to the minimum rate." && return 1
+
+            #echo $MAXIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/minimum_linkrate
+            #[ $? -eq 0 ] && MESSAGE="FAIL\tFailed to set the \"${dir}\" maximum rate less than the minimum rate." && return 1
+
+            #echo $tmp_min > ${PHY_FILE_PATH}/${dir}/minimum_linkrate
+	    cat ${PHY_FILE_PATH}/${dir}/minimum_linkrate
+            cat ${PHY_FILE_PATH}/${dir}/maximum_linkrate
+
+
         fi
         sleep 5
     done
@@ -57,7 +71,8 @@ function loop_rate_set_up()
 function main()
 {
     # call the implementation of the automation use cases
-    test_case_function_run
+    #test_case_function_run
+    rate_set_up
 }
 
 main
