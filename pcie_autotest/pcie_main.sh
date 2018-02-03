@@ -4,6 +4,8 @@ g_pfn="${BASH_SOURCE[0]}"
 g_fln=$(basename "${g_pfn}")
 g_drPro=$(dirname "${g_pfn}")
 
+g_drPro=$(cd "`dirname $0`" ; pwd)
+
 . ${g_drPro}/../config/common_config
 . ${g_drPro}/../config/common_lib
 

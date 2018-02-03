@@ -82,6 +82,7 @@ ArgInCmdLine()
     grep -q "\(^\| \)${sKey1}\( \|\$\)" /proc/cmdline
     if [ $? -ne 0 ]; then
         g_sErrCur="not have ${sKey1} in cmdline"
+        echo ${g_sErrCur}
         OutLog 1 "" "${g_sErrCur}." "${g_flLog}" false
         return 1
     fi
@@ -104,6 +105,7 @@ LspcikKeysiBA()
     lspci -k |grep ${argic} -B${nB} -A${nA} -q "${sKey1}"
     if [ $? -ne 0 ]; then
         g_sErrCur="not have ${sKey1}"
+        echo ${g_sErrCur}
         echo "lspci cmd is not success in LspcikKeysiBA "${sKey1} 
         printf "%s[%3d]%5s: ${g_sErrCur}\n" "${FUNCNAME[0]}" ${LINENO} "Error" >> "${g_flLog}"
         return 1
