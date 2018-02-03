@@ -18,7 +18,7 @@ pwd = os.path.split(os.path.realpath(__file__))[0]
 os.chdir(pwd)
 
 #get the CI test case repo
-gitrepo = 'https://github.com/hisilicon/plinth-autotest.git'
+gitrepo = 'https://github.com/Luojiaxing1991/ci_autotest.git'
 
 print(gitrepo.split("/")[-1][:-4])
 
@@ -52,14 +52,14 @@ print('Repo is updated,Keep running!')
 #we get back to root to delete the old repo and download the new one
 os.chdir(pwd)
 
-os.system('cp -rf %s/%s/ci_interface/if/gitclone.sh gitclone.sh'%(pwd,RepoDir))
+#os.system('cp -rf %s/%s/ci_interface/if/gitclone.sh gitclone.sh'%(pwd,RepoDir))
 
 os.system('rm -rf  %s'%RepoDir)
 
 #git clone
-os.system('expect gitclone.sh %s'%gitrepo)
-
-os.system('rm -fr gitclone.sh')
+#os.system('expect gitclone.sh %s'%gitrepo)
+os.system('git clone %s'%gitrepo)
+#os.system('rm -fr gitclone.sh')
 
 #cd to the git/ci_testcase 
 os.chdir(RepoDir)
