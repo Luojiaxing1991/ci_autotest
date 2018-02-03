@@ -6,7 +6,7 @@ R.SAS.F007.A	ST.FUNC.005	Support 12Gbit/s physical data rate	SAS盘，直连，速率协
 R.SAS.F006.A	ST.FUNC.006	6Gbit/s physical data rate	SATA盘，直连，速率协商测试(1.5Gbit/s, 3Gbit/s, 6Gbit/s)	physical_data_rate.sh	disk_negotiated_link_rate_query	off
 R.SAS.F017.A	ST.FUNC.007	PHY control through sysfs	SAS盘，直连，支持速率设置	phy_control_through_sysfs.sh	rate_set_up	on
 R.SAS.F017.A	ST.FUNC.008	PHY control through sysfs	SATA盘，直连，支持速率设置	phy_control_through_sysfs.sh	rate_set_up	off
-R.SAS.F017.A	ST.FUNC.009	PHY control through sysfs	SAS/SATA盘，直连，支持重复速率设置	phy_control_through_sysfs.sh	loop_rate_set_up	on
+R.SAS.F017.A	ST.FUNC.009	PHY control through sysfs	SAS/SATA盘，直连，支持重复速率设置	phy_control_through_sysfs.sh	loop_rate_set_up	off
 R.SAS.N005.A	ST.FUNC.014	 No cable unplug OOPs	SAS盘，直连，长时间速率数据传输	no_cable_unplug.sh	loog_time_IO_read_write	off
 R.SAS.N005.A	ST.FUNC.015	 No cable unplug OOPs	SAS盘，直连，反复读写磁盘	no_cable_unplug.sh	repeat_IO_read_write	off
 R.SAS.N005.A	ST.FUNC.016	 No cable unplug OOPs	SAS盘，直连，数据一致性测试	no_cable_unplug.sh	disk_file_data_consistency_test	off
