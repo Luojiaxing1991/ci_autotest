@@ -38,8 +38,10 @@ print("One table file exist! continue: ")
 f =open('%s/%s'%(pwd,target),'r')
 linelist=[]
 for line in f:
-    str=line.replace('\t','  ').rstrip()
+    str=line.replace('\t','@!').rstrip()
     str=str + " "
+    str=str.replace('on@!','off@!').rstrip()
+    str=str.replace('@!','\t').rstrip()
     str=str + '\n'
     linelist.append(str)
 
@@ -57,7 +59,7 @@ f.close()
 f1.close()
 
 #change the on to off
-os.system('sed -i "s/ on / off /g" test')
+#os.system('sed -i "s/ on / off /g" test')
 
 #update the table file
 os.system('cp test %s -f'%target)
