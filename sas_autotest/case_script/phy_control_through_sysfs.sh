@@ -31,7 +31,7 @@ function set_rate_link()
 
 	    echo "Begin to recove the origin value of max and min rate"
             echo $tmp_min > ${PHY_FILE_PATH}/${dir}/minimum_linkrate
-	    echo $tmp_max > ${PHY_FILE_PATH}/${dir}/minimum_linkrate
+	    echo $tmp_max > ${PHY_FILE_PATH}/${dir}/maximum_linkrate
 	    cat ${PHY_FILE_PATH}/${dir}/minimum_linkrate
             cat ${PHY_FILE_PATH}/${dir}/maximum_linkrate
 
