@@ -17,6 +17,7 @@ SAS_TOP_DIR=$(cd "`dirname $0`" ; pwd)
 function main()
 {
     cat ${TEST_CASE_DB_FILE} | while read line
+    echo "Begin to Run SAS Test!"
     do
         exec_script=`echo "${line}" | awk -F '\t' '{print $5}'`
         TEST_CASE_FUNCTION_NAME=`echo "${line}" | awk -F '\t' '{print $6}'`
@@ -30,12 +31,14 @@ function main()
             then
                 MESSAGE="FILE\tcase_script/${exec_script} execution script does not exist, please check."
             else
+		echo "Begin to run script: "${exec_script}
                 source case_script/${exec_script}
             fi
         fi
         echo -e "${line}\t${MESSAGE}" >> ${OUTPUT_TEST_DB_FILE}
         MESSAGE=""
     done
+    echo "Finish to Run SAS Test"
 }
 
 #Output log file header
