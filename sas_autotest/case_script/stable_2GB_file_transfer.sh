@@ -6,7 +6,6 @@
 function iozne_file_transfer_stability_test()
 {
     Test_Case_Title="iozne_file_transfer_stability_test"
-    Test_Case_ID="ST.FUNC.049/ST.FUNC.050"
 
     for disk_name in "${ALL_DISK_PART_NAME[@]}"
     do
@@ -14,7 +13,7 @@ function iozne_file_transfer_stability_test()
         if [ $? -ne 0 ]
         then
             umount ${disk_name}
-            writeFail "Mount "${disk_name}" disk failure."
+            MESSAGE="FAIL\tMount "${disk_name}" disk failure."
             return 1
         fi
 
@@ -23,28 +22,21 @@ function iozne_file_transfer_stability_test()
         if [ ${status} -ne 0 ]
         then
             umount ${disk_name}
-            writeFail "File transfer stability test,IO read and write exception."
+            MESSAGE="FAIL\tFile transfer stability test,IO read and write exception."
             return 1
         fi
 
         umount ${disk_name}
         rm -f ${ERROR_INFO}
     done
-
-    writePass
+    MESSAGE="PASS"
 }
 
 
 function main()
 {
-    JIRA_ID="PV-1612"
-    Test_Item="Stable 2GB file transfer"
-    Designed_Requirement_ID="R.SAS.N007.A"
-
-    # File transfer stability test
-    iozne_file_transfer_stability_test
+    # call the implementation of the automation use cases
+    test_case_function_run
 }
 
 main
-
-

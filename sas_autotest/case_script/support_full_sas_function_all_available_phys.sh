@@ -9,7 +9,6 @@
 function devmem_switch_all_phy()
 {
     Test_Case_Title="devmem_switch_all_phy"
-    Test_Case_ID="ST.FUNC.063/ST.FUNC.064/ST.FUNC.100/ST.FUNC101"
 
     begin_count=`fdisk -l | grep /dev/sd | wc -l`
     for i in `seq ${LOOP_PHY_COUNT}`
@@ -20,23 +19,22 @@ function devmem_switch_all_phy()
         phy_ops close all
         sleep 2
         phydown_count=`dmesg | grep 'phydown' | wc -l`
-        [ ${phydown_count} -eq 0 ] && writeFail "close all proximal phy, did not produce out event." && return 1
+        [ ${phydown_count} -eq 0 ] && MESSAGE="FAIL\tclose all proximal phy, did not produce out event." && return 1
 
         phy_ops open all
         sleep 2
         phyup_count=`dmesg | grep 'phyup' | wc -l`
-        [ ${phyup_count} -eq 0 ] && writeFail "open all proximal phy, did not produce in event." && return 1
+        [ ${phyup_count} -eq 0 ] && MESSAGE="FAIL\topen all proximal phy, did not produce in event." && return 1
     done
 
     sleep 5
     end_count=`fdisk -l | grep /dev/sd | wc -l`
     if [ ${begin_count} -ne ${end_count} ]
     then
-        writeFail "loop all proximal phy switches, the number of disks is missing."
+        MESSAGE="FAIL\tloop all proximal phy switches, the number of disks is missing."
         return 1
     fi
-
-    writePass
+    MESSAGE="PASS"
 }
 
 # loop hard_reset distal phy.
@@ -45,7 +43,6 @@ function devmem_switch_all_phy()
 function cycle_hard_reset_phy()
 {
     Test_Case_Title="cycle_hard_reset_phy"
-    Test_Case_ID="ST.FUNC.092/ST.FUNC.093/ST.FUNC.102/ST.FUNC.103"
 
     beg_count=`fdisk -l | grep /dev/sd | wc -l`
     for i in `seq ${RESET_PHY_COUNT}`
@@ -56,11 +53,10 @@ function cycle_hard_reset_phy()
 
     if [ ${beg_count} -ne ${end_count} ]
     then
-        writeFail "loop hard_reset distal phy, the number of disks is missing."
+        MESSAGE="FAIL\tloop hard_reset distal phy, the number of disks is missing."
         return 1
     fi
-
-    writePass
+    MESSAGE="PASS"
 }
 
 # loop link_reset distal phy.
@@ -69,7 +65,6 @@ function cycle_hard_reset_phy()
 function cycle_link_reset_phy()
 {
     Test_Case_Title="cycle_link_reset_phy"
-    Test_Case_ID="ST.FUNC.094/ST.FUNC.095/ST.FUNC.104/ST.FUNC.105"
 
     beg_count=`fdisk -l | grep /dev/sd | wc -l`
     for i in `seq ${RESET_PHY_COUNT}`
@@ -80,11 +75,10 @@ function cycle_link_reset_phy()
 
     if [ ${beg_count} -ne ${end_count} ]
     then
-        writeFail "loop link_reset distal phy, the number of disks is missing."
+        MESSAGE="FAIL\tloop link_reset distal phy, the number of disks is missing."
         return 1
     fi
-
-    writePass
+    MESSAGE="PASS"
 }
 
 # recycle enable distal phy.
@@ -93,7 +87,6 @@ function cycle_link_reset_phy()
 function cycle_enable_phy()
 {
     Test_Case_Title="cycle_link_reset_phy"
-    Test_Case_ID="ST.FUNC.0946/ST.FUNC.097/ST.FUNC.098/ST.FUNC.099"
 
     beg_count=`fdisk -l | grep /dev/sd | wc -l`
     for i in `seq ${RESET_PHY_COUNT}`
@@ -106,11 +99,10 @@ function cycle_enable_phy()
 
     if [ ${beg_count} -ne ${end_count} ]
     then
-        writeFail "recycle enable distal phy, the number of disks is missing."
+        MESSAGE="FAIL\trecycle enable distal phy, the number of disks is missing."
         return 1
     fi
-
-    writePass
+    MESSAGE="PASS"
 }
 
 # disk running business, switch single proximal phy.
@@ -119,7 +111,6 @@ function cycle_enable_phy()
 function devmen_single_switch_phy()
 {
     Test_Case_Title="devmen_single_phy_switch"
-    Test_Case_ID="ST.FUNC.106/ST.FUNC.115/ST.FUNC.124/ST.FUNC.135"
 
     sed -i "{s/^runtime=.*/runtime=${LOOP_PHY_TIME}/g;}" fio.conf
     ${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
@@ -144,11 +135,10 @@ function devmen_single_switch_phy()
     end_count=`fdisk -l | grep /dev/sd | wc -l`
     if [ ${beg_count} -ne ${end_count} ]
     then
-        writeFail "disk running business, switch single proximal phy, the number of disks is missing."
+        MESSAGE="FAIL\tdisk running business, switch single proximal phy, the number of disks is missing."
         return 1
     fi
-
-    writePass
+    MESSAGE="PASS"
 }
 
 # disk running business, switch multiple proximal phy.
@@ -157,7 +147,6 @@ function devmen_single_switch_phy()
 function devmem_multiple_switch_phy()
 {
     Test_Case_Title="devmem_multiple_phy_switch"
-    Test_Case_ID="ST.FUNC.107/ST.FUNC.116/ST.FUNC.125/ST.FUNC.136"
 
     sed -i "{s/^runtime=.*/runtime=${LOOP_PHY_TIME}/g;}" fio.conf
     ${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
@@ -197,10 +186,10 @@ function devmem_multiple_switch_phy()
     end_count=`fdisk -l | grep /dev/sd | wc -l`
     if [ ${beg_count} -ne ${end_count} ]
     then
-        writeFail "disk running business, switch multiple proximal phy, the number of disks is missing."
+        MESSAGE="FAIL\tdisk running business, switch multiple proximal phy, the number of disks is missing."
         return 1
     fi
-    writePass
+    MESSAGE="PASS"
 }
 
 # when fio runs the business, polls the swtich proximal phy.
@@ -209,7 +198,6 @@ function devmem_multiple_switch_phy()
 function devmem_polling_switch_phy()
 {
     Test_Case_Title="devmem_polling_switch_phy"
-    Test_Case_ID="ST.FUNC.127/ST.FUNC.138"
 
     beg_count=`fdisk -l | grep /dev/sd | wc -l`
     sed -i "{s/^runtime=.*/runtime=${LOOP_PHY_TIME}/g;}" fio.conf
@@ -230,11 +218,10 @@ function devmem_polling_switch_phy()
     end_count=`fdisk -l | grep /dev/sd | wc -l`
     if [ ${beg_count} -ne ${end_count} ]
     then
-        writeFail "disk running business, loop switch proximal phy, the number of disks is missing."
+        MESSAGE="FAIL\tdisk running business, loop switch proximal phy, the number of disks is missing."
         return 1
     fi
-
-    writePass
+    MESSAGE="PASS"
 }
 
 
@@ -244,7 +231,6 @@ function devmem_polling_switch_phy()
 function devmem_all_switch_phy()
 {
     Test_Case_Title="devmem_all_switch_phy"
-    Test_Case_ID="ST.FUNC.126/ST.FUNC.137"
 
     beg_count=`fdisk -l | grep /dev/sd | wc -l`
     sed -i "{s/^runtime=.*/runtime=${LOOP_PHY_TIME}/g;}" fio.conf
@@ -259,58 +245,19 @@ function devmem_all_switch_phy()
     end_count=`fdisk -l | grep /dev/sd | wc -l`
     if [ ${beg_count} -ne ${end_count} ]
     then
-        writeFail "disk running business, loop off all proximal phy, the number of disks is missing."
+        MESSAGE="FAIL\tdisk running business, loop off all proximal phy, the number of disks is missing."
         return 1
     fi
-
-    writePass
+    MESSAGE="PASS"
 }
 
 function main()
 {
-    JIRA_ID="PV-1601"
-    Test_Item="support full sas function on all available phys"
-    Designed_Requirement_ID="R.SAS.F010.A"
-
     #Get system disk partition information.
     fio_config
 
-    # cycle all proximal phy switchec.
-    devmem_switch_all_phy
-
-    #loop hard_reset distal phy.
-    cycle_hard_reset_phy
-
-    #loop link_reset distal phy.
-    cycle_link_reset_phy
-
-    # recycle enable distal phy.
-    cycle_enable_phy
-
-    # disk running business, switch single proximal phy.
-    devmen_single_switch_phy
-
-    # disk running business, switch single proximal phy.
-    devmem_multiple_switch_phy
-
-    # when fio runs the business, polls the swtich proximal phy.
-    [ judgment_network_env -eq 0  ] && devmem_polling_switch_phy
-
-    # switch all near-end phys while running the business.
-    [ judgment_network_env -eq 0 ] && devmem_all_switch_phy
-
-    # judge directly connected or connected expander.
-    judgment_network_env
-    return_num=$?
-    if [ ${return_num} -eq 0  ]
-    then
-        # when fio runs the business, polls the swtich proximal phy.
-        devmem_polling_switch_phy
-
-        # switch all near-end phys while running the business.
-        devmem_all_switch_phy
-    fi
+    # call the implementation of the automation use cases
+    test_case_function_run
 }
 
 main
-

@@ -7,22 +7,17 @@
 function ncq_query()
 {
     Test_Case_Title="ncq_query"
-    Test_Case_ID="ST.FUNC.191"
 
     info=`dmesg | grep 'NCQ'`
-    [ x"${info}" = x"" ] && writeFail "Query keyword \"NCQ\" failed." && return 1
+    [ x"${info}" = x"" ] && MESSAGE="FAIL\tQuery keyword \"NCQ\" failed." && return 1
 
-    writePass
+    MESSAGE="PASS"
 }
 
 function main()
 {
-    JIRA_ID="PV-1607"
-    Test_Item="Support SATA NCQ"
-    Designed_Requirement_ID="R.SAS.F012.A"
-
-    ncq_query
+    # call the implementation of the automation use cases
+    test_case_function_run
 }
 
 main
-

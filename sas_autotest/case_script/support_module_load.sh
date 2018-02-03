@@ -7,7 +7,6 @@
 function module_load_uninstall()
 {
     Test_Case_Title="module_load_uninstall"
-    Test_Case_ID="ST.FUNC.200/ST.FUNC.201"
 
     for ko in `echo ${MODULE_KO_FILE} | sed 's/|/ /g'`
     do
@@ -17,21 +16,21 @@ function module_load_uninstall()
 
         if [ ${return_num} -ne 0 -o x"${info}" == x"" ]
         then
-            writeFail "insmod load ${ko} fail."
+            MESSAGE="FAIL\tinsmod load ${ko} fail."
             return 1
         fi
     done
 
     #Get system disk partition information.
     get_all_disk_part
-    [ ${#ALL_DISK_PART_NAME[@]} -eq 0 ] && writeFail "load ko file, identify the disk failed" && return 1
+    [ ${#ALL_DISK_PART_NAME[@]} -eq 0 ] && MESSAGE="FAIL\tload ko file, identify the disk failed" && return 1
 
     #Mount the disk partition to the local.
     for dev in "${ALL_DISK_PART_NAME[@]}"
     do
         mount_disk ${dev}
         return_num=$?
-        [ ${return_num} -ne 0 ] && writeFail "failed to mount \"${dev}\"" && return 1
+        [ ${return_num} -ne 0 ] && MESSAGE="FAIL\tfailed to mount \"${dev}\"" && return 1
         umount ${dev}
     done
 
@@ -43,21 +42,17 @@ function module_load_uninstall()
 
         if [ ${return_num} -ne 0 -o x"${info}" == x"" ]
         then
-            writeFail "rmmod uninstall  ${ko} fail."
+            MESSAGE="FAIL\trmmod uninstall  ${ko} fail."
             return 1
         fi
     done
-
-    writePass
+    MESSAGE="PASS"
 }
 
 function main()
 {
-    JIRA_ID="N/A"
-    Test_Item="Support module load"
-    Designed_Requirement_ID="N/A"
-
-    module_load_uninstall
+    # call the implementation of the automation use cases
+    test_case_function_run
 }
 
 main

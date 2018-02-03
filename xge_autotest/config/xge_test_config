@@ -1,25 +1,34 @@
 #!/bin/bash
 #
 #
-
+#Automated data files exported in test cases.
+TEST_CASE_DB_FILE="data/hns_test_case.table"
+#
+OUTPUT_TEST_DB_FILE="data/report.csv"
+#
+TEST_CASE_FUNCTION_SWITCH=""
+#
+TEST_CASE_FUNCTION_NAME=""
+#
+MESSAGE=""
 
 # Test case mapping table
 declare -A case_map
 case_map=(
-["iperf_ge_port"]="on" 
+["iperf_ge_port"]="on"
 ["iperf_xge_port"]="off"
-
 )
 
 #Initial server IP
 declare -A initial_ip
-initial_ip==(
-["192.168.1.250"]="192.168.1.210"
-["192.168.1.210"]="192.168.1.250"
+initial_ip=(
+["192.168.1.181"]="192.168.1.228"
+["192.168.1.228"]="192.168.1.181"
 )
 
+
 #Number of threads
-thread=(1 5 10) 
+thread=(1 5 10)
 
 #iperf run time
 time=20
@@ -29,23 +38,3 @@ COMMON_TOOL_PATH="common_tool"
 
 # Test case code directory path
 TEST_CASE_PATH="xge_autotest/case_script"
-
-# Start the machine environment IP
-#BACK_IP=192.168.1.200
-
-#Network IP config
-local_eth1_ip="192.168.10.10"
-local_eth2_ip="192.168.20.10"
-local_eth3_ip="192.168.30.10"
-
-remote_eth1_ip="192.168.10.20"
-remote_eth2_ip="192.168.20.20"
-remote_eth3_ip="192.168.30.20"
-
-VLAN_local_eth1_ip="192.168.11.10"
-VLAN_local_eth2_ip="192.168.12.10"
-VLAN_local_eth3_ip="192.168.13.10"
-
-VLAN_remote_eth1_ip="192.168.11.20"
-VLAN_remote_eth2_ip="192.168.12.20"
-VLAN_remote_eth3_ip="192.168.13.20"
