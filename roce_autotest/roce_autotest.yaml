@@ -16,4 +16,4 @@ parse:
   pattern: '(?P<test_case_id>[ /a-zA-Z0-9]+): (?P<result>[A-Z]+)'
 run:
   steps:
-  - bash ./ci_testcase/roce_autotest/roce_main.sh
+  - bash ./roce_autotest/roce_main.sh
