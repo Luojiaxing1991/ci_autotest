@@ -1,4 +1,4 @@
-R.SAS.F001.A	ST.FUNC.001	The driver must support SSP	SAS≈Ã£¨÷±¡¨£¨ªÏ∫œ√¸¡Ó≤‚ ‘	driver_must_support.sh	driver_supports	off
+R.SAS.F001.A	ST.FUNC.001	The driver must support SSP	SAS≈Ã£¨÷±¡¨£¨ªÏ∫œ√¸¡Ó≤‚ ‘	driver_must_support.sh	driver_supports	on
 R.SAS.F002.A	ST.FUNC.002	The driver must support SMP	SAS≈Ã£¨expander£¨ªÏ∫œ√¸¡Ó≤‚ ‘	driver_must_support.sh	driver_supports	off
 R.SAS.F003.A	ST.FUNC.003	The driver must support STP	SATA≈Ã£¨expander£¨ªÏ∫œ√¸¡Ó≤‚ ‘	driver_must_support.sh	driver_supports	off
 R.SAS.F004.A	ST.FUNC.004	Support Max Devices	SAS≈Ã£¨SATA≈Ã£¨expander£¨¬˙‘ÿ∑˚∫œ≤‚ ‘	support_max_devices.sh	support_max_devices	off

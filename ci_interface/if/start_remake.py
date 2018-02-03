@@ -11,6 +11,8 @@ if targetdir == '':
     print("target path is not provide!exit")
     sys.exit(0)
 
+os.chdir(pwd)
+
 #cp table_remake.py to target dir
 os.system('cp table_remake.py %s'%targetdir)
 
