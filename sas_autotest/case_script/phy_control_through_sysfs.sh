@@ -60,9 +60,10 @@ function rate_set_up()
 function loop_rate_set_up()
 {
     Test_Case_Title="loop_rate_set_up"
-
+    echo "Begin to run loop_rate_set_up with "$num" cycle."
     for num in ${LOOP_RATE_SET_UP_NUMBER}
     do
+	echo "Start the "$num" cycle to set rate!"
         set_rate_link
         [ $? -ne 0 ] && MESSAGE="FAIL\tThe loop setting PHY rate value failed" && return 1
         sleep 2
@@ -73,8 +74,7 @@ function loop_rate_set_up()
 function main()
 {
     # call the implementation of the automation use cases
-    #test_case_function_run
-    rate_set_up
+    test_case_function_run
 }
 
 main
