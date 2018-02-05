@@ -20,6 +20,7 @@ case_map=(
 ["SupportXGE"]="on"
 ["Load_Unload_kernel_driver"]="off"
 ["CM_connect"]="off"
+["Completion_Event"]="off"
 )
 # code case index
 START_INDEX=0
