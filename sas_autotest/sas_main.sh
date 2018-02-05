@@ -33,13 +33,13 @@ function main()
             then
                 MESSAGE="FILE\tcase_script/${exec_script} execution script does not exist, please check."
             else
-		if [ x"$TEST_CASE_FUNCTION_SWITCH" == x"on" ]
-		then
-			echo "Begin to run script: "${exec_script}
+		#if [ x"$TEST_CASE_FUNCTION_SWITCH" == x"on" ]
+		#then
+		#	echo "Begin to run script: "${exec_script}
                 	source ${SAS_TOP_DIR}/case_script/${exec_script}
-		else
-			echo "Skip the Scirpt: "${exec_script}
-		fi
+		#else
+		#	echo "Skip the Scirpt: "${exec_script}
+		#fi
             fi
         fi
         echo -e "${line}\t${MESSAGE}" >> ${SAS_TOP_DIR}/${OUTPUT_TEST_DB_FILE}
