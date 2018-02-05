@@ -43,11 +43,11 @@ function set_rate_link()
             echo $MAXIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/maximum_linkrate
             [ $? -ne 0 ] && MESSAGE="FAIL\tFailed to set the maximum rate of \"${dir}\" greater than the minimum rate." && recover_linkrate "${tmp_min}" "${tmp_max}" "${dir}" && return 1
 
-            #echo $MINIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/maximum_linkrate
-            #[ $? -ne 0 ] && MESSAGE="FAIL\tFailed to set the \"${dir}\" maximum rate equal to the minimum rate." && recover_linkrate "${tmp_min}" "${tmp_max}" "${dir}" && return 1
+            echo $MINIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/maximum_linkrate
+            [ $? -ne 0 ] && MESSAGE="FAIL\tFailed to set the \"${dir}\" maximum rate equal to the minimum rate." && recover_linkrate "${tmp_min}" "${tmp_max}" "${dir}" && return 1
 
-            #echo $MAXIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/minimum_linkrate
-            #[ $? -eq 0 ] && MESSAGE="FAIL\tFailed to set the \"${dir}\" maximum rate less than the minimum rate." && recover_linkrate $tmp_min $tmp_max $dir && return 1
+            echo $MAXIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/minimum_linkrate
+            [ $? -eq 0 ] && MESSAGE="FAIL\tFailed to set the \"${dir}\" maximum rate less than the minimum rate." && recover_linkrate "${tmp_min}" "${tmp_max}" "${dir}" && return 1
 
             recover_linkrate "${tmp_min}" "${tmp_max}" "${dir}"
 	    #echo "Begin to recove the origin value of max and min rate"
