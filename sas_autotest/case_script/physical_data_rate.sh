@@ -6,9 +6,13 @@
 function disk_negotiated_link_rate_query()
 {
     Test_Case_Title="disk_negotiated_link_rate_query"
-
+    
+    echo "Begin to run disk_negotiated_link_rate_query function"
+    
     for dir in `ls ${PHY_FILE_PATH}`
     do
+	echo "Check the disk rate config file in "${dir}
+
         type=`cat ${PHY_FILE_PATH}/${dir}/target_port_protocols`
         [ x"${type}" = x"none" ] && continue
 
