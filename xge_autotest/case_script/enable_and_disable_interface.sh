@@ -14,22 +14,24 @@ function enable_and_disable_interface()
     echo "Begin to Run "${Test_Case_Title}
     ifconfig $local_tp2 up; ifconfig $local_tp2 192.168.10.10
     ssh root@$BACK_IP "ifconfig ${remote_tp2} up;ifconfig ${remote_tp2} 192.168.10.20; sleep 5"
-    ping 192.168.10.20 -c 5 > ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt &
+    ping 192.168.10.20 -c 5 > ${XGE_TOP_DIR}/data/log/enable_and_disable_interface.txt &
     sleep 10
-    cat ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt | grep "received, 0% packet loss" >/dev/null
+    cat ${XGE_TOP_DIR}/data/log/enable_and_disable_interface.txt | grep "received, 0% packet loss" >/dev/null
     if [ $? -eq 0 ];then
        enableok=1
     fi
     ssh root@$BACK_IP "ifconfig $remote_tp2 down"
-    ping 192.168.10.20 -c 5 > ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt &
+    ping 192.168.10.20 -c 5 > ${XGE_TOP_DIR}/data/log/enable_and_disable_interface.txt &
     sleep 10
-    cat ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt | grep "received, 0% packet loss" >/dev/null
+    cat ${XGE_TOP_DIR}/data/log/enable_and_disable_interface.txt | grep "received, 0% packet loss" >/dev/null
     if [ $? -eq 1 ];then
        disableok=1
     fi
     if [ $enableok -eq 1 -a $disableok -eq 1 ];then
+	echo "EN/DIS interface is Success!"
         MESSAGE="PASS"
     else
+	echo "En/DIS interface is Fail"
         MESSAGE="FAIL\tNet export up/down , Ping packet failure"
     fi
 }

@@ -59,21 +59,21 @@ function init_net_export()
 	 fi
 
 	 #we update the TP/FIBRE info intolocal_tp/fibre_list
-         ethtool $eth_map[${i}] | grep "TP"
+         ethtool ${eth_map[${i}]} | grep "TP"
          if [ $? = 0 ];then
-            local_tp_list=(${local_tp_list[*]} $eth_map[${i}])
+            local_tp_list=(${local_tp_list[*]} ${eth_map[${i}]})
          else
-            local_fibre_list=(${local_fibre_list[*]} $eth_map[${i}])
+            local_fibre_list=(${local_fibre_list[*]} ${eth_map[${i}]})
          fi
     done
 
-    local_tp1=${local_tp_list[0]}
+    local_tp1=${local_tp_list[1]}
     echo "The First TP port is "${local_tp1}
-    local_tp2=${local_tp_list[1]}
+    local_tp2=${local_tp_list[0]}
     echo "The second TP port is "${local_tp2}
-    local_fibre1=${local_fibre_list[0]}
+    local_fibre1=${local_fibre_list[1]}
     echo "The First FIBRE port is "${local_fibre1}
-    local_fibre2=${local_fibre_list[1]}
+    local_fibre2=${local_fibre_list[0]}
     echo "The second FIBRE port is"${local_fibre2}
 
     #remote_netport_list=$(ssh root@192.168.1.181 ifconfig -a | grep 'eth' | awk '{print $1}')
@@ -111,24 +111,24 @@ function init_net_export()
 	 fi
 
 	 #we update the TP/FIBRE info intolocal_tp/fibre_list
-         tmp=`ssh root@${BACK_IP} 'ethtool $eth_map[${i}] | grep "TP"'`
-         if [ x'${tmp}' == x'' ];then
-            remote_fibre_list=(${remote_fibre_list[*]} $eth_map_r[${i}])
+         tmp=`ssh root@${BACK_IP} 'ethtool '${eth_map_r[${i}]}' | grep "TP"'`
+         if [ "${tmp}"x = ""x ];then
+            remote_fibre_list=(${remote_fibre_list[*]} ${eth_map_r[${i}]})
          else
-            remote_tp_list=(${remote_tp_list[*]} $eth_map_r[${i}])
+            remote_tp_list=(${remote_tp_list[*]} ${eth_map_r[${i}]})
          fi
     done
 
-    remote_tp1=${remote_tp_list[0]}
-    remote_tp2=${remote_tp_list[1]}
+    remote_tp1=${remote_tp_list[1]}
+    remote_tp2=${remote_tp_list[0]}
     echo "The remote Tp port is as blow: "
     echo ${remote_tp1}
-    echo ${rempte_tp2}
-    remote_fibre1=${remote_fibre_list[0]}
-    remote_fibre2=${remote_fibre_list[1]}
+    echo ${remote_tp2}
+    remote_fibre1=${remote_fibre_list[1]}
+    remote_fibre2=${remote_fibre_list[0]}
     echo "The rempte FIBRE port is as blow:"
     echo ${remote_fibre1}
-    echo ${rempte_fibre2}
+    echo ${remote_fibre2}
 
     echo $remote_tp1 $remote_tp2 $remote_fibre1 $remote_fibre2
     #echo $local_tp_list $local_fibre_list $remote_tp_list $remote_fibre_list

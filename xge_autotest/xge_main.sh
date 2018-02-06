@@ -35,7 +35,7 @@ function main()
             then
                 MESSAGE="case_script/${exec_script} execution script does not exist, please check."
             else
-		if [x"$TEST_CASE_FUNCTION_SWITCH" == x"on" ]
+		if [ x"${TEST_CASE_FUNCTION_SWITCH}" == x"on" ]
 		then 
 			echo "Begin to run script: "${exec_script}
                         source ${XGE_TOP_DIR}/case_script/${exec_script}
