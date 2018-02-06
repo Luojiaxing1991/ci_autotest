@@ -86,6 +86,7 @@ ArgInCmdLine()
         OutLog 1 "" "${g_sErrCur}." "${g_flLog}" false
         return 1
     fi
+    echo "Finish ArgInCmdLine "${sKey1}" is success!"
 }
 
 LspcikKeysiBA()
@@ -110,6 +111,7 @@ LspcikKeysiBA()
         printf "%s[%3d]%5s: ${g_sErrCur}\n" "${FUNCNAME[0]}" ${LINENO} "Error" >> "${g_flLog}"
         return 1
     fi
+    echo "Finish LspcikKeysiBA "${sKey1}" is success!"
 }
 export -f LspcikKeysiBA
 
