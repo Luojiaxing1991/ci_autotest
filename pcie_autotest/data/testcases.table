@@ -1,3 +1,6 @@
-PV-315	R.PCIE.F001.A	ST.FUNC.001	Multiple Root Complex support (Hi161x) V testing	Verify all PCIe ports on D05 boards function	multiple_root_complex.sh	MultipleRootComplex	on
-PV-1432	R.PCIE.F104.A	ST.FUNC.003	PCIe ACPI Root Driver dependency	PCI ACPI Root Driver dependency on D05 boards function	acpi.sh	CmdACPI	off
-PV-1430	R.PCIE.F102.A	ST.FUNC.004	PCIE: UEFI dependency	PCIE: UEFI dependency on D05 boards function			off
+PV-315	R.PCIE.F001.A	ST.FUNC.001	Multiple Root Complex support (Hi161x) V testing	Verify all PCIe ports on D05 boards function	multiple_root_complex.sh	MultipleRootComplex	on	
+PV-1432	R.PCIE.F104.A	ST.FUNC.003	PCIe ACPI Root Driver dependency	PCI ACPI Root Driver dependency on D05 boards function	acpi.sh	CmdACPI	off	
+PV-1432	R.PCIE.F104.A	ST.FUNC.003	Msix I350	PCI ACPI Root Driver dependency on D05 boards function	msix.sh	MSIxI350	on	
+PV-1432	R.PCIE.F104.A	ST.FUNC.003	Driver Equlization Gen	PCI  on unction	driver_backward_compatibility.sh	DriverEqulizationGenP3600	off	
+PV-1432	R.PCIE.F104.A	ST.FUNC.003	Driver Backward Gen	PCIrds function	driver_backward_compatibility.sh	DriverBackwardGen2I350	off	
+

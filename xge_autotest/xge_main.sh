@@ -31,14 +31,14 @@ function main()
         then
             MESSAGE="unimplemented automated test cases."
         else
-            if [ ! -f "case_script/${exec_script}" ]
+            if [ ! -f "${XGE_TOP_DIR}/case_script/${exec_script}" ]
             then
                 MESSAGE="case_script/${exec_script} execution script does not exist, please check."
             else
 		if [x"$TEST_CASE_FUNCTION_SWITCH" == x"on" ]
 		then 
 			echo "Begin to run script: "${exec_script}
-                        #source case_script/${exec_script}
+                        source ${XGE_TOP_DIR}/case_script/${exec_script}
 		else
 			echo "Skip the script: "${exec_script}
 		fi

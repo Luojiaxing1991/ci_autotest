@@ -11,6 +11,7 @@
 function enable_and_disable_interface()
 {
     Test_Case_Title="enable_and_disable_interface"
+    echo "Begin to Run "${Test_Case_Title}
     ifconfig $local_tp2 up; ifconfig $local_tp2 192.168.10.10
     ssh root@$BACK_IP "ifconfig ${remote_tp2} up;ifconfig ${remote_tp2} 192.168.10.20; sleep 5"
     ping 192.168.10.20 -c 5 > ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt &
@@ -36,6 +37,9 @@ function enable_and_disable_interface()
 function continued_enable_and_disable_interface()
 {
     i=1
+    Test_Case_Title="Continued_enable_and_disable_interface"
+    echo "Begin to Run "${Test_Case_Title}
+
     while(($i<=10))
     do
         ifconfig $local_eth1 up; ifconfig $local_eth1 192.168.100.212
