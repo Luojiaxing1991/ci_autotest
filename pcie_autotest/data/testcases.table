@@ -1,3 +1,3 @@
 PV-315	R.PCIE.F001.A	ST.FUNC.001	Multiple Root Complex support (Hi161x) V testing	Verify all PCIe ports on D05 boards function	multiple_root_complex.sh	MultipleRootComplex	on
-PV-1432	R.PCIE.F104.A	ST.FUNC.003	PCIe ACPI Root Driver dependency	PCI ACPI Root Driver dependency on D05 boards function	acpi.sh	CmdACPI	on
+PV-1432	R.PCIE.F104.A	ST.FUNC.003	PCIe ACPI Root Driver dependency	PCI ACPI Root Driver dependency on D05 boards function	acpi.sh	CmdACPI	off
 PV-1430	R.PCIE.F102.A	ST.FUNC.004	PCIE: UEFI dependency	PCIE: UEFI dependency on D05 boards function			off

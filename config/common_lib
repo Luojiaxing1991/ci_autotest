@@ -147,6 +147,8 @@ RunTable()
     local drScript=${3}
     local flLog=${4:-/dev/null}
 
+    echo "The base table used is "${1}
+
     local sPass
     sPass=$(echo "${g_statusPass}" |sed 's#\([]/*[]\)#\\\1#g')
 
@@ -174,24 +176,33 @@ RunTable()
         sTTitle2=$(sed 's#\([]/*[]\)#\\\1#g' <<< "${sTTitle1}")
         sScript1=$(awk -F'\t' '{print $6}' <<< "${sR1}" |sed "s/^[ \t]\+//;s/[ \t]+\$//")
         sFuncNa=$(awk -F'\t' '{print $7}' <<< "${sR1}" |sed "s/^[ \t]\+//;s/[ \t]+\$//")
+        
+	#get the description of testcase
+	sTESTCASE=$(awk -F'\t' '{print $4}' <<< "${sR1}" |sed "s/^[ \t]\+//;s/[ \t]+\$//")
+        echo "Begin to run test case: "${sTESTCASE}
 
         g_sErrCur=
         grep -q "^${sLevelR2}\$" <<< "${g_sLevelRun}"
         if [ $? -ne 0 ]; then
+	    echo "Skip the test case: "
             g_sErrCur="test case close"
             sStatus1=${g_statusClose}
         else
             nRt1=${g_nNone}
             bRun1=true
+            echo "Check the script "${sScript1}" "${sScript2}"..."
             if [ -n "${sScript1}" ]; then
                 LoadSourceFileParent "${drScript}" "${sScript1}" sScript2 "${flLog}" false
                 if [ -n "${sScript2}" ]; then
+		    echo "Begin to set up Env of script: "${sScript1}" "${sScript2}
                     . "${sScript2}"
                     if [ $? -ne 0 ]; then
+			echo "Environment is not OK when running "${sScript1}" "${sScript2}
                         nRt1=${g_nBlock}
                         g_sErrCur="environment not OK"
                     fi
                 else
+		    echo "No found the script: "${sScript1}
                     bRun1=false
                     g_sErrCur="${sScript1} not exist"
                 fi
@@ -199,18 +210,22 @@ RunTable()
 
             if ${bRun1}; then
                 if [ -n "${sFuncNa}" ]; then
+		    echo "Begin to run the function "${sFuncNa}
                     ${sFuncNa}
                     nRt1=$?
                 else
+	            echo "No found the function: "${sFuncNa}
                     g_sErrCur="function is empty"
                 fi
             fi
 
             case ${nRt1} in
             ${g_nPass})
+		writePass() "PCIE" "${sTESTCASE}"
                 sStatus1=${g_statusPass}
                 ;;
             ${g_nFail})
+		writeFail() "PCIE" "${sTESTCASE}"
                 sStatus1=${g_statusFail}
                 ;;
             ${g_nBlock})
