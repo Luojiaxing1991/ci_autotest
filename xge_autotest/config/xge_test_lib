@@ -99,7 +99,7 @@ function init_net_export()
     tmp_fi=0
     for i in ${!eth_map_r[*]}
     do
-         tmp=`ssh root@${BACK_IP} 'dmesg | grep -i "renamed from "${i} -w'`
+         tmp=`ssh root@${BACK_IP} 'dmesg | grep -i "renamed from '${i}'" -w'`
 	 if [ x"${tmp}" == x"" ]
 	 then
 		 echo "The name of remote "${i}" is not renamed,Stay as "${eth_map_r[${i}]} 

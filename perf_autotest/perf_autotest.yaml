@@ -16,4 +16,4 @@ parse:
   pattern: '(?P<test_case_id>[ /a-zA-Z0-9]+): (?P<result>[A-Z]+)'
 run:
   steps:
-  - bash ./plinth-autotest/perf_autotest/perf_main.sh
+  - bash ./perf_autotest/perf_main.sh

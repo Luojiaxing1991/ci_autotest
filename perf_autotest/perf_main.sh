@@ -16,10 +16,9 @@ PERF_TOP_DIR=$(cd "`dirname $0`" ; pwd)
 # OUT: N/A
 function main()
 {
-    cat ${TEST_CASE_DB_FILE} | while read line
-
     echo "Begin to run PERF test!"
 
+    cat ${PERF_TOP_DIR}/${TEST_CASE_DB_FILE} | while read line
     do
         exec_script=`echo "${line}" | awk -F '\t' '{print $5}'`
         TEST_CASE_FUNCTION_NAME=`echo "${line}" | awk -F '\t' '{print $6}'`

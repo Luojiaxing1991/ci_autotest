@@ -6,13 +6,14 @@
 function fun_perf_list()
 {
   echo "Begin to run fun_perf_list"
-  :> ./data/log/pmu_event.txt
+  :> ${PERF_TOP_DIR}/data/log/pmu_event.txt
   pwd
-  perf list | grep $1| awk -F'[ \t]+' '{print $2}' > ./data/log/pmu_event.txt
-  msum=`cat ./data/log/pmu_event.txt | grep "hisi" | wc -l`
+  perf list | grep $1| awk -F'[ \t]+' '{print $2}' > ${PERF_TOP_DIR}/data/log/pmu_event.txt
+  msum=`cat ${PERF_TOP_DIR}/data/log/pmu_event.txt | grep "hisi" | wc -l`
   echo ${msum}
   if [[ $msum -le 0 ]];then
     mflag=0
+    echo "Test Fail in fun_perf_list when running perf list"
     MESSAGE="Fail"
     exit
   else 
@@ -20,9 +21,10 @@ function fun_perf_list()
   fi
 
   if [ $mflag -eq 1 ];then
-    rand=$(awk 'NR==2 {print $1}' ./data/log/pmu_event.txt)
-    rand2=$(awk 'NR==16 {print $1}' ./data/log/pmu_event.txt)
+    rand=$(awk 'NR==2 {print $1}' ${PERF_TOP_DIR}/data/log/pmu_event.txt)
+    rand2=$(awk 'NR==16 {print $1}' ${PERF_TOP_DIR}/data/log/pmu_event.txt)
     perf stat -a -e $rand -e $rand2 -I 200 sleep 10s
+    echo "fun_perf_list Func run success!"
     MESSAGE="Pass"
   fi 
 }
