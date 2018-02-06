@@ -1,0 +1,2 @@
+Designed Requirement ID	Test Case ID	Test Item	Test Case Title	Automated scripts	Realize the function	Switch	Result	Reason
+R.PERF.F022.A	PERF_FUNC_TEST_120	DDRC	DDRC perf ACPI test	perf_acpi_support.sh	ddrc_perf_acpi_test	on	Pass
