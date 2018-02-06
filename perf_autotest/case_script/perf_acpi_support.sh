@@ -5,10 +5,12 @@
 
 function fun_perf_list()
 {
+  echo "Begin to run fun_perf_list"
   :> ./data/log/pmu_event.txt
   pwd
   perf list | grep $1| awk -F'[ \t]+' '{print $2}' > ./data/log/pmu_event.txt
   msum=`cat ./data/log/pmu_event.txt | grep "hisi" | wc -l`
+  echo ${msum}
   if [[ $msum -le 0 ]];then
     mflag=0
     MESSAGE="Fail"
