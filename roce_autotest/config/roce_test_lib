@@ -1,8 +1,24 @@
 #!/bin/bash
 #
 
+#get the eth0's ip in server and client
+#IN	: NA
+#OUT: NA
+function Init_Net_Ip()
+{
+	#get the ip of server
+	LOCAL_IP=`ifconfig eth0 | grep 'inet addr:' | awk '{print $2}' | awk -F':' '{print $2}'`
+	echo "The server's ip is ${Local_IP}"
 
-## Utility function
+	#get the ip of slave board
+	for tmpip in "${!ip_map[@]}"
+	do
+		if [ "$tmpip"x = "$LOCAL_IP"x ];then
+			BACK_IP=${ip_map[$tmpip]}
+		fi
+	done
+	echo "The slave ip is ${BACK_IP}"
+}
 
 # Establish a relationship of mutual trust between two boards
 # IN : $1 The IP of eth0 in the board as client.

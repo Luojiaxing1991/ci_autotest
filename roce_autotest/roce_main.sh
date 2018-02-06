@@ -41,6 +41,8 @@ function main()
 # Output log file header
 writeLogHeader
 
+Init_Net_Ip
+
 TrustRelation ${BACK_IP}
 copy_tool_so
 

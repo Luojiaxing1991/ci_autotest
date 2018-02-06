@@ -22,6 +22,16 @@ case_map=(
 ["CM_connect"]="off"
 ["Completion_Event"]="off"
 )
+
+#ip_map
+#key: the ip of current server eth0
+#value: the ip of server eth0 which connects with current server directly
+declare -A ip_map
+ip_map=(
+["192.168.1.210"]="192.168.1.250"
+["192.168.1.250"]="192.168.1.210"
+)
+
 # code case index
 START_INDEX=0
 END_INDEX=3
