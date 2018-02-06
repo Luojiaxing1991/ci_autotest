@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+#
+
+#Automated data files exported in test cases.
+TEST_CASE_DB_FILE="data/perf_test_case.table"
+#
+OUTPUT_TEST_DB_FILE="data/report.csv"
+#
+TEST_CASE_FUNCTION_SWITCH=""
+#
+TEST_CASE_FUNCTION_NAME=""
+#
+MESSAGE=""
+
+#do not test the disk list,Default value is NULL.
+
+#  log file
+ERROR_INFO="error_info.log"
+
+#  Common tools directory path
+COMMON_TOOL_PATH="common_tool"
+
+#  Test case code directory path
+TEST_CASE_PATH="perf_autotest/case_script"
