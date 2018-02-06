@@ -5,7 +5,10 @@
 #OUT:N/A
 function SupportMR()
 {
-	${ROCE_TOP_DIR}/case_script/roce-test -m 2 -s 18 -e 19 -r -f ${ROCE_TOP_DIR}/case_script/test/test_case_list_server > ${FUNCNAME}_server.log &
+	pushd ${ROCE_CASE_DIR}
+
+	./roce-test -m 2 -s 18 -e 19 -r -f test/test_case_list_server > ${FUNCNAME}_server.log &
+
 	ClientFlag=`ssh root@${BACK_IP} "cd ${CASEPATH}/; ./roce-test -m 2 -s 18 -e 19 -r -f test_case_list_client > ../${FUNCNAME}_client.log; cd ../; grep -c \"\-test case success\" ${FUNCNAME}_client.log " `
 
 	wait
@@ -19,6 +22,8 @@ function SupportMR()
 	else
 		writeFail "Verify MR fail, please check!!!"
 	fi
+
+	popd
 
 	return 0
 }

@@ -5,7 +5,8 @@
 # OUT:N/A
 function CM_connect()
 {
-	./${TEST_CASE_PATH}/cm-server > ${FUNCNAME}_server.log &
+	pushd ${ROCE_CASE_DIR}
+	./cm-server > ${FUNCNAME}_server.log &
 	ssh root@${BACK_IP} " ./${CASEPATH}/cm-client ${FUNCTION}_client.log "
 	wait
 
@@ -17,6 +18,7 @@ function CM_connect()
 	else
 		writeFail
 	fi
+	popd
 }
 
 function main()

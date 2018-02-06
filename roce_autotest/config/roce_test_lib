@@ -39,7 +39,7 @@ function copy_tool_so()
 						  if [ ! -d ${CASEPATH} ]; then mkdir ${CASEPATH}; fi "
 	wait
 
-	pushd ${ROCE_TOP_DIR}/case_script
+	pushd ${ROCE_CASE_DIR}
 
 	pushd so
 	cp -a * /lib/

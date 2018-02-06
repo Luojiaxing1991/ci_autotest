@@ -5,7 +5,9 @@
 #OUT:N/A
 function SupportQP()
 {
-	${ROCE_TOP_DIR}/case_script/roce-test -m 2 -s 14 -e 14 -r -f ${ROCE_TOP_DIR}/case_script/test/test_case_list_server > ${FUNCNAME}_server.log &
+	pushd ${ROCE_CASE_DIR}
+
+	./roce-test -m 2 -s 14 -e 14 -r -f test/test_case_list_server > ${FUNCNAME}_server.log &
 	ClientFlag=`ssh root@${BACK_IP} "cd ${CASEPATH}/; ./roce-test -m 2 -s 14 -e 14 -r -f test_case_list_client > ../${FUNCNAME}_client.log; cd ../; grep -c \"\-test case success\" ${FUNCNAME}_client.log " `
 
 	wait
@@ -19,6 +21,8 @@ function SupportQP()
 	else
 		writeFail "Verify QP fail, please check!!!"
 	fi
+
+	popd
 
 	return 0
 }

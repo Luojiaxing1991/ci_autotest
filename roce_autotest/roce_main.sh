@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ROCE_TOP_DIR=$( cd "`dirname $0`" ; pwd )
+ROCE_CASE_DIR=${ROCE_TOP_DIR}/case_script
 
 # Load module configuration library
 . ${ROCE_TOP_DIR}/config/roce_test_config
@@ -23,7 +24,7 @@ function main()
         case "${case_map[$key]}" in
             on)
                 commd="${key}.sh"
-                source ${ROCE_TOP_DIR}/case_script/$commd
+                source ${ROCE_CASE_DIR}/$commd
             ;;
             off)
             ;;

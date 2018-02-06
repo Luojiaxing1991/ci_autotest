@@ -5,9 +5,11 @@
 # OUT:N/A
 function codecase()
 {
+	pushd ${ROCE_CASE_DIR}
+
 	for index in `seq ${START_INDEX} ${END_INDEX}`
 	do
-		${ROCE_TOP_DIR}/case_script/server-auto-5-2 ${index} 5 > code_server_${index} &
+		./server-auto-5-2 ${index} 5 > code_server_${index} &
 		ssh root@${BACK_IP} " ./${CASEPATH}/client-auto-5-2 ${index} 5 > code_client_${index} "
 		wait
 
@@ -34,6 +36,8 @@ function codecase()
 			writeFail
 		fi
 	done
+
+	popd
 }
 
 function main()
