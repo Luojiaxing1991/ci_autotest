@@ -23,7 +23,7 @@ function writePass()
     echo ${module}
     testcase=$2
     echo ${testcase}
-    lava-test-case ${module}":""${testcase}" --result pass
+    lava-test-case "${module}"":""${testcase}" --result pass
     return 0
 }
 
@@ -43,7 +43,7 @@ function writeFail()
     echo ${module}
     testcase=$2
     echo ${testcase}
-    lava-test-case ${module}":"${testcase} --result fail
+    lava-test-case "${module}"":""${testcase}" --result fail
     return 0
 }
 
