@@ -9,27 +9,31 @@
 
 
 #  Output success test case log information
-#  IN : N/A
+#  IN : $1 module name
+#       $2 test case title
 #  OUT: N/A
 function writePass()
 {
     local Test_Result="PASS"
-    echo "$Module_Name,""$JIRA_ID,""$Designed_Requirement_ID,""$Test_Case_ID,""$Test_Item,""$Test_Case_Title,""$Test_Result" >> ${REPORT_FILE}
+    #echo "$Module_Name,""$JIRA_ID,""$Designed_Requirement_ID,""$Test_Case_ID,""$Test_Item,""$Test_Case_Title,""$Test_Result" >> ${REPORT_FILE}
     #This cmd used to report pass result to lava server
-    lava-test-case ${Module_Name}":"${Test_Case_Title} --result pass
+    #lava-test-case ${Module_Name}":"${Test_Case_Title} --result pass
+    lava-test-case $1":"$2 --result pass
     return 0
 }
 
 #  Output fail test case log information
-#  IN : $1 Error log information
+#  IN : $1 module name 
+#       $2 test case title
 #  OUT: N/A
 function writeFail()
 {
     local Test_Result="FAIL"
-    local Remark="$1"
-    echo "$Module_Name,""$JIRA_ID,""$Designed_Requirement_ID,""$Test_Case_ID,""$Test_Item,""$Test_Case_Title,""$Test_Result,""$Remark" >> ${REPORT_FILE}
+    #local Remark="$1"
+    #echo "$Module_Name,""$JIRA_ID,""$Designed_Requirement_ID,""$Test_Case_ID,""$Test_Item,""$Test_Case_Title,""$Test_Result,""$Remark" >> ${REPORT_FILE}
     #This cmd used to report fail result to lava server
-    lava-test-case ${Module_Name}":"${Test_Case_Title} --result fail
+    #lava-test-case ${Module_Name}":"${Test_Case_Title} --result fail
+    lava-test-case $1":"$2 --result fail
     return 0
 }
 

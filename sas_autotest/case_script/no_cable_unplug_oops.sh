@@ -50,6 +50,7 @@ function loog_time_IO_read_write()
     Test_Case_Title="loog_time_IO_read_write"
 
     sed -i "{s/^runtime=.*/runtime=${FIO_LONG_RUN_TIME}/g;}" fio.conf
+    echo "Begin to IO rw with runtime: "${FIO_LONG_RUN_TIME}
     IO_read_write
     [ $? -eq 1 ] && MESSAGE="FAIL\tFIO tool long read and write disk failure." && return 1
     MESSAGE="PASS"

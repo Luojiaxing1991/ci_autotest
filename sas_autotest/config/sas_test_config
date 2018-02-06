@@ -13,6 +13,9 @@ TEST_CASE_FUNCTION_NAME=""
 #
 MESSAGE=""
 
+#
+TEST_CASE_TITLE=""
+
 #do not test the disk list,Default value is NULL.
 #configure multiple values, in the format of "/dev/sda|/dev/sdb".
 NOT_TEST_DISK_LIST="N/A"

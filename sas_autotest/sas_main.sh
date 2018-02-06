@@ -22,8 +22,10 @@ function main()
         exec_script=`echo "${line}" | awk -F '\t' '{print $5}'`
         TEST_CASE_FUNCTION_NAME=`echo "${line}" | awk -F '\t' '{print $6}'`
         TEST_CASE_FUNCTION_SWITCH=`echo "${line}" | awk -F '\t' '{print $7}'`
+        #Get the test title from testcase.table
+       	TEST_CASE_TITLE=`echo "${line}" | awk -F '\t' '{print $3}'`
 
-        echo "CaseInfo "$exec_script" "$TEST_CASE_FUNCTION_NAME" "$TEST_CASE_FUNCTION_SWITCH
+        echo "CaseInfo "$TEST_CASE_TITLE" "$exec_script" "$TEST_CASE_FUNCTION_NAME" "$TEST_CASE_FUNCTION_SWITCH
 
         if [ x"${exec_script}" == x"" ]
         then

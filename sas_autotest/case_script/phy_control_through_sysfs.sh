@@ -31,7 +31,8 @@ function set_rate_link()
 	echo "Begin to check sas type in "${dir}
         if [ x"$type" != x"none" ]
         then
-            echo "Begin to set rate in "${dir}
+            echo "Begin to set rate in "${dir0}
+
             #this function will destroy the setting value of disk speed
 	    #so may be we should save the value first,then recove it after test
             tmp_min=`cat ${PHY_FILE_PATH}/${dir}/minimum_linkrate | awk '{printf $0}'`
@@ -50,12 +51,6 @@ function set_rate_link()
             [ $? -eq 0 ] && MESSAGE="FAIL\tFailed to set the \"${dir}\" maximum rate less than the minimum rate." && recover_linkrate "${tmp_min}" "${tmp_max}" "${dir}" && return 1
 
             recover_linkrate "${tmp_min}" "${tmp_max}" "${dir}"
-	    #echo "Begin to recove the origin value of max and min rate"
-            #echo $tmp_min > ${PHY_FILE_PATH}/${dir}/minimum_linkrate
-	    #echo $tmp_max > ${PHY_FILE_PATH}/${dir}/maximum_linkrate
-	    #cat ${PHY_FILE_PATH}/${dir}/minimum_linkrate
-            #cat ${PHY_FILE_PATH}/${dir}/maximum_linkrate
-
         fi
         sleep 5
     done
