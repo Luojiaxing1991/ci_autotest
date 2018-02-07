@@ -19,12 +19,12 @@ function main()
 {
     echo "Begin to Run XGE Test"
 
-    local MaxRow=$(sed -n '$=' "${TEST_CASE_DB_FILE}")
+    local MaxRow=$(sed -n '$=' "${HNS_TOP_DIR}/${TEST_CASE_DB_FILE}")
     local RowNum=0
     while [ ${RowNum} -lt ${MaxRow} ]
     do
         let RowNum+=1
-        local line=$(sed -n "${RowNum}p" "${TEST_CASE_DB_FILE}")
+        local line=$(sed -n "${RowNum}p" "${HNS_TOP_DIR}/${TEST_CASE_DB_FILE}")
         exec_script=`echo "${line}" | awk -F '\t' '{print $6}'`
         TEST_CASE_FUNCTION_NAME=`echo "${line}" | awk -F '\t' '{print $7}'`
         TEST_CASE_FUNCTION_SWITCH=`echo "${line}" | awk -F '\t' '{print $8}'`

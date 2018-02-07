@@ -8,11 +8,13 @@
 function ge_restarts_auto_negotiation()
 {
     Test_Case_Title="ge_restarts_auto_negotiation"
+    echo "Begin to run "${Test_Case_Title}
     ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
     ssh root@${BACK_IP} 'ifconfig ${remote_tp1} up; ifconfig ${remote_tp1} ${remote_tp1_ip}; sleep 5;'
     i=1
     while(($i<=10))
     do
+	echo "Begin cycle "$i
         enableok=0
         disableok=0
         ethtool -r ${local_tp1}
@@ -36,16 +38,19 @@ function ge_restarts_auto_negotiation()
         fi
         if [ $enableok -eq 0 ] || [ $disableok -eq 0 ];then
             MESSAGE="FAIL\t auto negotiation fail"
+	    echo ${MESSAGE}
             break
         fi
         i=$(($i+1))
     done
     MESSAGE="PASS"
+    echo ${MESSAGE}
 }
 
 function ge_iperf_auto_negotiation()
 {
     Test_Case_Title="ge_iperf_auto_negotiation"
+    echo "Begin to run "${Test_Case_Title}
     ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
     ssh root@${BACK_IP} 'ifconfig ${remote_tp1} up; ifconfig ${remote_tp1} ${remote_tp1_ip}; sleep 5;iperf -s >/dev/null 2>&1 &'
     iperf -c ${remote_tp1} -t 3600 -i 2 -P 3 > ${HNS_TOP_DIR}/data/log/ge_iperf_auto_negotiation.txt &
@@ -64,10 +69,12 @@ function ge_iperf_auto_negotiation()
         killall iperf
         ssh root@${BACK_IP} "killall iperf"
         MESSAGE="PASS"
+	echo ${MESSAGE}
     else
         killall iperf
         ssh root@${BACK_IP} "killall iperf"
         MESSAGE="FAIL\t iperf auto negotiation fail"
+	echo ${MESSAGE}
     fi
 }
 
