@@ -40,3 +40,14 @@ COMMON_TOOL_PATH="common_tool"
 
 # Test case code directory path
 TEST_CASE_PATH="xge_autotest/case_script"
+
+#ifconfig net export IP
+local_tp1_ip="192.168.10.10"
+local_fibre1_ip="192.168.20.10"
+local_fibre2_ip="192.168.30.10"
+local_tp1_ipv6_ip="fe80::0db8:0:f101:1/64"
+local_fibre1_ipv6_ip="fe80::0db8:0:f101:2/64"
+
+remote_tp1_ip="192.168.10.20"
+remote_fibre1_ip="192.168.20.20"
+remote_fibre2_ip="192.168.30.20"

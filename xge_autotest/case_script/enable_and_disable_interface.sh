@@ -8,22 +8,23 @@
 # enable and disable interface
 # IN :N/A
 # OUT:N/A
-function enable_and_disable_interface()
+function ge_enable_and_disable_interface()
 {
-    Test_Case_Title="enable_and_disable_interface"
     echo "Begin to Run "${Test_Case_Title}
-    ifconfig $local_tp2 up; ifconfig $local_tp2 192.168.10.10
-    ssh root@$BACK_IP "ifconfig ${remote_tp2} up;ifconfig ${remote_tp2} 192.168.10.20; sleep 5"
-    ping 192.168.10.20 -c 5 > ${XGE_TOP_DIR}/data/log/enable_and_disable_interface.txt &
+
+    Test_Case_Title="ge_enable_and_disable_interface"
+    ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
+    ssh root@${BACK_IP} "ifconfig ${remote_tp1} up;ifconfig ${remote_tp1} ${remote_tp1_ip}; sleep 5"
+    ping ${remote_tp1_ip} -c 5 > ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt &
     sleep 10
-    cat ${XGE_TOP_DIR}/data/log/enable_and_disable_interface.txt | grep "received, 0% packet loss" >/dev/null
+    cat ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt | grep "received, 0% packet loss" >/dev/null
     if [ $? -eq 0 ];then
        enableok=1
     fi
-    ssh root@$BACK_IP "ifconfig $remote_tp2 down"
-    ping 192.168.10.20 -c 5 > ${XGE_TOP_DIR}/data/log/enable_and_disable_interface.txt &
+    ssh root@$BACK_IP "ifconfig ${remote_tp1} down"
+    ping ${remote_tp1_ip} -c 5 > ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt &
     sleep 10
-    cat ${XGE_TOP_DIR}/data/log/enable_and_disable_interface.txt | grep "received, 0% packet loss" >/dev/null
+    cat ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt | grep "received, 0% packet loss" >/dev/null
     if [ $? -eq 1 ];then
        disableok=1
     fi
@@ -36,7 +37,7 @@ function enable_and_disable_interface()
     fi
 }
 
-function continued_enable_and_disable_interface()
+function ge_continued_enable_and_disable_interface()
 {
     i=1
     Test_Case_Title="Continued_enable_and_disable_interface"
@@ -44,23 +45,28 @@ function continued_enable_and_disable_interface()
 
     while(($i<=10))
     do
-        ifconfig $local_eth1 up; ifconfig $local_eth1 192.168.100.212
-        ssh root@$BACK_IP "ifconfig $remote_eth1 up; ifconfig $remote_eth1 192.168.100.200; sleep 5"
-        ping 192.168.100.200 -c 5 > ${XGE_TOP_DIR}/data/log/continued_enable_and_disable_interface.txt &
+        ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
+        ssh root@$BACK_IP "ifconfig ${remote_tp1} up; ifconfig ${remote_tp1} ${remote_tp1_ip}; sleep 5"
+        ping ${remote_tp1_ip} -c 5 > ${HNS_TOP_DIR}/data/log/continued_enable_and_disable_interface.txt &
         sleep 10
-        cat ${XGE_TOP_DIR}/data/log/continued_enable_and_disable_interface.txt | grep "0% packet loss" >/dev/null
+        cat ${HNS_TOP_DIR}/data/log/continued_enable_and_disable_interface.txt | grep "received, 0% packet loss" >/dev/null
         if [ $? -eq 0 ];then
            enableok=1
         fi
-        ssh root@$BACK_IP "ifconfig $remote_eth1 down"
-        ping 192.168.100.200 -c 5 > ${XGE_TOP_DIR}/data/log/continued_enable_and_disable_interface.txt &
+        ssh root@$BACK_IP "ifconfig ${remote_tp1} down"
+        ping ${remote_tp1_ip} -c 5 > ${HNS_TOP_DIR}/data/log/continued_enable_and_disable_interface.txt &
         sleep 10
-        cat ${XGE_TOP_DIR}/data/log/continued_enable_and_disable_interface.txt | grep "0% packet loss" >/dev/null
+        cat ${HNS_TOP_DIR}/data/log/continued_enable_and_disable_interface.txt | grep "received, 0% packet loss" >/dev/null
         if [ $? -eq 1 ];then
            disableok=1
         fi
+        if [ $enableok -eq 0 -o $disableok -eq 0 ];then
+            MESSAGE="FAIL\tNet export many times up/down , Ping packet failure"
+            break
+        fi
         i=$(($i+1))
     done
+    MESSAGE="PASS"
     if [ $enableok -eq 1 -a $disableok -eq 1 ];then
         writePass
     else
@@ -68,83 +74,193 @@ function continued_enable_and_disable_interface()
     fi
 }
 
-function flow_enable_and_disable_interface()
+function ge_flow_enable_and_disable_interface()
 {
-    ifconfig $local_eth1 up; ifconfig $local_eth1 192.168.100.212
-    ssh root@$BACK_IP "ifconfig eth1 up; ifconfig eth1 192.168.100.200; sleep 5"
-    ping 192.168.100.200 > ${XGE_TOP_DIR}/data/log/flow_enable_and_disable_interface.txt &
-    PacketStatistics1=`ifconfig eth1 | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
+    Test_Case_Title="ge_flow_enable_and_disable_interface"
+    ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
+    ssh root@$BACK_IP "ifconfig ${remote_tp1} up; ifconfig ${remote_tp1} ${remote_tp1_ip}; sleep 5"
+    ping ${remote_tp1_ip} > ${HNS_TOP_DIR}/data/log/flow_enable_and_disable_interface.txt &
+    PacketStatistics1=`ifconfig ${remote_tp1} | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
     sleep 10
-    PacketStatistics2=`ifconfig eth1 | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
-    if [ $PacketStatistics2 > $PacketStatistics1 ];then
+    PacketStatistics2=`ifconfig ${remote_tp1} | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
+    if [ $PacketStatistics2 -gt $PacketStatistics1 ];then
         enableok=1
     fi
 
-    ssh root@$BACK_IP "ifconfig eth1 down"
-    PacketStatistics1=`ifconfig eth1 | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
+    ssh root@$BACK_IP "ifconfig ${remote_tp1} down"
+    PacketStatistics1=`ifconfig ${remote_tp1} | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
     sleep 10
-    PacketStatistics2=`ifconfig eth1 | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
-    if [ $PacketStatistics2 = $PacketStatistics1 ];then
+    PacketStatistics2=`ifconfig ${remote_tp1} | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
+    if [ $PacketStatistics2 -eq $PacketStatistics1 ];then
         disableok=1
     fi
     if [ $enableok -eq 1 -a $disableok -eq 1 ];then
-        writePass
+        killall ping
+        MESSAGE="PASS"
     else
-        writeFail
+        killall ping
+        MESSAGE="FAIL\tNet export many times up/down , Ping packet failure"
     fi
-    killall ping
 }
 
-function flow_continued_enable_and_disable_interface()
+function ge_flow_continued_enable_and_disable_interface()
 {
-    ifconfig $local_eth1 up; ifconfig $local_eth1 192.168.100.212
-    ssh root@$BACK_IP 'ifconfig eth1 up; ifconfig eth1 192.168.100.200; sleep 5;'
-    ping 192.168.100.200 > ${XGE_TOP_DIR}/data/log/flow_continued_enable_and_disable_interface.txt &
+    Test_Case_Title="ge_flow_continued_enable_and_disable_interface"
+    ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
+    ssh root@$BACK_IP 'ifconfig ${remote_tp1} up; ifconfig ${remote_tp1} ${remote_tp1_ip}; sleep 5;'
+    ping ${remote_tp1_ip} > ${HNS_TOP_DIR}/data/log/flow_continued_enable_and_disable_interface.txt &
     i=1
     while(($i<=10))
     do
-        ssh root@$BACK_IP 'ifconfig eth1 up'
-        PacketStatistics1=`ifconfig eth1 | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
+        ssh root@$BACK_IP 'ifconfig ${remote_tp1} up;sleep 2'
+        PacketStatistics1=`ifconfig ${remote_tp1} | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
         sleep 10
-        PacketStatistics2=`ifconfig eth1 | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
-        if [ $PacketStatistics2 > $PacketStatistics1 ];then
+        PacketStatistics2=`ifconfig ${remote_tp1} | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
+        if [ $PacketStatistics2 -gt $PacketStatistics1 ];then
             enableok=1
         fi
 
-        ssh root@$BACK_IP 'ifconfig eth1 down;'
-        PacketStatistics1=`ifconfig eth1 | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
+        ssh root@$BACK_IP 'ifconfig ${remote_tp1} down;sleep 2'
+        PacketStatistics1=`ifconfig ${remote_tp1} | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
         sleep 10
-        PacketStatistics2=`ifconfig eth1 | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
-        if [ $PacketStatistics2 = $PacketStatistics1 ];then
+        PacketStatistics2=`ifconfig ${remote_tp1} | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
+        if [ $PacketStatistics2 -eq $PacketStatistics1 ];then
             disableok=1
+        fi
+        if [ $enableok -eq 0 -o $disableok -eq 0 ];then
+            killall ping
+            MESSAGE="FAIL\tNet export many times up/down , Ping packet failure"
+            break
         fi
         i=$(($i+1))
     done
-    if [ $enableok -eq 1 -a $disableok -eq 1 ];then
-        writePass
-    else
-        writeFail
-    fi
     killall ping
+    MESSAGE="PASS"
 }
 
-#function flow_continued_enable_and_disable_interface()
+
+####### XGE net export up/down test #######
+function xge_enable_and_disable_interface()
+{
+    Test_Case_Title="xge_enable_and_disable_interface"
+    ifconfig ${local_fibre1} up; ifconfig ${local_fibre1} ${local_fibre1_ip}
+    ssh root@${BACK_IP} "ifconfig ${remote_fibre1} up;ifconfig ${remote_fibre1} ${remote_fibre1_ip}; sleep 5"
+    ping ${remote_fibre1_ip} -c 5 > ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt &
+    sleep 10
+    cat ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt | grep "received, 0% packet loss" >/dev/null
+    if [ $? -eq 0 ];then
+       enableok=1
+    fi
+    ssh root@$BACK_IP "ifconfig ${remote_fibre1} down"
+    ping ${remote_fibre1_ip} -c 5 > ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt &
+    sleep 10
+    cat ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt | grep "received, 0% packet loss" >/dev/null
+    if [ $? -eq 1 ];then
+       disableok=1
+    fi
+    if [ $enableok -eq 1 -a $disableok -eq 1 ];then
+        MESSAGE="PASS"
+    else
+        MESSAGE="FAIL\tNet export up/down , Ping packet failure"
+    fi
+}
+
+function xge_continued_enable_and_disable_interface()
+{
+    Test_Case_Title="xge_continued_enable_and_disable_interface"
+    i=1
+    while(($i<=10))
+    do
+        ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
+        ssh root@$BACK_IP "ifconfig ${remote_fibre1} up; ifconfig ${remote_fibre1} ${remote_fibre1_ip}; sleep 5"
+        ping ${remote_fibre1_ip} -c 5 > ${HNS_TOP_DIR}/data/log/continued_enable_and_disable_interface.txt &
+        sleep 10
+        cat ${HNS_TOP_DIR}/data/log/continued_enable_and_disable_interface.txt | grep "received, 0% packet loss" >/dev/null
+        if [ $? -eq 0 ];then
+           enableok=1
+        fi
+        ssh root@$BACK_IP "ifconfig ${remote_fibre1} down"
+        ping ${remote_fibre1_ip} -c 5 > ${HNS_TOP_DIR}/data/log/continued_enable_and_disable_interface.txt &
+        sleep 10
+        cat ${HNS_TOP_DIR}/data/log/continued_enable_and_disable_interface.txt | grep "received, 0% packet loss" >/dev/null
+        if [ $? -eq 1 ];then
+           disableok=1
+        fi
+        if [ $enableok -eq 0 -o $disableok -eq 0 ];then
+            MESSAGE="FAIL\tNet export many times up/down , Ping packet failure"
+            break
+        fi
+        i=$(($i+1))
+    done
+    MESSAGE="PASS"
+}
+
+function xge_flow_enable_and_disable_interface()
+{
+    Test_Case_Title="xge_flow_enable_and_disable_interface"
+    ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
+    ssh root@$BACK_IP "ifconfig ${remote_fibre1} up; ifconfig ${remote_fibre1} ${remote_fibre1_ip}; sleep 5"
+    ping ${remote_fibre1_ip} > ${HNS_TOP_DIR}/data/log/flow_enable_and_disable_interface.txt &
+    PacketStatistics1=`ifconfig ${remote_fibre1} | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
+    sleep 10
+    PacketStatistics2=`ifconfig ${remote_fibre1} | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
+    if [ $PacketStatistics2 -gt $PacketStatistics1 ];then
+        enableok=1
+    fi
+
+    ssh root@$BACK_IP "ifconfig ${remote_fibre1} down"
+    PacketStatistics1=`ifconfig ${remote_fibre1} | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
+    sleep 10
+    PacketStatistics2=`ifconfig ${remote_fibre1} | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
+    if [ $PacketStatistics2 -eq $PacketStatistics1 ];then
+        disableok=1
+    fi
+    if [ $enableok -eq 1 -a $disableok -eq 1 ];then
+        killall ping
+        MESSAGE="PASS"
+    else
+        killall ping
+        MESSAGE="FAIL\tNet export many times up/down , Ping packet failure"
+    fi
+}
+
+function xge_flow_continued_enable_and_disable_interface()
+{
+    Test_Case_Title="xge_flow_continued_enable_and_disable_interface"
+    ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
+    ssh root@$BACK_IP 'ifconfig ${remote_fibre1} up; ifconfig ${remote_fibre1} ${remote_fibre1_ip}; sleep 5;'
+    ping ${remote_fibre1_ip} > ${HNS_TOP_DIR}/data/log/flow_continued_enable_and_disable_interface.txt &
+    i=1
+    while(($i<=10))
+    do
+        ssh root@$BACK_IP 'ifconfig ${remote_fibre1} up;sleep 2'
+        PacketStatistics1=`ifconfig ${remote_fibre1} | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
+        sleep 10
+        PacketStatistics2=`ifconfig ${remote_fibre1} | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
+        if [ $PacketStatistics2 -gt $PacketStatistics1 ];then
+            enableok=1
+        fi
+
+        ssh root@$BACK_IP 'ifconfig ${remote_fibre1} down;sleep 2'
+        PacketStatistics1=`ifconfig ${remote_fibre1} | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
+        sleep 10
+        PacketStatistics2=`ifconfig ${remote_fibre1} | grep "RX packets:" | awk -F":" '{print $2}' | awk '{print $1}'`
+        if [ $PacketStatistics2 -eq $PacketStatistics1 ];then
+            disableok=1
+        fi
+        if [ $enableok -eq 0 -o $disableok -eq 0 ];then
+            killall ping
+            MESSAGE="FAIL\tNet export many times up/down , Ping packet failure"
+            break
+        fi
+        i=$(($i+1))
+    done
+    killall ping
+    MESSAGE="PASS"
+}
 
 function main()
 {
-    if [ x"${TEST_CASE_FUNCTION_SWITCH}" == x"on" ]
-    then
-        ${TEST_CASE_FUNCTION_NAME}
-    else
-        MESSAGE="BLOCK\tno automated use cases were implemented."
-    fi
-
-
-    #:>${XGE_TOP_DIR}/data/log/enable_and_disable_interface.txt
-    #enable_and_disable_interface
-    #continued_enable_and_disable_interface
-    #flow_enable_and_disable_interface
-    #flow_continued_enable_and_disable_interface
+    test_case_switch
 }
-
 main
