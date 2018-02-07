@@ -30,25 +30,11 @@ function fun_perf_list()
   fi 
 }
 
-function l3c_perf_acpi_test()
+function hha_perf_acpi_test()
 {
-    Test_Case_Title="L3C perf ACPI test"
+    Test_Case_Title="Support HHA PMU events"
 
-    fun_perf_list hisi_l3c
-}
-
-function ddrc_perf_acpi_test()
-{
-    Test_Case_Title="DDRC perf ACPI test"
-
-    fun_perf_list hisi_ddrc
-}
-
-function mn_perf_acpi_test()
-{
-    Test_Case_Title="MN perf ACPI test"
-
-    fun_perf_list hisi_mn
+    fun_perf_list hisi_hha
 }
 
 function main()

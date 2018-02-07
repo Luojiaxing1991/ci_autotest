@@ -18,9 +18,9 @@ function main()
 {
     cat ${TEST_CASE_DB_FILE} | while read line
     do
-        exec_script=`echo "${line}" | awk -F '\t' '{print $5}'`
-        TEST_CASE_FUNCTION_NAME=`echo "${line}" | awk -F '\t' '{print $6}'`
-        TEST_CASE_FUNCTION_SWITCH=`echo "${line}" | awk -F '\t' '{print $7}'`
+        exec_script=`echo "${line}" | awk -F '\t' '{print $6}'`
+        TEST_CASE_FUNCTION_NAME=`echo "${line}" | awk -F '\t' '{print $7}'`
+        TEST_CASE_FUNCTION_SWITCH=`echo "${line}" | awk -F '\t' '{print $8}'`
 
         if [ x"${exec_script}" == x"" ]
         then
