@@ -1,5 +1,15 @@
 #!/bin/bash
 # 
+## Utility function
+function test_case_switch()
+{
+    if [ x"${TEST_CASE_FUNCTION_SWITCH}" == x"on" ]
+    then
+        ${TEST_CASE_FUNCTION_NAME}
+    else
+        MESSAGE="BLOCK\tno automated use cases were implemented."
+    fi
+}
 
 ## Utility function
 function init_net_ip()
