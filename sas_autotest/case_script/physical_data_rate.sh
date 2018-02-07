@@ -30,10 +30,12 @@ function disk_negotiated_link_rate_query()
         if [ $BRate -eq 1 ]
         then
             MESSAGE="FAIL\t\"${dir}\" negotiated link rate query ERROR."
+	    echo ${MESSAGE}
             return 1
         fi
     done
     MESSAGE="PASS"
+    echo ${MESSAGE}
 }
 
 function main()
