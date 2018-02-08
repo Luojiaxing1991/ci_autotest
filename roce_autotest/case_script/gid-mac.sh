@@ -15,23 +15,17 @@ function gid-mac()
 
 	if [ $gid7 == $mac4 -a $gid8 == $mac5$mac6 ]
 	then
+		MESSAGE="PASS"
 		writePass "Configure  GID according to MAC successfully."
 	else
-		writeFail "Configure  GID according to MAC failed, please check!!!"
+		MESSAGE="FAIL\tConfigure  GID according to MAC failed, please check!"
 	fi
-
-	return 0
 }
 
 function main()
 {
-	JIRA_ID="PV-287"
-	Designed_Requirement_ID="R.ROCE.F010.A"
-	Test_Case_ID="ST-ROCE-78"
-	Test_Item="Configure  GID according to MAC"
-	Test_Case_Title=""
-
-	gid-mac
+	# call the implementation of the automation use cases
+	test_case_function_run
 }
 
 main

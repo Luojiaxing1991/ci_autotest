@@ -1,12 +1,25 @@
 #!/bin/bash
 #
 
+#get the eth0's ip in server and client
+#IN	: NA
+#OUT: NA
+function Init_Net_Ip()
+{
+	#get the ip of server
+	LOCAL_IP=`ifconfig eth0 | grep 'inet addr:' | awk '{print $2}' | awk -F':' '{print $2}'`
+	echo "The server's ip is ${LOCAL_IP}"
 
-# Load configuration options
-. roce_autotest/config/roce_test_config
-. config/common_lib
-
-## Utility function
+	#get the ip of slave board
+	for tmpip in "${!ip_map[@]}"
+	do
+		if [ "$tmpip"x = "$LOCAL_IP"x ];then
+			BACK_IP=${ip_map[$tmpip]}
+			break
+		fi
+	done
+	echo "The slave ip is ${BACK_IP}"
+}
 
 # Establish a relationship of mutual trust between two boards
 # IN : $1 The IP of eth0 in the board as client.
@@ -43,7 +56,7 @@ function copy_tool_so()
 						  if [ ! -d ${CASEPATH} ]; then mkdir ${CASEPATH}; fi "
 	wait
 
-	pushd ${TEST_CASE_PATH}
+	pushd ${ROCE_CASE_DIR}
 
 	pushd so
 	cp -a * /lib/
@@ -80,4 +93,25 @@ function copy_tool_so()
 
 	return 0
 
+}
+#  call the implementation of the automation use cases
+#  IN : N/A
+#  OUT: N/A
+function test_case_function_run()
+{
+	if [ x"${TEST_CASE_FUNCTION_SWITCH}" == x"on" ]
+	then
+		${TEST_CASE_FUNCTION_NAME}
+	else
+		MESSAGE="BLOCK\tno automated use cases were implemented."
+	fi
+}
+
+# Output log file header
+# IN : N/A
+# OUT: N/A
+function writeLogHeader
+{
+	echo -e "Designed Requirement ID\tTest Case ID\tTest Item\tTest Case Title\tAutomated scripts\tRealize the function\tSwitch\tResult\tReason" > ${ROCE_TOP_DIR}/${OUTPUT_TEST_DB_FILE}
+	return 0
 }

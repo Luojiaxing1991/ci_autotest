@@ -1,0 +1,8 @@
+PV-286	R.ROCE.F009.A	ST-ROCE-77	Verify basic RoCE function	Configure  GID according to IP	gid-ip.sh	gid-ip	on	
+PV-287	R.ROCE.F010.A	ST-ROCE-78	Verify basic RoCE function	Configure GID according to MAC address	gid-mac.sh	gid-mac	on	
+PV-366	R.ROCE.N006.B	ST-ROCE-85	Verify rocee is Linux platform device	Check platform device	platformdev.sh	platformdev	on	
+#N/A		ST-ROCE-87	Verify load/remove the RoCE kernel driver	Load the RoCE kernel driver	Load_Unload_kernel_driver.sh	 Load_kernel_driver	on	
+#N/A		ST-ROCE-88		Unload the RoCE kernel driver	Load_Unload_kernel_driver.sh	Unload_kernel_driver	on	
+PV-1482	R.ROCE.F030.A	ST-ROCE-89	Verify RoCEE's basic function on XGE port	send on XGE port	SupportXGE.sh	Send_On_XGE	on	
+PV-1482	R.ROCE.F030.A	ST-ROCE-90		RDMA read on XGE port	SupportXGE.sh	Read_On_XGE	on	
+PV-1482	R.ROCE.F030.A	ST-ROCE-91		RDMA write on XGE port	SupportXGE.sh	Write_On_XGE	on	
