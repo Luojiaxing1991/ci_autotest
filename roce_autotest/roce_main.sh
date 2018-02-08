@@ -17,6 +17,7 @@ ROCE_CASE_DIR=${ROCE_TOP_DIR}/case_script
 function main()
 {
     Module_Name="ROCE"
+    echo "Begin to run "$Module_Name" test"
 	local MaxRow=$(sed -n '$=' "${TEST_CASE_DB_FILE}")
 	local RowNum=0
 
@@ -28,21 +29,28 @@ function main()
 		exec_script=`echo "${line}" | awk -F '\t' '{print $6}'`
 		TEST_CASE_FUNCTION_NAME=`echo "${line}" | awk -F '\t' '{print $7}'`
 		TEST_CASE_FUNCTION_SWITCH=`echo "${line}" | awk -F '\t' '{print $8}'`
+                
+                TEST_CASE_TITLE=`echo "${line}" | awk -F '\t' '{print $3}'`
+
+                echo "TestCaseInfo "${TEST_CASE_TITLE}" "${exec_script}" "${TEST_CASE_FUNCTION_NAME}" "${TEST_CASE_FUNCTION_SWITCH} 
 
 		if [ x"${exec_script}" == x"" ]
 		then
 			MESSAGE="unimplemented automated test cases."
+			echo ${MESSAGE}
 		else
 			if [ ! -f "${ROCE_CASE_DIR}/${exec_script}" ]
 			then
 				MESSAGE="FILE\tcase_script/${exec_script} execution script does not exist, please check."
+				echo ${MESSAGE}
 			else
+				echo "Begint to run test "${TEST_CASE_TITLE}
 				source ${ROCE_CASE_DIR}/${exec_script}
 			fi
 		fi
 		echo -e "${line}${MESSAGE}" >> ${ROCE_TOP_DIR}/${OUTPUT_TEST_DB_FILE}
 		MESSAGE=""
-
+		echo "Finish test: "${TEST_CASE_TITLE}
 	done
 }
 

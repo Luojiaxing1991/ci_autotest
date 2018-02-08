@@ -11,7 +11,7 @@ function fun_perf_list()
   perf list | grep $1| awk -F'[ \t]+' '{print $2}' > ${PERF_TOP_DIR}/data/log/pmu_event.txt
   msum=`cat ${PERF_TOP_DIR}/data/log/pmu_event.txt | grep "hisi" | wc -l`
   echo ${msum}
-  cat $msum $mflag
+#  cat $msum $mflag
   if [ `cat /proc/cmdline | grep "acpi=force" | wc -l` -ne 1 ];then
     mflag=0
     echo "Test Fail in fun_perf_list when running perf list"
@@ -20,6 +20,7 @@ function fun_perf_list()
     if [ $msum -le 0 ];then
       mflag=0
       MESSAGE="Fail"
+      echo ${MESSAGE}
     else 
       mflag=1
     fi

@@ -7,8 +7,8 @@ function fun_perf_list()
 {
   :> pmu_event.txt
   mflag=0
-  perf list | grep $1| awk -F'[ \t]+' '{print $2}' > ./data/log/pmu_event.txt
-  msum=$(cat ./data/log/pmu_event.txt | grep $1 | wc -l) 
+  perf list | grep $1| awk -F'[ \t]+' '{print $2}' > ${PERF_TOP_DIR}/data/log/pmu_event.txt
+  msum=$(cat ${PERF_TOP_DIR}/data/log/pmu_event.txt | grep $1 | wc -l) 
   if [[ $msum -le 0 ]];then
     mflag=0
     MESSAGE="Fail"
@@ -18,7 +18,7 @@ function fun_perf_list()
 
   if [ $mflag -eq 1 ];then
     set num = 1
-    cat ./data/log/pmu_event.txt | while read myline
+    cat ${PERF_TOP_DIR}/data/log/pmu_event.txt | while read myline
     do
       num=$[$num+1]
       echo "LINE"$num":"$myline
