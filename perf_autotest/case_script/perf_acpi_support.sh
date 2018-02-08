@@ -7,17 +7,22 @@ function fun_perf_list()
 {
   echo "Begin to run fun_perf_list"
   :> ${PERF_TOP_DIR}/data/log/pmu_event.txt
-  pwd
+  mflag=0
   perf list | grep $1| awk -F'[ \t]+' '{print $2}' > ${PERF_TOP_DIR}/data/log/pmu_event.txt
   msum=`cat ${PERF_TOP_DIR}/data/log/pmu_event.txt | grep "hisi" | wc -l`
   echo ${msum}
-  if [[ $msum -le 0 ]];then
+  cat $msum $mflag
+  if [ `cat /proc/cmdline | grep "acpi=force" | wc -l` -ne 1 ];then
     mflag=0
     echo "Test Fail in fun_perf_list when running perf list"
     MESSAGE="Fail"
-    exit
-  else 
-    mflag=1
+  else
+    if [ $msum -le 0 ];then
+      mflag=0
+      MESSAGE="Fail"
+    else 
+      mflag=1
+    fi
   fi
 
   if [ $mflag -eq 1 ];then

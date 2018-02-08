@@ -19,11 +19,11 @@ function main()
     echo "Begin to run PERF test!"
 
     cat ${PERF_TOP_DIR}/${TEST_CASE_DB_FILE} | while read line
-    do
-        exec_script=`echo "${line}" | awk -F '\t' '{print $5}'`
-        TEST_CASE_FUNCTION_NAME=`echo "${line}" | awk -F '\t' '{print $6}'`
-        TEST_CASE_FUNCTION_SWITCH=`echo "${line}" | awk -F '\t' '{print $7}'`
-        
+    do         
+        exec_script=`echo "${line}" | awk -F '\t' '{print $6}'`
+        TEST_CASE_FUNCTION_NAME=`echo "${line}" | awk -F '\t' '{print $7}'`
+        TEST_CASE_FUNCTION_SWITCH=`echo "${line}" | awk -F '\t' '{print $8}'`
+
         #Get the test title from testcase.table
 	TEST_CASE_TITLE=`echo "${line}" | awk -F '\t' '{print $3}'`
 
