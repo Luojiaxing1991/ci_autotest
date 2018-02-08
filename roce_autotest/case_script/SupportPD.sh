@@ -5,7 +5,9 @@
 #OUT:N/A
 function SupportPD()
 {
-	./${TEST_CASE_PATH}/roce-test -m 2 -s 11 -e 12 -r -f ${TEST_CASE_PATH}/test/test_case_list_server > ${FUNCNAME}_server.log &
+	pushd ${ROCE_CASE_DIR}
+
+	./roce-test -m 2 -s 11 -e 12 -r -f test/test_case_list_server > ${FUNCNAME}_server.log &
 	ClientFlag=`ssh root@${BACK_IP} "cd ${CASEPATH}/; ./roce-test -m 2 -s 11 -e 12 -r -f test_case_list_client > ../${FUNCNAME}_client.log; cd ../; grep -c \"\-test case success\" ${FUNCNAME}_client.log " `
 
 	wait
@@ -19,6 +21,8 @@ function SupportPD()
 	else
 		writeFail "Verify PD fail, please check!!!"
 	fi
+
+	popd
 
 	return 0
 }
