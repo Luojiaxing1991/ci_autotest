@@ -22,6 +22,6 @@ function test_case_function_run()
 # OUT: N/A
 function writeLogHeader
 {
-    echo -e "Designed Requirement ID\tTest Case ID\tTest Item\tTest Case Title\tAutomated scripts\tRealize the function\tSwitch\tResult\tReason" > ${OUTPUT_TEST_DB_FILE}
+    echo -e "JIRA ID\tDesigned Requirement ID\tTest Case ID\tTest Item\tTest Case Title\tAutomated scripts\tRealize the function\tSwitch\tResult\tReason" > ${OUTPUT_TEST_DB_FILE}
     return 0
 }
