@@ -37,7 +37,7 @@
 			"parameters":{
 			     "Maintainer": "Luojiaxing"
 			},
-			"testdef": "perf_autotest/perf_autotest.yaml"
+			"testdef": "xge_autotest/xge_autotest.yaml"
                     }
                 ],
                 "timeout": 172800
