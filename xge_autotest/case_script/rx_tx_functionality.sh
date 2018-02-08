@@ -19,7 +19,7 @@ function ge_two_ends_receiving_and_sending ()
     ssh root@$BACK_IP 'ping '${local_tp1_ip}' -c 5' > ${HNS_TOP_DIR}/data/log/ge_two_ends_receiving_and_sending.txt &
     sleep 10
     cat ${HNS_TOP_DIR}/data/log/ge_two_ends_receiving_and_sending.txt | grep "received, 0% packet loss" >/dev/null
-    if [ $? -eq 1 ];then
+    if [ $? -eq 0 ];then
        disableok=1
     fi
     if [ $enableok -eq 1 -a $disableok -eq 1 ];then

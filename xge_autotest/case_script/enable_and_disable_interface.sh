@@ -17,17 +17,21 @@ function ge_enable_and_disable_interface()
     ssh root@${BACK_IP} "ifconfig ${remote_tp1} up;ifconfig ${remote_tp1} ${remote_tp1_ip}; sleep 5"
     ping ${remote_tp1_ip} -c 5 > ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt &
     sleep 10
+    enableok=0
+    disable0k=0
     cat ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt | grep "received, 0% packet loss" >/dev/null
     if [ $? -eq 0 ];then
        enableok=1
     fi
+    echo "enableok "${enableok}
     ssh root@$BACK_IP "ifconfig ${remote_tp1} down"
     ping ${remote_tp1_ip} -c 5 > ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt &
     sleep 10
     cat ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt | grep "received, 0% packet loss" >/dev/null
-    if [ $? -eq 1 ];then
+    if [ $? -eq 0 ];then
        disableok=1
     fi
+    echo "disableok "${disableok}
     if [ $enableok -eq 1 -a $disableok -eq 1 ];then
 	echo "EN/DIS interface is Success!"
         MESSAGE="PASS"

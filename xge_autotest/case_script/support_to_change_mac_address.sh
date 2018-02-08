@@ -7,18 +7,21 @@
 function ge_mac_address_random_generation()
 {
     Test_Case_Title="ge_mac_address_random_generation"
+    echo "Begin to run "${Test_Case_Title}
     ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
     ssh root@${BACK_IP} "ifconfig ${remote_tp1} up; ifconfig ${remote_tp1} ${remote_tp1_ip}; sleep 5;"
     
-    MacAddress1=$(ifconfig eth1 | grep "HWaddr" | awk '{print $NF}' | tr -d ':')
+    MacAddress1=$(ifconfig ${local_tp1} | grep "HWaddr" | awk '{print $NF}' | tr -d ':')
     
     ifconfig ${local_tp1} down;sleep 5
-    MacAddress2=$(ifconfig eth1 | grep "HWaddr" | awk '{print $NF}' | tr -d ':')
+    MacAddress2=$(ifconfig ${local_tp1} | grep "HWaddr" | awk '{print $NF}' | tr -d ':')
     ifconfig ${local_tp1} up
     if [ "$MacAddress1" = "$MacAddress2" ];then
         MESSAGE="PASS"
+	echo ${MESSAGE}
     else
         MESSAGE="FAIL\t MAC addresses cannot be generated randomly "
+	echo ${MESSAGE}
     fi    
 }
 
@@ -27,6 +30,8 @@ function ge_mac_address_fault_tolerant()
     Test_Case_Title="ge_mac_address_fault_tolerant"
     ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
     ssh root@${BACK_IP} "ifconfig ${remote_tp1} up; ifconfig ${remote_tp1} ${remote_tp1_ip}; sleep 5;"
+    OrgMacAddress1=$(ifconfig ${local_tp1} | grep "HWaddr" | awk '{print $NF}')
+    echo ${OrgMacAddress1}
     gemacvalue="1 3 5 7 9"
     for i in $gemacvalue
     do
@@ -45,6 +50,12 @@ function ge_mac_address_fault_tolerant()
         fi
     done
     MESSAGE="PASS"
+
+    ifconfig ${local_tp1} hw ether ${OrgMacAddress1} | grep "SIOCSIFHWADDR: Cannot assign requested address"
+
+    OrgMacAddress1=$(ifconfig ${local_tp1} | grep "HWaddr" | awk '{print $NF}')
+    echo "Recover mac as "${OrgMacAddress1}
+    
 }
 
 function ge_set_standard_mac_address()
@@ -97,10 +108,10 @@ function xge_mac_address_random_generation()
     ifconfig ${local_fibre1} up; ifconfig ${local_fibre1} ${local_fibre1_ip}
     ssh root@${BACK_IP} "ifconfig ${remote_fibre1} up; ifconfig ${remote_fibre1} ${remote_fibre1_ip}; sleep 5;"
     
-    MacAddress1=$(ifconfig eth1 | grep "HWaddr" | awk '{print $NF}' | tr -d ':')
+    MacAddress1=$(ifconfig ${local_tp1} | grep "HWaddr" | awk '{print $NF}' | tr -d ':')
     
     ifconfig ${local_fibre1} down;sleep 5
-    MacAddress2=$(ifconfig eth1 | grep "HWaddr" | awk '{print $NF}' | tr -d ':')
+    MacAddress2=$(ifconfig ${local_tp1} | grep "HWaddr" | awk '{print $NF}' | tr -d ':')
     ifconfig ${local_fibre1} up
     if [ "$MacAddress1" = "$MacAddress2" ];then
         MESSAGE="PASS"
