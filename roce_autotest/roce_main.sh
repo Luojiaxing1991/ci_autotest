@@ -54,14 +54,17 @@ function main()
 	done
 }
 
-# Output log file header
-writeLogHeader
-
+#get BACK_IP according host's ip
 Init_Net_Ip
 
 TrustRelation ${BACK_IP}
 
+Set_Test_Ip
+
 copy_tool_so
+
+# Output log file header
+writeLogHeader
 
 main
 

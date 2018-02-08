@@ -5,9 +5,9 @@
 #OUT:N/A
 function gid-ip()
 {
-	local roceip=`ifconfig eth3 | grep -Po "(?<=(inet addr:))(.*)(?=(  Bcast))"`
-	local gid7=`cat /sys/class/infiniband/hns_0/ports/2/gids/1 | awk -F ':' '{print $7}'`
-	local gid8=`cat /sys/class/infiniband/hns_0/ports/2/gids/1 | awk -F ':' '{print $8}'`
+	local roceip=`ifconfig $LOCAL_ETHX | grep -Po "(?<=(inet addr:))(.*)(?=(  Bcast))"`
+	local gid7=`cat /sys/class/infiniband/hns_0/ports/${ROCE_PORT}/gids/1 | awk -F ':' '{print $7}'`
+	local gid8=`cat /sys/class/infiniband/hns_0/ports/${ROCE_PORT}/gids/1 | awk -F ':' '{print $8}'`
 
 	local ip1=`printf %02x $(echo $roceip | awk -F '.' '{print $1}')`
 	local ip2=`printf %02x $(echo $roceip | awk -F '.' '{print $2}')`
