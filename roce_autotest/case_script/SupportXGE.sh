@@ -5,62 +5,85 @@
 #OUT:N/A
 function SupportXGE()
 {
-	local HOSTIP=`ifconfig eth3|grep -Po "(?<=(inet addr:))(.*)(?=(Bcast))"`
-	ethtool eth3 | grep "10000Mb/s" > /dev/null
-	[ $? != 0 ] && writeFail "The eth3 on Server isn't XGE!" && return 1
+	ethtool $LOCAL_ETHX | grep "10000Mb/s" > /dev/null
+	[ $? != 0 ] && MESSAGE="FAIL\tThe $LOCAL_ETHX on Server isn't XGE!" && return 1
 
-	ssh root@${BACK_IP} "ethtool eth3 > ${FUNCNAME}_client.log"
-	scp root@${BACK_IP}:${FUNCNAME}_client.log ./
+	XGE_Flag=`ssh root@${BACK_IP} "ethtool $REMOTE_ETHX | grep -c '10000Mb/s'" `
 
-	grep "10000Mb/s" ${FUNCNAME}_client.log > /dev/null
-	[ $? != 0 ] && writeFail "The eth3 on Client isn't XGE!" && return 1
+	if [ $XGE_Flag != 1 ]
+	then
+		MESSAGE="FAIL\tThe $REMOTE_ETHX on Client isn't XGE!"
+		return 1
+	fi
+}
+
+function Send_On_XGE()
+{
+	SupportXGE
+	[ $? != 0 ] && return 1
 
 	pushd ${ROCE_CASE_DIR}/perftest/
 
-	#echo "send on XGE port"
-	./ib_send_bw -i 2 > /dev/null 2>&1 &
-	SendFlag=`ssh root@${BACK_IP} "./${CASEPATH}/ib_send_bw -i 2 ${HOSTIP} | grep -c "65536" " `
+	./ib_send_bw -i $ROCE_PORT > /dev/null 2>&1 &
+	SendFlag=`ssh root@${BACK_IP} "./${CASEPATH}/ib_send_bw -i $ROCE_PORT ${local_port_ip[$ROCE_PORT]} | grep -c "65536" " `
+	wait
+
 	if [ $SendFlag == 1 ]
 	then
-		writePass "send on XGE port OK!"
+		MESSAGE="PASS"
 	else
-		writeFail "send on XGE port fail!"
-	fi
-
-	#echo "RDMA read on XGE port"
-	./ib_read_bw -i 2 > /dev/null 2>&1 &
-	ReadFlag=`ssh root@${BACK_IP} "./${CASEPATH}/ib_read_bw -i 2 ${HOSTIP} | grep -c "65536" " `
-	if [ $ReadFlag == 1 ]
-	then
-		writePass "read on XGE port OK!"
-	else
-		writeFail "read on XGE port fail!"
-	fi
-
-	#echo "RDMA write on XGE port"
-	./ib_write_bw -i 2 > /dev/null 2>&1 &
-	WriteFlag=`ssh root@${BACK_IP} "./${CASEPATH}/ib_write_bw -i 2 ${HOSTIP} | grep -c "65536" " `
-	if [ $WriteFlag == 1 ]
-	then
-		writePass "write on XGE port OK!"
-	else
-		writeFail "write on XGE port fail!"
+		MESSAGE= "FAIL\tsend on XGE port fail!"
 	fi
 
 	popd
+}
 
-	return 0
+function Read_On_XGE()
+{
+	SupportXGE
+	[ $? != 0 ] && return 1
+
+	pushd ${ROCE_CASE_DIR}/perftest/
+
+	./ib_read_bw -i $ROCE_PORT > /dev/null 2>&1 &
+	ReadFlag=`ssh root@${BACK_IP} "./${CASEPATH}/ib_read_bw -i $ROCE_PORT ${local_port_ip[$ROCE_PORT]} | grep -c "65536" " `
+	wait
+
+	if [ $ReadFlag == 1 ]
+	then
+		MESSAGE="PASS"
+	else
+		MESSAGE= "FAIL\tread on XGE port fail!"
+	fi
+
+	popd
+}
+
+function Write_On_XGE()
+{
+	SupportXGE
+	[ $? != 0 ] && return 1
+
+	pushd ${ROCE_CASE_DIR}/perftest/
+
+	./ib_write_bw -i $ROCE_PORT > /dev/null 2>&1 &
+	WriteFlag=`ssh root@${BACK_IP} "./${CASEPATH}/ib_write_bw -i $ROCE_PORT ${local_port_ip[$ROCE_PORT]} | grep -c "65536" " `
+	wait
+
+	if [ $WriteFlag == 1 ]
+	then
+		MESSAGE="PASS"
+	else
+		MESSAGE= "FAIL\twrite on XGE port fail!"
+	fi
+
+	popd
 }
 
 function main()
 {
-	JIRA_ID="PV-1482"
-	Designed_Requirement_ID="R.ROCE.F030.A"
-	Test_Case_ID="ST-ROCE-89/90/91"
-	Test_Item="Support of XGE"
-	Test_Case_Title=""
-
-	SupportXGE
+	# call the implementation of the automation use cases
+	test_case_function_run
 }
 main
 

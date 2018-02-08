@@ -41,7 +41,26 @@ function Init_Net_Ip()
 	done
 	echo "The slave ip is ${BACK_IP}"
 
-	init_net_export
+        init_net_export
+}
+
+# set ip for testing
+# IN : NA
+# OUT: NA
+function Set_Test_Ip()
+{
+	#set local ip for testing
+	ifconfig $LOCAL_ETHX ${local_port_ip[$ROCE_PORT]}
+
+	#get the net's port according the roce's port
+	REMOTE_ETHX=`ssh root@${BACK_IP} "cat /sys/class/infiniband/hns_0/ports/${ROCE_PORT}/gid_attrs/ndevs/0" `
+
+	#set remote ip for testing
+	ssh root@${BACK_IP} "ifconfig ${LOCAL_ETHX} ${remote_port_ip[$ROCE_PORT]}"
+
+	#check the network is ok
+	ping ${remote_port_ip[$ROCE_PORT]} -c 6 > /dev/null
+	[ $? != 0 ] && echo "The network isn't working between local $LOCAL_ETHX and remote $REMOTE_ETHX, please check!" && exit 1
 }
 
 # Establish a relationship of mutual trust between two boards
@@ -90,6 +109,11 @@ function copy_tool_so()
 	scp roce-test client-auto-5-2 root@${BACK_IP}:${CASEPATH}/
 
 	pushd test
+
+	#modify the ib_port and servername according to the user's configuration
+	sed -i "/ib_port/s/^[0-9.]\+\([ \t]\+\)/${ROCE_PORT}\1/" *
+	sed -i "/servername/s/^[0-9.]\+\([ \t]\+\)/${local_port_ip[$ROCE_PORT]}\1/" *
+
 	scp * root@${BACK_IP}:${CASEPATH}/
 	popd
 
@@ -100,7 +124,7 @@ function copy_tool_so()
 
 	popd
 
-#config for the roce's kernel driver
+	#config for the roce's kernel driver
 	if [ ! -d /usr/local/etc/libibverbs.d ]
 	then
 		mkdir -p /usr/local/etc/libibverbs.d

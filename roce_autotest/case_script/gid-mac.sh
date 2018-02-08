@@ -5,10 +5,10 @@
 #OUT:N/A
 function gid-mac()
 {
-	local gid7=`cat /sys/class/infiniband/hns_0/ports/2/gids/0 | awk -F ':' '{print $7}' | cut -c3-`
-	local gid8=`cat /sys/class/infiniband/hns_0/ports/2/gids/0 | awk -F ':' '{print $8}'`
+	local gid7=`cat /sys/class/infiniband/hns_0/ports/${ROCE_PORT}/gids/0 | awk -F ':' '{print $7}' | cut -c3-`
+	local gid8=`cat /sys/class/infiniband/hns_0/ports/${ROCE_PORT}/gids/0 | awk -F ':' '{print $8}'`
 
-	local hwaddr=`ifconfig eth3 | grep -Po "(?<=(HWaddr ))(.*)(?=(  ))"`
+	local hwaddr=`ifconfig $LOCAL_ETHX | grep -Po "(?<=(HWaddr ))(.*)(?=(  ))"`
 	local mac4=`echo $hwaddr | awk -F ':' '{print $(NF-2)}'`
 	local mac5=`echo $hwaddr | awk -F ':' '{print $(NF-1)}'`
 	local mac6=`echo $hwaddr | awk -F ':' '{print $NF}'`
