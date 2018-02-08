@@ -173,3 +173,11 @@ function setTrustRelation()
     return 0
 }
 
+function determine_iperf_exists()
+{
+    local_iperf_tools=$(which iperf)
+    remote_iperf_tool=$(ssh root@${BACK_IP} "which iperf")
+    if [ x"$local_iperf_tools" == x"" -o x"$remote_iperf_tool" == x"" ];then
+        return 1
+    fi
+}
