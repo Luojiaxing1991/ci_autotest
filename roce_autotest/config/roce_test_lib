@@ -1,6 +1,27 @@
 #!/bin/bash
 #
 
+function init_net_export()
+{
+    echo "Begin to check eth rename info!"
+
+    #we update the eth rename info to eth_map,then update TP/FIBRE info
+    tmp_tp=0
+    tmp_fi=0
+    for i in ${!eth_map[*]}
+    do
+         tmp=`dmesg | grep -i "renamed from "${i} -w`
+	 if [ x"${tmp}" == x"" ]
+	 then
+		 echo "The name of "${i}" is not renamed,Stay as "${eth_map[${i}]} 
+	 else
+	         tmp=`echo ${tmp%:*}`
+	         tmp=`echo ${tmp##* }`
+	         eth_map[${i}]=${tmp}
+	         echo "The name of "${i}" is renamed as "${eth_map[${i}]}
+	 fi
+    done
+}
 #get the eth0's ip in server and client
 #IN	: NA
 #OUT: NA
@@ -19,6 +40,8 @@ function Init_Net_Ip()
 		fi
 	done
 	echo "The slave ip is ${BACK_IP}"
+
+	init_net_export
 }
 
 # Establish a relationship of mutual trust between two boards
