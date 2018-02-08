@@ -11,7 +11,7 @@ function ge_read_phy_register()
     echo "Begin to run "${Test_Case_Title}
     ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
     mii-tool ${local_tp1} -v > ${HNS_TOP_DIR}/data/log/read_phy_register.txt
-    if [ $? -eq 0 ]
+    if [ $? -eq 0 ];then
         MESSAGE="PASS"
 	echo ${MESSAGE}
     else
@@ -37,17 +37,19 @@ function ge_iperf_read_phy_register()
     fi
     
     ssh root@${BACK_IP} 'ifconfig '${remote_tp1}' up; ifconfig '${remote_tp1}' '${remote_tp1_ip}'; sleep 5;iperf -s >/dev/null 2>&1 &'
-    iperf -c ${remote_tp1} -t 3600 -i 1 -P 3 > ${HNS_TOP_DIR}/data/log/ge_iperf_read_phy_register.txt &
+    iperf -c ${remote_tp1_ip} -t 3600 -i 1 -P 3 > ${HNS_TOP_DIR}/data/log/ge_iperf_read_phy_register.txt &
     mii-tool ${local_tp1} -r
     sleep 1
     bandwidth1=$(cat ${HNS_TOP_DIR}/data/log/ge_iperf_read_phy_register.txt | tail -1 | awk '{print $(NF-1)}')
+    echo $bandwidth1
     if [ $bandwidth1 -eq 0 ];then
         enableok=1
     fi
     echo "Check enableok "${enableok}
     sleep 10
     bandwidth2=$(cat ${HNS_TOP_DIR}/data/log/ge_iperf_read_phy_register.txt | tail -1 | awk '{print $(NF-1)}')
-    if [ $bandwidth2 -eq 0 ];then
+    echo $bandwidth2
+    if [ $bandwidth2 -gt 0 ];then
         disableok=1
     fi
     echo "Check disableok "${disableok}
@@ -67,7 +69,7 @@ function xge_read_phy_register()
     echo ${Test_Case_Title}
     ifconfig ${remote_fibre1} up; ifconfig ${remote_fibre1} ${remote_fibre1_ip}
     mii-tool ${remote_fibre1} -v | grep "failed: Invalid argument" > ${HNS_TOP_DIR}/data/log/xge_read_phy_register.txt
-    if [ $? -eq 0 ]
+    if [ $? -eq 0 ];then
         MESSAGE="PASS"
 	echo ${MESSAGE}
     else
