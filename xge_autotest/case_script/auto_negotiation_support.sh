@@ -26,6 +26,7 @@ function ge_restarts_auto_negotiation()
         cat ${HNS_TOP_DIR}/data/log/ge_restarts_auto_negotiation.txt | grep "received, 0% packet loss" >/dev/null
         if [ $? -eq 0 ];then
             enableok=1
+	    echo $enableok
         fi
         ifconfig ${local_tp1} down
         ethtool -r ${local_tp1}
@@ -38,6 +39,9 @@ function ge_restarts_auto_negotiation()
         if [ $? -eq 0 ];then
             disableok=1
         fi
+	echo "The result of Enable net is "$enableok
+	echo "The result of disable net is "$disableok
+
         if [ $enableok -eq 0 ] || [ $disableok -eq 0 ];then
             MESSAGE="FAIL\t auto negotiation fail"
 	    echo ${MESSAGE}
