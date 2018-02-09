@@ -7,6 +7,7 @@
 function ge_query_link_state()
 {
     Test_Case_Title="ge_query_link_state"
+    echo "Begin to run "${Test_Case_Title}
     ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
     ssh root@${BACK_IP} "ifconfig ${remote_tp1} up; ifconfig ${remote_tp1} ${remote_tp1_ip}; sleep 5;"
     
@@ -37,15 +38,20 @@ function ge_query_link_state()
     ifconfig ${local_tp1} up
     for ((i=1;i<=10;i++));
     do
+	echo $i
         enableok=0
         disableok=0
         ssh root@${BACK_IP} "ifconfig ${remote_tp1} down"
+	if [ $i -gt 1  ];then
+		sleep 5
+	fi
         LinkState=$(ethtool ${local_tp1} | grep "Link detected:" | awk -F":" '{print $NF}' | tr -d ' ')
         if [ "$LinkState" = "no" ];then
             enableok=1
         fi
         
         ssh root@${BACK_IP} "ifconfig ${remote_tp1} up"
+	sleep 5
         LinkState=$(ethtool ${local_tp1} | grep "Link detected:" | awk -F":" '{print $NF}' | tr -d ' ')
         if [ "$LinkState" = "yes" ];then
             disableok=1
@@ -56,7 +62,10 @@ function ge_query_link_state()
             MESSAGE="FAIL\t Ping packet failure"
             break
         fi
+	echo $enableok
+	echo $disableok
     done
+    echo ${MESSAGE}
 }
 
 function ge_link_state_fault_tolerant()

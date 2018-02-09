@@ -9,7 +9,7 @@ function ge_ipv6_ping_pack()
     Test_Case_Title="ge_ipv6_ping_pack"
     ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
     ssh root@${BACK_IP} "ifconfig ${remote_tp1} up; ifconfig ${remote_tp1} ${remote_tp1_ip}; sleep 5;"
-    RemoteIpv6Address=$(ssh root@BACK_IP "ifconfig eth1 | grep "inet6" | awk '{print $(NF-1)}' | awk -F'/' '{print $1}'") 
+    RemoteIpv6Address=$(ssh root@${BACK_IP} "ifconfig "${remote_tp1}" | grep 'inet6' | awk '{print $(NF-1)}' | awk -F'/' '{print $1}'") 
     ping6 ${RemoteIpv6Address}%${local_tp1} -c 5 > ${HNS_TOP_DIR}/data/log/ipv6_ping_pack.txt &
     cat ${HNS_TOP_DIR}/data/log/ipv6_ping_pack.txt | grep "received, 0% packet loss" >/dev/null
     if [ $? -eq 0 ];then

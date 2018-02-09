@@ -7,9 +7,11 @@
 function ge_query_ring_parameter_gettings()
 {
     Test_Case_Title="ge_query_ring_parameter_gettings"
+    echo "Begin to run "${Test_Case_Title}
     ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
     ssh root@${BACK_IP} "ifconfig ${remote_tp1} up; ifconfig ${remote_tp1} ${remote_tp1_ip}; sleep 5;"
-    
+    MESSAGE="PASS"
+
     enableok=0
     disableok=0
     for ((i=1;i<=10;i++));
@@ -17,6 +19,7 @@ function ge_query_ring_parameter_gettings()
         ifconfig ${local_tp1} down
         RingParameter=$(ethtool -g ${local_tp1} | grep "\(RX:\|TX:\)" | awk '{print $NF}')
         for i in $RingParameter
+	do
             if [ "$i" = "1024" ];then
                 enableok=1
             fi
@@ -24,6 +27,7 @@ function ge_query_ring_parameter_gettings()
         ifconfig ${local_tp1} up
         RingParameter=$(ethtool -g ${local_tp1} | grep "\(RX:\|TX:\)" | awk '{print $NF}')
         for i in $RingParameter
+	do
             if [ "$i" = "1024" ];then
                 disableok=1
             fi
@@ -32,7 +36,7 @@ function ge_query_ring_parameter_gettings()
             MESSAGE="FAIL\t ring parameter query fail"
         fi
     done
-    MESSAGE="PASS"
+    echo ${MESSAGE}
 }
 
 function query_ring_parameter_fault_tolerant()
@@ -60,6 +64,7 @@ function xge_query_ring_parameter_gettings()
         ifconfig ${local_fibre1} down
         RingParameter=$(ethtool -g ${local_fibre1} | grep "\(RX:\|TX:\)" | awk '{print $NF}')
         for i in $RingParameter
+	do
             if [ "$i" = "1024" ];then
                 enableok=1
             fi
@@ -67,6 +72,7 @@ function xge_query_ring_parameter_gettings()
         ifconfig ${local_fibre1} up
         RingParameter=$(ethtool -g ${local_fibre1} | grep "\(RX:\|TX:\)" | awk '{print $NF}')
         for i in $RingParameter
+	do
             if [ "$i" = "1024" ];then
                 disableok=1
             fi
