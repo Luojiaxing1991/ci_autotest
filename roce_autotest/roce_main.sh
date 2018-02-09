@@ -18,13 +18,13 @@ function main()
 {
     Module_Name="ROCE"
     echo "Begin to run "$Module_Name" test"
-	local MaxRow=$(sed -n '$=' "${TEST_CASE_DB_FILE}")
+	local MaxRow=$(sed -n '$=' "${ROCE_TOP_DIR}/${TEST_CASE_DB_FILE}")
 	local RowNum=0
 
 	while [ ${RowNum} -lt ${MaxRow} ]
 	do
 		let RowNum+=1
-		local line=$(sed -n "${RowNum}p" "${TEST_CASE_DB_FILE}")
+		local line=$(sed -n "${RowNum}p" "${ROCE_TOP_DIR}/${TEST_CASE_DB_FILE}")
 
 		exec_script=`echo "${line}" | awk -F '\t' '{print $6}'`
 		TEST_CASE_FUNCTION_NAME=`echo "${line}" | awk -F '\t' '{print $7}'`
