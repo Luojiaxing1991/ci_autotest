@@ -14,8 +14,8 @@
             },
             "parameters": {
                 "bootloadertype": "ipxe",
-                "dtb": "http://localhost:8083/debug-plinth-ci/debug-roce-4.15.0+_+20180209/arm64_debug/hip07-d05.dtb",
-                "kernel": "http://localhost:8083/debug-plinth-ci/debug-roce-4.15.0+_+20180209/arm64_debug/Image",
+                "dtb": "http://localhost:8083/debug-plinth-ci/debug-roce-4.15.0+_+20180209/arm64-debug/hip07-d05.dtb",
+                "kernel": "http://localhost:8083/debug-plinth-ci/debug-roce-4.15.0+_+20180209/arm64-debug/Image",
                 "target_type": "ubuntu"
             }
         },
