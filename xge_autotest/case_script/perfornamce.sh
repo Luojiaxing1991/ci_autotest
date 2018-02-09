@@ -4,9 +4,9 @@ IPERFDIR="iperf_log"
 NETPERFDIR="netperf_log"
 QPERFDIR="qperf_log"
 
-NETPORT1="$remote_fibre1"
+NETPORT1="$remote_tp1"
 NETPORT2="$remote_fibre2"
-NETPORTLIST="$remote_fibre1 $remote_fibre2"
+NETPORTLIST="$remote_tp1 $remote_fibre2"
 
 #ipv6 config
 
@@ -270,7 +270,7 @@ function iperf_single()
             for owNum in $THREAD
             do
                 echo "Run single port $netport ${owNum}thread......"
-                iperf -c ${remote_fibre1_ip} -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/single_one-way_${netport}_${owNum}thread.log
+                iperf -c ${remote_tp1_ip} -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/single_one-way_${netport}_${owNum}thread.log
                 check_single_process
                 data_integration
             done
@@ -279,30 +279,31 @@ function iperf_single()
             for owNum in $THREAD
             do
                 echo "Run single port $netport ${owNum}thread......"
-                iperf -c ${remote_fibre2_ip} -t $IPERFDURATION -i 1 -P $owNum > $LOG_DIR/$IPERFDIR/single_one-way_${netport}_${owNum}thread.log
-                check_single_process
-                data_integration
+               # iperf -c ${remote_fibre2_ip} -t $IPERFDURATION -i 1 -P $owNum > $LOG_DIR/$IPERFDIR/single_one-way_${netport}_${owNum}thread.log
+               # check_single_process
+               # data_integration
             done
             sleep 5
         fi
     done
     sleep 5
-
+    if [ "ss" = "fefe"  ];then
     #two-way perfornamce
-    ssh root@$BACK_IP "killall iperf;iperf -s >/dev/null 2>&1 &"
-    echo "#############################"
-    echo "Run iperf Single port two-way..."
-    echo "#############################"
-    SendPyte="SingleTwo"
-    for twNum in $THREAD
-    do
+      ssh root@$BACK_IP "killall iperf;iperf -s >/dev/null 2>&1 &"
+      echo "#############################"
+      echo "Run iperf Single port two-way..."
+      echo "#############################"
+      SendPyte="SingleTwo"
+      for twNum in $THREAD
+      do
         echo "Run single port two-way ${twNum}thread......"
         iperf -c ${remote_fibre1_ip} -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Single_two-way_${NETPORT1}_${twNum}thread.log &
         iperf -c ${remote_fibre2_ip} -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Single_two-way_${NETPORT2}_${twNum}thread.log &
         sleep 25
         check_single_process
         data_integration
-    done
+      done
+    fi
 }
 
 function iperf_dual()
@@ -529,10 +530,13 @@ fi
 prepare_log_dir
 
 #ifconfig IP
-ifconfig $NETPORT1 ${local_fibre1_ip}
-ifconfig $NETPORT2 ${local_fibre2_ip}
+ifconfig $local_tp1 ${local_tp1_ip}
+ifconfig $local_fibr2 ${local_fibre2_ip}
 ssh root@$BACK_IP "ifconfig $NETPORT1 ${remote_fibre1_ip};ifconfig $NETPORT2 ${remote_fibre2_ip};"
-
+iperf_single
+iperf_dual
+ssh root@$BACK_IP "killall iperf" 
+   
 case $test_type in 
 "all")
     echo "testing  iperf ..."
