@@ -12,11 +12,11 @@ function fun_perf_list()
   cat $msum $mflag
   if [ `cat /proc/cmdline | grep "acpi=force" | wc -l` -ne 1 ];then
     mflag=0
-    MESSAGE="Fail"
+    MESSAGE="Fail\t No ACPI Support!"
   else
     if [ $msum -le 0 ];then
       mflag=0
-      MESSAGE="Fail"
+      MESSAGE="Fail\t No $1 Perf Support Event!"
     else 
       mflag=1
     fi

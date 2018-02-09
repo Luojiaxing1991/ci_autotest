@@ -1,0 +1,105 @@
+#           time             counts unit events
+     0.200104453      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     0.200104453               3092      hisi_ddrc0_3/flux_write/ 
+     0.400253712      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     0.400253712               5078      hisi_ddrc0_3/flux_write/ 
+     0.600455631      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     0.600455631               7106      hisi_ddrc0_3/flux_write/ 
+     0.800557097      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     0.800557097               9670      hisi_ddrc0_3/flux_write/ 
+     1.000657445      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     1.000657445              12124      hisi_ddrc0_3/flux_write/ 
+     1.200757793      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     1.200757793              13890      hisi_ddrc0_3/flux_write/ 
+     1.400858221      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     1.400858221              15710      hisi_ddrc0_3/flux_write/ 
+     1.600955610      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     1.600955610              17526      hisi_ddrc0_3/flux_write/ 
+     1.801055909      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     1.801055909              19282      hisi_ddrc0_3/flux_write/ 
+     2.001155309      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     2.001155309              21124      hisi_ddrc0_3/flux_write/ 
+     2.201254610      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     2.201254610              22844      hisi_ddrc0_3/flux_write/ 
+     2.401353830      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     2.401353830              24654      hisi_ddrc0_3/flux_write/ 
+     2.601452711      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     2.601452711              26498      hisi_ddrc0_3/flux_write/ 
+     2.801551603      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     2.801551603              28216      hisi_ddrc0_3/flux_write/ 
+     3.001650955      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     3.001650955              30254      hisi_ddrc0_3/flux_write/ 
+     3.201750127      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     3.201750127              31998      hisi_ddrc0_3/flux_write/ 
+     3.401849419      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     3.401849419              33748      hisi_ddrc0_3/flux_write/ 
+     3.601948071      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     3.601948071              36704      hisi_ddrc0_3/flux_write/ 
+     3.802047334      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     3.802047334              41684      hisi_ddrc0_3/flux_write/ 
+     4.002146177      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     4.002146177              46632      hisi_ddrc0_3/flux_write/ 
+     4.202244579      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     4.202244579              51570      hisi_ddrc0_3/flux_write/ 
+     4.402343842      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     4.402343842              56654      hisi_ddrc0_3/flux_write/ 
+     4.602443324      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     4.602443324              61850      hisi_ddrc0_3/flux_write/ 
+     4.802542317      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     4.802542317              66880      hisi_ddrc0_3/flux_write/ 
+     5.002640909      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     5.002640909              71832      hisi_ddrc0_3/flux_write/ 
+#           time             counts unit events
+     5.202740661      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     5.202740661              76864      hisi_ddrc0_3/flux_write/ 
+     5.402841432      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     5.402841432              81904      hisi_ddrc0_3/flux_write/ 
+     5.602938184      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     5.602938184              87214      hisi_ddrc0_3/flux_write/ 
+     5.803068174      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     5.803068174              92246      hisi_ddrc0_3/flux_write/ 
+     6.003167375      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     6.003167375              97340      hisi_ddrc0_3/flux_write/ 
+     6.203267434      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     6.203267434             102918      hisi_ddrc0_3/flux_write/ 
+     6.403367234      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     6.403367234             107958      hisi_ddrc0_3/flux_write/ 
+     6.603467034      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     6.603467034             113132      hisi_ddrc0_3/flux_write/ 
+     6.803566348      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     6.803566348             118136      hisi_ddrc0_3/flux_write/ 
+     7.003665136      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     7.003665136             123098      hisi_ddrc0_3/flux_write/ 
+     7.203764843      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     7.203764843             128070      hisi_ddrc0_3/flux_write/ 
+     7.403863691      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     7.403863691             133030      hisi_ddrc0_3/flux_write/ 
+     7.603963078      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     7.603963078             138142      hisi_ddrc0_3/flux_write/ 
+     7.804061880      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     7.804061880             143020      hisi_ddrc0_3/flux_write/ 
+     8.004161594      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     8.004161594             147946      hisi_ddrc0_3/flux_write/ 
+     8.204260968      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     8.204260968             152884      hisi_ddrc0_3/flux_write/ 
+     8.404460488      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     8.404460488             157814      hisi_ddrc0_3/flux_write/ 
+     8.604559903      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     8.604559903             162932      hisi_ddrc0_3/flux_write/ 
+     8.804659287      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     8.804659287             167868      hisi_ddrc0_3/flux_write/ 
+     9.004758887      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     9.004758887             172796      hisi_ddrc0_3/flux_write/ 
+     9.204858607      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     9.204858607             177756      hisi_ddrc0_3/flux_write/ 
+     9.404957468      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     9.404957468             182698      hisi_ddrc0_3/flux_write/ 
+     9.605054209      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     9.605054209             187778      hisi_ddrc0_3/flux_write/ 
+     9.805154419      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+     9.805154419             192724      hisi_ddrc0_3/flux_write/ 
+    10.005254024      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+    10.005254024             197890      hisi_ddrc0_3/flux_write/ 
+#           time             counts unit events
+    10.032725639      <not counted>      hisi_ddrc0_1/flux_read_cmd/  (0.00%)
+    10.032725639             198684      hisi_ddrc0_3/flux_write/ 
