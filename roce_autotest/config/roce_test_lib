@@ -151,10 +151,11 @@ function test_case_function_run()
 	if [ x"${TEST_CASE_FUNCTION_SWITCH}" == x"on" ]
 	then
 		${TEST_CASE_FUNCTION_NAME}
+		lava-test-case "${TEST_CASE_TITLE}" --result pass
 	else
 		MESSAGE="BLOCK\tno automated use cases were implemented."
 	fi
-	writePass "ROCE" "${TEST_CASE_TITLE"
+	#writePass "ROCE" "${TEST_CASE_TITLE"
 }
 
 # Output log file header

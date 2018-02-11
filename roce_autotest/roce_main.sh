@@ -47,7 +47,7 @@ function main()
 				if [ x"${TEST_CASE_FUNCTION_SWITCH}" == x"on"  ]
 				then
 			        	echo "Begint to run test "${TEST_CASE_TITLE}
-					#source ${ROCE_CASE_DIR}/${exec_script}
+					source ${ROCE_CASE_DIR}/${exec_script}
 				else
 					echo "Skip the script!"
 				fi
@@ -55,7 +55,7 @@ function main()
 		fi
 		echo -e "${line}${MESSAGE}" >> ${ROCE_TOP_DIR}/${OUTPUT_TEST_DB_FILE}
 		MESSAGE=""
-		echo "Finish test: "${TEST_CASE_TITLE}
+		echo "Done test: "${TEST_CASE_TITLE}
 	done
 }
 

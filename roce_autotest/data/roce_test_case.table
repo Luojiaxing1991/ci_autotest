@@ -66,7 +66,7 @@ PV-287	R.ROCE.F010.A	ST-ROCE-78	Verify basic RoCE function	Configure GID accordi
 PV-340	R.ROCE.F011.A	ST-ROCE-79	Verify basic RoCE feature	Get device attribute	codecase.sh	codecase	off	
 PV-341	R.ROCE.F012.A	ST-ROCE-80	Verify basic RoCE feature	Get port information	codecase.sh	codecase	off	
 PV-963	R.ROCE.F013.A	ST-ROCE-81	Verify basic RoCE feature	Get GID information	codecase.sh	codecase	off	
-PV-352	R.ROCE.F024.A	ST-ROCE-82	Verify Completion Event	 Request completion notification on a CQ and get CQ completion event.	Support_Completion_Event.sh	Completion_Event	on	
+PV-352	R.ROCE.F024.A	ST-ROCE-82	Verify Completion Event	 Request completion notification on a CQ and get CQ completion event.	Completion_Event.sh	Completion_Event	on	
 PV-343	R.ROCE.F015.A	ST-ROCE-83	Verify create and destroy AH	Creat AH ,then destroy it	codecase.sh	codecase	off	
 PV-1827	R.ROCE.N004.B	ST-ROCE-84	Support RoCEv1 in hi161x	Verify RoCEv1 in hi161x	codecase.sh	codecase	off	
 PV-366	R.ROCE.N006.B	ST-ROCE-85	Verify rocee is Linux platform device	Check platform device	platformdev.sh	platformdev	on	
