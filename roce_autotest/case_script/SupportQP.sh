@@ -5,7 +5,6 @@
 #OUT:N/A
 function Up_to_256k_QP()
 {
-	Test_Case_ID="ST-ROCE-59"
 	pushd ${ROCE_CASE_DIR}
 
 	./roce-test -m 2 -s 13 -e 13 -r -f test/test_case_list_server > ${FUNCNAME}_server.log &
@@ -16,16 +15,14 @@ function Up_to_256k_QP()
 
 	if [ $ServerFlag == 1 -a $ClientFlag == 1 ]
 	then
-		writePass "Verify Up to 256k QPs success"
+		MESSAGE="PASS"
 		rm ${FUNCNAME}_server.log log_00*
-		ssh root@${BACK_IP} "rm ${FUNCNAME}_client.log log_00*"
+		ssh root@${BACK_IP} "rm ${FUNCNAME}_client.log ${CASEPATH}/log_00*"
 	else
-		writeFail "Verify Up to 256k QPs fail, please check!!!"
+		MESSAGE="FAIL\tVerify Up to 256k QPs fail, please check log!"
 	fi
 
 	popd
-
-	return 0
 }
 
 #Verify that the maximum depth of QP's WQE is 16383
@@ -33,7 +30,6 @@ function Up_to_256k_QP()
 #OUT:N/A
 function Max_QP_WQE_Depth()
 {
-	Test_Case_ID="ST-ROCE-61"
 	pushd ${ROCE_CASE_DIR}
 
 	./roce-test -m 2 -s 14 -e 14 -r -f test/test_case_list_server > ${FUNCNAME}_server.log &
@@ -44,16 +40,14 @@ function Max_QP_WQE_Depth()
 
 	if [ $ServerFlag == 1 -a $ClientFlag == 1 ]
 	then
-		writePass "Verify max QP's WQE depth success"
+		MESSAGE="PASS"
 		rm ${FUNCNAME}_server.log log_00*
-		ssh root@${BACK_IP} "rm ${FUNCNAME}_client.log log_00*"
+		ssh root@${BACK_IP} "rm ${FUNCNAME}_client.log ${CASEPATH}/log_00*"
 	else
-		writeFail "Verify max QP's WQE depth, please check!!!"
+		MESSAGE="FAIL\tVerify max QP's WQE depth, please check log!"
 	fi
 
 	popd
-
-	return 0
 }
 
 #Verify that the depth of QP's WQE supports 1
@@ -61,7 +55,6 @@ function Max_QP_WQE_Depth()
 #OUT:N/A
 function QP_WQE_One_Depth()
 {
-	Test_Case_ID="ST-ROCE-63"
 	pushd ${ROCE_CASE_DIR}
 
 	./roce-test -m 2 -s 27 -e 27 -r -f test/test_case_list_server > ${FUNCNAME}_server.log &
@@ -72,30 +65,20 @@ function QP_WQE_One_Depth()
 
 	if [ $ServerFlag == 1 -a $ClientFlag == 1 ]
 	then
-		writePass "Verify QP's WQE depth supports one success"
+		MESSAGE="PASS"
 		rm ${FUNCNAME}_server.log log_00*
-		ssh root@${BACK_IP} "rm ${FUNCNAME}_client.log log_00*"
+		ssh root@${BACK_IP} "rm ${FUNCNAME}_client.log ${CASEPATH}/log_00*"
 	else
-		writeFail "Verify QP's WQE depth supports one failed, please check!!!"                     
+		MESSAGE="FAIL\tVerify QP's WQE depth supports one failed, please check log!"
 	fi
 
 	popd
-
-	return 0
 }
 
 function main()
 {
-	JIRA_ID="PV-344"
-	Designed_Requirement_ID="R.ROCE.F016.A"
-	Test_Item="Support of QP"
-	Test_Case_Title=""
-
-	#Up_to_256k_QP
-
-	Max_QP_WQE_Depth
-
-	QP_WQE_One_Depth
+    # call the implementation of the automation use cases
+	test_case_function_run
 }
 main
 

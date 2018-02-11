@@ -6,29 +6,25 @@
 function CM_connect()
 {
 	pushd ${ROCE_CASE_DIR}
-	./cm-server > ${FUNCNAME}_server.log &
-	ssh root@${BACK_IP} " ./${CASEPATH}/cm-client ${FUNCTION}_client.log "
+	./cm-server -i $ROCE_PORT > ${FUNCNAME}_server.log &
+	Cm_Client_Flag=`ssh root@${BACK_IP} " cd ${CASEPATH}/; ./cm-client -i $ROCE_PORT ${local_port_ip[$ROCE_PORT]} > ../${FUNCTION}_client.log; cd ../; grep -c 'pass: 2' ${FUNCTION}_client.log " `
 	wait
 
-	scp root@${BACK_IP}:${FUNCTION}_client.log ./
+	Cm_Server_Flag=`grep -c 'pass: 2' ${FUNCNAME}_server.log`
 
-	if [ ` grep -c "pass: 2" ${FUNCNAME}_server.log ` -a ` grep -c "pass: 2" ${FUNCTION}_client.log ` ]
+	if [ ${Cm_Server_Flag} == 1 -a ${Cm_Client_Flag} == 1 ]
 	then
-		writePass
+		MESSAGE="PASS"
 	else
-		writeFail
+		MESSAGE="FAIL\tVerify establish connection through RDMA CM failed"
 	fi
 	popd
 }
 
 function main()
 {
-	JIRA_ID="PV-288"
-	Designed_Requirement_ID="R.ROCE.F008.A"
-	Test_Case_ID="ST-ROCE-43"
-	Test_Item="Verify establish connection through RDMA CM"
-	Test_Case_Title="使用RDMA CM方式建立连接"
-	CM_connect
+	# call the implementation of the automation use cases
+	test_case_function_run
 }
 
 main
