@@ -9,41 +9,27 @@
 
 
 #  Output success test case log information
-#  IN : $1 module name
-#       $2 test case title
+#  IN : N/A
 #  OUT: N/A
 function writePass()
 {
     local Test_Result="PASS"
-    #echo "$Module_Name,""$JIRA_ID,""$Designed_Requirement_ID,""$Test_Case_ID,""$Test_Item,""$Test_Case_Title,""$Test_Result" >> ${REPORT_FILE}
+    echo "$Module_Name,""$JIRA_ID,""$Designed_Requirement_ID,""$Test_Case_ID,""$Test_Item,""$Test_Case_Title,""$Test_Result" >> ${REPORT_FILE}
     #This cmd used to report pass result to lava server
-    #lava-test-case ${Module_Name}":"${Test_Case_Title} --result pass
-    echo "Output result for test blow: "
-    module=$1
-    echo ${module}
-    testcase=$2
-    echo ${testcase}
-    lava-test-case "${module}"":""${testcase}" --result pass
+    lava-test-case ${Module_Name}":"${Test_Case_Title} --result pass
     return 0
 }
 
 #  Output fail test case log information
-#  IN : $1 module name 
-#       $2 test case title
+#  IN : $1 Error log information
 #  OUT: N/A
 function writeFail()
 {
     local Test_Result="FAIL"
-    #local Remark="$1"
-    #echo "$Module_Name,""$JIRA_ID,""$Designed_Requirement_ID,""$Test_Case_ID,""$Test_Item,""$Test_Case_Title,""$Test_Result,""$Remark" >> ${REPORT_FILE}
+    local Remark="$1"
+    echo "$Module_Name,""$JIRA_ID,""$Designed_Requirement_ID,""$Test_Case_ID,""$Test_Item,""$Test_Case_Title,""$Test_Result,""$Remark" >> ${REPORT_FILE}
     #This cmd used to report fail result to lava server
-    #lava-test-case ${Module_Name}":"${Test_Case_Title} --result fail
-    echo "Output result for test blow: "
-    module=$1
-    echo ${module}
-    testcase=$2
-    echo ${testcase}
-    lava-test-case "${module}"":""${testcase}" --result fail
+    lava-test-case ${Module_Name}":"${Test_Case_Title} --result fail
     return 0
 }
 
@@ -91,25 +77,28 @@ function setTrustRelation
 #add by hezhongyan
 ##################
 #Alone Functions
-OutLog()
+#g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+#OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${flLog}" false
+OutLogHead()
 {
     local nStatus=${1}
     local sStatus=${2}
-    local sMsg=${3}
-    local flLog=${4:-/dev/null}
-    local bExitErr=${5:-false}
+    local sHead1=${3}
+    local sMsg1=${4}
+    local flLog=${5:-/dev/null}
+    local bExitErr=${6:-false}
 
     local sLogA
     case "${nStatus}" in
     0)
         sStatus=${sStatus:-Info}
-        sLogA=$(printf "%s[%3d]%s[%3d]%5s[${nStatus}]: %s" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO} "${sStatus}" "${sMsg}")
+        sLogA=$(printf "%s%5s[%3d]: %s\n" "${sHead1}" "${sStatus}" "${nStatus}" "${sMsg1}")
         echo "${sLogA}"
         echo "${sLogA}" >> "${flLog}"
         ;;
     *)
         sStatus=${sStatus:-Error}
-        sLogA=$(printf "%s[%3d]%s[%3d]%5s[${nStatus}]: %s" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO} "${sStatus}" "${sMsg}")
+        sLogA=$(printf "%s%5s[%3d]: %s\n" "${sHead1}" "${sStatus}" "${nStatus}" "${sMsg1}")
         echo "${sLogA}" 1>&2
         echo "${sLogA}" >> "${flLog}"
         if [ "${bExitErr}" == "true" ]; then
@@ -118,8 +107,10 @@ OutLog()
         ;;
     esac
 }
-export -f OutLog
+export -f OutLogHead
 
+##########
+#Complex Functions
 LoadSourceFileParent()
 {
     local drCur1=${1}
@@ -129,7 +120,7 @@ LoadSourceFileParent()
     local bExitErr=${5:-true}
 
     if [ -z "${drCur1}" -o -z "${flFind1}" ]; then
-        g_sErrCur="directory or file name is empty"
+        g_sMsgCur="directory or file name is empty"
         eval ${varPaths}=
         return
     fi
@@ -139,8 +130,9 @@ LoadSourceFileParent()
     if [ ! -f "${flPub1}" ]; then
         s1=$(find ${drCur1}/.. ${g_argFindMaxDepth} -type f -name "${flFind1}")
         if [ -z "${s1}" ]; then
-            g_sErrCur="Not found ${flFind1}"
-            OutLog 1 "Error" "${g_sErrCur}" "${flLog}" ${bExitErr}
+            g_sMsgCur="Not found ${flFind1}"
+            g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+            OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${flLog}" "${bExitErr}"
         fi
         flPub1=${s1}
     fi
@@ -148,8 +140,8 @@ LoadSourceFileParent()
 }
 export -f LoadSourceFileParent
 
-##########
-#Complex Functions
+#说明:RunTable 1-Excel文本表 2-要生成的中间结果表 3-脚本所在目录 4-程序打印的日志信息
+#示例:RunTable "data/testcases.table" ~/tmp/status.txt pcie_autotest/case_script ~/tmp/pcie.log
 RunTable()
 {
     local flTableOrigin=${1}
@@ -174,7 +166,13 @@ RunTable()
 
     local sR0 sR1 sLevelR1 sLevelR2 sTTitle1 sTTitle2 sScript1 sScript2 sFuncNa
     local sStatus1 nRt1 bRun1 sLineStatus
-    while read sR0; do
+
+    local nMaxRow nR1
+    nMaxRow=$(sed -n '$=' "${flTableOrigin}")
+    nR1=0
+    while [ ${nR1} -lt ${nMaxRow} ]; do
+        let nR1+=1
+        sR0=$(sed -n "${nR1}p" "${flTableOrigin}")
         sR1=$(echo "${sR0}" |sed "s/^[ \t]\+//;s/[ \t\r]\+\$//")
         if [ -z "${sR1}" ]; then
             continue
@@ -191,11 +189,10 @@ RunTable()
 	sTESTCASE=$(awk -F'\t' '{print $4}' <<< "${sR1}" |sed "s/^[ \t]\+//;s/[ \t]+\$//")
         echo "Begin to run test case: "${sTESTCASE}
 
-        g_sErrCur=
+        g_sMsgCur=
         grep -q "^${sLevelR2}\$" <<< "${g_sLevelRun}"
         if [ $? -ne 0 ]; then
-	    echo "Skip the test case: "
-            g_sErrCur="test case close"
+            g_sMsgCur="test case close"
             sStatus1=${g_statusClose}
         else
             nRt1=${g_nNone}
@@ -204,28 +201,27 @@ RunTable()
             if [ -n "${sScript1}" ]; then
                 LoadSourceFileParent "${drScript}" "${sScript1}" sScript2 "${flLog}" false
                 if [ -n "${sScript2}" ]; then
-		    echo "Begin to set up Env of script: "${sScript1}" "${sScript2}
-                    . "${sScript2}"
+                    #脚本中如果有exit,会引起当前进程退出;
+                    eval ". ${sScript2}"
                     if [ $? -ne 0 ]; then
 			echo "Environment is not OK when running "${sScript1}" "${sScript2}
                         nRt1=${g_nBlock}
-                        g_sErrCur="environment not OK"
+                        g_sMsgCur="environment not OK"
                     fi
                 else
 		    echo "No found the script: "${sScript1}
                     bRun1=false
-                    g_sErrCur="${sScript1} not exist"
+                    g_sMsgCur="${sScript1} not exist"
                 fi
             fi
 
             if ${bRun1}; then
                 if [ -n "${sFuncNa}" ]; then
-		    echo "Begin to run the function "${sFuncNa}
-                    ${sFuncNa}
+                    echo "${sFuncNa}"
+                    eval "${sFuncNa}"
                     nRt1=$?
                 else
-	            echo "No found the function: "${sFuncNa}
-                    g_sErrCur="function is empty"
+                    g_sMsgCur="function is empty"
                 fi
             fi
 
@@ -245,7 +241,7 @@ RunTable()
                 sStatus1=${g_statusNone}
                 ;;
             127)
-                g_sErrCur="${sFuncNa} not exist"
+                g_sMsgCur="${sFuncNa} not exist"
                 sStatus1=${g_statusNone}
                 ;;
             *)
@@ -255,7 +251,7 @@ RunTable()
         fi
 
         if [ -z "${sTTitle1}" ]; then
-            g_sErrCur="no title ${sR1}"
+            g_sMsgCur="no title ${sR1}"
             sLineStatus=
         else
             sLineStatus=$(grep "${sTTitle2}" <<< "${sStatusTable}")
@@ -265,17 +261,19 @@ RunTable()
             grep -q "^${sPass}${g_sSplit}" <<< "${sLineStatus}"
             if [ $? -ne 0 ]; then
                 sStatusTable=$(sed "/${sTTitle2}/d" <<< "${sStatusTable}")
-                sStatusTable=${sStatusTable}$'\n'${sStatus1}${g_sSplit}${sTTitle1}${g_sSplit}${g_sErrCur}
+                sStatusTable=${sStatusTable}$'\n'${sStatus1}${g_sSplit}${sTTitle1}${g_sSplit}${g_sMsgCur}
             fi
         else
-            sStatusTable=${sStatusTable}$'\n'${sStatus1}${g_sSplit}${sTTitle1}${g_sSplit}${g_sErrCur}
+            sStatusTable=${sStatusTable}$'\n'${sStatus1}${g_sSplit}${sTTitle1}${g_sSplit}${g_sMsgCur}
         fi
-    done < "${flTableOrigin}"
+    done
 
     echo "${sStatusTable}" > "${flTableStatus}"
 }
 export -f RunTable
 
+#说明:GenReport 1-Excel文本表 2-要生成的中间结果表 3-模块名 4-程序打印的日志信息
+#示例:GenReport "data/testcases.table" ~/tmp/status.txt PCIe ~/tmp/pcie.log
 GenReport()
 {
     local flTableOrigin=${1}
@@ -288,7 +286,10 @@ GenReport()
     sFail=$(echo "${g_statusFail}" |sed 's#\([]/*[]\)#\\\1#g')
 
     if [ ! -f "${flTableStatus}" ]; then
-        OutLog 1 "" "${flTableStatus} not exist." "${flLog}" true
+        g_sMsgCur="${flTableStatus} not exist"
+        g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+        OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${flLog}" false
+        return 1
     fi
 
     sTableOrigin=$(cat "${flTableOrigin}")
@@ -338,7 +339,10 @@ GenTable()
     sFail=$(echo "${g_statusFail}" |sed 's#\([]/*[]\)#\\\1#g')
 
     if [ ! -f "${flTableStatus}" ]; then
-        OutLog 1 "" "${flTableStatus} not exist." "${flLog}" true
+        g_sMsgCur="${flTableStatus} not exist"
+        g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+        OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${flLog}" false
+        return 1
     fi
 
     local sTCsTable
