@@ -154,6 +154,7 @@ function test_case_function_run()
 	else
 		MESSAGE="BLOCK\tno automated use cases were implemented."
 	fi
+	writePass "ROCE" "${TEST_CASE_TITLE"
 }
 
 # Output log file header
