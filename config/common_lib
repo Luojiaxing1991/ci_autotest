@@ -187,7 +187,7 @@ RunTable()
         
 	#get the description of testcase
 	sTESTCASE=$(awk -F'\t' '{print $4}' <<< "${sR1}" |sed "s/^[ \t]\+//;s/[ \t]+\$//")
-        echo "Begin to run test case: "${sTESTCASE}
+        echo "TestInfo: "${sTTitle1}" "${sScript1}" "${sFuncNa}
 
         g_sMsgCur=
         grep -q "^${sLevelR2}\$" <<< "${g_sLevelRun}"
