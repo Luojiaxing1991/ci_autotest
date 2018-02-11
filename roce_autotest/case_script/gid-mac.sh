@@ -20,6 +20,7 @@ function gid-mac()
 	else
 		MESSAGE="FAIL\tConfigure  GID according to MAC failed, please check!"
 	fi
+	echo ${MESSAGE}
 }
 
 function main()
