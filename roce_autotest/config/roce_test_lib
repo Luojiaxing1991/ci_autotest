@@ -101,14 +101,14 @@ function copy_tool_so()
 	pushd ${ROCE_CASE_DIR}
 
 	pushd so
-	cp -a * /lib/
+	#cp -a * /lib/
 
-	rsync -l * root@${BACK_IP}:/lib/
+	#rsync -l * root@${BACK_IP}:/lib/
         #需要对libibver.so.1重新软连接
 	popd
 
-	scp ${ROCE_TOP_DIR}/case_script/4120/roce_test_main root@${BACK_IP}:${CASEPATH}/roce-test
-        scp client-auto-5-2 root@${BACK_IP}:${CASEPATH}/
+#	scp ${ROCE_TOP_DIR}/case_script/4120/roce_test_main root@${BACK_IP}:${CASEPATH}/roce-test
+#        scp client-auto-5-2 root@${BACK_IP}:${CASEPATH}/
 
 	pushd test
 
