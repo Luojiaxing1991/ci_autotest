@@ -44,8 +44,13 @@ function main()
 				MESSAGE="FILE\tcase_script/${exec_script} execution script does not exist, please check."
 				echo ${MESSAGE}
 			else
-				echo "Begint to run test "${TEST_CASE_TITLE}
-			#	source ${ROCE_CASE_DIR}/${exec_script}
+				if [ x"${TEST_CASE_FUNCTION_SWITCH}" == x"on"  ]
+				then
+			        	echo "Begint to run test "${TEST_CASE_TITLE}
+					#source ${ROCE_CASE_DIR}/${exec_script}
+				else
+					echo "Skip the script!"
+				fi
 			fi
 		fi
 		echo -e "${line}${MESSAGE}" >> ${ROCE_TOP_DIR}/${OUTPUT_TEST_DB_FILE}
@@ -61,7 +66,7 @@ TrustRelation ${BACK_IP}
 
 Set_Test_Ip
 
-copy_tool_so
+#copy_tool_so
 
 # Output log file header
 writeLogHeader
