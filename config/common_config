@@ -22,7 +22,7 @@ SYSTEM_USER=root
 SYSTEM_PASSWD=root
 
 
-REPORT_FILE=data/report.csv
+REPORT_FILE=${CONFIG_LIB_TMP}/../pcie_autotest/data/report.csv
 AUTOTEST_ZIP_FILE=autotest.tar.gz
 # Setting up a single board default startup system.
 BOARD_GRUB_DEFAULT=
