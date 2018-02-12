@@ -35,20 +35,20 @@ printf "%s[%3d]%5s: Load [${g_pfnCur}] call by [${g_flParent}]\n" "${FUNCNAME[0]
 DriverEqulizationGen3P3600()
 {
     #X4_gen3=$(devmem 0x700a0200080 32 |cut -c5-6)
-    CheckCard2KeysBA "${g_sKeyP3600}" "LnkSta: \+Speed 8GT/s, Width x4,"
+    CheckCard2KeysBA "${g_sKeyP3600}" "LnkSta:[ ${g__t}]*Speed 8GT/s, Width x4,"
 }
 
 DriverEqulizationGen3Raid3008()
 {
     #X8_gen3=$(devmem 0x8a0090080 32 |cut -c5-6)
-    CheckCard2KeysBA "Symbios Logic SAS3008" "LnkSta: \+Speed 8GT/s, Width x8,"
+    CheckCard2KeysBA "Symbios Logic SAS3008" "LnkSta:[ ${g__t}]*Speed 8GT/s, Width x8,"
 }
 
 DriverBackwardGen1VGA()
 {
     #VGA compatible controller: Device 19e5:1711
     #X1_gen1=$(devmem 0x8a00b0080 32 |cut -c5-6)
-    CheckCard2KeysBA "19e5:1711" "LnkSta: \+Speed 2.5GT/s, Width x1,"
+    CheckCard2KeysBA "19e5:1711" "LnkSta:[ ${g__t}]*Speed 2.5GT/s, Width x1,"
     if [ $? -ne 0 ]; then
         return 1
     fi
@@ -58,7 +58,7 @@ DriverBackwardGen1VGA()
 
 DriverBackwardGen2I350()
 {
-    CheckCard2KeysBA "I350" "LnkSta: \+Speed 5GT/s, Width x4,"
+    CheckCard2KeysBA "I350" "LnkSta:[ ${g__t}]*Speed 5GT/s, Width x4,"
     if [ $? -ne 0 ]; then
         return 1
     fi
@@ -68,7 +68,7 @@ DriverBackwardGen2I350()
 
 DriverBackwardGen282599()
 {
-    CheckCard2KeysBA "82599" "LnkSta: \+Speed 5GT/s, Width x8,"
+    CheckCard2KeysBA "82599" "LnkSta:[ ${g__t}]*Speed 5GT/s, Width x8,"
     if [ $? -ne 0 ]; then
         return 1
     fi
