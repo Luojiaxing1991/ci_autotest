@@ -88,17 +88,28 @@ OutLogHead()
     local flLog=${5:-/dev/null}
     local bExitErr=${6:-false}
 
-    local sLogA
     case "${nStatus}" in
     0)
         sStatus=${sStatus:-Info}
+        ;;
+    *)
+        sStatus=${sStatus:-Error}
+        ;;
+    esac
+
+    local sLogA=
+    if [ -n "${sHead1}" ]; then
         sLogA=$(printf "%s%5s[%3d]: %s\n" "${sHead1}" "${sStatus}" "${nStatus}" "${sMsg1}")
+    elif [ -n "${sMsg1}" ]; then
+        sLogA=${sMsg1}
+    fi
+
+    case "${nStatus}" in
+    0)
         echo "${sLogA}"
         echo "${sLogA}" >> "${flLog}"
         ;;
     *)
-        sStatus=${sStatus:-Error}
-        sLogA=$(printf "%s%5s[%3d]: %s\n" "${sHead1}" "${sStatus}" "${nStatus}" "${sMsg1}")
         echo "${sLogA}" 1>&2
         echo "${sLogA}" >> "${flLog}"
         if [ "${bExitErr}" == "true" ]; then
@@ -189,7 +200,9 @@ RunTable()
 	sTESTCASE=$(awk -F'\t' '{print $4}' <<< "${sR1}" |sed "s/^[ \t]\+//;s/[ \t]+\$//")
         echo "TestInfo: "${sTTitle1}" "${sScript1}" "${sFuncNa}
 
-        g_sMsgCur=
+        OutLogHead 0 "" "" "" "${flLog}" false
+        OutLogHead 0 "" "" "${sTTitle1}" "${flLog}" false
+
         grep -q "^${sLevelR2}\$" <<< "${g_sLevelRun}"
         if [ $? -ne 0 ]; then
             g_sMsgCur="test case close"
@@ -217,7 +230,8 @@ RunTable()
 
             if ${bRun1}; then
                 if [ -n "${sFuncNa}" ]; then
-                    echo "${sFuncNa}"
+                    OutLogHead 0 "" "" "${sFuncNa}" "${flLog}" false
+
                     eval "${sFuncNa}"
                     nRt1=$?
                 else

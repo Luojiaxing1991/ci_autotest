@@ -80,7 +80,8 @@ export g_sMsgCur=
 #Alone Functions
 ArgInCmdLine()
 {
-    local sKey1=${1}    
+    local sKey1=${1}
+    
     echo "Begin to run ArgInCmdLine "${sKey1}
     grep -q "\(^\| \)${sKey1}\( \|\$\)" /proc/cmdline
     if [ $? -ne 0 ]; then
@@ -100,7 +101,7 @@ LspcikKeysiBA()
     local nA=${4:-0}
    
     echo "Begin to run LspcikKeysiBA"${sKey1}  
-  
+
     local argic
     argic=
     if [ "${bIC}" == "true" ]; then

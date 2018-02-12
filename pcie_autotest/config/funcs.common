@@ -119,17 +119,28 @@ OutLogHead()
     local flLog=${5:-/dev/null}
     local bExitErr=${6:-false}
 
-    local sLogA
     case "${nStatus}" in
     0)
         sStatus=${sStatus:-Info}
+        ;;
+    *)
+        sStatus=${sStatus:-Error}
+        ;;
+    esac
+
+    local sLogA=
+    if [ -n "${sHead1}" ]; then
         sLogA=$(printf "%s%5s[%3d]: %s\n" "${sHead1}" "${sStatus}" "${nStatus}" "${sMsg1}")
+    elif [ -n "${sMsg1}" ]; then
+        sLogA=${sMsg1}
+    fi
+
+    case "${nStatus}" in
+    0)
         echo "${sLogA}"
         echo "${sLogA}" >> "${flLog}"
         ;;
     *)
-        sStatus=${sStatus:-Error}
-        sLogA=$(printf "%s%5s[%3d]: %s\n" "${sHead1}" "${sStatus}" "${nStatus}" "${sMsg1}")
         echo "${sLogA}" 1>&2
         echo "${sLogA}" >> "${flLog}"
         if [ "${bExitErr}" == "true" ]; then
@@ -192,42 +203,166 @@ GetMCValue()
 }
 export -f GetMCValue
 
-FloatCmp()
+DelNumDot()
 {
-    local sFloat1=${1}
-    local sFloat2=${2}
+    local sNum1=${1}
+    local sNum2=${2}
+    local varSInt1=${3}
+    local varSInt2=${4}
 
-    sFloat1=$(sed 's/^[ \t0]\+//;s/[ \t0]\+$//' <<< "${sFloat1}")
-    sFloat2=$(sed 's/^[ \t0]\+//;s/[ \t0]\+$//' <<< "${sFloat2}")
+    local sB1 sB2 sE1 sE2 n1 n2
+    sB1=$(awk -F'.' '{print $1}' <<< "${sNum1}")
+    sB2=$(awk -F'.' '{print $1}' <<< "${sNum2}")
 
-    local sB1 sB2 sE1 sE2 nE1 nE2
-    sB1=$(awk -F'.' '{print $1}' <<< "${sFloat1}")
-    sB2=$(awk -F'.' '{print $1}' <<< "${sFloat2}")
+    sE1=$(awk -F'.' '{print $2}' <<< "${sNum1}")
+    sE2=$(awk -F'.' '{print $2}' <<< "${sNum2}")
 
-    sE1=$(awk -F'.' '{print $2}' <<< "${sFloat1}")
-    sE2=$(awk -F'.' '{print $2}' <<< "${sFloat2}")
-
-    nE1=$(wc -c <<< "${sE1}")
-    nE2=$(wc -c <<< "${sE2}")
-
-    while [ ${nE1} -lt ${nE2} ]; do
+    sE1=$(sed 's/[ \t0]\+$//' <<< "${sE1}")
+    sE2=$(sed 's/[ \t0]\+$//' <<< "${sE2}")
+    n1=${#sE1}
+    n2=${#sE2}
+    while [ ${n1} -lt ${n2} ]; do
         sE1=${sE1}0
-        let nE1+=1
+        let n1+=1
     done
-    while [ ${nE2} -lt ${nE1} ]; do
+    while [ ${n2} -lt ${n1} ]; do
         sE2=${sE2}0
-        let nE2+=1
+        let n2+=1
     done
 
-    if [ "${sB1}${sE1}" \> "${sB2}${sE2}" ]; then
+    eval ${varSInt1}="${sB1}${sE1}"
+    eval ${varSInt2}="${sB2}${sE2}"
+}
+export -f DelNumDot
+
+IntPreAdd0()
+{
+    local sInt1=${1}
+    local sInt2=${2}
+    local varSInt1=${3}
+    local varSInt2=${4}
+
+    local n1 n2
+    sInt1=$(sed 's/^[ \t0]\+//' <<< "${sInt1}")
+    sInt2=$(sed 's/^[ \t0]\+//' <<< "${sInt2}")
+    n1=${#sInt1}
+    n2=${#sInt2}
+    while [ ${n1} -lt ${n2} ]; do
+        sInt1=0${sInt1}
+        let n1+=1
+    done
+    while [ ${n2} -lt ${n1} ]; do
+        sInt2=0${sInt2}
+        let n2+=1
+    done
+
+    eval ${varSInt1}="${sInt1}"
+    eval ${varSInt2}="${sInt2}"
+}
+export -f IntPreAdd0
+
+RankKMGT()
+{
+    local c1=${1}
+    local varRank=${2}
+    local varNR1=${3}
+
+    if [ -z "${c1}" ]; then
+        eval ${varRank}=0
+        return 0
+    fi
+
+    local nD1=0
+    case "${c1}" in
+    [kK])
+        let nD1=1
+        ;;
+    [mM])
+        let nD1=2
+        ;;
+    [gG])
+        let nD1=3
+        ;;
+    [tT])
+        let nD1=4
+        ;;
+    *)
+        eval ${varNR1}+=1
+        g_sMsgCur="[${c1}] not define"
+        printf "%s[%3d]%s[%3d]%5s: ${g_sMsgCur}\n" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO} "Error" 1>&2
         return 1
-    elif [ "${sB1}${sE1}" \< "${sB2}${sE2}" ]; then
+    esac
+
+    eval ${varRank}=\${nD1}
+    return 0
+}
+export -f RankKMGT
+
+NumCmpKMGT()
+{
+    local sNum1=${1}
+    local sNum2=${2}
+    local nKUnit=${3}
+    local varStat=${4}
+
+    local sInt1 sInt2
+    sInt1=$(sed "s/^\([0-9.]\+\)[^0-9.]*\$/\1/" <<< "${sNum1}")
+    sInt2=$(sed "s/^\([0-9.]\+\)[^0-9.]*\$/\1/" <<< "${sNum2}")
+    DelNumDot "${sInt1}" "${sInt2}" sInt1 sInt2
+    g_sMsgCur="[${sInt1}] cmp [${sInt2}]"
+    #printf "%s[%3d]%s[%3d]%5s: ${g_sMsgCur}\n" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO} "Info"
+
+    local sUnit1 sUnit2
+    sUnit1=$(sed "s/^\([0-9.]\+\)\([^0-9.]*\)\$/\2/" <<< "${sNum1}")
+    sUnit2=$(sed "s/^\([0-9.]\+\)\([^0-9.]*\)\$/\2/" <<< "${sNum2}")
+
+    if [ "${sUnit1}" != "${sUnit2}" ]; then
+        local c1 c2 sU1 sU2
+        c1=$(grep -o "^[^Bb]\+" <<< "${sUnit1}")
+        c2=$(grep -o "^[^Bb]\+" <<< "${sUnit2}")
+
+        sU1=$(sed "s/^[^Bb]\+//" <<< "${sUnit1}")
+        sU2=$(sed "s/^[^Bb]\+//" <<< "${sUnit2}")
+        if [ "${sU1}" != "${sU2}" ]; then
+            eval ${varStat}+=1
+            g_sMsgCur="unit suffix not the same [${sU1}] [${sU2}]"
+            printf "%s[%3d]%s[%3d]%5s: ${g_sMsgCur}\n" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO} "Error" 1>&2
+            return 3
+        fi
+        
+        local nC1 nC2 nR1
+        nR1=0
+        nC1=0
+        nC2=0
+        RankKMGT "${c1}" nC1 nR1
+        RankKMGT "${c2}" nC2 nR1
+        if [ ${nR1} -ne 0 ]; then
+            eval ${varStat}+=1
+            return 3
+        fi
+
+        while [ ${nC1} -lt ${nC2} ]; do
+            let sInt2*=nKUnit
+            let nC1+=1
+        done
+        while [ ${nC2} -lt ${nC1} ]; do
+            let sInt1*=nKUnit
+            let nC2+=1
+        done
+    fi
+
+    IntPreAdd0 "${sInt1}" "${sInt2}" sInt1 sInt2
+    g_sMsgCur="[${sInt1}] cmp [${sInt2}]"
+    #printf "%s[%3d]%s[%3d]%5s: ${g_sMsgCur}\n" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO} "Info"
+    if [ "${sInt1}" \> "${sInt2}" ]; then
+        return 1
+    elif [ "${sInt1}" \< "${sInt2}" ]; then
         return 2
     fi
 
     return 0
 }
-export -f FloatCmp
+export -f NumCmpKMGT
 
 ##########
 #Complex Functions
@@ -321,7 +456,9 @@ RunTable()
         sScript1=$(awk -F'\t' '{print $6}' <<< "${sR1}" |sed "s/^[ \t]\+//;s/[ \t]+\$//")
         sFuncNa=$(awk -F'\t' '{print $7}' <<< "${sR1}" |sed "s/^[ \t]\+//;s/[ \t]+\$//")
 
-        g_sMsgCur=
+        OutLogHead 0 "" "" "" "${flLog}" false
+        OutLogHead 0 "" "" "${sTTitle1}" "${flLog}" false
+
         grep -q "^${sLevelR2}\$" <<< "${g_sLevelRun}"
         if [ $? -ne 0 ]; then
             g_sMsgCur="test case close"
@@ -346,7 +483,8 @@ RunTable()
 
             if ${bRun1}; then
                 if [ -n "${sFuncNa}" ]; then
-                    echo "${sFuncNa}"
+                    OutLogHead 0 "" "" "${sFuncNa}" "${flLog}" false
+
                     eval "${sFuncNa}"
                     nRt1=$?
                 else
