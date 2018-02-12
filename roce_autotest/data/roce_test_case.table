@@ -63,7 +63,7 @@ PV-353	R.ROCE.F025.A	ST-ROCE-73		支持注册具有远程写权限的MR	SupportMR.sh	MR_Remo
 PV-353	R.ROCE.F025.A	ST-ROCE-74		支持注册具有远程读和本地写权限的MR	SupportMR.sh	MR_Remote_Read_Local_Write	on	
 PV-286	R.ROCE.F009.A	ST-ROCE-77	Verify basic RoCE function	Configure  GID according to IP	gid-ip.sh	gid-ip	on	
 PV-287	R.ROCE.F010.A	ST-ROCE-78	Verify basic RoCE function	Configure GID according to MAC address	gid-mac.sh	gid-mac	on	
-PV-340	R.ROCE.F011.A	ST-ROCE-79	Verify basic RoCE feature	Get device attribute	codecase.sh	codecase	off	
+PV-340	R.ROCE.F011.A	ST-ROCE-79	12Verify basic RoCE feature	Get device attribute	codecase.sh	codecase	off	
 PV-341	R.ROCE.F012.A	ST-ROCE-80	Verify basic RoCE feature	Get port information	codecase.sh	codecase	off	
 PV-963	R.ROCE.F013.A	ST-ROCE-81	Verify basic RoCE feature	Get GID information	codecase.sh	codecase	off	
 PV-352	R.ROCE.F024.A	ST-ROCE-82	Verify Completion Event	 Request completion notification on a CQ and get CQ completion event.	Completion_Event.sh	Completion_Event	on	

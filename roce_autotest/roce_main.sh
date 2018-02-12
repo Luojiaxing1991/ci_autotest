@@ -55,7 +55,7 @@ function main()
 		fi
 		echo -e "${line}${MESSAGE}" >> ${ROCE_TOP_DIR}/${OUTPUT_TEST_DB_FILE}
 		MESSAGE=""
-		echo "Done test: "${TEST_CASE_TITLE}
+		#echo "Done test: "${TEST_CASE_TITLE}
 	done
 }
 
