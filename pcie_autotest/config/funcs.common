@@ -457,7 +457,7 @@ RunTable()
         sFuncNa=$(awk -F'\t' '{print $7}' <<< "${sR1}" |sed "s/^[ \t]\+//;s/[ \t]+\$//")
 
         OutLogHead 0 "" "" "" "${flLog}" false
-        OutLogHead 0 "" "" "${sTTitle1}" "${flLog}" false
+        OutLogHead 0 "" "" "title: ${sTTitle1}" "${flLog}" false
 
         grep -q "^${sLevelR2}\$" <<< "${g_sLevelRun}"
         if [ $? -ne 0 ]; then
@@ -483,7 +483,7 @@ RunTable()
 
             if ${bRun1}; then
                 if [ -n "${sFuncNa}" ]; then
-                    OutLogHead 0 "" "" "${sFuncNa}" "${flLog}" false
+                    OutLogHead 0 "" "" "function: ${sFuncNa}" "${flLog}" false
 
                     eval "${sFuncNa}"
                     nRt1=$?
@@ -517,6 +517,7 @@ RunTable()
             esac
         fi
         echo "The result of "${sTTitle1}" is "${sStatus1}
+        OutLogHead 0 "" "" "status: ${sStatus1}" "${flLog}" false
         if [ -z "${sTTitle1}" ]; then
             g_sMsgCur="no title ${sR1}"
             sLineStatus=

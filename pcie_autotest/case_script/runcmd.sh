@@ -32,6 +32,9 @@ export g_defSourceFiles=${g_defSourceFiles}$'\n'${g_pfnCur}
 printf "%s[%3d]%5s: Load [${g_pfnCur}] call by [${g_flParent}]\n" "${FUNCNAME[0]}" ${LINENO} "Info"
 
 ####################################################################################
+LoadSourceFileParent "${g_dp_runcmd_common}" "enum.sh" flPath1 "${g_flLog}" true
+$(sed "s#^#. #" <<< "${flPath1}")
+
 RunFio()
 {
     local tRW=${1}
@@ -91,11 +94,11 @@ RunFio()
     local drLocalLogs
     drLocalLogs=${g_dicLib1_B136[kMDrLog]}
     drLocalLogs=${HOME}/tmp/data/logs
-    #SafeRemoveFolder "/logs/" "${drLocalLogs}/${g_dicMCSame[kDrTmpLog]}" "${flLog}"
+    SafeRemoveFolder "/logs/" "${drLocalLogs}/${g_dicMCSame[kDrTmpLog]}" "${flLog}"
 
     m_sTrapRuned="
     "
-    #RunACmdsRemote g_dicLib1_B136 "pcie_test_lib" "${m_sCmd}" m_dic ${nCols} m_dicValue 1 m_sTrapRuned true "${flLog}"
+    RunACmdsRemote g_dicLib1_B136 "pcie_test_lib" "${m_sCmd}" m_dic ${nCols} m_dicValue 1 m_sTrapRuned true "${flLog}"
 
     #####################
     local sFlList s1 nPosV nPerf1
@@ -175,7 +178,7 @@ RunFio()
 
     #####################
     mkdir -p "${drLocalLogs}/${g_dicMCSame[kDrProperLog]}"
-    #mv "${drLocalLogs}/${g_dicMCSame[kDrTmpLog]}"/* "${drLocalLogs}/${g_dicMCSame[kDrProperLog]}"
+    mv "${drLocalLogs}/${g_dicMCSame[kDrTmpLog]}"/* "${drLocalLogs}/${g_dicMCSame[kDrProperLog]}"
 
     #####################
     return ${nStat1}
@@ -186,8 +189,33 @@ RunFioUser()
 {
     local tReadWrite=${1}
     local nfPerfDef=${2}
-    local sDiskName=${3}
-    local nTimesRun=${4:-3}
+    local sCardName=${3}
+    local sDiskName=${4}
+    local nTimesRun=${5:-3}
+
+    case "${sCardName}" in
+    3108)
+        EnumerationRaid3108
+        ;;
+    3008)
+        EnumerationRaid3008
+        ;;
+    ES3000)
+        EnumES3000
+        ;;
+    *)
+        g_sMsgCur="card[${sCardName}] not defined"
+        g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+        OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${g_flLog}" false
+        return 1
+        ;;
+    esac
+    if [ $? -ne 0 ]; then
+        g_sMsgCur="card[${sCardName}] not exist"
+        g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+        OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${g_flLog}" false
+        return 1
+    fi
 
     case "${tReadWrite}" in
     read|write)
