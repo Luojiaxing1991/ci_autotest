@@ -10,7 +10,7 @@
                 "kernel.tree": "plinth",
                 "kernel.version": "release-plinth-4.15.0+_+300e39166a78fb18af5231a5631bfbc500db55ee",
                 "platform.fastboot": "false",
-                "test.plan": "sas roce pcie hns debug test"
+                "test.plan": "sas long time test"
             },
             "parameters": {
                 "bootloadertype": "ipxe",
@@ -53,7 +53,7 @@
         }
     ],
     "device_type": "hip07-d05",
-    "job_name": "SAS,PCIE,ROCE,HNS Test",
+    "job_name": "SAS Test long time",
     "logging_level": "DEBUG",
     "priority": "high",
     "timeout": 172800

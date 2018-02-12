@@ -516,7 +516,7 @@ RunTable()
                 ;;
             esac
         fi
-
+        echo "The result of "${sTTitle1}" is "${sStatus1}
         if [ -z "${sTTitle1}" ]; then
             g_sMsgCur="no title ${sR1}"
             sLineStatus=
