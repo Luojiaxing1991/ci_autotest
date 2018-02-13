@@ -584,10 +584,12 @@ GenReport()
             echo "${sStatus1}" |grep -q "^${sPass}\$"
             if [ $? -eq 0 ]; then
                 writePass
+                lava_report "${sTTitle1}" pass
             else
                 echo "${sStatus1}" |grep -q "^${sFail}\$"
                 if [ $? -eq 0 ]; then
                     writeFail "${sMessage}"
+                    lava_report "${sTTitle1}" fail
                 fi
             fi
         fi
