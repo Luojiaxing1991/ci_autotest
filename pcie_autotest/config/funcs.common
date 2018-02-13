@@ -522,9 +522,9 @@ RunTable()
             etho "The test have benn skip!"
         else
             if [ x"${sStatus1}" == x"Pass" ];then
-               lava_report "${sStatus1}" pass
+               lava_report "${sTTitle1}" pass
             else
-               lava_report "${sStatus1}" fail
+               lava_report "${sTTitle1}" fail
             fi
         fi
 
