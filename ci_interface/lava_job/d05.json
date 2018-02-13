@@ -44,6 +44,22 @@
                 "timeout": 172800
             }
         },
+
+        {
+            "command": "lava_test_shell",
+            "parameters": {
+                "testdef_repos": [
+                    {
+                        "git-repo": "https://github.com/Luojiaxing1991/ci_autotest.git",
+			"parameters":{
+			     "Maintainer": "Luojiaxing"
+			},
+			"testdef": "roce_autotest/roce_autotest.yaml"
+                    }
+                ],
+                "timeout": 172800
+            }
+        },
         {
             "command": "submit_results",
             "parameters": {

@@ -547,7 +547,9 @@ RunTable()
         fi
     done
 
-    echo "${sStatusTable}" > "${flTableStatus}"
+    #echo "${sStatusTable}" > "${flTableStatus}"
+
+    echo "The pcie RunTable phase is over!"
 }
 export -f RunTable
 
