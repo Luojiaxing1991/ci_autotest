@@ -16,6 +16,7 @@
 #  OUT: N/A
 function lava_report()
 {
+    echo "The result of test "$1" is "$2
     #This cmd used to report pass result to lava server0
     lava-test-case $1 --result $2
     return 0
