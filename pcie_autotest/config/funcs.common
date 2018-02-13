@@ -518,10 +518,10 @@ RunTable()
         fi
         echo "The result of "${sTTitle1}" is "${sStatus1}
 
-        if [ x"${sStatus1}" == x"Close" ];then
+        if [ x"${sStatus1}" = x"Close" ];then
             etho "The test have benn skip!"
         else
-            if [ x"${sStatus1}" == x"Pass" ];then
+            if [ x"${sStatus1}" = x"Pass" ];then
                lava_report "${sTTitle1}" pass
             else
                lava_report "${sTTitle1}" fail
