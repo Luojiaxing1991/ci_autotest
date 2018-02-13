@@ -1,6 +1,8 @@
 #!/bin/bash
 # 
 ## Utility function
+. ${HNS_TOP_DIR}/../config/common_lib
+
 function test_case_switch()
 {
     if [ x"${TEST_CASE_FUNCTION_SWITCH}" == x"on" ]

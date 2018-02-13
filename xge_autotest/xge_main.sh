@@ -25,9 +25,9 @@ function main()
     do
         let RowNum+=1
         local line=$(sed -n "${RowNum}p" "${HNS_TOP_DIR}/${TEST_CASE_DB_FILE}")
-        exec_script=`echo "${line}" | awk -F '\t' '{print $5}'`
-        TEST_CASE_FUNCTION_NAME=`echo "${line}" | awk -F '\t' '{print $6}'`
-        TEST_CASE_FUNCTION_SWITCH=`echo "${line}" | awk -F '\t' '{print $7}'`
+        exec_script=`echo "${line}" | awk -F '\t' '{print $6}'`
+        TEST_CASE_FUNCTION_NAME=`echo "${line}" | awk -F '\t' '{print $7}'`
+        TEST_CASE_FUNCTION_SWITCH=`echo "${line}" | awk -F '\t' '{print $8}'`
         TEST_CASE_TITLE=`echo "${line}" | awk -F '\t' '{print $3}'`
 
         echo "CaseInfo "${TEST_CASE_TITLE}" "$exec_script" "$TEST_CASE_FUNCTION_NAME" "$TEST_CASE_FUNCTION_SWITCH 
