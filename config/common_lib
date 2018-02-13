@@ -7,6 +7,21 @@
 # 1 writeLog
 #############################################################################################################
 
+#  Output success test case log information
+#  IN : 
+#       $1:    The title of testcase
+#       $2:    The result of current testcase
+#           pass:  the test is ok
+#           fail:  the test is fail
+#  OUT: N/A
+function lava_report()
+{
+    #This cmd used to report pass result to lava server0
+    lava-test-case $1 --result $2
+    return 0
+}
+
+
 
 #  Output success test case log information
 #  IN : N/A

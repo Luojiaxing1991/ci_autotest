@@ -1,6 +1,6 @@
 PV-1538	R.PERF.F001.A	PERF_FUNC_TEST_000	L3C	L3C perf stat function test	perf_stat_function_test.sh	l3c_perf_stat_function_test	off	
 PV-1538	R.PERF.F001.A	PERF_FUNC_TEST_005	MN	MN perf stat function test	perf_stat_function_test.sh	mn_perf_stat_function_test	off	
-PV-1538	R.PERF.F001.A	PERF_FUNC_TEST_010	DDRC	DDRC perf stat function test	perf_stat_function_test.sh	ddrc_perf_stat_function_test	on	
+PV-1538	R.PERF.F001.A	PERF_FUNC_TEST_010	DDRC	DDRC perf stat function test	perf_stat_function_test.sh	ddrc_perf_stat_function_test	off	
 PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_015	L3C	L3C perf list function test	perf_list_function_test.sh	l3c_perf_list_function_test	on	
 PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_020	MN	MN perf list function test	perf_list_function_test.sh	mn_perf_list_function_test	on	
 PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_015	DDRC	DDRC perf list function test	perf_list_function_test.sh	ddrc_perf_list_function_test	on	

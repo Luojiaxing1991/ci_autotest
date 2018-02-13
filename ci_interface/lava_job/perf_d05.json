@@ -52,7 +52,7 @@
         }
     ],
     "device_type": "hip07-d05",
-    "job_name": "ROCE Test",
+    "job_name": "PERF Test",
     "logging_level": "DEBUG",
     "priority": "high",
     "timeout": 172800
