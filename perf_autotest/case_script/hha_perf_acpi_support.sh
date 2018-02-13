@@ -23,8 +23,8 @@ function fun_perf_list()
   fi
 
   if [ $mflag -eq 1 ];then
-    rand=$(awk 'NR==2 {print $1}' ./data/log/pmu_event.txt)
-    rand2=$(awk 'NR==16 {print $1}' ./data/log/pmu_event.txt)
+    rand=$(awk 'NR==2 {print $1}' ${PERF_TOP_DIR}/data/log/pmu_event.txt)
+    rand2=$(awk 'NR==16 {print $1}' ${PERF_TOP_DIR}/data/log/pmu_event.txt)
     perf stat -a -e $rand -e $rand2 -I 200 sleep 10s
     MESSAGE="Pass"
     echo ${MESSAGE}
