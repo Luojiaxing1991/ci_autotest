@@ -23,7 +23,6 @@ function fun_perf_list()
       if [ `cat ${PERF_TOP_DIR}/data/log/counts.txt | grep -i "not" | wc -l` -le -1 ];then 
         mflag=1
 	echo pass
-	break
       else
         mflag=0
         echo fail	
