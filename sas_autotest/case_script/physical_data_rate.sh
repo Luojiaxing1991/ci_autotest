@@ -18,7 +18,8 @@ function disk_negotiated_link_rate_query()
 
         rate_value=`cat ${PHY_FILE_PATH}/${dir}/negotiated_linkrate | awk -F '.' '{print $1}'`
         BRate=1
-        for rate in `echo $DISK_NEGOTIATED_LINKRATE_VALUE | sed 's/|/ /g'`
+        rate_info=`echo $DISK_NEGOTIATED_LINKRATE_VALUE | sed 's/|/ /g'`
+        for rate in ${rate_info}
         do
             if [ $(echo "${rate_value} ${rate}"|awk '{if($1=$2){print 0}else{print 1}}') -eq 0 ]
             then

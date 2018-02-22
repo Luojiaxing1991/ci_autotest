@@ -16,16 +16,14 @@ function test_case_function_run()
     then
 	#echo "Begin to run testcase: "${TEST_CASE_TITLE}
         ${TEST_CASE_FUNCTION_NAME}
-
-        echo "The return value of script: "${exec_script}"is "$?
         
 	if [ $? -ne 0 ]
 	then
 	    echo "The result of testcase "${TEST_CASE_TITLE}" is fail"
-            writeFail "SAS" "${TEST_CASE_TITLE}"
+	    lava_report "${TEST_CASE_TITLE}" fail
         else
 	    echo "The result of testcase "${TEST_CASE_TITLE}" is success"
-            writePass "SAS" "${TEST_CASE_TITLE}"
+	    lava_report "${TEST_CASE_TITLE}" pass
 	fi
     else
         MESSAGE="BLOCK\tno automated use cases were implemented."
@@ -38,7 +36,7 @@ function test_case_function_run()
 # OUT: N/A
 function writeLogHeader
 {
-    echo -e "Designed Requirement ID\tTest Case ID\tTest Item\tTest Case Title\tAutomated scripts\tRealize the function\tSwitch\tResult\tReason" > ${OUTPUT_TEST_DB_FILE}
+    echo -e "Designed Requirement ID\tTest Case ID\tTest Item\tTest Case Title\tAutomated scripts\tRealize the function\tSwitch\tResult\tReason" > ${SAS_TOP_DIR}/${OUTPUT_TEST_DB_FILE}
     return 0
 }
 
@@ -184,7 +182,9 @@ function phy_ops()
 # OUT: N/A
 function change_sas_phy_file()
 {
-    for dir in `ls ${PHY_FILE_PATH}`
+    dir_info=`ls ${PHY_FILE_PATH}`
+
+    for dir in ${dir_info}
     do
         str=`cat ${PHY_FILE_PATH}/${dir}/target_port_protocols`
         num=`echo "${dir}" | awk -F":" '{print $NF}'`
