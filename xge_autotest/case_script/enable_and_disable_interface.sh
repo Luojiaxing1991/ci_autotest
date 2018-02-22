@@ -49,6 +49,7 @@ function ge_continued_enable_and_disable_interface()
 
     while(($i<=10))
     do
+        echo "begin cycle "$i
         ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
         ssh root@$BACK_IP "ifconfig ${remote_tp1} up; ifconfig ${remote_tp1} ${remote_tp1_ip}; sleep 5"
         ping ${remote_tp1_ip} -c 5 > ${HNS_TOP_DIR}/data/log/continued_enable_and_disable_interface.txt &
@@ -68,6 +69,7 @@ function ge_continued_enable_and_disable_interface()
             MESSAGE="FAIL\tNet export many times up/down , Ping packet failure"
             break
         fi
+        echo "${MESSAGE}"
         i=$(($i+1))
     done
     MESSAGE="PASS"

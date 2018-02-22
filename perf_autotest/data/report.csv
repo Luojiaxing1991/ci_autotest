@@ -1,11 +1,31 @@
 JIRA ID	Designed Requirement ID	Test Case ID	Test Item	Test Case Title	Automated scripts	Realize the function	Switch	Result	Reason
-PV-1538	R.PERF.F001.A	PERF_FUNC_TEST_000	L3C	L3C perf stat function test	perf_stat_function_test.sh	l3c_perf_stat_function_test	on	Pass
+PV-1538	R.PERF.F001.A	PERF_FUNC_TEST_000	L3C	L3C perf stat function test	perf_stat_function_test.sh	l3c_perf_stat_function_test	off	BLOCK	no automated use cases were implemented.
+PV-1538	R.PERF.F001.A	PERF_FUNC_TEST_005	MN	MN perf stat function test	perf_stat_function_test.sh	mn_perf_stat_function_test	off	BLOCK	no automated use cases were implemented.
+PV-1538	R.PERF.F001.A	PERF_FUNC_TEST_010	DDRC	DDRC perf stat function test	perf_stat_function_test.sh	ddrc_perf_stat_function_test	on	Fail	 hisi_ddrc Event Run Error!
+PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_015	L3C	L3C perf list function test	perf_list_function_test.sh	l3c_perf_list_function_test	on	Pass
+PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_020	MN	MN perf list function test	perf_list_function_test.sh	mn_perf_list_function_test	on	Pass
+PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_015	DDRC	DDRC perf list function test	perf_list_function_test.sh	ddrc_perf_list_function_test	on	Pass
+PV-1543	R.PERF.F012.A	PERF_FUNC_TEST_065	L3C	L3C perf disable/enable function test	perf_enable_function_test.sh	l3c_perf_enable_function_test	on	Fail	 hisi_l3c Event disable/enable Function Test Fail!
+PV-1788	R.PERF.F013.A	PERF_FUNC_TEST_070	MN	MN perf disable/enable function test	perf_enable_function_test.sh	mn_perf_enable_function_test	on	Fail	 hisi_mn Event disable/enable Function Test Fail!
+PV-1542	R.PERF.F014.A	PERF_FUNC_TEST_075	L3C	L3C perf irq function test	perf_irq_function_test.sh	l3c_perf_irq_function_test	on	Fail	 hisi_l3c Event IRQ Function Test Fail!
+PV-1533	R.PERF.F015.A	PERF_FUNC_TEST_080	MN	MN perf irq function test	perf_irq_function_test.sh	mn_perf_irq_function_test	on	Fail	 hisi_mn Event IRQ Function Test Fail!
+PV-1534	R.PERF.F016.A	PERF_FUNC_TEST_085	DDRC	DDRC perf irq function test	perf_irq_function_test.sh	ddrc_perf_irq_function_test	on	Fail	 hisi_ddrc Event IRQ Function Test Fail!
+PV-1531	R.PERF.F022.A	PERF_FUNC_TEST_130	L3C	L3C perf ACPI test	perf_acpi_support.sh	l3c_perf_acpi_test	on	Pass
+PV-1531	R.PERF.F022.A	PERF_FUNC_TEST_135	MN	MN perf ACPI test	perf_acpi_support.sh	mn_perf_acpi_test	on	Pass
+PV-1531	R.PERF.F022.A	PERF_FUNC_TEST_140	DDRC	DDRC perf ACPI test	perf_acpi_support.sh	ddrc_perf_acpi_test	on	Pass
+PV-1584	R.PERF.F023.A	PERF_FUNC_TEST_145	HHA	Support HHA PMU events	hha_perf_acpi_support.sh	hha_perf_acpi_test	on	Fail	 No hisi_hha Perf Evnet Support!
+PV-1538	R.PERF.F001.A	PERF_FUNC_TEST_000	L3C	L3C perf stat function test	perf_stat_function_test.sh	l3c_perf_stat_function_test	off	BLOCK	no automated use cases were implemented.
 PV-1538	R.PERF.F001.A	PERF_FUNC_TEST_005	MN	MN perf stat function test	perf_stat_function_test.sh	mn_perf_stat_function_test	off	BLOCK	no automated use cases were implemented.
 PV-1538	R.PERF.F001.A	PERF_FUNC_TEST_010	DDRC	DDRC perf stat function test	perf_stat_function_test.sh	ddrc_perf_stat_function_test	off	BLOCK	no automated use cases were implemented.
-PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_015	L3C	L3C perf list function test	perf_list_function_test.sh	l3c_perf_list_function_test	off	BLOCK	no automated use cases were implemented.
-PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_020	MN	MN perf list function test	perf_list_function_test.sh	mn_perf_list_function_test	off	BLOCK	no automated use cases were implemented.
-PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_015	DDRC	DDRC perf list function test	perf_list_function_test.sh	ddrc_perf_list_function_test	off	BLOCK	no automated use cases were implemented.
-PV-1531	R.PERF.F022.A	PERF_FUNC_TEST_130	L3C	L3C perf ACPI test	perf_acpi_support.sh	l3c_perf_acpi_test	off	BLOCK	no automated use cases were implemented.
-PV-1531	R.PERF.F022.A	PERF_FUNC_TEST_135	MN	MN perf ACPI test	perf_acpi_support.sh	mn_perf_acpi_test	off	BLOCK	no automated use cases were implemented.
-PV-1531	R.PERF.F022.A	PERF_FUNC_TEST_140	DDRC	DDRC perf ACPI test	perf_acpi_support.sh	ddrc_perf_acpi_test	off	BLOCK	no automated use cases were implemented.
-PV-1584	R.PERF.F023.A	PERF_FUNC_TEST_145	HHA	Support HHA PMU events	hha_perf_acpi_support.sh	hha_perf_acpi_test	off	BLOCK	no automated use cases were implemented.
+PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_015	L3C	L3C perf list function test	perf_list_function_test.sh	l3c_perf_list_function_test	on	Pass
+PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_020	MN	MN perf list function test	perf_list_function_test.sh	mn_perf_list_function_test	on	Pass
+PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_015	DDRC	DDRC perf list function test	perf_list_function_test.sh	ddrc_perf_list_function_test	on	Pass
+PV-1543	R.PERF.F012.A	PERF_FUNC_TEST_065	L3C	L3C perf disable/enable function test	perf_enable_function_test.sh	l3c_perf_enable_function_test	on	Fail	 hisi_l3c Event disable/enable Function Test Fail!
+PV-1788	R.PERF.F013.A	PERF_FUNC_TEST_070	MN	MN perf disable/enable function test	perf_enable_function_test.sh	mn_perf_enable_function_test	on	Fail	 hisi_mn Event disable/enable Function Test Fail!
+PV-1542	R.PERF.F014.A	PERF_FUNC_TEST_075	L3C	L3C perf irq function test	perf_irq_function_test.sh	l3c_perf_irq_function_test	on	Fail	 hisi_l3c Event IRQ Function Test Fail!
+PV-1533	R.PERF.F015.A	PERF_FUNC_TEST_080	MN	MN perf irq function test	perf_irq_function_test.sh	mn_perf_irq_function_test	on	Fail	 hisi_mn Event IRQ Function Test Fail!
+PV-1534	R.PERF.F016.A	PERF_FUNC_TEST_085	DDRC	DDRC perf irq function test	perf_irq_function_test.sh	ddrc_perf_irq_function_test	on	Fail	 hisi_ddrc Event IRQ Function Test Fail!
+PV-1531	R.PERF.F022.A	PERF_FUNC_TEST_130	L3C	L3C perf ACPI test	perf_acpi_support.sh	l3c_perf_acpi_test	on	Pass
+PV-1531	R.PERF.F022.A	PERF_FUNC_TEST_135	MN	MN perf ACPI test	perf_acpi_support.sh	mn_perf_acpi_test	on	Pass
+PV-1531	R.PERF.F022.A	PERF_FUNC_TEST_140	DDRC	DDRC perf ACPI test	perf_acpi_support.sh	ddrc_perf_acpi_test	on	Pass
+PV-1584	R.PERF.F023.A	PERF_FUNC_TEST_145	HHA	Support HHA PMU events	hha_perf_acpi_support.sh	hha_perf_acpi_test	on	Fail	 No hisi_hha Perf Evnet Support!

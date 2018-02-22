@@ -517,6 +517,17 @@ RunTable()
             esac
         fi
         echo "The result of "${sTTitle1}" is "${sStatus1}
+
+        if [ x"${sStatus1}" = x"[Close]" ];then
+            etho "The test have benn skip!"
+        else
+            if [ x"${sStatus1}" = x"[Pass]" ];then
+               lava_report "${sTTitle1}" pass
+            else
+               lava_report "${sTTitle1}" fail
+            fi
+        fi
+
         OutLogHead 0 "" "" "status: ${sStatus1}" "${flLog}" false
         if [ -z "${sTTitle1}" ]; then
             g_sMsgCur="no title ${sR1}"
@@ -536,7 +547,9 @@ RunTable()
         fi
     done
 
-    echo "${sStatusTable}" > "${flTableStatus}"
+    #echo "${sStatusTable}" > "${flTableStatus}"
+
+    echo "The pcie RunTable phase is over!"
 }
 export -f RunTable
 
@@ -584,10 +597,12 @@ GenReport()
             echo "${sStatus1}" |grep -q "^${sPass}\$"
             if [ $? -eq 0 ]; then
                 writePass
+                #lava_report "${sTTitle1}" pass
             else
                 echo "${sStatus1}" |grep -q "^${sFail}\$"
                 if [ $? -eq 0 ]; then
                     writeFail "${sMessage}"
+                    #lava_report "${sTTitle1}" fail
                 fi
             fi
         fi
