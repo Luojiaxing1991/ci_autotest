@@ -37,7 +37,7 @@
 			"parameters":{
 			     "Maintainer": "Luojiaxing"
 			},
-			"testdef": "roce_autotest/roce_autotest.yaml"
+			"testdef": "perf_autotest/perf_autotest.yaml"
                     }
                 ],
                 "timeout": 172800
