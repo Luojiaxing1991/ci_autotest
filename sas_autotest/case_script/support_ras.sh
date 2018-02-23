@@ -75,26 +75,36 @@ function output_ecc_info()
     esac
 }
 
-# 1bit ecc error register injection.
+# 1bit ecc error register 0 injection.
+# IN  : $1 - register injection value.
+# OUT : N/A
+function 1bit_ecc_inject0_en()
+{
+    Test_Case_Title="1bit_ecc_inject0_en"
+    reg_value=$1
+
+    ecc_injection_process "${reg_value}" "${INJECT0_REG_ADDR_VALUE}" "0x1"
+    retun_num=$?
+    output_ecc_info ${return_num} ${INJECT0_REG_ADDR_VALUE} ${reg_value}
+
+    ${DEVMEM} ${MASK_REG_ADDR_VALUE} w 0x0
+
+    # restore register initial value.
+    ${DEVMEM} ${INJECT0_REG_ADDR_VALUE} w 0x0
+    ${DEVMEM} ${INJECT1_REG_ADDR_VALUE} w 0x0
+}
+
+# 1bit ecc error register 1 injection.
 # IN  : N/A
 # OUT : N/A
-function 1bit_ecc_injection()
+function 1bit_ecc_inject1_en()
 {
-    Test_Case_Title="1bit_ecc_injection"
+    Test_Case_Title="1bit_ecc_inject1_en"
+    reg_value=$1
 
-    for reg in ${ECC_1BIT_REG_INJECT0_VALUE[@]}
-    do
-        ecc_injection_process "${reg}" "${INJECT0_REG_ADDR_VALUE}" "0x1"
-        retun_num=$?
-        output_ecc_info ${return_num} ${INJECT0_REG_ADDR_VALUE} ${reg}
-    done
-
-    for reg in ${ECC_1BIT_REG_INJECT1_VALUE[@]}
-    do
-        ecc_injection_process "${reg}" ${INJECT1_REG_ADDR_VALUE} "0x1"
-        return_num=$?
-        output_ecc_info ${return_num} ${INJECT1_REG_ADDR_VALUE} ${reg}
-    done
+    ecc_injection_process "${reg_value}" ${INJECT1_REG_ADDR_VALUE} "0x1"
+    return_num=$?
+    output_ecc_info ${return_num} ${INJECT1_REG_ADDR_VALUE} ${reg_value}
 
     ${DEVMEM} ${MASK_REG_ADDR_VALUE} w 0x0
 
@@ -109,13 +119,11 @@ function 1bit_ecc_injection()
 function 2bit_ecc_injection()
 {
     Test_Case_Title="2bit_ecc_injection"
+    reg_value=$1
 
-    for reg in ${ECC_2BIT_REG_INJECT1_VALUE[@]}
-    do
-        ecc_injection_process "${reg}" "${INJECT1_REG_ADDR_VALUE}" "0x11"
-        return_num=$?
-        output_ecc_info ${return_num} ${INJECT1_REG_ADDR_VALUE} ${reg}
-    done
+    ecc_injection_process "${reg_value}" "${INJECT1_REG_ADDR_VALUE}" "0x11"
+    return_num=$?
+    output_ecc_info ${return_num} ${INJECT1_REG_ADDR_VALUE} ${reg_value}
 
     ${DEVMEM} ${MASK_REG_ADDR_VALUE} w 0x0
 
@@ -126,6 +134,9 @@ function 2bit_ecc_injection()
 
 function main()
 {
+    info=`echo ${TEST_CASE_FUNCTION_NAME} | awk -F '_' '{print $NF}'`
+    TEST_CASE_FUNCTION_NAME="${TEST_CASE_FUNCTION_NAME} 0x${info}"
+
     # call the implementation of the automation use cases
     test_case_function_run
 }

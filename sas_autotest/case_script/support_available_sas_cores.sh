@@ -34,11 +34,11 @@ function FIO_IO_RAIO_randrw()
 
     for ratio in "${IO_RATIO[@]}"
     do
-	echo "Begin FIO_IO_RAIO_randrw cycle: "${ratio}
+        echo "Begin FIO_IO_RAIO_randrw cycle: "${ratio}
         sed -i "{s/^rwmixread=.*/rwmixread=${ratio}/g;}" fio.conf
         fio fio.conf
         [ $? -ne 0 ] && MESSAGE="FAIL\tfio tool ${ratio} raio mixed io read and write failed." && echo "Fail fio tool "${ratio} & return 1
-	echo "Success fio tool "${ratio}
+        echo "Success fio tool "${ratio}
     done
     MESSAGE="PASS"
 }
@@ -60,11 +60,11 @@ function FIO_IO_RAIO_read_write()
 
     for rw in read write
     do
-	echo "Begin FIO IO RAIO rw cycle: "${rw}
+        echo "Begin FIO IO RAIO rw cycle: "${rw}
         sed -i "{s/^rw=.*/rw=i${rw}/g;}" fio.conf
         fio fio.conf
         [ $? -ne 0 ] && MESSAGE="FAIL\tfio tool ${rw} io read and write failed." && echo "Fail fio tool "${rw} & return 1
-	echo "Success fio tool "${rw}
+        echo "Success fio tool "${rw}
     done
 
     MESSAGE="PASS"
@@ -77,4 +77,3 @@ function main()
 }
 
 main
-
