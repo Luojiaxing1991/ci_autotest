@@ -92,7 +92,7 @@ function main()
     #Judge the current environment, directly connected environment or expander environment.
     judgment_network_env
     [ $? -eq 0 ] && echo "the current environment expander network, do not execute test cases." && return 0
-    
+
     # call the implementation of the automation use cases
     test_case_function_run
 }

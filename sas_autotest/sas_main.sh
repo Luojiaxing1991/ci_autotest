@@ -1,4 +1,4 @@
-#è#!/bin/bash
+#!/bin/bash
 
 
 SAS_TOP_DIR=$(cd "`dirname $0`" ; pwd)
@@ -19,11 +19,11 @@ function main()
     echo "Begin to Run SAS Test!"
     cat ${SAS_TOP_DIR}/${TEST_CASE_DB_FILE} | while read line
     do
-        exec_script=`echo "${line}" | awk -F '\t' '{print $5}'`
-        TEST_CASE_FUNCTION_NAME=`echo "${line}" | awk -F '\t' '{print $6}'`
-        TEST_CASE_FUNCTION_SWITCH=`echo "${line}" | awk -F '\t' '{print $7}'`
+        exec_script=`echo "${line}" | awk -F '\t' '{print $6}'`
+        TEST_CASE_FUNCTION_NAME=`echo "${line}" | awk -F '\t' '{print $7}'`
+        TEST_CASE_FUNCTION_SWITCH=`echo "${line}" | awk -F '\t' '{print $8}'`
         #Get the test title from testcase.table
-       	TEST_CASE_TITLE=`echo "${line}" | awk -F '\t' '{print $3}'`
+        TEST_CASE_TITLE=`echo "${line}" | awk -F '\t' '{print $3}'`
 
         echo "CaseInfo "$TEST_CASE_TITLE" "$exec_script" "$TEST_CASE_FUNCTION_NAME" "$TEST_CASE_FUNCTION_SWITCH
 
@@ -38,7 +38,7 @@ function main()
 		#if [ x"$TEST_CASE_FUNCTION_SWITCH" == x"on" ]
 		#then
 		#	echo "Begin to run script: "${exec_script}
-                	source ${SAS_TOP_DIR}/case_script/${exec_script}
+                source ${SAS_TOP_DIR}/case_script/${exec_script}
 		#else
 		#	echo "Skip the Scirpt: "${exec_script}
 		#fi
@@ -60,4 +60,3 @@ main
 
 # clean exit so lava-test can trust the results
 exit 0
-
