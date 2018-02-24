@@ -7,12 +7,12 @@
 function recover_linkrate()
 {
     echo "Begin to recove the origin value of max and min rate"
-    
+
     echo "Para is "$1" "$2" "$3
 
     echo $1 > ${PHY_FILE_PATH}/$3/minimum_linkrate
-    echo $2 > ${PHY_FILE_PATH}/$3/maximum_linkrate    
-    
+    echo $2 > ${PHY_FILE_PATH}/$3/maximum_linkrate
+
     echo "The "$3" linkrate is recover as flow:"
     cat ${PHY_FILE_PATH}/${dir}/minimum_linkrate
     cat ${PHY_FILE_PATH}/${dir}/maximum_linkrate
@@ -34,11 +34,11 @@ function set_rate_link()
             echo "Begin to set rate in "${dir0}
 
             #this function will destroy the setting value of disk speed
-	    #so may be we should save the value first,then recove it after test
+            #so may be we should save the value first,then recove it after test
             tmp_min=`cat ${PHY_FILE_PATH}/${dir}/minimum_linkrate | awk '{printf $0}'`
-	    echo "origin min rate value is "$tmp_min
+            echo "origin min rate value is "$tmp_min
             tmp_max=`cat ${PHY_FILE_PATH}/${dir}/maximum_linkrate | awk '{printf $0}'`
-	    echo "origin max rate value is"$tmp_max
+            echo "origin max rate value is"$tmp_max
 
             echo $MINIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/minimum_linkrate
             echo $MAXIMUM_LINK_VALUE > ${PHY_FILE_PATH}/${dir}/maximum_linkrate
@@ -89,6 +89,10 @@ function loop_rate_set_up()
 
 function main()
 {
+    #Judge the current environment, directly connected environment or expander environment.
+    judgment_network_env
+    [ $? -eq 0 ] && echo "the current environment expander network, do not execute test cases." && return 0
+
     # call the implementation of the automation use cases
     test_case_function_run
 }

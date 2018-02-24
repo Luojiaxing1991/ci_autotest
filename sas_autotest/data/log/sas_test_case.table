@@ -4,33 +4,33 @@ R.SAS.F003.A	ST.FUNC.003	The driver must support STP	SATA≈Ã£¨expander£¨ªÏ∫œ√¸¡Ó≤
 R.SAS.F004.A	ST.FUNC.004	Support Max Devices	SAS≈Ã£¨SATA≈Ã£¨expander£¨¬˙‘ÿ∑˚∫œ≤‚ ‘	support_max_devices.sh	support_max_devices	on	
 R.SAS.F007.A	ST.FUNC.005	Support 12Gbit/s physical data rate	SAS≈Ã£¨÷±¡¨£¨ÀŸ¬ –≠…Ã≤‚ ‘(1.5Gbit/s, 3Gbit/s, 6Gbit/s, 12Gbits)	physical_data_rate.sh	disk_negotiated_link_rate_query	on	
 R.SAS.F006.A	ST.FUNC.006	6Gbit/s physical data rate	SATA≈Ã£¨÷±¡¨£¨ÀŸ¬ –≠…Ã≤‚ ‘(1.5Gbit/s, 3Gbit/s, 6Gbit/s)	physical_data_rate.sh	disk_negotiated_link_rate_query	on	
-R.SAS.F017.A	ST.FUNC.007	PHY control through sysfs	SAS≈Ã£¨÷±¡¨£¨÷ß≥÷ÀŸ¬ …Ë÷√	phy_control_through_sysfs.sh	rate_set_up	on	
-R.SAS.F017.A	ST.FUNC.008	PHY control through sysfs	SATA≈Ã£¨÷±¡¨£¨÷ß≥÷ÀŸ¬ …Ë÷√	phy_control_through_sysfs.sh	rate_set_up	on	
-R.SAS.F017.A	ST.FUNC.009	PHY control through sysfs	SAS/SATA≈Ã£¨÷±¡¨£¨÷ß≥÷÷ÿ∏¥ÀŸ¬ …Ë÷√	phy_control_through_sysfs.sh	loop_rate_set_up	on	
-R.SAS.N005.A	ST.FUNC.014	 No cable unplug OOPs	SAS≈Ã£¨÷±¡¨£¨≥§ ±º‰ÀŸ¬  ˝æ›¥´ ‰	no_cable_unplug.sh	loog_time_IO_read_write	on	
-R.SAS.N005.A	ST.FUNC.015	 No cable unplug OOPs	SAS≈Ã£¨÷±¡¨£¨∑¥∏¥∂¡–¥¥≈≈Ã	no_cable_unplug.sh	repeat_IO_read_write	on	
-R.SAS.N005.A	ST.FUNC.016	 No cable unplug OOPs	SAS≈Ã£¨÷±¡¨£¨ ˝æ›“ª÷¬–‘≤‚ ‘	no_cable_unplug.sh	disk_file_data_consistency_test	on	
+R.SAS.F017.A	ST.FUNC.007	PHY control through sysfs	SAS≈Ã£¨÷±¡¨£¨÷ß≥÷ÀŸ¬ …Ë÷√	phy_control_through_sysfs.sh	rate_set_up	off	
+R.SAS.F017.A	ST.FUNC.008	PHY control through sysfs	SATA≈Ã£¨÷±¡¨£¨÷ß≥÷ÀŸ¬ …Ë÷√	phy_control_through_sysfs.sh	rate_set_up	off	
+R.SAS.F017.A	ST.FUNC.009	PHY control through sysfs	SAS/SATA≈Ã£¨÷±¡¨£¨÷ß≥÷÷ÿ∏¥ÀŸ¬ …Ë÷√	phy_control_through_sysfs.sh	loop_rate_set_up	off	
+R.SAS.N005.A	ST.FUNC.014	 No cable unplug OOPs	SAS≈Ã£¨÷±¡¨£¨≥§ ±º‰ÀŸ¬  ˝æ›¥´ ‰	no_cable_unplug_oops.sh	loog_time_IO_read_write	on	
+R.SAS.N005.A	ST.FUNC.015	 No cable unplug OOPs	SAS≈Ã£¨÷±¡¨£¨∑¥∏¥∂¡–¥¥≈≈Ã	no_cable_unplug_oops.sh	repeat_IO_read_write	on	
+R.SAS.N005.A	ST.FUNC.016	 No cable unplug OOPs	SAS≈Ã£¨÷±¡¨£¨ ˝æ›“ª÷¬–‘≤‚ ‘	no_cable_unplug_oops.sh	disk_file_data_consistency_test	on	
 R.SAS.N007.A	ST.FUNC.017	Stable 2GB file transfer	SAS≈Ã£¨÷±¡¨£¨ ˝æ›Œ»∂®–‘≤‚ ‘	stable_2GB_file_transfer.sh	iozne_file_transfer_stability_test	on	
 R.SAS.N004.A	ST.FUNC.018	SAS 3.0	SAS≈Ã£¨÷±¡¨£¨¥ÛIO∂¡–¥£®4M£©	support_available_sas_cores.sh	FIO_IO_read_write	on	
 R.SAS.N004.A	ST.FUNC.019	SAS 3.0	SAS≈Ã£¨÷±¡¨£¨–°IO∂¡–¥£®512B£©	support_available_sas_cores.sh	FIO_IO_read_write	on	
-R.SAS.N005.A	ST.FUNC.020	 No cable unplug OOPs	SATA≈Ã£¨÷±¡¨£¨≥§ ±º‰ÀŸ¬  ˝æ›¥´ ‰	no_cable_unplug.sh	loog_time_IO_read_write	on	
-R.SAS.N005.A	ST.FUNC.021	 No cable unplug OOPs	SATA≈Ã£¨÷±¡¨£¨∑¥∏¥∂¡–¥¥≈≈Ã	no_cable_unplug.sh	repeat_IO_read_write	on	
-R.SAS.N005.A	ST.FUNC.022	 No cable unplug OOPs	SATA≈Ã£¨÷±¡¨£¨ ˝æ›“ª÷¬–‘≤‚ ‘	no_cable_unplug.sh	disk_file_data_consistency_test	on	
+R.SAS.N005.A	ST.FUNC.020	 No cable unplug OOPs	SATA≈Ã£¨÷±¡¨£¨≥§ ±º‰ÀŸ¬  ˝æ›¥´ ‰	no_cable_unplug_oops.sh	loog_time_IO_read_write	on	
+R.SAS.N005.A	ST.FUNC.021	 No cable unplug OOPs	SATA≈Ã£¨÷±¡¨£¨∑¥∏¥∂¡–¥¥≈≈Ã	no_cable_unplug_oops.sh	repeat_IO_read_write	on	
+R.SAS.N005.A	ST.FUNC.022	 No cable unplug OOPs	SATA≈Ã£¨÷±¡¨£¨ ˝æ›“ª÷¬–‘≤‚ ‘	no_cable_unplug_oops.sh	disk_file_data_consistency_test	on	
 R.SAS.N007.A	ST.FUNC.023	Stable 2GB file transfer	SATA≈Ã£¨÷±¡¨£¨ ˝æ›Œ»∂®–‘≤‚ ‘	stable_2GB_file_transfer.sh	iozne_file_transfer_stability_test	on	
 R.SAS.N003.A	ST.FUNC.024	SAS 2.0	SATA≈Ã£¨÷±¡¨£¨¥ÛIO∂¡–¥£®4M£©	support_available_sas_cores.sh	FIO_IO_read_write	on	
 R.SAS.N003.A	ST.FUNC.025	SAS 2.0	SATA≈Ã£¨÷±¡¨£¨–°IO∂¡–¥£®512B£©	support_available_sas_cores.sh	FIO_IO_read_write	on	
-R.SAS.N005.A	ST.FUNC.026	 No cable unplug OOPs	SAS≈Ã£¨expander£¨≥§ ±º‰ÀŸ¬  ˝æ›¥´ ‰	no_cable_unplug.sh	loog_time_IO_read_write	on	
-R.SAS.N005.A	ST.FUNC.027	 No cable unplug OOPs	SAS≈Ã£¨expander£¨∑¥∏¥∂¡–¥¥≈≈Ã	no_cable_unplug.sh	repeat_IO_read_write	on	
+R.SAS.N005.A	ST.FUNC.026	 No cable unplug OOPs	SAS≈Ã£¨expander£¨≥§ ±º‰ÀŸ¬  ˝æ›¥´ ‰	no_cable_unplug_oops.sh	loog_time_IO_read_write	on	
+R.SAS.N005.A	ST.FUNC.027	 No cable unplug OOPs	SAS≈Ã£¨expander£¨∑¥∏¥∂¡–¥¥≈≈Ã	no_cable_unplug_oops.sh	repeat_IO_read_write	on	
 R.SAS.N004.A	ST.FUNC.028	SAS 3.0	SAS≈Ã£¨expander£¨¥ÛIO∂¡–¥£®4M£©	support_available_sas_cores.sh	FIO_IO_read_write	on	
 R.SAS.N004.A	ST.FUNC.029	SAS 3.0	SAS≈Ã£¨expander£¨–°IO∂¡–¥£®512B£©	support_available_sas_cores.sh	FIO_IO_read_write	on	
-R.SAS.N005.A	ST.FUNC.030	 No cable unplug OOPs	SAS≈Ã£¨expander£¨ ˝æ›“ª÷¬–‘≤‚ ‘	no_cable_unplug.sh	disk_file_data_consistency_test	on	
+R.SAS.N005.A	ST.FUNC.030	 No cable unplug OOPs	SAS≈Ã£¨expander£¨ ˝æ›“ª÷¬–‘≤‚ ‘	no_cable_unplug_oops.sh	disk_file_data_consistency_test	on	
 R.SAS.N007.A	ST.FUNC.031	Stable 2GB file transfer	SAS≈Ã£¨expander£¨¥´ ‰Œ»∂®–‘≤‚ ‘	stable_2GB_file_transfer.sh	iozne_file_transfer_stability_test	on	
 R.SAS.N001.A	ST.FUNC.032	The driver should support 700KIOPS per controller	SAS≈Ã£¨expander£¨700KIOPS∏ﬂ–‘ƒ‹≤‚(4KB)	support_700k_iops.sh	fio_iops_controller	on	
-R.SAS.N005.A	ST.FUNC.033	 No cable unplug OOPs	SATA≈Ã£¨expander£¨≥§ ±º‰ÀŸ¬  ˝æ›¥´ ‰	no_cable_unplug.sh	loog_time_IO_read_write	on	
-R.SAS.N005.A	ST.FUNC.034	 No cable unplug OOPs	SATA≈Ã£¨expander£¨∑¥∏¥∂¡–¥¥≈≈Ã	no_cable_unplug.sh	repeat_IO_read_write	on	
+R.SAS.N005.A	ST.FUNC.033	 No cable unplug OOPs	SATA≈Ã£¨expander£¨≥§ ±º‰ÀŸ¬  ˝æ›¥´ ‰	no_cable_unplug_oops.sh	loog_time_IO_read_write	on	
+R.SAS.N005.A	ST.FUNC.034	 No cable unplug OOPs	SATA≈Ã£¨expander£¨∑¥∏¥∂¡–¥¥≈≈Ã	no_cable_unplug_oops.sh	repeat_IO_read_write	on	
 R.SAS.N003.A	ST.FUNC.035	SAS 2.0	SATA≈Ã£¨expander£¨¥ÛIO∂¡–¥£®4M£©	support_available_sas_cores.sh	FIO_IO_read_write	on	
 R.SAS.N003.A	ST.FUNC.036	SAS 2.0	SATA≈Ã£¨expander£¨–°IO∂¡–¥£®512B£©	support_available_sas_cores.sh	FIO_IO_read_write	on	
-R.SAS.N005.A	ST.FUNC.037	 No cable unplug OOPs	SATA≈Ã£¨expander£¨ ˝æ›“ª÷¬–‘≤‚ ‘	no_cable_unplug.sh	disk_file_data_consistency_test	on	
+R.SAS.N005.A	ST.FUNC.037	 No cable unplug OOPs	SATA≈Ã£¨expander£¨ ˝æ›“ª÷¬–‘≤‚ ‘	no_cable_unplug_oops.sh	disk_file_data_consistency_test	on	
 R.SAS.N007.A	ST.FUNC.038	Stable 2GB file transfer	SATA≈Ã£¨expander£¨¥´ ‰Œ»∂®–‘≤‚ ‘	stable_2GB_file_transfer.sh	iozne_file_transfer_stability_test	on	
 R.SAS.N004.A	ST.FUNC.039	SAS 3.0	—π¡¶≤‚ ‘  4M~4kÀÊª˙¥Û–°io£®∂¡10%£©	support_available_sas_cores.sh	FIO_IO_RAIO_randrw	on	
 R.SAS.N004.A	ST.FUNC.040	SAS 3.0	—π¡¶≤‚ ‘  4M~4kÀÊª˙¥Û–°io£®∂¡50%£©	support_available_sas_cores.sh	FIO_IO_RAIO_randrw	on	
@@ -38,124 +38,112 @@ R.SAS.N004.A	ST.FUNC.041	SAS 3.0	—π¡¶≤‚ ‘  4M~4kÀÊª˙¥Û–°io£®∂¡90%£©	support_avai
 R.SAS.N004.A	ST.FUNC.042	SAS 3.0	—π¡¶≤‚ ‘ 4M~4kÀÊª˙¥Û–°io£®÷ª∂¡£©	support_available_sas_cores.sh	FIO_IO_RAIO_read_write	on	
 R.SAS.N004.A	ST.FUNC.043	SAS 3.0	—π¡¶≤‚ ‘ 4M~4kÀÊª˙¥Û–°io£®÷ª–¥£©	support_available_sas_cores.sh	FIO_IO_RAIO_read_write	on	
 R.SAS.N004.A	ST.FUNC.044	SAS 3.0	—π¡¶≤‚ ‘ÀÊª˙¥Û–°io£®4k/30:8k/40:16k/30£©	support_available_sas_cores.sh	FIO_IO_RAIO_read_write	on	
-R.SAS.F025.A	ST.FUNC.047	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_DQE_RAM0	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.048	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_DQE_RAM1	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.049	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_DQE_RAM2	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.050	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_DQE_RAM3	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.051	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_CQE_RAM	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.052	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_IOST_RAM0	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.053	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_IOST_RAM1	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.054	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_IOST_RAM2	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.055	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_IOST_RAM3	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.056	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_ITCT_RAM0	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.057	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_ITCT_RAM1	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.058	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_ITCT_RAM2	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.059	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_ITCT_RAM3	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.060	RAS support	µ•bit ECC£∫RXM mem0	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.061	RAS support	µ•bit ECC£∫RXM mem1	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.062	RAS support	µ•bit ECC£∫RXM mem2	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.063	RAS support	µ•bit ECC£∫RXM mem3	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.064	RAS support	µ•bit ECC£∫LM ITCT±Ìmem0	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.065	RAS support	µ•bit ECC£∫LM ITCT±Ìmem1	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.066	RAS support	µ•bit ECC£∫LM ITCT±Ìmem2	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.067	RAS support	µ•bit ECC£∫LM ITCT±Ìmem3	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.068	RAS support	µ•bit ECC£∫LM IOST±Ìmem0	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.069	RAS support	µ•bit ECC£∫LM IOST±Ìmem1	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.070	RAS support	µ•bit ECC£∫LM IOST±Ìmem2	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.071	RAS support	µ•bit ECC£∫LM IOST±Ìmem3	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.072	RAS support	µ•bit ECC£∫SAS_DMAC_TX_RAM Õ®µ¿0	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.073	RAS support	µ•bit ECC£∫SAS_DMAC_TX_RAM Õ®µ¿1	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.074	RAS support	µ•bit ECC£∫SAS_DMAC_TX_RAM Õ®µ¿2	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.075	RAS support	µ•bit ECC£∫SAS_DMAC_TX_RAM Õ®µ¿3	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.076	RAS support	µ•bit ECC£∫SAS_DMAC_TX_RAM Õ®µ¿4	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.077	RAS support	µ•bit ECC£∫SAS_DMAC_TX_RAM Õ®µ¿5	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.078	RAS support	µ•bit ECC£∫SAS_DMAC_TX_RAM Õ®µ¿6	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.079	RAS support	µ•bit ECC£∫SAS_DMAC_TX_RAM Õ®µ¿7	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.080	RAS support	µ•bit ECC£∫SAS_DMAC_TX_RAM Õ®µ¿8	ras_support.sh	1bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.081	RAS support	À´bit ECC£∫SAS_DMAC_RX_RAM Õ®µ¿0	ras_support.sh	2bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.082	RAS support	À´bit ECC£∫SAS_DMAC_RX_RAM Õ®µ¿1	ras_support.sh	2bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.083	RAS support	À´bit ECC£∫SAS_DMAC_RX_RAM Õ®µ¿2	ras_support.sh	2bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.084	RAS support	À´bit ECC£∫SAS_DMAC_RX_RAM Õ®µ¿3	ras_support.sh	2bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.085	RAS support	À´bit ECC£∫SAS_DMAC_RX_RAM Õ®µ¿4	ras_support.sh	2bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.086	RAS support	À´bit ECC£∫SAS_DMAC_RX_RAM Õ®µ¿5	ras_support.sh	2bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.087	RAS support	À´bit ECC£∫SAS_DMAC_RX_RAM Õ®µ¿6	ras_support.sh	2bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.088	RAS support	À´bit ECC£∫SAS_DMAC_RX_RAM Õ®µ¿7	ras_support.sh	2bit_ecc_injection	on	
-R.SAS.F025.A	ST.FUNC.089	RAS support	À´bit ECC£∫SAS_DMAC_RX_RAM Õ®µ¿8	ras_support.sh	2bit_ecc_injection	on	
-R.SAS.F010.A	ST.FUNC.090	Support full SAS function on all available PHYs	SAS≈Ã£¨÷±¡¨£¨ø™πÿΩ¸∂ÀPHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	on	
-R.SAS.F010.A	ST.FUNC.091	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨ø™πÿΩ¸∂ÀPHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	on	
-R.SAS.F010.A	ST.FUNC.092	Support full SAS function on all available PHYs	SAS≈Ã£¨÷±¡¨£¨hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	on	
-R.SAS.F010.A	ST.FUNC.093	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	on	
-R.SAS.F010.A	ST.FUNC.094	Support full SAS function on all available PHYs	SAS≈Ã£¨÷±¡¨£¨link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	on	
-R.SAS.F010.A	ST.FUNC.095	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	on	
-R.SAS.F010.A	ST.FUNC.096	Support full SAS function on all available PHYs	SAS≈Ã£¨÷±¡¨£¨ø™πÿenable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	on	
-R.SAS.F010.A	ST.FUNC.097	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨ø™πÿenable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	on	
-R.SAS.F010.A	ST.FUNC.098	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨ø™πÿenable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	on	
-R.SAS.F010.A	ST.FUNC.099	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨ø™πÿenable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	on	
-R.SAS.F010.A	ST.FUNC.100	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨ø™πÿΩ¸∂ÀPHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	on	
-R.SAS.F010.A	ST.FUNC.101	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨ø™πÿΩ¸∂ÀPHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	on	
-R.SAS.F010.A	ST.FUNC.102	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	on	
-R.SAS.F010.A	ST.FUNC.103	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	on	
-R.SAS.F010.A	ST.FUNC.104	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	on	
-R.SAS.F010.A	ST.FUNC.105	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	on	
-R.SAS.F010.A	ST.FUNC.106	Support full SAS function on all available PHYs	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨µ•øÈSAS¥≈≈Ãπÿ±’Ω¸∂Àphy	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	on	
-R.SAS.F010.A	ST.FUNC.107	Support full SAS function on all available PHYs	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡øÈSAS¥≈≈Ãπÿ±’Ω¸∂Àphy	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	on	
-R.SAS.F008.A	ST.FUNC.108	Support SAS Narrow and Wide Ports	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	on	
-R.SAS.F008.A	ST.FUNC.109	Support SAS Narrow and Wide Ports	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡¥Œlink reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	on	
-R.SAS.F008.A	ST.FUNC.110	Support SAS Narrow and Wide Ports	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	on	
-R.SAS.F008.A	ST.FUNC.111	Support SAS Narrow and Wide Ports	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	on	
-R.SAS.F008.A	ST.FUNC.112	Support SAS Narrow and Wide Ports	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	on	
+R.SAS.F022.A	ST.FUNC.045	Controller reset for ECC error	expander£¨2bit ECC¥ÌŒÛ◊¢»Î	controller_ecc_error_reset.sh	controller_2bit_ecc_reset	off	
+R.SAS.F022.A	ST.FUNC.046	Controller reset for ECC error	expander£¨1bit ECC¥ÌŒÛ◊¢»Î	controller_ecc_error_reset.sh	controller_1bit_ecc_reset	off	
+R.SAS.F025.A	ST.FUNC.047	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_DQE_RAM0	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.048	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_DQE_RAM1	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.049	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_DQE_RAM2	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.050	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_DQE_RAM3	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.051	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_CQE_RAM	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.052	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_IOST_RAM0	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.053	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_IOST_RAM1	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.054	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_IOST_RAM2	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.055	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_IOST_RAM3	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.056	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_ITCT_RAM0	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.057	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_ITCT_RAM1	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.058	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_ITCT_RAM2	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.059	RAS support	µ•bit ECC£∫SAS_HGC_IOMB_ITCT_RAM3	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.060	RAS support	µ•bit ECC£∫RXM mem0	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.061	RAS support	µ•bit ECC£∫RXM mem1	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.062	RAS support	µ•bit ECC£∫RXM mem2	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.063	RAS support	µ•bit ECC£∫RXM mem3	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.064	RAS support	µ•bit ECC£∫LM ITCT±Ìmem0	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.065	RAS support	µ•bit ECC£∫LM ITCT±Ìmem1	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.066	RAS support	µ•bit ECC£∫LM ITCT±Ìmem2	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.067	RAS support	µ•bit ECC£∫LM ITCT±Ìmem3	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.068	RAS support	µ•bit ECC£∫LM IOST±Ìmem0	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.069	RAS support	µ•bit ECC£∫LM IOST±Ìmem1	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.070	RAS support	µ•bit ECC£∫LM IOST±Ìmem2	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.071	RAS support	µ•bit ECC£∫LM IOST±Ìmem3	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.072	RAS support	µ•bit ECC£∫SAS_DMAC_TX_RAM Õ®µ¿0	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.073	RAS support	µ•bit ECC£∫SAS_DMAC_TX_RAM Õ®µ¿1	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.074	RAS support	µ•bit ECC£∫SAS_DMAC_TX_RAM Õ®µ¿2	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.075	RAS support	µ•bit ECC£∫SAS_DMAC_TX_RAM Õ®µ¿3	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.076	RAS support	µ•bit ECC£∫SAS_DMAC_TX_RAM Õ®µ¿4	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.077	RAS support	µ•bit ECC£∫SAS_DMAC_TX_RAM Õ®µ¿5	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.078	RAS support	µ•bit ECC£∫SAS_DMAC_TX_RAM Õ®µ¿6	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.079	RAS support	µ•bit ECC£∫SAS_DMAC_TX_RAM Õ®µ¿7	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.080	RAS support	µ•bit ECC£∫SAS_DMAC_TX_RAM Õ®µ¿8	support_ras.sh	1bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.081	RAS support	À´bit ECC£∫SAS_DMAC_RX_RAM Õ®µ¿0	support_ras.sh	2bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.082	RAS support	À´bit ECC£∫SAS_DMAC_RX_RAM Õ®µ¿1	support_ras.sh	2bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.083	RAS support	À´bit ECC£∫SAS_DMAC_RX_RAM Õ®µ¿2	support_ras.sh	2bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.084	RAS support	À´bit ECC£∫SAS_DMAC_RX_RAM Õ®µ¿3	support_ras.sh	2bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.085	RAS support	À´bit ECC£∫SAS_DMAC_RX_RAM Õ®µ¿4	support_ras.sh	2bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.086	RAS support	À´bit ECC£∫SAS_DMAC_RX_RAM Õ®µ¿5	support_ras.sh	2bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.087	RAS support	À´bit ECC£∫SAS_DMAC_RX_RAM Õ®µ¿6	support_ras.sh	2bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.088	RAS support	À´bit ECC£∫SAS_DMAC_RX_RAM Õ®µ¿7	support_ras.sh	2bit_ecc_injection	off	
+R.SAS.F025.A	ST.FUNC.089	RAS support	À´bit ECC£∫SAS_DMAC_RX_RAM Õ®µ¿8	support_ras.sh	2bit_ecc_injection	off	
+R.SAS.F010.A	ST.FUNC.090	Support full SAS function on all available PHYs	SAS≈Ã£¨÷±¡¨£¨ø™πÿΩ¸∂ÀPHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	off	
+R.SAS.F010.A	ST.FUNC.091	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨ø™πÿΩ¸∂ÀPHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	off	
+R.SAS.F010.A	ST.FUNC.092	Support full SAS function on all available PHYs	SAS≈Ã£¨÷±¡¨£¨hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	off	
+R.SAS.F010.A	ST.FUNC.093	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	off	
+R.SAS.F010.A	ST.FUNC.094	Support full SAS function on all available PHYs	SAS≈Ã£¨÷±¡¨£¨link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	off	
+R.SAS.F010.A	ST.FUNC.095	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	off	
+R.SAS.F010.A	ST.FUNC.096	Support full SAS function on all available PHYs	SAS≈Ã£¨÷±¡¨£¨ø™πÿenable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	off	
+R.SAS.F010.A	ST.FUNC.097	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨ø™πÿenable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	off	
+R.SAS.F010.A	ST.FUNC.098	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨ø™πÿenable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	off	
+R.SAS.F010.A	ST.FUNC.099	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨ø™πÿenable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	off	
+R.SAS.F010.A	ST.FUNC.100	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨ø™πÿΩ¸∂ÀPHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	off	
+R.SAS.F010.A	ST.FUNC.101	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨ø™πÿΩ¸∂ÀPHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	off	
+R.SAS.F010.A	ST.FUNC.102	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	off	
+R.SAS.F010.A	ST.FUNC.103	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	off	
+R.SAS.F010.A	ST.FUNC.104	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	off	
+R.SAS.F010.A	ST.FUNC.105	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	off	
+R.SAS.F010.A	ST.FUNC.106	Support full SAS function on all available PHYs	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨µ•øÈSAS¥≈≈Ãπÿ±’Ω¸∂Àphy	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	off	
+R.SAS.F010.A	ST.FUNC.107	Support full SAS function on all available PHYs	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡øÈSAS¥≈≈Ãπÿ±’Ω¸∂Àphy	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	off	
+R.SAS.F008.A	ST.FUNC.108	Support SAS Narrow and Wide Ports	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	off	
+R.SAS.F008.A	ST.FUNC.109	Support SAS Narrow and Wide Ports	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡¥Œlink reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	off	
+R.SAS.F008.A	ST.FUNC.110	Support SAS Narrow and Wide Ports	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	off	
+R.SAS.F008.A	ST.FUNC.111	Support SAS Narrow and Wide Ports	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
+R.SAS.F008.A	ST.FUNC.112	Support SAS Narrow and Wide Ports	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
 R.SAS.F014.A	ST.FUNC.113	Support hotplug	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ãenable	upport_hotplug.sh	fio_single_enable	on	
-R.SAS.F014.A	ST.FUNC.114	Support hotplug	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	on	
-R.SAS.F010.A	ST.FUNC.115	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ãπÿ±’Ω¸∂Àphy	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	on	
-R.SAS.F010.A	ST.FUNC.116	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ãπÿ±’Ω¸∂Àphy	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	on	
-R.SAS.F008.A	ST.FUNC.117	Support SAS Narrow and Wide Ports	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	on	
-R.SAS.F008.A	ST.FUNC.118	Support SAS Narrow and Wide Ports	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡¥Œlink reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	on	
-R.SAS.F008.A	ST.FUNC.119	Support SAS Narrow and Wide Ports	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	on	
-R.SAS.F008.A	ST.FUNC.120	Support SAS Narrow and Wide Ports	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	on	
-R.SAS.F008.A	ST.FUNC.121	Support SAS Narrow and Wide Ports	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	on	
-R.SAS.F014.A	ST.FUNC.122	Support hotplug	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	on	
-R.SAS.F014.A	ST.FUNC.123	Support hotplug	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	on	
-R.SAS.F010.A	ST.FUNC.124	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨IO∂¡–¥£¨µ•∏ˆphy∆µ∑±…¡∂œ	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	on	
-R.SAS.F010.A	ST.FUNC.125	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨IO∂¡–¥£¨∂‡∏ˆphy∆µ∑±…¡∂œ	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	on	
-R.SAS.F010.A	ST.FUNC.126	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨IO∂¡–¥£¨πÿ±’À˘”–phy	support_full_sas_function_all_available_phys.sh	devmem_all_switch_phy	on	
-R.SAS.F010.A	ST.FUNC.127	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨IO∂¡–¥£¨¬÷—Ø∑¥∏¥ø™πÿphy	support_full_sas_function_all_available_phys.sh	devmem_polling_switch_phy	on	
-R.SAS.F008.A	ST.FUNC.128	Support SAS Narrow and Wide Ports	SAS≈Ã£¨expander£¨IO∂¡–¥£¨link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	on	
-R.SAS.F008.A	ST.FUNC.129	Support SAS Narrow and Wide Ports	SAS≈Ã£¨expander£¨IO∂¡–¥£¨∂‡¥Œlink reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	on	
-R.SAS.F008.A	ST.FUNC.130	Support SAS Narrow and Wide Ports	SAS≈Ã£¨expander£¨IO∂¡–¥£¨hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	on	
-R.SAS.F008.A	ST.FUNC.131	Support SAS Narrow and Wide Ports	SAS≈Ã£¨expander£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	on	
-R.SAS.F008.A	ST.FUNC.132	Support SAS Narrow and Wide Ports	SAS≈Ã£¨expander£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	on	
+R.SAS.F014.A	ST.FUNC.114	Support hotplug	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	off	
+R.SAS.F010.A	ST.FUNC.115	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ãπÿ±’Ω¸∂Àphy	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	off	
+R.SAS.F010.A	ST.FUNC.116	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ãπÿ±’Ω¸∂Àphy	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	off	
+R.SAS.F008.A	ST.FUNC.117	Support SAS Narrow and Wide Ports	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	off	
+R.SAS.F008.A	ST.FUNC.118	Support SAS Narrow and Wide Ports	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡¥Œlink reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	off	
+R.SAS.F008.A	ST.FUNC.119	Support SAS Narrow and Wide Ports	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	off	
+R.SAS.F008.A	ST.FUNC.120	Support SAS Narrow and Wide Ports	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
+R.SAS.F008.A	ST.FUNC.121	Support SAS Narrow and Wide Ports	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
+R.SAS.F014.A	ST.FUNC.122	Support hotplug	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	off	
+R.SAS.F014.A	ST.FUNC.123	Support hotplug	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	off	
+R.SAS.F010.A	ST.FUNC.124	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨IO∂¡–¥£¨µ•∏ˆphy∆µ∑±…¡∂œ	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	off	
+R.SAS.F010.A	ST.FUNC.125	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨IO∂¡–¥£¨∂‡∏ˆphy∆µ∑±…¡∂œ	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	off	
+R.SAS.F010.A	ST.FUNC.126	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨IO∂¡–¥£¨πÿ±’À˘”–phy	support_full_sas_function_all_available_phys.sh	devmem_all_switch_phy	off	
+R.SAS.F010.A	ST.FUNC.127	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨IO∂¡–¥£¨¬÷—Ø∑¥∏¥ø™πÿphy	support_full_sas_function_all_available_phys.sh	devmem_polling_switch_phy	off	
+R.SAS.F008.A	ST.FUNC.128	Support SAS Narrow and Wide Ports	SAS≈Ã£¨expander£¨IO∂¡–¥£¨link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	off	
+R.SAS.F008.A	ST.FUNC.129	Support SAS Narrow and Wide Ports	SAS≈Ã£¨expander£¨IO∂¡–¥£¨∂‡¥Œlink reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	off	
+R.SAS.F008.A	ST.FUNC.130	Support SAS Narrow and Wide Ports	SAS≈Ã£¨expander£¨IO∂¡–¥£¨hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	off	
+R.SAS.F008.A	ST.FUNC.131	Support SAS Narrow and Wide Ports	SAS≈Ã£¨expander£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
+R.SAS.F008.A	ST.FUNC.132	Support SAS Narrow and Wide Ports	SAS≈Ã£¨expander£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
 R.SAS.F014.A	ST.FUNC.133	Support hotplug	SAS≈Ã£¨expander£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	on	
 R.SAS.F014.A	ST.FUNC.134	Support hotplug	SAS≈Ã£¨expander£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	on	
-R.SAS.F010.A	ST.FUNC.135	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨IO∂¡–¥£¨µ•∏ˆΩ¸∂Àphy∆µ∑±…¡∂œ	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	on	
-R.SAS.F010.A	ST.FUNC.136	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨IO∂¡–¥£¨∂‡∏ˆΩ¸∂Àphy∆µ∑±…¡∂œ	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	on	
-R.SAS.F010.A	ST.FUNC.137	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨IO∂¡–¥£¨πÿ±’À˘”–Ω¸∂Àphy	support_full_sas_function_all_available_phys.sh	devmem_all_switch_phy	on	
-R.SAS.F010.A	ST.FUNC.138	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨IO∂¡–¥£¨¬÷—Ø∑¥∏¥ø™πÿΩ¸∂Àphy	support_full_sas_function_all_available_phys.sh	devmem_polling_switch_phy	on	
-R.SAS.F008.A	ST.FUNC.139	Support SAS Narrow and Wide Ports	SATA≈Ã£¨expander£¨IO∂¡–¥£¨link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	on	
-R.SAS.F008.A	ST.FUNC.140	Support SAS Narrow and Wide Ports	SATA≈Ã£¨expander£¨IO∂¡–¥£¨∂‡¥Œlink reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	on	
-R.SAS.F008.A	ST.FUNC.141	Support SAS Narrow and Wide Ports	SATA≈Ã£¨expander£¨IO∂¡–¥£¨hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	on	
-R.SAS.F008.A	ST.FUNC.142	Support SAS Narrow and Wide Ports	SATA≈Ã£¨expander£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	on	
-R.SAS.F008.A	ST.FUNC.143	Support SAS Narrow and Wide Ports	SATA≈Ã£¨expander£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	on	
+R.SAS.F010.A	ST.FUNC.135	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨IO∂¡–¥£¨µ•∏ˆΩ¸∂Àphy∆µ∑±…¡∂œ	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	off	
+R.SAS.F010.A	ST.FUNC.136	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨IO∂¡–¥£¨∂‡∏ˆΩ¸∂Àphy∆µ∑±…¡∂œ	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	off	
+R.SAS.F010.A	ST.FUNC.137	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨IO∂¡–¥£¨πÿ±’À˘”–Ω¸∂Àphy	support_full_sas_function_all_available_phys.sh	devmem_all_switch_phy	off	
+R.SAS.F010.A	ST.FUNC.138	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨IO∂¡–¥£¨¬÷—Ø∑¥∏¥ø™πÿΩ¸∂Àphy	support_full_sas_function_all_available_phys.sh	devmem_polling_switch_phy	off	
+R.SAS.F008.A	ST.FUNC.139	Support SAS Narrow and Wide Ports	SATA≈Ã£¨expander£¨IO∂¡–¥£¨link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	off	
+R.SAS.F008.A	ST.FUNC.140	Support SAS Narrow and Wide Ports	SATA≈Ã£¨expander£¨IO∂¡–¥£¨∂‡¥Œlink reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	off	
+R.SAS.F008.A	ST.FUNC.141	Support SAS Narrow and Wide Ports	SATA≈Ã£¨expander£¨IO∂¡–¥£¨hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	off	
+R.SAS.F008.A	ST.FUNC.142	Support SAS Narrow and Wide Ports	SATA≈Ã£¨expander£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
+R.SAS.F008.A	ST.FUNC.143	Support SAS Narrow and Wide Ports	SATA≈Ã£¨expander£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
 R.SAS.F014.A	ST.FUNC.144	Support hotplug	SATA≈Ã£¨expander£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	on	
 R.SAS.F014.A	ST.FUNC.145	Support hotplug	SATA≈Ã£¨expander£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	on	
-R.SAS.F012.A	ST.FUNC.191	Support SATA NCQ	SATA≈Ã£¨expander£¨NCQ≤È—Ø	sata_ncq_query.sh	ncq_query	on	
+R.SAS.F012.A	ST.FUNC.191	Support SATA NCQ	SATA≈Ã£¨expander£¨NCQ≤È—Ø	support_sata_ncq.sh	ncq_query	on	
 R.SAS.F015.A	ST.FUNC.195	Support SMART	SATA£¨÷±¡¨£¨SMART	support_smart.sh	smart_disk_check	on	
 R.SAS.F015.A	ST.FUNC.196	Support SMART	SAS£¨÷±¡¨£¨SMART	support_smart.sh	smart_disk_check	on	
 R.SAS.F015.A	ST.FUNC.198	Support SMART	SATA≈Ã£¨expander£¨SMART	support_smart.sh	smart_disk_check	on	
 R.SAS.F015.A	ST.FUNC.199	Support SMART	SAS≈Ã£¨expander£¨SMART	support_smart.sh	smart_disk_check	on	
-N/A	ST.FUNC.200	N/A	expander£¨º”‘ÿ°¢–∂‘ÿkoƒ£øÈ	support_module_load.sh	module_load_uninstall	on	
-N/A	ST.FUNC.201	N/A	÷±¡¨±≥∞Â£¨º”‘ÿ°¢–∂‘ÿkoƒ£øÈ	support_module_load.sh	module_load_uninstall	on	
- PHYs   SATA≈Ã£¨expander£¨IO∂¡–¥£¨¬÷—Ø∑¥∏¥ø™πÿΩ¸∂Àphy   support_full_sas_function_all_available_phys.sh   devmem_polling_switch_phy   on   
-R.SAS.F008.A   ST.FUNC.139   Support SAS Narrow and Wide Ports   SATA≈Ã£¨expander£¨IO∂¡–¥£¨link reset   narrow_and_wide_ports.sh   fio_single_link_reset_phy   on   
-R.SAS.F008.A   ST.FUNC.140   Support SAS Narrow and Wide Ports   SATA≈Ã£¨expander£¨IO∂¡–¥£¨∂‡¥Œlink reset   narrow_and_wide_ports.sh   fio_cycle_link_reset_phy   on   
-R.SAS.F008.A   ST.FUNC.141   Support SAS Narrow and Wide Ports   SATA≈Ã£¨expander£¨IO∂¡–¥£¨hard reset   narrow_and_wide_ports.sh   fio_single_hard_reset_phy   on   
-R.SAS.F008.A   ST.FUNC.142   Support SAS Narrow and Wide Ports   SATA≈Ã£¨expander£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ã∂‡¥Œhard reset   narrow_and_wide_ports.sh   fio_cycle_hard_reset_phy   on   
-R.SAS.F008.A   ST.FUNC.143   Support SAS Narrow and Wide Ports   SATA≈Ã£¨expander£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ã∂‡¥Œhard reset   narrow_and_wide_ports.sh   fio_cycle_hard_reset_phy   on   
-R.SAS.F014.A   ST.FUNC.144   Support hotplug   SATA≈Ã£¨expander£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ãenable   support_hotplug.sh   fio_single_enable   on   
-R.SAS.F014.A   ST.FUNC.145   Support hotplug   SATA≈Ã£¨expander£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ãenable   support_hotplug.sh   fio_single_enable   on   
-R.SAS.F012.A   ST.FUNC.191   Support SATA NCQ   SATA≈Ã£¨expander£¨NCQ≤È—Ø   sata_ncq_query.sh   ncq_query   on   
-R.SAS.F015.A   ST.FUNC.195   Support SMART   SATA£¨÷±¡¨£¨SMART   support_smart.sh   smart_disk_check   on   
-R.SAS.F015.A   ST.FUNC.196   Support SMART   SAS£¨÷±¡¨£¨SMART   support_smart.sh   smart_disk_check   on   
-R.SAS.F015.A   ST.FUNC.198   Support SMART   SATA≈Ã£¨expander£¨SMART   support_smart.sh   smart_disk_check   on   
-R.SAS.F015.A   ST.FUNC.199   Support SMART   SAS≈Ã£¨expander£¨SMART   support_smart.sh   smart_disk_check   on   
-N/A   ST.FUNC.200   N/A   expander£¨º”‘ÿ°¢–∂‘ÿkoƒ£øÈ   support_module_load.sh   module_load_uninstall   on   
-N/A   ST.FUNC.201   N/A   ÷±¡¨±≥∞Â£¨º”‘ÿ°¢–∂‘ÿkoƒ£øÈ   support_module_load.sh   module_load_uninstall   on   
+N/A	ST.FUNC.200	N/A	expander£¨º”‘ÿ°¢–∂‘ÿkoƒ£øÈ	support_module_load.sh	module_load_uninstall	off	
+N/A	ST.FUNC.201	N/A	÷±¡¨±≥∞Â£¨º”‘ÿ°¢–∂‘ÿkoƒ£øÈ	support_module_load.sh	module_load_uninstall	off	
+R.SAS.F018.A	ST.FUNC.202	Support ACPI for probe and reset	÷ß≥÷ACPI∑Ω Ω∆Ù∂Ø	support_acpi.sh	check_acpi_start	on	
