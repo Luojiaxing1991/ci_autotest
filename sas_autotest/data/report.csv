@@ -41,20 +41,110 @@ PV-1725	R.SAS.N004.A	ST.FUNC.043	SAS 3.0	压力测试 4M~4k随机大小io（只写）	suppor
 PV-1725	R.SAS.N004.A	ST.FUNC.044	SAS 3.0	压力测试随机大小io（4k/30:8k/40:16k/30）	support_available_sas_cores.sh	FIO_IO_RAIO_read_write	off	BLOCK	no automated use cases were implemented.
 PV-1596	R.SAS.F022.A	ST.FUNC.045	Controller reset for ECC error	expander，2bit ECC错误注入	controller_ecc_error_reset.sh	controller_2bit_ecc_reset	off	FILE	case_script/controller_ecc_error_reset.sh execution script does not exist, please check.
 PV-1596	R.SAS.F022.A	ST.FUNC.046	Controller reset for ECC error	expander，1bit ECC错误注入	controller_ecc_error_reset.sh	controller_1bit_ecc_reset	off	FILE	case_script/controller_ecc_error_reset.sh execution script does not exist, please check.
-PV-1330	R.SAS.F025.A	ST.FUNC.047	RAS support	单bit ECC：SAS_HGC_IOMB_DQE_RAM0	support_ras.sh	1bit_ecc_inject0_en	off	BLOCK	no automated use cases were implemented.
-PV-1330	R.SAS.F025.A	ST.FUNC.048	RAS support	单bit ECC：SAS_HGC_IOMB_DQE_RAM1	support_ras.sh	1bit_ecc_inject0_en_2	on	PASS
-PV-1330	R.SAS.F025.A	ST.FUNC.049	RAS support	单bit ECC：SAS_HGC_IOMB_DQE_RAM2	support_ras.sh	1bit_ecc_inject0_en_4	on	PASS
-PV-1330	R.SAS.F025.A	ST.FUNC.050	RAS support	单bit ECC：SAS_HGC_IOMB_DQE_RAM3	support_ras.sh	1bit_ecc_inject0_en_8	on	PASS
-PV-1330	R.SAS.F025.A	ST.FUNC.051	RAS support	单bit ECC：SAS_HGC_IOMB_CQE_RAM	support_ras.sh	1bit_ecc_inject0_en_10	on	FAIL	0xa2000200 register address setting , no error message is reported.
-PV-1330	R.SAS.F025.A	ST.FUNC.052	RAS support	单bit ECC：SAS_HGC_IOMB_IOST_RAM0	support_ras.sh	1bit_ecc_inject0_en_20	on	FAIL	0xa2000200 register address setting , no error message is reported.
-PV-1330	R.SAS.F025.A	ST.FUNC.053	RAS support	单bit ECC：SAS_HGC_IOMB_IOST_RAM1	support_ras.sh	1bit_ecc_inject0_en_40	on	FAIL	0xa2000200 register address setting , no error message is reported.
-PV-1330	R.SAS.F025.A	ST.FUNC.054	RAS support	单bit ECC：SAS_HGC_IOMB_IOST_RAM2	support_ras.sh	1bit_ecc_inject0_en_80	on	FAIL	0xa2000200 register address setting , no error message is reported.
-PV-1330	R.SAS.F025.A	ST.FUNC.055	RAS support	单bit ECC：SAS_HGC_IOMB_IOST_RAM3	support_ras.sh	1bit_ecc_inject0_en_100	on	FAIL	0xa2000200 register address setting , no error message is reported.
-PV-1330	R.SAS.F025.A	ST.FUNC.056	RAS support	单bit ECC：SAS_HGC_IOMB_ITCT_RAM0	support_ras.sh	1bit_ecc_inject0_en_200	on	FAIL	0xa2000200 register address setting , no error message is reported.
-PV-1330	R.SAS.F025.A	ST.FUNC.057	RAS support	单bit ECC：SAS_HGC_IOMB_ITCT_RAM1	support_ras.sh	1bit_ecc_inject0_en_400	on	FAIL	0xa2000200 register address setting , no error message is reported.
-PV-1330	R.SAS.F025.A	ST.FUNC.058	RAS support	单bit ECC：SAS_HGC_IOMB_ITCT_RAM2	support_ras.sh	1bit_ecc_inject0_en_800	on	FAIL	0xa2000200 register address setting , no error message is reported.
-PV-1330	R.SAS.F025.A	ST.FUNC.059	RAS support	单bit ECC：SAS_HGC_IOMB_ITCT_RAM3	support_ras.sh	1bit_ecc_inject0_en_1000	on	FAIL	0xa2000200 register address setting , no error message is reported.
-PV-1330	R.SAS.F025.A	ST.FUNC.060	RAS support	单bit ECC：RXM mem0	support_ras.sh	1bit_ecc_inject0_en_2000	on	FAIL	0xa2000200 register address setting , no error message is reported.
-PV-1330	R.SAS.F025.A	ST.FUNC.061	RAS support	单bit ECC：RXM mem1	support_ras.sh	1bit_ecc_inject0_en_4000	on	FAIL	0xa2000200 register address setting , no error message is reported.
-PV-1330	R.SAS.F025.A	ST.FUNC.062	RAS support	单bit ECC：RXM mem2	support_ras.sh	1bit_ecc_inject0_en_8000	on	FAIL	0xa2000200 register address setting , no error message is reported.
-PV-1330	R.SAS.F025.A	ST.FUNC.063	RAS support	单bit ECC：RXM mem3	support_ras.sh	1bit_ecc_inject0_en_10000	on	FAIL	0xa2000200 register address setting , no error message is reported.
+PV-1330	R.SAS.F025.A	ST.FUNC.047	RAS support	单bit ECC：SAS_HGC_IOMB_DQE_RAM0	support_ras.sh	1bit_ecc_inject0_en_1	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.048	RAS support	单bit ECC：SAS_HGC_IOMB_DQE_RAM1	support_ras.sh	1bit_ecc_inject0_en_2	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.049	RAS support	单bit ECC：SAS_HGC_IOMB_DQE_RAM2	support_ras.sh	1bit_ecc_inject0_en_4	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.050	RAS support	单bit ECC：SAS_HGC_IOMB_DQE_RAM3	support_ras.sh	1bit_ecc_inject0_en_8	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.051	RAS support	单bit ECC：SAS_HGC_IOMB_CQE_RAM	support_ras.sh	1bit_ecc_inject0_en_10	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.052	RAS support	单bit ECC：SAS_HGC_IOMB_IOST_RAM0	support_ras.sh	1bit_ecc_inject0_en_20	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.053	RAS support	单bit ECC：SAS_HGC_IOMB_IOST_RAM1	support_ras.sh	1bit_ecc_inject0_en_40	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.054	RAS support	单bit ECC：SAS_HGC_IOMB_IOST_RAM2	support_ras.sh	1bit_ecc_inject0_en_80	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.055	RAS support	单bit ECC：SAS_HGC_IOMB_IOST_RAM3	support_ras.sh	1bit_ecc_inject0_en_100	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.056	RAS support	单bit ECC：SAS_HGC_IOMB_ITCT_RAM0	support_ras.sh	1bit_ecc_inject0_en_200	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.057	RAS support	单bit ECC：SAS_HGC_IOMB_ITCT_RAM1	support_ras.sh	1bit_ecc_inject0_en_400	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.058	RAS support	单bit ECC：SAS_HGC_IOMB_ITCT_RAM2	support_ras.sh	1bit_ecc_inject0_en_800	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.059	RAS support	单bit ECC：SAS_HGC_IOMB_ITCT_RAM3	support_ras.sh	1bit_ecc_inject0_en_1000	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.060	RAS support	单bit ECC：RXM mem0	support_ras.sh	1bit_ecc_inject0_en_2000	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.061	RAS support	单bit ECC：RXM mem1	support_ras.sh	1bit_ecc_inject0_en_4000	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.062	RAS support	单bit ECC：RXM mem2	support_ras.sh	1bit_ecc_inject0_en_8000	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.063	RAS support	单bit ECC：RXM mem3	support_ras.sh	1bit_ecc_inject0_en_10000	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.064	RAS support	单bit ECC：LM ITCT表mem0	support_ras.sh	1bit_ecc_inject0_en_20000	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.065	RAS support	单bit ECC：LM ITCT表mem1	support_ras.sh	1bit_ecc_inject0_en_40000	on	FAIL	0xa2000200 register address setting , no error message is reported.
+PV-1330	R.SAS.F025.A	ST.FUNC.066	RAS support	单bit ECC：LM ITCT表mem2	support_ras.sh	1bit_ecc_inject0_en_80000	on	FAIL	0xa2000200 register address setting , no error message is reported.
+PV-1330	R.SAS.F025.A	ST.FUNC.067	RAS support	单bit ECC：LM ITCT表mem3	support_ras.sh	1bit_ecc_inject0_en_100000	on	FAIL	0xa2000200 register address setting , no error message is reported.
+PV-1330	R.SAS.F025.A	ST.FUNC.068	RAS support	单bit ECC：LM IOST表mem0	support_ras.sh	1bit_ecc_inject0_en_200000	on	FAIL	0xa2000200 register address setting , no error message is reported.
+PV-1330	R.SAS.F025.A	ST.FUNC.069	RAS support	单bit ECC：LM IOST表mem1	support_ras.sh	1bit_ecc_inject0_en_400000	on	FAIL	0xa2000200 register address setting , no error message is reported.
+PV-1330	R.SAS.F025.A	ST.FUNC.070	RAS support	单bit ECC：LM IOST表mem2	support_ras.sh	1bit_ecc_inject0_en_800000	on	FAIL	0xa2000200 register address setting , no error message is reported.
+PV-1330	R.SAS.F025.A	ST.FUNC.071	RAS support	单bit ECC：LM IOST表mem3	support_ras.sh	1bit_ecc_inject0_en_1000000	on	FAIL	0xa2000200 register address setting , no error message is reported.
+PV-1330	R.SAS.F025.A	ST.FUNC.072	RAS support	单bit ECC：SAS_DMAC_TX_RAM 通道0	support_ras.sh	1bit_ecc_inject1_en_1	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.073	RAS support	单bit ECC：SAS_DMAC_TX_RAM 通道1	support_ras.sh	1bit_ecc_inject1_en_4	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.074	RAS support	单bit ECC：SAS_DMAC_TX_RAM 通道2	support_ras.sh	1bit_ecc_inject1_en_10	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.075	RAS support	单bit ECC：SAS_DMAC_TX_RAM 通道3	support_ras.sh	1bit_ecc_inject1_en_40	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.076	RAS support	单bit ECC：SAS_DMAC_TX_RAM 通道4	support_ras.sh	1bit_ecc_inject1_en_100	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.077	RAS support	单bit ECC：SAS_DMAC_TX_RAM 通道5	support_ras.sh	1bit_ecc_inject1_en_400	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.078	RAS support	单bit ECC：SAS_DMAC_TX_RAM 通道6	support_ras.sh	1bit_ecc_inject1_en_1000	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.079	RAS support	单bit ECC：SAS_DMAC_TX_RAM 通道7	support_ras.sh	1bit_ecc_inject1_en_4000	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.080	RAS support	单bit ECC：SAS_DMAC_TX_RAM 通道8	support_ras.sh	1bit_ecc_inject1_en_10000	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.081	RAS support	双bit ECC：SAS_DMAC_RX_RAM 通道0	support_ras.sh	2bit_ecc_injection_2	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.082	RAS support	双bit ECC：SAS_DMAC_RX_RAM 通道1	support_ras.sh	2bit_ecc_injection_8	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.083	RAS support	双bit ECC：SAS_DMAC_RX_RAM 通道2	support_ras.sh	2bit_ecc_injection_20	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.084	RAS support	双bit ECC：SAS_DMAC_RX_RAM 通道3	support_ras.sh	2bit_ecc_injection_80	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.085	RAS support	双bit ECC：SAS_DMAC_RX_RAM 通道4	support_ras.sh	2bit_ecc_injection_200	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.086	RAS support	双bit ECC：SAS_DMAC_RX_RAM 通道5	support_ras.sh	2bit_ecc_injection_800	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.087	RAS support	双bit ECC：SAS_DMAC_RX_RAM 通道6	support_ras.sh	2bit_ecc_injection_2000	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.088	RAS support	双bit ECC：SAS_DMAC_RX_RAM 通道7	support_ras.sh	2bit_ecc_injection_8000	off	BLOCK	no automated use cases were implemented.
+PV-1330	R.SAS.F025.A	ST.FUNC.089	RAS support	双bit ECC：SAS_DMAC_RX_RAM 通道8	support_ras.sh	2bit_ecc_injection_20000	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.090	Support full SAS function on all available PHYs	SAS盘，直连，开关近端PHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.091	Support full SAS function on all available PHYs	SATA盘，直连，开关近端PHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.092	Support full SAS function on all available PHYs	SAS盘，直连，hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.093	Support full SAS function on all available PHYs	SATA盘，直连，hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.094	Support full SAS function on all available PHYs	SAS盘，直连，link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.095	Support full SAS function on all available PHYs	SATA盘，直连，link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.096	Support full SAS function on all available PHYs	SAS盘，直连，开关enable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.097	Support full SAS function on all available PHYs	SATA盘，直连，开关enable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.098	Support full SAS function on all available PHYs	SAS盘，expander，开关enable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.099	Support full SAS function on all available PHYs	SATA盘，expander，开关enable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.100	Support full SAS function on all available PHYs	SAS盘，expander，开关近端PHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.101	Support full SAS function on all available PHYs	SATA盘，expander，开关近端PHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.102	Support full SAS function on all available PHYs	SAS盘，expander，hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.103	Support full SAS function on all available PHYs	SATA盘，expander，hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.104	Support full SAS function on all available PHYs	SAS盘，expander，link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.105	Support full SAS function on all available PHYs	SATA盘，expander，link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.106	Support full SAS function on all available PHYs	SAS盘，直连，IO读写，单块SAS磁盘关闭近端phy	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.107	Support full SAS function on all available PHYs	SAS盘，直连，IO读写，多块SAS磁盘关闭近端phy	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	off	BLOCK	no automated use cases were implemented.
+PV-1606	R.SAS.F008.A	ST.FUNC.108	Support SAS Narrow and Wide Ports	SAS盘，直连，IO读写，link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1606	R.SAS.F008.A	ST.FUNC.109	Support SAS Narrow and Wide Ports	SAS盘，直连，IO读写，多次link reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1606	R.SAS.F008.A	ST.FUNC.110	Support SAS Narrow and Wide Ports	SAS盘，直连，IO读写，hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1606	R.SAS.F008.A	ST.FUNC.111	Support SAS Narrow and Wide Ports	SAS盘，直连，IO读写，单块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1606	R.SAS.F008.A	ST.FUNC.112	Support SAS Narrow and Wide Ports	SAS盘，直连，IO读写，多块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1598	R.SAS.F014.A	ST.FUNC.113	Support hotplug	SAS盘，直连，IO读写，单块磁盘enable	upport_hotplug.sh	fio_single_enable	off	FILE	case_script/upport_hotplug.sh execution script does not exist, please check.
+PV-1598	R.SAS.F014.A	ST.FUNC.114	Support hotplug	SAS盘，直连，IO读写，多块磁盘enable	support_hotplug.sh	fio_single_enable	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.115	Support full SAS function on all available PHYs	SATA盘，直连，IO读写，单块磁盘关闭近端phy	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.116	Support full SAS function on all available PHYs	SATA盘，直连，IO读写，多块磁盘关闭近端phy	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	off	BLOCK	no automated use cases were implemented.
+PV-1606	R.SAS.F008.A	ST.FUNC.117	Support SAS Narrow and Wide Ports	SATA盘，直连，IO读写，link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1606	R.SAS.F008.A	ST.FUNC.118	Support SAS Narrow and Wide Ports	SATA盘，直连，IO读写，多次link reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1606	R.SAS.F008.A	ST.FUNC.119	Support SAS Narrow and Wide Ports	SATA盘，直连，IO读写，hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1606	R.SAS.F008.A	ST.FUNC.120	Support SAS Narrow and Wide Ports	SATA盘，直连，IO读写，单块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1606	R.SAS.F008.A	ST.FUNC.121	Support SAS Narrow and Wide Ports	SATA盘，直连，IO读写，多块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1598	R.SAS.F014.A	ST.FUNC.122	Support hotplug	SATA盘，直连，IO读写，单块磁盘enable	support_hotplug.sh	fio_single_enable	off	BLOCK	no automated use cases were implemented.
+PV-1598	R.SAS.F014.A	ST.FUNC.123	Support hotplug	SATA盘，直连，IO读写，多块磁盘enable	support_hotplug.sh	fio_single_enable	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.124	Support full SAS function on all available PHYs	SAS盘，expander，IO读写，单个phy频繁闪断	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.125	Support full SAS function on all available PHYs	SAS盘，expander，IO读写，多个phy频繁闪断	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.126	Support full SAS function on all available PHYs	SAS盘，expander，IO读写，关闭所有phy	support_full_sas_function_all_available_phys.sh	devmem_all_switch_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.127	Support full SAS function on all available PHYs	SAS盘，expander，IO读写，轮询反复开关phy	support_full_sas_function_all_available_phys.sh	devmem_polling_switch_phy	off	BLOCK	no automated use cases were implemented.
+PV-1606	R.SAS.F008.A	ST.FUNC.128	Support SAS Narrow and Wide Ports	SAS盘，expander，IO读写，link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1606	R.SAS.F008.A	ST.FUNC.129	Support SAS Narrow and Wide Ports	SAS盘，expander，IO读写，多次link reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1606	R.SAS.F008.A	ST.FUNC.130	Support SAS Narrow and Wide Ports	SAS盘，expander，IO读写，hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1606	R.SAS.F008.A	ST.FUNC.131	Support SAS Narrow and Wide Ports	SAS盘，expander，IO读写，单块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1606	R.SAS.F008.A	ST.FUNC.132	Support SAS Narrow and Wide Ports	SAS盘，expander，IO读写，多块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1598	R.SAS.F014.A	ST.FUNC.133	Support hotplug	SAS盘，expander，IO读写，单块磁盘enable	support_hotplug.sh	fio_single_enable	off	BLOCK	no automated use cases were implemented.
+PV-1598	R.SAS.F014.A	ST.FUNC.134	Support hotplug	SAS盘，expander，IO读写，多块磁盘enable	support_hotplug.sh	fio_single_enable	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.135	Support full SAS function on all available PHYs	SATA盘，expander，IO读写，单个近端phy频繁闪断	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.136	Support full SAS function on all available PHYs	SATA盘，expander，IO读写，多个近端phy频繁闪断	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.137	Support full SAS function on all available PHYs	SATA盘，expander，IO读写，关闭所有近端phy	support_full_sas_function_all_available_phys.sh	devmem_all_switch_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.138	Support full SAS function on all available PHYs	SATA盘，expander，IO读写，轮询反复开关近端phy	support_full_sas_function_all_available_phys.sh	devmem_polling_switch_phy	off	BLOCK	no automated use cases were implemented.
+PV-1606	R.SAS.F008.A	ST.FUNC.139	Support SAS Narrow and Wide Ports	SATA盘，expander，IO读写，link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1606	R.SAS.F008.A	ST.FUNC.140	Support SAS Narrow and Wide Ports	SATA盘，expander，IO读写，多次link reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1606	R.SAS.F008.A	ST.FUNC.141	Support SAS Narrow and Wide Ports	SATA盘，expander，IO读写，hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1606	R.SAS.F008.A	ST.FUNC.142	Support SAS Narrow and Wide Ports	SATA盘，expander，IO读写，单块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1606	R.SAS.F008.A	ST.FUNC.143	Support SAS Narrow and Wide Ports	SATA盘，expander，IO读写，多块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1598	R.SAS.F014.A	ST.FUNC.144	Support hotplug	SATA盘，expander，IO读写，单块磁盘enable	support_hotplug.sh	fio_single_enable	off	BLOCK	no automated use cases were implemented.
+PV-1598	R.SAS.F014.A	ST.FUNC.145	Support hotplug	SATA盘，expander，IO读写，多块磁盘enable	support_hotplug.sh	fio_single_enable	off	BLOCK	no automated use cases were implemented.
+PV-1607	R.SAS.F012.A	ST.FUNC.191	Support SATA NCQ	SATA盘，expander，NCQ查询	support_sata_ncq.sh	ncq_query	off	BLOCK	no automated use cases were implemented.
+PV-1608	R.SAS.F015.A	ST.FUNC.195	Support SMART	SATA，直连，SMART	support_smart.sh	smart_disk_check	off	BLOCK	no automated use cases were implemented.
+PV-1608	R.SAS.F015.A	ST.FUNC.196	Support SMART	SAS，直连，SMART	support_smart.sh	smart_disk_check	off	BLOCK	no automated use cases were implemented.
+PV-1608	R.SAS.F015.A	ST.FUNC.198	Support SMART	SATA盘，expander，SMART	support_smart.sh	smart_disk_check	off	BLOCK	no automated use cases were implemented.
+PV-1608	R.SAS.F015.A	ST.FUNC.199	Support SMART	SAS盘，expander，SMART	support_smart.sh	smart_disk_check	off	BLOCK	no automated use cases were implemented.
+#N/A	N/A	ST.FUNC.200	N/A	expander，加载、卸载ko模块	support_module_load.sh	module_load_uninstall	off	BLOCK	no automated use cases were implemented.
+#N/A	N/A	ST.FUNC.201	N/A	直连背板，加载、卸载ko模块	support_module_load.sh	module_load_uninstall	off	BLOCK	no automated use cases were implemented.
+PV-1946	R.SAS.F018.A	ST.FUNC.202	Support ACPI for probe and reset	支持ACPI方式启动	support_acpi.sh	check_acpi_start	off	BLOCK	no automated use cases were implemented.
