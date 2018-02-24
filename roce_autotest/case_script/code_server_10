@@ -1,0 +1,25 @@
+port=18515,servername:(null)!
+
+ [prtest_init_connection : 341] !
+ [prtest_init_connection : 350] SERVER connection start!
+ [main : 20849] prtest_init_connection ok!
+ [main : 20857] pr_socket : name (null), port 18515, machine 0, sockfd 4
+ [main : 20868] prtest_find_prdev ok!
+ [main : 20885] ibv_open_device ok! Link type is Ethernet
+ Mtu : 1024
+
+ addr = 0xffffa9af1010,lkey = rkey = 0x700
+ addr = 0xffffa9bf1010,lkey = rkey = 0x800hr_qp->port_num= 0x2
+
+ [prtest_set_up_connection : 332] my_dest->vaddr = 0xa9bf1010
+ [prtest_set_up_connection : 333] my_dest->rkey  = 0x800
+ [prtest_set_up_connection : 334] my_dest->psn   = 0xe30c4d
+dest lid      out_reads qpn        psn         rkey     vaddr
+my : 0        16        143      0xe30c4d    0x800      0xffffa9bf1010
+rem: 0        16        142      0xa48ee6    0x600      0xffff8584a010
+ my_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:159:00:01
+rem_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:138:00:01
+
+  data_len= 0x2, test_rad[0] = 0x0, send_va = 0xffffa9af1010, remot_va = 0xffff8594a010,recv_va = 0xffffa9bf1010
+ [prtest_run_send_imd_rnr_s1 : 5153] post send OK!
+ [prtest_run_send_imd_rnr_s1-5166]ne = 0x1 ,wc_status = 0xd, wc.opcode = 0x0######### total: 41  , pass: 1  , failed :0   ############

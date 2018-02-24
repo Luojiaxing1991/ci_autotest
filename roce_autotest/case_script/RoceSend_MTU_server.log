@@ -1,0 +1,10 @@
+start_id=2, end_id=2 
+---------test_case_002: send1 start--------
+test file name: test/server_socket2_49
+hr_qp->port_num= 0x2
+test case 2 failed 
+test 0(qp_depth) res is 0 
+//--test case success!--//
+test 1(connect) res is -58 
+test 2(send) res is -58 
+clean test case failed!

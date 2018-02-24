@@ -1,0 +1,22 @@
+port=18515,servername:(null)!
+
+ [prtest_init_connection : 341] !
+ [prtest_init_connection : 350] SERVER connection start!
+ [main : 20849] prtest_init_connection ok!
+ [main : 20857] pr_socket : name (null), port 18515, machine 0, sockfd 4
+ [main : 20868] prtest_find_prdev ok!
+ [main : 20885] ibv_open_device ok! Link type is Ethernet
+ Mtu : 1024
+
+ addr = 0xffff97a90010,lkey = rkey = 0x700
+ addr = 0xffff97b90010,lkey = rkey = 0x800hr_qp->port_num= 0x2
+
+ [prtest_set_up_connection : 332] my_dest->vaddr = 0x97b90010
+ [prtest_set_up_connection : 333] my_dest->rkey  = 0x800
+ [prtest_set_up_connection : 334] my_dest->psn   = 0x19f86
+dest lid      out_reads qpn        psn         rkey     vaddr
+my : 0        16        159      0x19f86     0x800      0xffff97b90010
+rem: 0        16        158      0x776fa4    0x600      0xffff8469d010
+ my_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:159:00:01
+rem_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:138:00:01
+######### total: 41  , pass: 1  , failed :0   ############

@@ -44,7 +44,7 @@ END_INDEX=3
 #     3           eth0(this port cann't be used for testing, since for NFS)
 #     4           eth1
 # The roce's port used for testing
-ROCE_PORT=4
+ROCE_PORT=2
 
 # local_port_ip
 # key: the roce's port
