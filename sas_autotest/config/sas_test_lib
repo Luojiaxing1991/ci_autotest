@@ -17,13 +17,13 @@ function test_case_function_run()
         #echo "Begin to run testcase: "${TEST_CASE_TITLE}
         ${TEST_CASE_FUNCTION_NAME}
 
-        if [ $? -ne 0 ]
+        if [ x"${MESSAGE}" == x"PASS" ]
         then
-            echo "The result of testcase "${TEST_CASE_TITLE}" is fail"
-            lava_report "${TEST_CASE_TITLE}" fail
-        else
             echo "The result of testcase "${TEST_CASE_TITLE}" is success"
             lava_report "${TEST_CASE_TITLE}" pass
+        else
+            echo "The result of testcase "${TEST_CASE_TITLE}" is fail"
+            lava_report "${TEST_CASE_TITLE}" fail
         fi
     else
         MESSAGE="BLOCK\tno automated use cases were implemented."
