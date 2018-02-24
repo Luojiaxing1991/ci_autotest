@@ -40,7 +40,7 @@ PV-1725	R.SAS.N004.A	ST.FUNC.043	SAS 3.0	压力测试 4M~4k随机大小io（只写）	suppor
 PV-1725	R.SAS.N004.A	ST.FUNC.044	SAS 3.0	压力测试随机大小io（4k/30:8k/40:16k/30）	support_available_sas_cores.sh	FIO_IO_RAIO_read_write	on	
 PV-1596	R.SAS.F022.A	ST.FUNC.045	Controller reset for ECC error	expander，2bit ECC错误注入	controller_ecc_error_reset.sh	controller_2bit_ecc_reset	on	
 PV-1596	R.SAS.F022.A	ST.FUNC.046	Controller reset for ECC error	expander，1bit ECC错误注入	controller_ecc_error_reset.sh	controller_1bit_ecc_reset	on	
-PV-1330	R.SAS.F025.A	ST.FUNC.047	RAS support	单bit ECC：SAS_HGC_IOMB_DQE_RAM0	support_ras.sh	1bit_ecc_inject0_en	on	
+PV-1330	R.SAS.F025.A	ST.FUNC.047	RAS support	单bit ECC：SAS_HGC_IOMB_DQE_RAM0	support_ras.sh	1bit_ecc_inject0_en_1	on	
 PV-1330	R.SAS.F025.A	ST.FUNC.048	RAS support	单bit ECC：SAS_HGC_IOMB_DQE_RAM1	support_ras.sh	1bit_ecc_inject0_en_2	on	
 PV-1330	R.SAS.F025.A	ST.FUNC.049	RAS support	单bit ECC：SAS_HGC_IOMB_DQE_RAM2	support_ras.sh	1bit_ecc_inject0_en_4	on	
 PV-1330	R.SAS.F025.A	ST.FUNC.050	RAS support	单bit ECC：SAS_HGC_IOMB_DQE_RAM3	support_ras.sh	1bit_ecc_inject0_en_8	on	
