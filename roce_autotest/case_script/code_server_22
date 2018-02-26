@@ -1,0 +1,33 @@
+port=18515,servername:(null)!
+
+ [prtest_init_connection : 341] !
+ [prtest_init_connection : 350] SERVER connection start!
+ [main : 20849] prtest_init_connection ok!
+ [main : 20857] pr_socket : name (null), port 18515, machine 0, sockfd 4
+ [main : 20868] prtest_find_prdev ok!
+ [main : 20885] ibv_open_device ok!
+ [ROCEE_set_trp_bp : 7756] mmap ok, mappedAddr = 0xffff9fce8000
+ [set_trp_bp_enable : 7573] DmaeAddr = 0xffff9fcefad0
+ [set_trp_bp_enable : 7577] RoceBpReg = 0x0
+ [set_trp_bp_enable : 7573] DmaeAddr = 0xffff9fcefad0
+ [set_trp_bp_enable : 7577] RoceBpReg = 0x0
+ [set_trp_bp_enable : 7573] DmaeAddr = 0xffff9fcefad0
+ [set_trp_bp_enable : 7577] RoceBpReg = 0x0
+ [set_trp_bp_enable : 7573] DmaeAddr = 0xffff9fcefad0
+ [set_trp_bp_enable : 7577] RoceBpReg = 0x0
+ [set_trp_bp_enable : 7573] DmaeAddr = 0xffff9fcefad0
+ [set_trp_bp_enable : 7577] RoceBpReg = 0x0
+ [set_trp_bp_enable : 7573] DmaeAddr = 0xffff9fcefad0
+ [set_trp_bp_enable : 7577] RoceBpReg = 0x0
+ [set_trp_bp_enable : 7573] DmaeAddr = 0xffff9fcefad0
+ [set_trp_bp_enable : 7577] RoceBpReg = 0x0
+ [set_trp_bp_enable : 7573] DmaeAddr = 0xffff9fcefad0
+ [set_trp_bp_enable : 7577] RoceBpReg = 0x0
+ [set_trp_bp_enable : 7573] DmaeAddr = 0xffff9fcefad0
+ [set_trp_bp_enable : 7577] RoceBpReg = 0x0
+ [set_trp_bp_enable : 7573] DmaeAddr = 0xffff9fcefad0
+ [set_trp_bp_enable : 7577] RoceBpReg = 0x0
+ [set_trp_bp_enable : 7573] DmaeAddr = 0xffff9fcefad0
+ [set_trp_bp_enable : 7577] RoceBpReg = 0x0
+ [set_trp_bp_enable : 7573] DmaeAddr = 0xffff9fcefad0
+ [set_trp_bp_enable : 7577] RoceBpReg = 0x0######### total: 41  , pass: 1  , failed :0   ############

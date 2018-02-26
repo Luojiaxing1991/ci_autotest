@@ -1,0 +1,37 @@
+port=18515,servername:(null)!
+
+ [prtest_init_connection : 341] !
+ [prtest_init_connection : 350] SERVER connection start!
+ [main : 20849] prtest_init_connection ok!
+ [main : 20857] pr_socket : name (null), port 18515, machine 0, sockfd 4
+ [main : 20868] prtest_find_prdev ok!
+ [main : 20885] ibv_open_device ok! Link type is Ethernet
+ Mtu : 256
+
+ addr = 0xffffb1b94010,lkey = rkey = 0x700
+ addr = 0xffffb1c94010,lkey = rkey = 0x800hr_qp->port_num= 0x2
+
+ [prtest_set_up_connection : 332] my_dest->vaddr = 0xb1c94010
+ [prtest_set_up_connection : 333] my_dest->rkey  = 0x800
+ [prtest_set_up_connection : 334] my_dest->psn   = 0xccea7a
+dest lid      out_reads qpn        psn         rkey     vaddr
+my : 0        16        140      0xccea7a    0x800      0xffffb1c94010
+rem: 0        16        139      0xd7e56e    0x600      0xffffbd272010
+ my_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:159:00:01
+rem_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:138:00:01
+
+ j = 0x0, data_len= 0xb23c6
+ [prtest_run_send-1741]send_flags = 0x0
+ [prtest_run_send-1860]send_flags = 0x0
+ j = 0x1, data_len= 0xc9869
+ [prtest_run_send-1741]send_flags = 0x0
+ [prtest_run_send-1860]send_flags = 0x0
+ j = 0x2, data_len= 0x34873
+ [prtest_run_send-1741]send_flags = 0x0
+ [prtest_run_send-1860]send_flags = 0x0
+ j = 0x3, data_len= 0xdc51
+ [prtest_run_send-1741]send_flags = 0x0
+ [prtest_run_send-1860]send_flags = 0x0
+ j = 0x4, data_len= 0x95cff
+ [prtest_run_send-1741]send_flags = 0x0
+ [prtest_run_send-1860]send_flags = 0x0######### total: 41  , pass: 1  , failed :0   ############

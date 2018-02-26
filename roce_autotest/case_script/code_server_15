@@ -1,0 +1,320 @@
+port=18515,servername:(null)!
+
+ [prtest_init_connection : 341] !
+ [prtest_init_connection : 350] SERVER connection start!
+ [main : 20849] prtest_init_connection ok!
+ [main : 20857] pr_socket : name (null), port 18515, machine 0, sockfd 4
+ [main : 20868] prtest_find_prdev ok!
+ [main : 20885] ibv_open_device ok! Link type is Ethernet
+
+ loop 0********************************* Mtu : 1024
+
+ set mtu ok.
+ alloc pd ok.
+ addr = 0xffff7f6c6010,lkey = rkey = 0x700
+ addr = 0xffff7f7c6010,lkey = rkey = 0x800
+ create recv cq ok.
+ create send cq ok.
+ create qp ok.hr_qp->port_num= 0x2
+
+ modify qp init ok.
+ set up connection ok.
+dest lid      out_reads qpn        psn         rkey     vaddr
+my : 0        16        148      0x4f2aee    0x800      0xffff7f7c6010
+rem: 0        16        147      0xcc53ae    0x600      0xffff9d995010
+ my_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:159:00:01
+rem_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:138:00:01
+
+ modify qp rtr ok.
+ modify qp rts ok.
+ shake hand ok.
+ loop 1********************************* Mtu : 1024
+
+ set mtu ok.
+ alloc pd ok.
+ addr = 0xffff7f4c5010,lkey = rkey = 0x900
+ addr = 0xffff7f5c5010,lkey = rkey = 0xa00
+ create recv cq ok.
+ create send cq ok.
+ create qp ok.hr_qp->port_num= 0x2
+
+ modify qp init ok.
+ set up connection ok.
+dest lid      out_reads qpn        psn         rkey     vaddr
+my : 0        16        149      0x768540    0xa00      0xffff7f5c5010
+rem: 0        16        148      0x5d5f00    0x800      0xffff9d794010
+ my_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:159:00:01
+rem_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:138:00:01
+
+ modify qp rtr ok.
+ modify qp rts ok.
+ shake hand ok.
+ loop 2********************************* Mtu : 1024
+
+ set mtu ok.
+ alloc pd ok.
+ addr = 0xffff7f2c4010,lkey = rkey = 0xb00
+ addr = 0xffff7f3c4010,lkey = rkey = 0xc00
+ create recv cq ok.
+ create send cq ok.
+ create qp ok.hr_qp->port_num= 0x2
+
+ modify qp init ok.
+ set up connection ok.
+dest lid      out_reads qpn        psn         rkey     vaddr
+my : 0        16        150      0x9fbd8a    0xc00      0xffff7f3c4010
+rem: 0        16        149      0x8cf44a    0xa00      0xffff9d593010
+ my_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:159:00:01
+rem_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:138:00:01
+
+ modify qp rtr ok.
+ modify qp rts ok.
+ shake hand ok.
+ loop 3********************************* Mtu : 1024
+
+ set mtu ok.
+ alloc pd ok.
+ addr = 0xffff7f0c3010,lkey = rkey = 0xd00
+ addr = 0xffff7f1c3010,lkey = rkey = 0xe00
+ create recv cq ok.
+ create send cq ok.
+ create qp ok.hr_qp->port_num= 0x2
+
+ modify qp init ok.
+ set up connection ok.
+dest lid      out_reads qpn        psn         rkey     vaddr
+my : 0        16        151      0xac4f11    0xe00      0xffff7f1c3010
+rem: 0        16        150      0xdd1ed1    0xc00      0xffff9d392010
+ my_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:159:00:01
+rem_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:138:00:01
+
+ modify qp rtr ok.
+ modify qp rts ok.
+ shake hand ok.
+ loop 4********************************* Mtu : 1024
+
+ set mtu ok.
+ alloc pd ok.
+ addr = 0xffff7eec2010,lkey = rkey = 0xf00
+ addr = 0xffff7efc2010,lkey = rkey = 0x1000
+ create recv cq ok.
+ create send cq ok.
+ create qp ok.hr_qp->port_num= 0x2
+
+ modify qp init ok.
+ set up connection ok.
+dest lid      out_reads qpn        psn         rkey     vaddr
+my : 0        16        152      0x84a650    0x1000     0xffff7efc2010
+rem: 0        16        151      0xf39b10    0xe00      0xffff9d191010
+ my_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:159:00:01
+rem_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:138:00:01
+
+ modify qp rtr ok.
+ modify qp rts ok.
+ shake hand ok.
+ loop 5********************************* Mtu : 1024
+
+ set mtu ok.
+ alloc pd ok.
+ addr = 0xffff7ecc1010,lkey = rkey = 0x1100
+ addr = 0xffff7edc1010,lkey = rkey = 0x1200
+ create recv cq ok.
+ create send cq ok.
+ create qp ok.hr_qp->port_num= 0x2
+
+ modify qp init ok.
+ set up connection ok.
+dest lid      out_reads qpn        psn         rkey     vaddr
+my : 0        16        153      0x3f0572    0x1200     0xffff7edc1010
+rem: 0        16        152      0x61bb32    0x1000     0xffff9cf90010
+ my_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:159:00:01
+rem_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:138:00:01
+
+ modify qp rtr ok.
+ modify qp rts ok.
+ shake hand ok.
+ loop 6********************************* Mtu : 1024
+
+ set mtu ok.
+ alloc pd ok.
+ addr = 0xffff7eac0010,lkey = rkey = 0x1300
+ addr = 0xffff7ebc0010,lkey = rkey = 0x1400
+ create recv cq ok.
+ create send cq ok.
+ create qp ok.hr_qp->port_num= 0x2
+
+ modify qp init ok.
+ set up connection ok.
+dest lid      out_reads qpn        psn         rkey     vaddr
+my : 0        16        154      0xbb7ee9    0x1400     0xffff7ebc0010
+rem: 0        16        153      0xcd61a9    0x1200     0xffff9cd8f010
+ my_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:159:00:01
+rem_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:138:00:01
+
+ modify qp rtr ok.
+ modify qp rts ok.
+ shake hand ok.
+ loop 7********************************* Mtu : 1024
+
+ set mtu ok.
+ alloc pd ok.
+ addr = 0xffff7e8bf010,lkey = rkey = 0x1500
+ addr = 0xffff7e9bf010,lkey = rkey = 0x1600
+ create recv cq ok.
+ create send cq ok.
+ create qp ok.hr_qp->port_num= 0x2
+
+ modify qp init ok.
+ set up connection ok.
+dest lid      out_reads qpn        psn         rkey     vaddr
+my : 0        16        155      0x6b9b2e    0x1600     0xffff7e9bf010
+rem: 0        16        154      0xc1a6ee    0x1400     0xffff9cb8e010
+ my_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:159:00:01
+rem_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:138:00:01
+
+ modify qp rtr ok.
+ modify qp rts ok.
+ shake hand ok.
+ loop end*********************************
+ qp 0, test 0
+ qp 1, test 0
+ qp 2, test 0
+ qp 3, test 0
+ qp 4, test 0
+ qp 5, test 0
+ qp 6, test 0
+ qp 7, test 0
+ qp 0, test 0
+  data_len= 0xb4567, test_rad[0] = 0x0
+ qp 1, test 0
+  data_len= 0xb23c6, test_rad[1] = 0x1
+ qp 2, test 0
+  data_len= 0xc9869, test_rad[2] = 0x2
+ [prtest_run_read-2047]send_flags = 0x0
+ [prtest_run_read-2058]send_flags = 0x0
+ qp 3, test 0
+  data_len= 0x34873, test_rad[3] = 0x3
+ qp 4, test 0
+  data_len= 0xdc51, test_rad[4] = 0x4
+ qp 5, test 0
+  data_len= 0x95cff, test_rad[5] = 0x0
+ qp 6, test 0
+  data_len= 0x8944a, test_rad[6] = 0x1
+ qp 7, test 0
+  data_len= 0x558ec, test_rad[7] = 0x2
+ [prtest_run_read-2047]send_flags = 0x0
+ [prtest_run_read-2058]send_flags = 0x0
+ qp 0, test 1
+ qp 1, test 1
+ qp 2, test 1
+ qp 3, test 1
+ qp 4, test 1
+ qp 5, test 1
+ qp 6, test 1
+ qp 7, test 1
+ qp 0, test 1
+  data_len= 0xe1f29, test_rad[1] = 0x1
+ qp 1, test 1
+  data_len= 0x87ccd, test_rad[2] = 0x2
+ [prtest_run_read-2047]send_flags = 0x0
+ [prtest_run_read-2058]send_flags = 0x0
+ qp 2, test 1
+  data_len= 0xb58ba, test_rad[3] = 0x3
+ qp 3, test 1
+  data_len= 0xed7ab, test_rad[4] = 0x4
+ qp 4, test 1
+  data_len= 0x141f2, test_rad[5] = 0x0
+ qp 5, test 1
+  data_len= 0x71efb, test_rad[6] = 0x1
+ qp 6, test 1
+  data_len= 0x2a9e3, test_rad[7] = 0x2
+ [prtest_run_read-2047]send_flags = 0x0
+ [prtest_run_read-2058]send_flags = 0x0
+ qp 7, test 1
+  data_len= 0x5e146, test_rad[8] = 0x4
+ qp 0, test 2
+ qp 1, test 2
+ qp 2, test 2
+ qp 3, test 2
+ qp 4, test 2
+ qp 5, test 2
+ qp 6, test 2
+ qp 7, test 2
+ qp 0, test 2
+  data_len= 0xf007c, test_rad[2] = 0x2
+ [prtest_run_read-2047]send_flags = 0x0
+ [prtest_run_read-2058]send_flags = 0x0
+ qp 1, test 2
+  data_len= 0x62c2, test_rad[3] = 0x3
+ qp 2, test 2
+  data_len= 0x854, test_rad[4] = 0x4
+ qp 3, test 2
+  data_len= 0x127f8, test_rad[5] = 0x0
+ qp 4, test 2
+  data_len= 0x6231b, test_rad[6] = 0x1
+ qp 5, test 2
+  data_len= 0x6e9e8, test_rad[7] = 0x2
+ [prtest_run_read-2047]send_flags = 0x0
+ [prtest_run_read-2058]send_flags = 0x0
+ qp 6, test 2
+  data_len= 0xcde7, test_rad[8] = 0x4
+ qp 7, test 2
+  data_len= 0xf438d, test_rad[9] = 0x1
+ qp 0, test 3
+ qp 1, test 3
+ qp 2, test 3
+ qp 3, test 3
+ qp 4, test 3
+ qp 5, test 3
+ qp 6, test 3
+ qp 7, test 3
+ qp 0, test 3
+  data_len= 0xe0f76, test_rad[3] = 0x3
+ qp 1, test 3
+  data_len= 0x2255a, test_rad[4] = 0x4
+ qp 2, test 3
+  data_len= 0xcf92e, test_rad[5] = 0x0
+ qp 3, test 3
+  data_len= 0xd7263, test_rad[6] = 0x1
+ qp 4, test 3
+  data_len= 0xcc233, test_rad[7] = 0x2
+ [prtest_run_read-2047]send_flags = 0x0
+ [prtest_run_read-2058]send_flags = 0x0
+ qp 5, test 3
+  data_len= 0xfd79f, test_rad[8] = 0x4
+ qp 6, test 3
+  data_len= 0x7c4c9, test_rad[9] = 0x1
+ qp 7, test 3
+  data_len= 0x8079a, test_rad[10] = 0x2
+ [prtest_run_read-2047]send_flags = 0x0
+ [prtest_run_read-2058]send_flags = 0x0
+ qp 0, test 4
+ qp 1, test 4
+ qp 2, test 4
+ qp 3, test 4
+ qp 4, test 4
+ qp 5, test 4
+ qp 6, test 4
+ qp 7, test 4
+ qp 0, test 4
+  data_len= 0xafb66, test_rad[4] = 0x4
+ qp 1, test 4
+  data_len= 0x45d32, test_rad[5] = 0x0
+ qp 2, test 4
+  data_len= 0xb500d, test_rad[6] = 0x1
+ qp 3, test 4
+  data_len= 0xbd7b7, test_rad[7] = 0x2
+ [prtest_run_read-2047]send_flags = 0x0
+ [prtest_run_read-2058]send_flags = 0x0
+ qp 4, test 4
+  data_len= 0xdba31, test_rad[8] = 0x4
+ qp 5, test 4
+  data_len= 0x3e458, test_rad[9] = 0x1
+ qp 6, test 4
+  data_len= 0x130a3, test_rad[10] = 0x2
+ [prtest_run_read-2047]send_flags = 0x0
+ [prtest_run_read-2058]send_flags = 0x0
+ qp 7, test 4
+  data_len= 0xbd95a, test_rad[11] = 0x2
+ [prtest_run_read-2047]send_flags = 0x0
+ [prtest_run_read-2058]send_flags = 0x0######### total: 41  , pass: 1  , failed :0   ############

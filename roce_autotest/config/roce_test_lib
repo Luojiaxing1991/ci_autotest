@@ -108,7 +108,7 @@ function copy_tool_so()
 	popd
 
 #	scp ${ROCE_TOP_DIR}/case_script/4120/roce_test_main root@${BACK_IP}:${CASEPATH}/roce-test
-#        scp client-auto-5-2 root@${BACK_IP}:${CASEPATH}/
+        scp roce-client root@${BACK_IP}:${CASEPATH}/
 
 	pushd test
 

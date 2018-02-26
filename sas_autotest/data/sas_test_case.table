@@ -40,7 +40,7 @@ PV-1725	R.SAS.N004.A	ST.FUNC.043	SAS 3.0	压力测试 4M~4k随机大小io（只写）	suppor
 PV-1725	R.SAS.N004.A	ST.FUNC.044	SAS 3.0	压力测试随机大小io（4k/30:8k/40:16k/30）	support_available_sas_cores.sh	FIO_IO_RAIO_read_write	on	
 PV-1596	R.SAS.F022.A	ST.FUNC.045	Controller reset for ECC error	expander，2bit ECC错误注入	controller_ecc_error_reset.sh	controller_2bit_ecc_reset	on	
 PV-1596	R.SAS.F022.A	ST.FUNC.046	Controller reset for ECC error	expander，1bit ECC错误注入	controller_ecc_error_reset.sh	controller_1bit_ecc_reset	on	
-PV-1330	R.SAS.F025.A	ST.FUNC.047	RAS support	单bit ECC：SAS_HGC_IOMB_DQE_RAM0	support_ras.sh	1bit_ecc_inject0_en	on	
+PV-1330	R.SAS.F025.A	ST.FUNC.047	RAS support	单bit ECC：SAS_HGC_IOMB_DQE_RAM0	support_ras.sh	1bit_ecc_inject0_en_1	on	
 PV-1330	R.SAS.F025.A	ST.FUNC.048	RAS support	单bit ECC：SAS_HGC_IOMB_DQE_RAM1	support_ras.sh	1bit_ecc_inject0_en_2	on	
 PV-1330	R.SAS.F025.A	ST.FUNC.049	RAS support	单bit ECC：SAS_HGC_IOMB_DQE_RAM2	support_ras.sh	1bit_ecc_inject0_en_4	on	
 PV-1330	R.SAS.F025.A	ST.FUNC.050	RAS support	单bit ECC：SAS_HGC_IOMB_DQE_RAM3	support_ras.sh	1bit_ecc_inject0_en_8	on	
@@ -83,60 +83,60 @@ PV-1330	R.SAS.F025.A	ST.FUNC.086	RAS support	双bit ECC：SAS_DMAC_RX_RAM 通道5	su
 PV-1330	R.SAS.F025.A	ST.FUNC.087	RAS support	双bit ECC：SAS_DMAC_RX_RAM 通道6	support_ras.sh	2bit_ecc_injection_2000	on	
 PV-1330	R.SAS.F025.A	ST.FUNC.088	RAS support	双bit ECC：SAS_DMAC_RX_RAM 通道7	support_ras.sh	2bit_ecc_injection_8000	on	
 PV-1330	R.SAS.F025.A	ST.FUNC.089	RAS support	双bit ECC：SAS_DMAC_RX_RAM 通道8	support_ras.sh	2bit_ecc_injection_20000	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.090	Support full SAS function on all available PHYs	SAS盘，直连，开关近端PHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.091	Support full SAS function on all available PHYs	SATA盘，直连，开关近端PHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.092	Support full SAS function on all available PHYs	SAS盘，直连，hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.093	Support full SAS function on all available PHYs	SATA盘，直连，hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.094	Support full SAS function on all available PHYs	SAS盘，直连，link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.095	Support full SAS function on all available PHYs	SATA盘，直连，link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.096	Support full SAS function on all available PHYs	SAS盘，直连，开关enable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.097	Support full SAS function on all available PHYs	SATA盘，直连，开关enable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.098	Support full SAS function on all available PHYs	SAS盘，expander，开关enable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.099	Support full SAS function on all available PHYs	SATA盘，expander，开关enable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.100	Support full SAS function on all available PHYs	SAS盘，expander，开关近端PHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.101	Support full SAS function on all available PHYs	SATA盘，expander，开关近端PHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.102	Support full SAS function on all available PHYs	SAS盘，expander，hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.103	Support full SAS function on all available PHYs	SATA盘，expander，hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.104	Support full SAS function on all available PHYs	SAS盘，expander，link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.105	Support full SAS function on all available PHYs	SATA盘，expander，link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.106	Support full SAS function on all available PHYs	SAS盘，直连，IO读写，单块SAS磁盘关闭近端phy	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.107	Support full SAS function on all available PHYs	SAS盘，直连，IO读写，多块SAS磁盘关闭近端phy	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	on	
-PV-1606	R.SAS.F008.A	ST.FUNC.108	Support SAS Narrow and Wide Ports	SAS盘，直连，IO读写，link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	on	
-PV-1606	R.SAS.F008.A	ST.FUNC.109	Support SAS Narrow and Wide Ports	SAS盘，直连，IO读写，多次link reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	on	
-PV-1606	R.SAS.F008.A	ST.FUNC.110	Support SAS Narrow and Wide Ports	SAS盘，直连，IO读写，hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	on	
-PV-1606	R.SAS.F008.A	ST.FUNC.111	Support SAS Narrow and Wide Ports	SAS盘，直连，IO读写，单块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	on	
-PV-1606	R.SAS.F008.A	ST.FUNC.112	Support SAS Narrow and Wide Ports	SAS盘，直连，IO读写，多块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	on	
+PV-1601	R.SAS.F010.A	ST.FUNC.090	Support full SAS function on all available PHYs	SAS盘，直连，开关近端PHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.091	Support full SAS function on all available PHYs	SATA盘，直连，开关近端PHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.092	Support full SAS function on all available PHYs	SAS盘，直连，hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.093	Support full SAS function on all available PHYs	SATA盘，直连，hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.094	Support full SAS function on all available PHYs	SAS盘，直连，link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.095	Support full SAS function on all available PHYs	SATA盘，直连，link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.096	Support full SAS function on all available PHYs	SAS盘，直连，开关enable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.097	Support full SAS function on all available PHYs	SATA盘，直连，开关enable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.098	Support full SAS function on all available PHYs	SAS盘，expander，开关enable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.099	Support full SAS function on all available PHYs	SATA盘，expander，开关enable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.100	Support full SAS function on all available PHYs	SAS盘，expander，开关近端PHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.101	Support full SAS function on all available PHYs	SATA盘，expander，开关近端PHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.102	Support full SAS function on all available PHYs	SAS盘，expander，hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.103	Support full SAS function on all available PHYs	SATA盘，expander，hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.104	Support full SAS function on all available PHYs	SAS盘，expander，link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.105	Support full SAS function on all available PHYs	SATA盘，expander，link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.106	Support full SAS function on all available PHYs	SAS盘，直连，IO读写，单块SAS磁盘关闭近端phy	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.107	Support full SAS function on all available PHYs	SAS盘，直连，IO读写，多块SAS磁盘关闭近端phy	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	off	
+PV-1606	R.SAS.F008.A	ST.FUNC.108	Support SAS Narrow and Wide Ports	SAS盘，直连，IO读写，link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	off	
+PV-1606	R.SAS.F008.A	ST.FUNC.109	Support SAS Narrow and Wide Ports	SAS盘，直连，IO读写，多次link reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	off	
+PV-1606	R.SAS.F008.A	ST.FUNC.110	Support SAS Narrow and Wide Ports	SAS盘，直连，IO读写，hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	off	
+PV-1606	R.SAS.F008.A	ST.FUNC.111	Support SAS Narrow and Wide Ports	SAS盘，直连，IO读写，单块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
+PV-1606	R.SAS.F008.A	ST.FUNC.112	Support SAS Narrow and Wide Ports	SAS盘，直连，IO读写，多块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
 PV-1598	R.SAS.F014.A	ST.FUNC.113	Support hotplug	SAS盘，直连，IO读写，单块磁盘enable	upport_hotplug.sh	fio_single_enable	on	
 PV-1598	R.SAS.F014.A	ST.FUNC.114	Support hotplug	SAS盘，直连，IO读写，多块磁盘enable	support_hotplug.sh	fio_single_enable	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.115	Support full SAS function on all available PHYs	SATA盘，直连，IO读写，单块磁盘关闭近端phy	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.116	Support full SAS function on all available PHYs	SATA盘，直连，IO读写，多块磁盘关闭近端phy	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	on	
-PV-1606	R.SAS.F008.A	ST.FUNC.117	Support SAS Narrow and Wide Ports	SATA盘，直连，IO读写，link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	on	
-PV-1606	R.SAS.F008.A	ST.FUNC.118	Support SAS Narrow and Wide Ports	SATA盘，直连，IO读写，多次link reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	on	
-PV-1606	R.SAS.F008.A	ST.FUNC.119	Support SAS Narrow and Wide Ports	SATA盘，直连，IO读写，hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	on	
-PV-1606	R.SAS.F008.A	ST.FUNC.120	Support SAS Narrow and Wide Ports	SATA盘，直连，IO读写，单块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	on	
-PV-1606	R.SAS.F008.A	ST.FUNC.121	Support SAS Narrow and Wide Ports	SATA盘，直连，IO读写，多块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	on	
+PV-1601	R.SAS.F010.A	ST.FUNC.115	Support full SAS function on all available PHYs	SATA盘，直连，IO读写，单块磁盘关闭近端phy	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.116	Support full SAS function on all available PHYs	SATA盘，直连，IO读写，多块磁盘关闭近端phy	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	off	
+PV-1606	R.SAS.F008.A	ST.FUNC.117	Support SAS Narrow and Wide Ports	SATA盘，直连，IO读写，link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	off	
+PV-1606	R.SAS.F008.A	ST.FUNC.118	Support SAS Narrow and Wide Ports	SATA盘，直连，IO读写，多次link reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	off	
+PV-1606	R.SAS.F008.A	ST.FUNC.119	Support SAS Narrow and Wide Ports	SATA盘，直连，IO读写，hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	off	
+PV-1606	R.SAS.F008.A	ST.FUNC.120	Support SAS Narrow and Wide Ports	SATA盘，直连，IO读写，单块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
+PV-1606	R.SAS.F008.A	ST.FUNC.121	Support SAS Narrow and Wide Ports	SATA盘，直连，IO读写，多块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
 PV-1598	R.SAS.F014.A	ST.FUNC.122	Support hotplug	SATA盘，直连，IO读写，单块磁盘enable	support_hotplug.sh	fio_single_enable	on	
 PV-1598	R.SAS.F014.A	ST.FUNC.123	Support hotplug	SATA盘，直连，IO读写，多块磁盘enable	support_hotplug.sh	fio_single_enable	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.124	Support full SAS function on all available PHYs	SAS盘，expander，IO读写，单个phy频繁闪断	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.125	Support full SAS function on all available PHYs	SAS盘，expander，IO读写，多个phy频繁闪断	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.126	Support full SAS function on all available PHYs	SAS盘，expander，IO读写，关闭所有phy	support_full_sas_function_all_available_phys.sh	devmem_all_switch_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.127	Support full SAS function on all available PHYs	SAS盘，expander，IO读写，轮询反复开关phy	support_full_sas_function_all_available_phys.sh	devmem_polling_switch_phy	on	
-PV-1606	R.SAS.F008.A	ST.FUNC.128	Support SAS Narrow and Wide Ports	SAS盘，expander，IO读写，link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	on	
-PV-1606	R.SAS.F008.A	ST.FUNC.129	Support SAS Narrow and Wide Ports	SAS盘，expander，IO读写，多次link reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	on	
-PV-1606	R.SAS.F008.A	ST.FUNC.130	Support SAS Narrow and Wide Ports	SAS盘，expander，IO读写，hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	on	
-PV-1606	R.SAS.F008.A	ST.FUNC.131	Support SAS Narrow and Wide Ports	SAS盘，expander，IO读写，单块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	on	
-PV-1606	R.SAS.F008.A	ST.FUNC.132	Support SAS Narrow and Wide Ports	SAS盘，expander，IO读写，多块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	on	
+PV-1601	R.SAS.F010.A	ST.FUNC.124	Support full SAS function on all available PHYs	SAS盘，expander，IO读写，单个phy频繁闪断	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.125	Support full SAS function on all available PHYs	SAS盘，expander，IO读写，多个phy频繁闪断	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.126	Support full SAS function on all available PHYs	SAS盘，expander，IO读写，关闭所有phy	support_full_sas_function_all_available_phys.sh	devmem_all_switch_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.127	Support full SAS function on all available PHYs	SAS盘，expander，IO读写，轮询反复开关phy	support_full_sas_function_all_available_phys.sh	devmem_polling_switch_phy	off	
+PV-1606	R.SAS.F008.A	ST.FUNC.128	Support SAS Narrow and Wide Ports	SAS盘，expander，IO读写，link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	off	
+PV-1606	R.SAS.F008.A	ST.FUNC.129	Support SAS Narrow and Wide Ports	SAS盘，expander，IO读写，多次link reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	off	
+PV-1606	R.SAS.F008.A	ST.FUNC.130	Support SAS Narrow and Wide Ports	SAS盘，expander，IO读写，hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	off	
+PV-1606	R.SAS.F008.A	ST.FUNC.131	Support SAS Narrow and Wide Ports	SAS盘，expander，IO读写，单块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
+PV-1606	R.SAS.F008.A	ST.FUNC.132	Support SAS Narrow and Wide Ports	SAS盘，expander，IO读写，多块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
 PV-1598	R.SAS.F014.A	ST.FUNC.133	Support hotplug	SAS盘，expander，IO读写，单块磁盘enable	support_hotplug.sh	fio_single_enable	on	
 PV-1598	R.SAS.F014.A	ST.FUNC.134	Support hotplug	SAS盘，expander，IO读写，多块磁盘enable	support_hotplug.sh	fio_single_enable	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.135	Support full SAS function on all available PHYs	SATA盘，expander，IO读写，单个近端phy频繁闪断	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.136	Support full SAS function on all available PHYs	SATA盘，expander，IO读写，多个近端phy频繁闪断	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.137	Support full SAS function on all available PHYs	SATA盘，expander，IO读写，关闭所有近端phy	support_full_sas_function_all_available_phys.sh	devmem_all_switch_phy	on	
-PV-1601	R.SAS.F010.A	ST.FUNC.138	Support full SAS function on all available PHYs	SATA盘，expander，IO读写，轮询反复开关近端phy	support_full_sas_function_all_available_phys.sh	devmem_polling_switch_phy	on	
-PV-1606	R.SAS.F008.A	ST.FUNC.139	Support SAS Narrow and Wide Ports	SATA盘，expander，IO读写，link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	on	
-PV-1606	R.SAS.F008.A	ST.FUNC.140	Support SAS Narrow and Wide Ports	SATA盘，expander，IO读写，多次link reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	on	
-PV-1606	R.SAS.F008.A	ST.FUNC.141	Support SAS Narrow and Wide Ports	SATA盘，expander，IO读写，hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	on	
-PV-1606	R.SAS.F008.A	ST.FUNC.142	Support SAS Narrow and Wide Ports	SATA盘，expander，IO读写，单块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	on	
-PV-1606	R.SAS.F008.A	ST.FUNC.143	Support SAS Narrow and Wide Ports	SATA盘，expander，IO读写，多块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	on	
+PV-1601	R.SAS.F010.A	ST.FUNC.135	Support full SAS function on all available PHYs	SATA盘，expander，IO读写，单个近端phy频繁闪断	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.136	Support full SAS function on all available PHYs	SATA盘，expander，IO读写，多个近端phy频繁闪断	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.137	Support full SAS function on all available PHYs	SATA盘，expander，IO读写，关闭所有近端phy	support_full_sas_function_all_available_phys.sh	devmem_all_switch_phy	off	
+PV-1601	R.SAS.F010.A	ST.FUNC.138	Support full SAS function on all available PHYs	SATA盘，expander，IO读写，轮询反复开关近端phy	support_full_sas_function_all_available_phys.sh	devmem_polling_switch_phy	off	
+PV-1606	R.SAS.F008.A	ST.FUNC.139	Support SAS Narrow and Wide Ports	SATA盘，expander，IO读写，link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	off	
+PV-1606	R.SAS.F008.A	ST.FUNC.140	Support SAS Narrow and Wide Ports	SATA盘，expander，IO读写，多次link reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	off	
+PV-1606	R.SAS.F008.A	ST.FUNC.141	Support SAS Narrow and Wide Ports	SATA盘，expander，IO读写，hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	off	
+PV-1606	R.SAS.F008.A	ST.FUNC.142	Support SAS Narrow and Wide Ports	SATA盘，expander，IO读写，单块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
+PV-1606	R.SAS.F008.A	ST.FUNC.143	Support SAS Narrow and Wide Ports	SATA盘，expander，IO读写，多块磁盘多次hard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
 PV-1598	R.SAS.F014.A	ST.FUNC.144	Support hotplug	SATA盘，expander，IO读写，单块磁盘enable	support_hotplug.sh	fio_single_enable	on	
 PV-1598	R.SAS.F014.A	ST.FUNC.145	Support hotplug	SATA盘，expander，IO读写，多块磁盘enable	support_hotplug.sh	fio_single_enable	on	
 PV-1607	R.SAS.F012.A	ST.FUNC.191	Support SATA NCQ	SATA盘，expander，NCQ查询	support_sata_ncq.sh	ncq_query	on	
@@ -144,6 +144,6 @@ PV-1608	R.SAS.F015.A	ST.FUNC.195	Support SMART	SATA，直连，SMART	support_smart.s
 PV-1608	R.SAS.F015.A	ST.FUNC.196	Support SMART	SAS，直连，SMART	support_smart.sh	smart_disk_check	on	
 PV-1608	R.SAS.F015.A	ST.FUNC.198	Support SMART	SATA盘，expander，SMART	support_smart.sh	smart_disk_check	on	
 PV-1608	R.SAS.F015.A	ST.FUNC.199	Support SMART	SAS盘，expander，SMART	support_smart.sh	smart_disk_check	on	
-#N/A	N/A	ST.FUNC.200	N/A	expander，加载、卸载ko模块	support_module_load.sh	module_load_uninstall	on	
-#N/A	N/A	ST.FUNC.201	N/A	直连背板，加载、卸载ko模块	support_module_load.sh	module_load_uninstall	on	
+#N/A	N/A	ST.FUNC.200	N/A	expander，加载、卸载ko模块	support_module_load.sh	module_load_uninstall	off	
+#N/A	N/A	ST.FUNC.201	N/A	直连背板，加载、卸载ko模块	support_module_load.sh	module_load_uninstall	off	
 PV-1946	R.SAS.F018.A	ST.FUNC.202	Support ACPI for probe and reset	支持ACPI方式启动	support_acpi.sh	check_acpi_start	on	

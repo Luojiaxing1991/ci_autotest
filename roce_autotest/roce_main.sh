@@ -66,7 +66,7 @@ TrustRelation ${BACK_IP}
 
 Set_Test_Ip
 
-#copy_tool_so
+copy_tool_so
 
 # Output log file header
 writeLogHeader
