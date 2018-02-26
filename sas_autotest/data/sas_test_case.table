@@ -106,8 +106,8 @@ PV-1606	R.SAS.F008.A	ST.FUNC.109	Support SAS Narrow and Wide Ports	SAS≈Ã£¨÷±¡¨£¨
 PV-1606	R.SAS.F008.A	ST.FUNC.110	Support SAS Narrow and Wide Ports	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	off	
 PV-1606	R.SAS.F008.A	ST.FUNC.111	Support SAS Narrow and Wide Ports	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
 PV-1606	R.SAS.F008.A	ST.FUNC.112	Support SAS Narrow and Wide Ports	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
-PV-1598	R.SAS.F014.A	ST.FUNC.113	Support hotplug	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ãenable	upport_hotplug.sh	fio_single_enable	on	
-PV-1598	R.SAS.F014.A	ST.FUNC.114	Support hotplug	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	on	
+PV-1598	R.SAS.F014.A	ST.FUNC.113	Support hotplug	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	off	
+PV-1598	R.SAS.F014.A	ST.FUNC.114	Support hotplug	SAS≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	off	
 PV-1601	R.SAS.F010.A	ST.FUNC.115	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ãπÿ±’Ω¸∂Àphy	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	off	
 PV-1601	R.SAS.F010.A	ST.FUNC.116	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ãπÿ±’Ω¸∂Àphy	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	off	
 PV-1606	R.SAS.F008.A	ST.FUNC.117	Support SAS Narrow and Wide Ports	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	off	
@@ -115,8 +115,8 @@ PV-1606	R.SAS.F008.A	ST.FUNC.118	Support SAS Narrow and Wide Ports	SATA≈Ã£¨÷±¡¨£
 PV-1606	R.SAS.F008.A	ST.FUNC.119	Support SAS Narrow and Wide Ports	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	off	
 PV-1606	R.SAS.F008.A	ST.FUNC.120	Support SAS Narrow and Wide Ports	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
 PV-1606	R.SAS.F008.A	ST.FUNC.121	Support SAS Narrow and Wide Ports	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
-PV-1598	R.SAS.F014.A	ST.FUNC.122	Support hotplug	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	on	
-PV-1598	R.SAS.F014.A	ST.FUNC.123	Support hotplug	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	on	
+PV-1598	R.SAS.F014.A	ST.FUNC.122	Support hotplug	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	off	
+PV-1598	R.SAS.F014.A	ST.FUNC.123	Support hotplug	SATA≈Ã£¨÷±¡¨£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	off	
 PV-1601	R.SAS.F010.A	ST.FUNC.124	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨IO∂¡–¥£¨µ•∏ˆphy∆µ∑±…¡∂œ	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	off	
 PV-1601	R.SAS.F010.A	ST.FUNC.125	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨IO∂¡–¥£¨∂‡∏ˆphy∆µ∑±…¡∂œ	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	off	
 PV-1601	R.SAS.F010.A	ST.FUNC.126	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨IO∂¡–¥£¨πÿ±’À˘”–phy	support_full_sas_function_all_available_phys.sh	devmem_all_switch_phy	off	
@@ -126,8 +126,8 @@ PV-1606	R.SAS.F008.A	ST.FUNC.129	Support SAS Narrow and Wide Ports	SAS≈Ã£¨expand
 PV-1606	R.SAS.F008.A	ST.FUNC.130	Support SAS Narrow and Wide Ports	SAS≈Ã£¨expander£¨IO∂¡–¥£¨hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	off	
 PV-1606	R.SAS.F008.A	ST.FUNC.131	Support SAS Narrow and Wide Ports	SAS≈Ã£¨expander£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
 PV-1606	R.SAS.F008.A	ST.FUNC.132	Support SAS Narrow and Wide Ports	SAS≈Ã£¨expander£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
-PV-1598	R.SAS.F014.A	ST.FUNC.133	Support hotplug	SAS≈Ã£¨expander£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	on	
-PV-1598	R.SAS.F014.A	ST.FUNC.134	Support hotplug	SAS≈Ã£¨expander£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	on	
+PV-1598	R.SAS.F014.A	ST.FUNC.133	Support hotplug	SAS≈Ã£¨expander£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	off	
+PV-1598	R.SAS.F014.A	ST.FUNC.134	Support hotplug	SAS≈Ã£¨expander£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	off	
 PV-1601	R.SAS.F010.A	ST.FUNC.135	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨IO∂¡–¥£¨µ•∏ˆΩ¸∂Àphy∆µ∑±…¡∂œ	support_full_sas_function_all_available_phys.sh	devmem_single_switch_phy	off	
 PV-1601	R.SAS.F010.A	ST.FUNC.136	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨IO∂¡–¥£¨∂‡∏ˆΩ¸∂Àphy∆µ∑±…¡∂œ	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	off	
 PV-1601	R.SAS.F010.A	ST.FUNC.137	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨IO∂¡–¥£¨πÿ±’À˘”–Ω¸∂Àphy	support_full_sas_function_all_available_phys.sh	devmem_all_switch_phy	off	
@@ -137,8 +137,8 @@ PV-1606	R.SAS.F008.A	ST.FUNC.140	Support SAS Narrow and Wide Ports	SATA≈Ã£¨expan
 PV-1606	R.SAS.F008.A	ST.FUNC.141	Support SAS Narrow and Wide Ports	SATA≈Ã£¨expander£¨IO∂¡–¥£¨hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	off	
 PV-1606	R.SAS.F008.A	ST.FUNC.142	Support SAS Narrow and Wide Ports	SATA≈Ã£¨expander£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
 PV-1606	R.SAS.F008.A	ST.FUNC.143	Support SAS Narrow and Wide Ports	SATA≈Ã£¨expander£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	
-PV-1598	R.SAS.F014.A	ST.FUNC.144	Support hotplug	SATA≈Ã£¨expander£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	on	
-PV-1598	R.SAS.F014.A	ST.FUNC.145	Support hotplug	SATA≈Ã£¨expander£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	on	
+PV-1598	R.SAS.F014.A	ST.FUNC.144	Support hotplug	SATA≈Ã£¨expander£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	off	
+PV-1598	R.SAS.F014.A	ST.FUNC.145	Support hotplug	SATA≈Ã£¨expander£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	off	
 PV-1607	R.SAS.F012.A	ST.FUNC.191	Support SATA NCQ	SATA≈Ã£¨expander£¨NCQ≤È—Ø	support_sata_ncq.sh	ncq_query	on	
 PV-1608	R.SAS.F015.A	ST.FUNC.195	Support SMART	SATA£¨÷±¡¨£¨SMART	support_smart.sh	smart_disk_check	on	
 PV-1608	R.SAS.F015.A	ST.FUNC.196	Support SMART	SAS£¨÷±¡¨£¨SMART	support_smart.sh	smart_disk_check	on	
