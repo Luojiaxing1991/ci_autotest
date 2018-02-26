@@ -16,11 +16,11 @@ echo "begin to run pcie test"
 
 RunTable "${g_flTCsTable}" "${g_flStatusTable}" "${g_dp_pcie_test_common}" "${g_flLog}"
 
-writeLogHeader
-GenReport "${g_flTCsTable}" "${g_flStatusTable}" PCIe "${g_flLog}"
+#writeLogHeader
+#GenReport "${g_flTCsTable}" "${g_flStatusTable}" PCIe "${g_flLog}"
 
-flStatusTable=$(basename "${g_flStatusTable}")
-GenTable "${g_flStatusTable}" "${g_flBaseLog}_${flStatusTable}" "PCIe" "${g_flLog}"
+#flStatusTable=$(basename "${g_flStatusTable}")
+#GenTable "${g_flStatusTable}" "${g_flBaseLog}_${flStatusTable}" "PCIe" "${g_flLog}"
 
 #####################
 

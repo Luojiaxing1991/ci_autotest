@@ -1,0 +1,77 @@
+PV-289	R.ROCE.F001.A	ST-ROCE-1	RDMA operations in user space	RDMA操作类型混合随机，双向收发数据，相同操作数据包长不同	codecase.sh	codecase0	on	
+#N/A		ST-ROCE-2		RDMA操作混合随机，双向互发数据，发送数据包长随机	codecase.sh	codecase1	on	
+#N/A		ST-ROCE-3		RDMA send混合包长，双向发送数据	codecase.sh	codecase2	on	
+#N/A		ST-ROCE-4		带立即数的RDMA send操作，双向发送数据	codecase.sh	codecase3	on	
+#N/A		ST-ROCE-5		RDMA read操作，双向发送数据	codecase.sh	codecase4	on	
+#N/A		ST-ROCE-6		RDMA write操作，双向发送数据	codecase.sh	codecase5	on	
+#N/A		ST-ROCE-7		带立即数的RDMA write操作测试，双向发送数据	codecase.sh	codecase6	on	
+#N/A		ST-ROCE-8		send超时重传测试	codecase.sh	codecase7	on	
+#N/A		ST-ROCE-9		RDMA read超时重传测试，双向发送数据	codecase.sh	codecase8	on	
+#N/A		ST-ROCE-10		RDMA write超时重传测试，双向发送数据	codecase.sh	codecase9	on	
+#N/A		ST-ROCE-11		send rnr定时检测操作，server端发送数据	codecase.sh	codecase10	on	
+#N/A		ST-ROCE-12		带立即数的send定时检测测试，server端发送数据	codecase.sh	codecase11	on	
+#N/A		ST-ROCE-13		RDMA write、read、send混合操作测试，va递增，数据包长随机，双向发送数据	codecase.sh	codecase12	on	
+#N/A		ST-ROCE-14	支持Solicited Event	本端，对端配置CQ为solicited event模式，本端提交opcode的WR（WR的长度<=MTU），第一次为send操作，server将两端需要发送的数据发送到client端，然后mix通过随机数组选择具体操作类型，本端WQE设置SE为1(对端检测到接受包文SE为1），对端WQE成功处理完以后，对端硬件会上报一个CQE的完成事件	codecase.sh	codecase13	on	
+#N/A		ST-ROCE-15		每个wr支持的最大SGE的RDMA操作混合测试，操作类型混合，支持的最大SGE为2	codecase.sh	codecase14	on	
+#N/A		ST-ROCE-16		使用一个socket，遍历所有的QP，进行必要的post recv，同步后遍历所有的QP进行post send和poll cq	codecase.sh	codecase15	on	
+#N/A		ST-ROCE-17		环回和对接功能测试	codecase.sh	codecase16	on	
+#N/A		ST-ROCE-18		超时重传，丢包重传，RNR重传混合混合测试，sever端与client不同步	codecase.sh	codecase17	on	
+#N/A		ST-ROCE-19		roce丢包测试，设置丢包，用户态进程执行	codecase.sh	codecase18	on	
+#N/A		ST-ROCE-20		roce反压测试，设置反压，用户态进程执行	codecase.sh	codecase19	on	
+#N/A		ST-ROCE-21		tsp反压测试，设置反压，用户态进进程执行	codecase.sh	codecase20	on	
+#N/A		ST-ROCE-22		RDMA操作类型opcode混合测试，比较数据	codecase.sh	codecase21	on	
+#N/A		ST-ROCE-23		RDMA send操作测试，混合包长、compare数据、单向发送数据	codecase.sh	codecase22	on	
+#N/A		ST-ROCE-24		带立即数的RDMA send操作测试，混合包长、compare数据、单向发送数据	codecase.sh	codecase23	on	
+#N/A		ST-ROCE-25		RDMA write操作测试，混合包长、compare数据、单向发送数据	codecase.sh	codecase24	on	
+#N/A		ST-ROCE-26		带立即数的RDMA write操作测试，混合包长、compare数据、单向发送数据	codecase.sh	codecase25	on	
+#N/A		ST-ROCE-27		使用一个socket，遍历所有的QP，根据不同的mtu、sq_sig_all、send_flag和包长，send操作测试，compare接收数据	codecase.sh	codecase26	on	
+#N/A		ST-ROCE-28		使用一个socket，遍历所有的QP，根据不同的mtu、sq_sig_all、send_flag和包长，进行带立即数的send操作测试，compare接收数据	codecase.sh	codecase27	on	
+#N/A		ST-ROCE-29		使用一个socket，遍历所有的QP，根据不同的mtu、sq_sig_all、send_flag和包长，进行rdma_write操作测试，compare接收数据	codecase.sh	codecase28	on	
+#N/A		ST-ROCE-30		使用一个socket，遍历所有的QP，根据不同的mtu、sq_sig_all、send_flag和包长，进行带立即数的rdma_write操作测试，compare接收数据	codecase.sh	codecase29	on	
+#N/A		ST-ROCE-31		使用一个socket，遍历4个QP，opcode为IBV_WR_SEND，根据两种请求通知机制进行接收，compare接收数据	codecase.sh	codecase30	on	
+#N/A		ST-ROCE-32		使用一个socket，遍历4个QP，带立即数的发送操作，根据两种请求通知机制进行接收，compare接收数据	codecase.sh	codecase31	on	
+#N/A		ST-ROCE-33		使用一个socket，遍历4个QP，opcode为IBV_WR_RDMA_READ，根据2种请求通知机制进行发送，compare数据	codecase.sh	codecase32	on	
+#N/A		ST-ROCE-34		使用一个socket，遍历4个QP，opcode为IBV_WR_RDMA_WRITED，根据2种请求通知机制进行发送，compare数据	codecase.sh	codecase33	on	
+#N/A		ST-ROCE-35		使用一个socket，遍历4个QP，opcode为IBV_WR_RDMA_WRITED_WITH_IMM，根据2种请求通知机制进行发送，compare接收数据	codecase.sh	codecase34	on	
+#N/A		ST-ROCE-36		client设置反压，server端发送2个msg，第三个msg产生sq_sge（key）错误，检查server端产生的cqe.	codecase.sh	codecase35	on	
+#N/A		ST-ROCE-37		server端发送1个msg，3个wr，2个wr正常，第3个wr产生sq_sge（key）错误，检查server端产生的cqe.	codecase.sh	codecase36	on	
+#N/A		ST-ROCE-38		S/C端分别创建2个QP，S端传递recv_wr，C端为传递send_wr，两次传递的数据包长不同	codecase.sh	codecase37	on	
+PV-288	R.ROCE.F008.A	ST-ROCE-43	Verify establish connection through RDMA CM	使用RDMA CM方式建立连接	CM_connect.sh	CM_connect	off	
+#N/A		ST-ROCE-44		使用socket方式建立连接	SupportCQ.sh	One_CQ_One_QP	on	
+PV-335	R.ROCE.F003.A	ST-ROCE-47	Support of Send operation	支持向SQ提交操作类型为send的WR，WR提交硬件发送的数据长度=MTU（注：测试send only报文）	RoceSend.sh	RoceSend_MTU	on	
+PV-335	R.ROCE.F003.A	ST-ROCE-48		支持向SQ提交操作类型为send的WR，WR提交硬件发送的数据长度大于MTU小于2MTU（注：测试send first+last报文）	RoceSend.sh	RoceSend_Gt_MTU	on	
+PV-335	R.ROCE.F003.A	ST-ROCE-49		支持向SQ提交操作类型为send的WR，WR提交硬件发送的数据长度大于2MTU小于3MTU（注：测试send first+mid+last报文）	RoceSend.sh	RoceSend_Gt_2MTU	on	
+PV-336	R.ROCE.F004.A	ST-ROCE-50	Support of RDMA Read operation.	支持向SQ提交操作类型为RDMA READ的WR，并能正确从对端读取数据,WR提交硬件发送的数据长度=MTU（注：测试RDMA Read req +RDMA resp only报文）	RdmaRead.sh	RdmaRead_MTU	on	
+PV-336	R.ROCE.F004.A	ST-ROCE-51		支持向SQ提交操作类型为RDMA READ的WR，并能正确从对端读取数据,WR提交硬件发送的数据长度大于MTU小于2MTU（注：测试RDMA Read req +RDMA READresp first + RDMA READ resp last报文）	RdmaRead.sh	RdmaRead_Gt_MTU	on	
+PV-336	R.ROCE.F004.A	ST-ROCE-52		支持向SQ提交操作类型为RDMA READ的WR，并能正确从对端读取数据,WR提交硬件发送的数据长度大于2MTU小于3MTU（注：测试RDMA Read req +RDMA READresp first + RDMA READ resp middle + RDMA READ resp last报文）	RdmaRead.sh	RdmaRead_Gt_2MTU	on	
+PV-337	R.ROCE.F005.A	ST-ROCE-53	Support of RDMA Write operation	支持向SQ提交操作类型为RDMA WRITE的WR，并能正确将数据写到接收方内存,WR提交硬件发送的数据长度=MTU（注：测试RDMA Write only报文）	RdmaWrite.sh	RdmaWrite_MTU	on	
+PV-337	R.ROCE.F005.A	ST-ROCE-54		支持向SQ提交操作类型为RDMA WRITE的WR，并能正确将数据写到接收方内存,WR提交硬件发送的数据长度大于MTU小于2MTU（注：测试RDMA Write first+last报文）	RdmaWrite.sh	RdmaWrite_Gt_MTU	on	
+PV-337	R.ROCE.F005.A	ST-ROCE-55		支持向SQ提交操作类型为RDMA WRITE的WR，并能正确将数据写到接收方内存,WR提交硬件发送的数据长度大于2MTU小于3MTU（注：测试RDMA WRITE first+mid+last报文）	RdmaWrite.sh	RdmaWrite_Gt_2MTU	on	
+PV-342	R.ROCE.F014.A	ST-ROCE-56	Support of PD.	创建1个PD，创建成功，创建的PD能释放	SupportPD.sh	One_PD	on	
+PV-342	R.ROCE.F014.A	ST-ROCE-57		创建32767(0x7FFF)个PD，每个都能创建成功，创建的PD其PDID互不相同，创建的PD都能释放	SupportPD.sh	Max_PD_32k	off	
+PV-344	R.ROCE.F016.A	ST-ROCE-59	Support of RC QP	支持同时创建262,144 (0x3FFFF)个QP，且每个QP都能正常工作	SupportQP.sh	Up_to_256k_QP	off	
+PV-344	R.ROCE.F016.A	ST-ROCE-61		支持创建的QP其WQE深度最大为16383，QP能正常工作，能向QP提交最多16383个WQE。	SupportQP.sh	Max_QP_WQE_Depth	off	
+PV-344	R.ROCE.F016.A	ST-ROCE-63		支持创建的QP其WQE深度最大为1时，QP能正常工作	SupportQP.sh	QP_WQE_One_D	
+PV-351	R.ROCE.F023.A	ST-ROCE-64	Support of CQ	支持创建1个CQ，创建的CQ能同时和1个QP的SQ、RQ关联	SupportCQ.sh	One_CQ_One_QP	on	
+PV-351	R.ROCE.F023.A	ST-ROCE-65		支持创建1个CQ，创建的CQ能同时和多个QP的SQ、RQ关联	SupportCQ.sh	One_CQ_Mul_QP	on	
+PV-351	R.ROCE.F023.A	ST-ROCE-66		支持同时创建65536 (0x10000)个CQ	SupportCQ.sh	Max_CQ_64k	off	
+PV-353	R.ROCE.F025.A	ST-ROCE-67	Support of MR	申请2G大小mr，选择类型dma	SupportMR.sh	DMA_MR_2G	on	
+PV-353	R.ROCE.F025.A	ST-ROCE-68		申请2G大小 mr，选择类型usr	SupportMR.sh	USR_MR_2G	on	
+PV-353	R.ROCE.F025.A	ST-ROCE-71		申请512K个mr，选择类型usr，本地读写权限	SupportMR.sh	Max_USR_MR_512k	off	
+PV-353	R.ROCE.F025.A	ST-ROCE-72		申请512K个mr，选择类型dma，本地读写权限	SupportMR.sh	Max_DMA_MR_512k	off	
+PV-353	R.ROCE.F025.A	ST-ROCE-73		支持注册具有远程写权限的MR	SupportMR.sh	MR_Remote_Write	on	
+PV-353	R.ROCE.F025.A	ST-ROCE-74		支持注册具有远程读和本地写权限的MR	SupportMR.sh	MR_Remote_Read_Local_Write	on	
+PV-286	R.ROCE.F009.A	ST-ROCE-77	Verify basic RoCE function	Configure  GID according to IP	gid-ip.sh	gid-ip	on	
+PV-287	R.ROCE.F010.A	ST-ROCE-78	Verify basic RoCE function	Configure GID according to MAC address	gid-mac.sh	gid-mac	on	
+PV-340	R.ROCE.F011.A	ST-ROCE-79	Verify basic RoCE feature	Get device attribute	codecase.sh	codecase99	on	
+PV-341	R.ROCE.F012.A	ST-ROCE-80	Verify basic RoCE feature	Get port information	codecase.sh	codecase99	on	
+PV-963	R.ROCE.F013.A	ST-ROCE-81	Verify basic RoCE feature	Get GID information	codecase.sh	codecase99	on	
+PV-352	R.ROCE.F024.A	ST-ROCE-82	Verify Completion Event	 Request completion notification on a CQ and get CQ completion event.	Completion_Event.sh	Completion_Event	on	
+PV-343	R.ROCE.F015.A	ST-ROCE-83	Verify create and destroy AH	Creat AH ,then destroy it	codecase.sh	codecase40	on	
+PV-1827	R.ROCE.N004.B	ST-ROCE-84	Support RoCEv1 in hi161x	Verify RoCEv1 in hi161x	codecase.sh	codecase0	on	
+PV-366	R.ROCE.N006.B	ST-ROCE-85	Verify rocee is Linux platform device	Check platform device	platformdev.sh	platformdev	on	
+#N/A		ST-ROCE-87	Verify load/remove the RoCE kernel driver	Load the RoCE kernel driver	Load_Unload_kernel_driver.sh	 Load_kernel_driver	on	
+#N/A		ST-ROCE-88		Unload the RoCE kernel driver	Load_Unload_kernel_driver.sh	Unload_kernel_driver	on	
+PV-1482	R.ROCE.F030.A	ST-ROCE-89	Verify RoCEE's basic function on XGE port	send on XGE port	SupportXGE.sh	Send_On_XGE	on	
+PV-1482	R.ROCE.F030.A	ST-ROCE-90		RDMA read on XGE port	SupportXGE.sh	Read_On_XGE	on	
+PV-1482	R.ROCE.F030.A	ST-ROCE-91		RDMA write on XGE port	SupportXGE.sh	Write_On_XGE	on	

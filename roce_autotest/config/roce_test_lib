@@ -1,12 +1,67 @@
 #!/bin/bash
 #
 
+function init_net_export()
+{
+    echo "Begin to check eth rename info!"
 
-# Load configuration options
-. roce_autotest/config/roce_test_config
-. config/common_lib
+    #we update the eth rename info to eth_map,then update TP/FIBRE info
+    tmp_tp=0
+    tmp_fi=0
+    for i in ${!eth_map[*]}
+    do
+         tmp=`dmesg | grep -i "renamed from "${i} -w`
+	 if [ x"${tmp}" == x"" ]
+	 then
+		 echo "The name of "${i}" is not renamed,Stay as "${eth_map[${i}]} 
+	 else
+	         tmp=`echo ${tmp%:*}`
+	         tmp=`echo ${tmp##* }`
+	         eth_map[${i}]=${tmp}
+	         echo "The name of "${i}" is renamed as "${eth_map[${i}]}
+	 fi
+    done
+}
+#get the eth0's ip in server and client
+#IN	: NA
+#OUT: NA
+function Init_Net_Ip()
+{
+	#get the ip of server
+	LOCAL_IP=`ifconfig eth0 | grep 'inet addr:' | awk '{print $2}' | awk -F':' '{print $2}'`
+	echo "The server's ip is ${LOCAL_IP}"
 
-## Utility function
+	#get the ip of slave board
+	for tmpip in "${!ip_map[@]}"
+	do
+		if [ "$tmpip"x = "$LOCAL_IP"x ];then
+			BACK_IP=${ip_map[$tmpip]}
+			break
+		fi
+	done
+	echo "The slave ip is ${BACK_IP}"
+
+        init_net_export
+}
+
+# set ip for testing
+# IN : NA
+# OUT: NA
+function Set_Test_Ip()
+{
+	#set local ip for testing
+	ifconfig $LOCAL_ETHX ${local_port_ip[$ROCE_PORT]}
+
+	#get the net's port according the roce's port
+	REMOTE_ETHX=`ssh root@${BACK_IP} "cat /sys/class/infiniband/hns_0/ports/${ROCE_PORT}/gid_attrs/ndevs/0" `
+
+	#set remote ip for testing
+	ssh root@${BACK_IP} "ifconfig ${LOCAL_ETHX} ${remote_port_ip[$ROCE_PORT]}"
+
+	#check the network is ok
+	ping ${remote_port_ip[$ROCE_PORT]} -c 6 > /dev/null
+	[ $? != 0 ] && echo "The network isn't working between local $LOCAL_ETHX and remote $REMOTE_ETHX, please check!" && exit 1
+}
 
 # Establish a relationship of mutual trust between two boards
 # IN : $1 The IP of eth0 in the board as client.
@@ -43,17 +98,24 @@ function copy_tool_so()
 						  if [ ! -d ${CASEPATH} ]; then mkdir ${CASEPATH}; fi "
 	wait
 
-	pushd ${TEST_CASE_PATH}
+	pushd ${ROCE_CASE_DIR}
 
 	pushd so
-	cp -a * /lib/
+	#cp -a * /lib/
 
-	rsync -l * root@${BACK_IP}:/lib/
+	#rsync -l * root@${BACK_IP}:/lib/
+        #需要对libibver.so.1重新软连接
 	popd
 
-	scp roce-test client-auto-5-2 root@${BACK_IP}:${CASEPATH}/
+#	scp ${ROCE_TOP_DIR}/case_script/4120/roce_test_main root@${BACK_IP}:${CASEPATH}/roce-test
+        scp roce-client root@${BACK_IP}:${CASEPATH}/
 
 	pushd test
+
+	#modify the ib_port and servername according to the user's configuration
+	sed -i "/ib_port/s/^[0-9.]\+\([ \t]\+\)/${ROCE_PORT}\1/" *
+	sed -i "/servername/s/^[0-9.]\+\([ \t]\+\)/${local_port_ip[$ROCE_PORT]}\1/" *
+
 	scp * root@${BACK_IP}:${CASEPATH}/
 	popd
 
@@ -64,7 +126,7 @@ function copy_tool_so()
 
 	popd
 
-#config for the roce's kernel driver
+	#config for the roce's kernel driver
 	if [ ! -d /usr/local/etc/libibverbs.d ]
 	then
 		mkdir -p /usr/local/etc/libibverbs.d
@@ -80,4 +142,31 @@ function copy_tool_so()
 
 	return 0
 
+}
+#  call the implementation of the automation use cases
+#  IN : N/A
+#  OUT: N/A
+function test_case_function_run()
+{
+	if [ x"${TEST_CASE_FUNCTION_SWITCH}" == x"on" ]
+	then
+		${TEST_CASE_FUNCTION_NAME}
+		if [ x"${MESSAGE}" == x"PASS"  ];then
+          		lava_report "${TEST_CASE_TITLE}" pass
+		else
+			lava_report "${TEST_CASE_TITLE}" fail
+		fi
+	else
+		MESSAGE="BLOCK\tno automated use cases were implemented."
+	fi
+	#writePass "ROCE" "${TEST_CASE_TITLE"
+}
+
+# Output log file header
+# IN : N/A
+# OUT: N/A
+function writeLogHeader
+{
+	echo -e "Designed Requirement ID\tTest Case ID\tTest Item\tTest Case Title\tAutomated scripts\tRealize the function\tSwitch\tResult\tReason" > ${ROCE_TOP_DIR}/${OUTPUT_TEST_DB_FILE}
+	return 0
 }

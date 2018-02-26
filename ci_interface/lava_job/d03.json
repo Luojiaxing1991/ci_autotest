@@ -34,13 +34,11 @@
             "parameters": {
                 "testdef_repos": [
                     {
-                        "git-repo": "https://github.com/Luojiaxing1991/luo_driver_ci_testcase/tree/luo",
+                        "git-repo": "https://github.com/Luojiaxing1991/ci_autotest.git",
 			"parameters":{
 			     "Maintainer": "Luojiaxing"
 			},
-			"testdef": "ci_testcase/sas_autotest/sas_autotest.yaml"
-
-
+			"testdef": "sas_autotest/sas_autotest.yaml"
                     }
                 ],
                 "timeout": 172800
@@ -57,7 +55,7 @@
 	}
     ],
     "device_type": "hip06-d03",
-    "job_name": "plinth-release-plinth-4.15.0+_+300e39166a78fb18af5231a5631bfbc500db55ee-arm64-SAS_Test",
+    "job_name": "plinth-SAS-HNS-PCIE-ROCE-PERF_Test",
     "logging_level": "DEBUG",
     "priority": "high",
     "timeout": 172800

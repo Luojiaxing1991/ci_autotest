@@ -19,6 +19,7 @@
                 "target_type": "ubuntu"
             }
         },
+	
         {
             "command": "boot_linaro_image",
             "parameters": {
@@ -27,7 +28,6 @@
                 ]
             }
         },
-
         {
             "command": "lava_test_shell",
             "parameters": {
@@ -38,8 +38,6 @@
 			     "Maintainer": "Luojiaxing"
 			},
 			"testdef": "sas_autotest/sas_autotest.yaml"
-
-
                     }
                 ],
                 "timeout": 172800

@@ -1,47 +1,34 @@
 #!/bin/bash
 
-# case fr m code
+# case from code
 # IN :N/A
 # OUT:N/A
 function codecase()
 {
-	for index in `seq ${START_INDEX} ${END_INDEX}`
-	do
-		./${TEST_CASE_PATH}/server-auto-5-2 ${index} 5 > code_server_${index} &
-		ssh root@${BACK_IP} " ./${CASEPATH}/client-auto-5-2 ${index} 5 > code_client_${index} "
-		wait
+	pushd ${ROCE_CASE_DIR}
 
-		scp root@${BACK_IP}:code_client_${index} ./
-		ssh root@${BACK_IP} " rm code_client_${index} "
+	./roce-server -n ${CODE_INDEX} -i ${ROCE_PORT} -c 5 > code_server_${CODE_INDEX} &
+	Code_Client_Flag=`ssh root@${BACK_IP} " ./${CASEPATH}/roce-client -n ${CODE_INDEX} -i ${ROCE_PORT} -c 5 ${local_port_ip[$ROCE_PORT]} | grep -c 'pass: 1'" `
+	wait
 
-		local case_id=`expr $index + 1`
-		Test_Case_ID="ST-ROCE-${case_id}"
-		if [ $index == 0 ]
-		then
-			JIRA_ID="PV-298"
-			Designed_Requirement_ID="R.ROCE.F001.A"
-			Test_Item="Support RDMA operations in user space"
-		else
-			JIRA_ID=""
-			Designed_Requirement_ID=""
-			Test_Item=""
-		fi
+	Code_Server_Flag=`grep -c "pass: 1" code_server_${CODE_INDEX}`
 
-		if [ ` grep -c "pass: 1" code_server_${index} ` -a ` grep -c "pass: 1" code_client_${index} ` ]
-		then
-			writePass
-		else
-			writeFail
-		fi
-	done
+	if [ $Code_Server_Flag == 1 -a $Code_Client_Flag == 1 ]
+	then
+		MESSAGE="PASS"
+	else
+		MESSAGE="FAIL"
+	fi
+
+	popd
 }
 
 function main()
 {
-	JIRA_ID=""
-	Test_Item=""
-	Designed_Requirement_ID=""
-	codecase
+	CODE_INDEX=`grep -Po "\d*" <<< "${TEST_CASE_FUNCTION_NAME}" `
+	TEST_CASE_FUNCTION_NAME=`echo ${TEST_CASE_FUNCTION_NAME:0:8}`
+	# call the implementation of the automation use cases
+	test_case_function_run
 }
 
 main

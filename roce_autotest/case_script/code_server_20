@@ -1,0 +1,33 @@
+port=18515,servername:(null)!
+
+ [prtest_init_connection : 341] !
+ [prtest_init_connection : 350] SERVER connection start!
+ [main : 20849] prtest_init_connection ok!
+ [main : 20857] pr_socket : name (null), port 18515, machine 0, sockfd 4
+ [main : 20868] prtest_find_prdev ok!
+ [main : 20885] ibv_open_device ok!
+ [ROCEE_set_pkt_drp : 7629] mmap ok, mappedAddr = 0xffffafd59000
+ [set_drop_pkt : 7497] DmaeAddr = 0xffffafd59010
+ [set_drop_pkt : 7501] DmaeBypaMod = 0x30000
+ [set_drop_pkt : 7506] DmaeBypaMod = 0x0, reg val = 0x0
+ [set_drop_pkt : 7511] DmaeBypaMod = 0x30000, reg val = 0x30000
+ [set_drop_pkt : 7497] DmaeAddr = 0xffffafd59010
+ [set_drop_pkt : 7501] DmaeBypaMod = 0x30000
+ [set_drop_pkt : 7506] DmaeBypaMod = 0x0, reg val = 0x0
+ [set_drop_pkt : 7511] DmaeBypaMod = 0x30000, reg val = 0x30000
+ [set_drop_pkt : 7497] DmaeAddr = 0xffffafd59010
+ [set_drop_pkt : 7501] DmaeBypaMod = 0x30000
+ [set_drop_pkt : 7506] DmaeBypaMod = 0x0, reg val = 0x0
+ [set_drop_pkt : 7511] DmaeBypaMod = 0x30000, reg val = 0x30000
+ [set_drop_pkt : 7497] DmaeAddr = 0xffffafd59010
+ [set_drop_pkt : 7501] DmaeBypaMod = 0x30000
+ [set_drop_pkt : 7506] DmaeBypaMod = 0x0, reg val = 0x0
+ [set_drop_pkt : 7511] DmaeBypaMod = 0x30000, reg val = 0x30000
+ [set_drop_pkt : 7497] DmaeAddr = 0xffffafd59010
+ [set_drop_pkt : 7501] DmaeBypaMod = 0x30000
+ [set_drop_pkt : 7506] DmaeBypaMod = 0x0, reg val = 0x0
+ [set_drop_pkt : 7511] DmaeBypaMod = 0x30000, reg val = 0x30000
+ [set_drop_pkt : 7497] DmaeAddr = 0xffffafd59010
+ [set_drop_pkt : 7501] DmaeBypaMod = 0x30000
+ [set_drop_pkt : 7506] DmaeBypaMod = 0x0, reg val = 0x0
+ [set_drop_pkt : 7511] DmaeBypaMod = 0x30000, reg val = 0x30000######### total: 41  , pass: 1  , failed :0   ############

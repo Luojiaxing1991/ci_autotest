@@ -38,10 +38,10 @@ fsrc1=funcs.common
 flPub1=${drCur1}/${fsrc1}
 if [ ! -f "${flPub1}" ]; then
     s1=$(find ${drCur1}/.. ${g_argFindMaxDepth} -type f -name "${fsrc1}")
-    #if [ -z "${s1}" ]; then
-    #    printf "%s[%3d]%5s: Not found ${fsrc1}\n" "${FUNCNAME[0]}" ${LINENO} "Error" >&2
-    #    exit 1
-    #fi
+    if [ -z "${s1}" ]; then
+        printf "%s[%3d]%5s: Not found ${fsrc1}\n" "${FUNCNAME[0]}" ${LINENO} "Error" >&2
+        exit 1
+    fi
     flPub1=${s1}
 fi
 if [ -n "${flPub1}" ]; then
@@ -51,6 +51,9 @@ fi
 #####################
 #Load config
 LoadSourceFileParent "${g_dp_pcie_test_common}" "${g_fn_pcie_test_common%_*}_config" flPath1 "${g_flLog}" true
+$(sed "s#^#. #" <<< "${flPath1}")
+
+LoadSourceFileParent "${g_dp_pcie_test_common}" "olmcim.cfg" flPath1 "${g_flLog}" true
 $(sed "s#^#. #" <<< "${flPath1}")
 
 #####################
@@ -71,21 +74,23 @@ fi
 
 ###########
 export g_sLevelRun=$(sed "/^[ \t]*\$/d;/^[ \t]*#/d;s@^[ \t]\+@@;s@[ \t]\+\$@@" <<< "${g_sLevelRun}")
-export g_sErrCur=
+export g_sMsgCur=
 
 #####################
 #Alone Functions
 ArgInCmdLine()
 {
-    local sKey1=${1}    
+    local sKey1=${1}
+    
     echo "Begin to run ArgInCmdLine "${sKey1}
     grep -q "\(^\| \)${sKey1}\( \|\$\)" /proc/cmdline
     if [ $? -ne 0 ]; then
-        g_sErrCur="not have ${sKey1} in cmdline"
-        echo ${g_sErrCur}
-        OutLog 1 "" "${g_sErrCur}." "${g_flLog}" false
+        g_sMsgCur="not have ${sKey1} in cmdline"
+        g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+        OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${g_flLog}" false
         return 1
     fi
+    echo "Finish ArgInCmdLine "${sKey1}" is success!"
 }
 
 LspcikKeysiBA()
@@ -96,7 +101,7 @@ LspcikKeysiBA()
     local nA=${4:-0}
    
     echo "Begin to run LspcikKeysiBA"${sKey1}  
-  
+
     local argic
     argic=
     if [ "${bIC}" == "true" ]; then
@@ -104,12 +109,13 @@ LspcikKeysiBA()
     fi
     lspci -k |grep ${argic} -B${nB} -A${nA} -q "${sKey1}"
     if [ $? -ne 0 ]; then
-        g_sErrCur="not have ${sKey1}"
-        echo ${g_sErrCur}
+        g_sMsgCur="not have ${sKey1}"
+        g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
         echo "lspci cmd is not success in LspcikKeysiBA "${sKey1} 
-        printf "%s[%3d]%5s: ${g_sErrCur}\n" "${FUNCNAME[0]}" ${LINENO} "Error" >> "${g_flLog}"
+        OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${g_flLog}" false
         return 1
     fi
+    echo "Finish LspcikKeysiBA "${sKey1}" is success!"
 }
 export -f LspcikKeysiBA
 
@@ -123,16 +129,18 @@ DmesgCard2KeyBA()
     local bdfA
     bdfA=$(lspci -k |grep -i -B${nB} -A${nA} "${sKey1}" |grep -o "^[0-9A-Fa-f:.]\+")
     if [ -z "${bdfA}" ]; then
-        g_sErrCur="not have ${sKey1}"
-        printf "%s[%3d]%5s: ${g_sErrCur}\n" "${FUNCNAME[0]}" ${LINENO} "Error" >> "${g_flLog}"
+        g_sMsgCur="not have ${sKey1}"
+        g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+        OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${g_flLog}" false
         return 1
     fi
 
     bdf1=$(echo "${bdfA}" |sed -n '1p')
     dmesg |grep "${bdf1}" |grep -iq "${sKey2}"
     if [ $? -ne 0 ]; then
-        g_sErrCur="not have ${sKey2}"
-        printf "%s[%3d]%5s: ${g_sErrCur}\n" "${FUNCNAME[0]}" ${LINENO} "Error" >> "${g_flLog}"
+        g_sMsgCur="not have ${sKey2}"
+        g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+        OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${g_flLog}" false
         return 1
     fi
 }
@@ -147,16 +155,18 @@ CheckCard2KeysBA()
     local bdfA
     bdfA=$(lspci -k |grep -i -B${nB} -A${nA} "${sKey1}" |grep -o "^[0-9A-Fa-f:.]\+")
     if [ -z "${bdfA}" ]; then
-        g_sErrCur="not have ${sKey1}"
-        printf "%s[%3d]%5s: ${g_sErrCur}\n" "${FUNCNAME[0]}" ${LINENO} "Error" >> "${g_flLog}"
+        g_sMsgCur="not have ${sKey1}"
+        g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+        OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${g_flLog}" false
         return 1
     fi
 
     bdf1=$(echo "${bdfA}" |sed -n '1p')
     lspci -s ${bdf1} -vvv |grep -q "${sKey2}"
     if [ $? -ne 0 ]; then
-        g_sErrCur="not have ${sKey2}"
-        printf "%s[%3d]%5s: ${g_sErrCur}\n" "${FUNCNAME[0]}" ${LINENO} "Error" >> "${g_flLog}"
+        g_sMsgCur="not have ${sKey2}"
+        g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+        OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${g_flLog}" false
         return 1
     fi
 }
@@ -172,16 +182,18 @@ DmesgCard2KeyBA()
     local bdfA
     bdfA=$(lspci -k |grep -i -B${nB} -A${nA} "${sKey1}" |grep -o "^[0-9A-Fa-f:.]\+")
     if [ -z "${bdfA}" ]; then
-        g_sErrCur="not have ${sKey1}"
-        printf "%s[%3d]%5s: ${g_sErrCur}\n" "${FUNCNAME[0]}" ${LINENO} "Error" >> "${g_flLog}"
+        g_sMsgCur="not have ${sKey1}"
+        g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+        OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${g_flLog}" false
         return 1
     fi
 
     bdf1=$(echo "${bdfA}" |sed -n '1p')
     dmesg |grep "${bdf1}" |grep -iq "${sKey2}"
     if [ $? -ne 0 ]; then
-        g_sErrCur="not have ${sKey2}"
-        printf "%s[%3d]%5s: ${g_sErrCur}\n" "${FUNCNAME[0]}" ${LINENO} "Error" >> "${g_flLog}"
+        g_sMsgCur="not have ${sKey2}"
+        g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+        OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${g_flLog}" false
         return 1
     fi
 }
@@ -211,8 +223,9 @@ ACPICard()
     local bdfA
     bdfA=$(lspci -k |grep -i -B${nB} -A${nA} "${sKey1}" |grep -o "^[0-9A-Fa-f:.]\+")
     if [ -z "${bdfA}" ]; then
-        g_sErrCur="not have ${sKey1}"
-        printf "%s[%3d]%5s: ${g_sErrCur}\n" "${FUNCNAME[0]}" ${LINENO} "Error" >> "${g_flLog}"
+        g_sMsgCur="not have ${sKey1}"
+        g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+        OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${g_flLog}" false
         return 1
     fi
 

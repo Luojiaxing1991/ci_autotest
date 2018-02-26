@@ -199,6 +199,10 @@ function devmem_polling_switch_phy()
 {
     Test_Case_Title="devmem_polling_switch_phy"
 
+    #Judge the current environment, directly connected environment or expander environment.
+    judgment_network_env
+    [ $? -ne 0 ] && echo "the current environment is direct connection network, do not execute test case." && return 0
+
     beg_count=`fdisk -l | grep /dev/sd | wc -l`
     sed -i "{s/^runtime=.*/runtime=${LOOP_PHY_TIME}/g;}" fio.conf
     ${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
@@ -231,6 +235,10 @@ function devmem_polling_switch_phy()
 function devmem_all_switch_phy()
 {
     Test_Case_Title="devmem_all_switch_phy"
+
+    #Judge the current environment, directly connected environment or expander environment.
+    judgment_network_env
+    [ $? -ne 0 ] && echo "the current environment is direct connection network, do not execute test case." && return 0
 
     beg_count=`fdisk -l | grep /dev/sd | wc -l`
     sed -i "{s/^runtime=.*/runtime=${LOOP_PHY_TIME}/g;}" fio.conf

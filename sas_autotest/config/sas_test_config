@@ -2,24 +2,23 @@
 #
 #
 
+
+#Get the current board type.
+BOARD_TYPE=`dmidecode | grep "Product Name:" | sed -n "1p" | awk -F ' ' '{print $NF}'`
+
 #Automated data files exported in test cases.
 TEST_CASE_DB_FILE="data/sas_test_case.table"
-#
+#Test case execution result save file.
 OUTPUT_TEST_DB_FILE="data/report.csv"
-#
+#Test case execution switch.
 TEST_CASE_FUNCTION_SWITCH=""
-#
+#Test case execution function name.
 TEST_CASE_FUNCTION_NAME=""
-#
+#Test case execution result.
 MESSAGE=""
 
 #
 TEST_CASE_TITLE=""
-
-#do not test the disk list,Default value is NULL.
-#configure multiple values, in the format of "/dev/sda|/dev/sdb".
-NOT_TEST_DISK_LIST="N/A"
-
 #
 INFO=`cat /etc/hostname`
 if [ x"${INFO}" = x"estuary" ]
@@ -99,25 +98,25 @@ DISK_NEGOTIATED_LINKRATE_VALUE='1.5|3|6|12'
 
 ## 3 - stable_2GB_file_transfer
 #  Disk file data consistency test, File comparison times, Default Value is 500.
-COMPARISON_NUMBER=500
+COMPARISON_NUMBER=5
 
 ## 4 - No cable unplug OOPs
 #  Long time read / write disk, Default Value is 0.
 #IS_LONG_TIME_IO_READ_WRITE=0
 #  Long time read and write disk time, Default Value is 14400ms.
-FIO_LONG_RUN_TIME=14400
+FIO_LONG_RUN_TIME=10
 #  Repeat read / write disk, Default Value is 0.
 #IS_REPEAT_IO_READ_WRITE=0
 #  Repeat read and write disks. Default value is 100 second.
-REPEAT_RW_NUMBER=100
+REPEAT_RW_NUMBER=5
 #  FIO tool to read the cycle time.
-REPEAT_RM_TIME=10
+REPEAT_RM_TIME=2
 
 ## 5 - phy_control_through_sysfs
 #  loop Rate set up function switch,  1 - oepn test, 0 - close test, Default Value is 0.
 #IS_LOOP_RATE_SET_UP=0
 #  loop Rate set up number, Default Value is 10000.
-LOOP_RATE_SET_UP_NUMBER=10000
+LOOP_RATE_SET_UP_NUMBER=5
 #  Maximum disk phy, Default Value is "6.0 Gbit".
 MAXIMUM_LINK_VALUE="6.0 Gbit"
 #  Minimum disk phy, Default Value is "3.0 Gbit".
@@ -133,13 +132,13 @@ BSSPLIT="4k/30:8k/40:16k/30"
 #  cycle the number of all proximal phy switches, Default value is 100.
 LOOP_PHY_COUNT=100
 #  cycle reset distal phy number, Default value is 1000.
-REST_PHY_COUNT=1000
+REST_PHY_COUNT=5
 #  fio tool business run time.
-LOOP_PHY_TIME=300
+LOOP_PHY_TIME=10
 
 ## 8 - Support SAS Narrow and Wide Ports.
 # fio tool business run time.
-FIO_RESET_TIME=300
+FIO_RESET_TIME=10
 #  Reset the number of Hart_rest or link_reset
 FIO_RESET_COUNT=5
 

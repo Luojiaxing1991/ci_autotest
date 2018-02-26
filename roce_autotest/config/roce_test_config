@@ -2,34 +2,75 @@
 #
 #
 
+#Automated data files exported in test cases.
+TEST_CASE_DB_FILE="data/roce_test_case.table"
+#
+OUTPUT_TEST_DB_FILE="data/report.csv"
+#
+TEST_CASE_FUNCTION_SWITCH=""
+#
+TEST_CASE_FUNCTION_NAME=""
+#
+MESSAGE=""
 
-# Test case mapping table
-declare -A case_map
-case_map=(
-["codecase"]="off"
-["gid-ip"]="off"
-["gid-mac"]="off"
-["RoceSend"]="off"
-["RdmaRead"]="off"
-["RdmaWrite"]="off"
-["SupportPD"]="off"
-["SupportQP"]="off"
-["SupportCQ"]="off"
-["SupportMR"]="off"
-["platformdev"]="on"
-["SupportXGE"]="on"
+#User set
+#ip_map
+#key: the ip of current server eth0
+#value: the ip of server eth0 which connects with current server directly
+declare -A ip_map
+ip_map=(
+["192.168.1.210"]="192.168.1.250"
+["192.168.1.250"]="192.168.1.210"
+["192.168.3.229"]="192.168.3.237"
+["192.168.3.237"]="192.168.3.229"
 )
+
+declare -A eth_map
+eth_map=(
+["eth0"]="eth0"
+["eth1"]="eth1"
+["eth2"]="eth2"
+["eth3"]="eth3"
+)
+
 # code case index
 START_INDEX=0
 END_INDEX=3
 
+# default
+# RoCE's port   Net's port
+#     1           eth2
+#     2           eth3
+#     3           eth0(this port cann't be used for testing, since for NFS)
+#     4           eth1
+# The roce's port used for testing
+ROCE_PORT=2
+
+# local_port_ip
+# key: the roce's port
+# value: the local ip of the roce's port
+declare -A local_port_ip
+local_port_ip=(
+["1"]="192.168.12.120"
+["2"]="192.168.13.120"
+["4"]="192.168.15.120"
+)
+
+# remote_port_ip
+# key: the roce's port
+# value: the remote ip of the roce's port
+declare -A remote_port_ip
+remote_port_ip=(
+["1"]="192.168.12.119"
+["2"]="192.168.13.119"
+["4"]="192.168.15.119"
+)
+# get the net's port according the roce's port
+LOCAL_ETHX=`cat /sys/class/infiniband/hns_0/ports/${ROCE_PORT}/gid_attrs/ndevs/0`
+REMOTE_ETHX=""
 
 # Common tools directory path
 COMMON_TOOL_PATH="common_tool"
 
-# Test case code directory path
-TEST_CASE_PATH="roce_autotest/case_script"
+# Test case tool directory path
 CASEPATH="roce-test"
-
-# Start the machine environment IP
-BACK_IP=192.168.1.250

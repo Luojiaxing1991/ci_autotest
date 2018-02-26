@@ -39,10 +39,16 @@ Enumeration82599()
 
 EnumerationRaid3008()
 {
-    LspcikKeysiBA "RAID bus controller: LSI Logic / Symbios Logic MegaRAID SAS-3 3008"
+    LspcikKeysiBA "SAS3008 PCI-Express"
 }
 
 EnumerationRaid3108()
 {
-    LspcikKeysiBA "RAID bus controller: LSI Logic / Symbios Logic MegaRAID SAS-3 3108"
+    LspcikKeysiBA "LSI Logic / Symbios Logic MegaRAID SAS-3 3108"
 }
+
+EnumES3000()
+{
+    LspcikKeysiBA "19e5:0123"
+}
+

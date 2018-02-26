@@ -5,17 +5,17 @@
 
 function fun_perf_list()
 {
-  :> ./data/log/pmu_event.txt
-  perf list | grep $1| awk -F'[ \t]+' '{print $2}' > ./data/log/pmu_event.txt
-  msum=$(cat ./data/log/pmu_event.txt | grep $1 | wc -l)
+  :> ${PERF_TOP_DIR}/data/log/pmu_event.txt
+  perf list | grep $1| awk -F'[ \t]+' '{print $2}' > ${PERF_TOP_DIR}/data/log/pmu_event.txt
+  msum=$(cat ${PERF_TOP_DIR}/data/log/pmu_event.txt | grep $1 | wc -l)
   if [[ $msum -le 0 ]];then
     MESSAGE="Fail\t No $1 Perf Support Event!"
     return
   else 
-    rand=$(awk 'NR==2 {print $1}' ./data/log/pmu_event.txt)
-    rand2=$(awk 'NR==16 {print $1}' ./data/log/pmu_event.txt)
-    perf stat -a -e $rand -e $rand2 -I 200 sleep 10s >& ./data/log/perf_statu.log
-    if [ `cat ./data/log/perf_statu.log | grep -i "dump" | wc -l` -le 7 ];then 
+    rand=$(awk 'NR==2 {print $1}' ${PERF_TOP_DIR}/data/log/pmu_event.txt)
+    rand2=$(awk 'NR==16 {print $1}' ${PERF_TOP_DIR}/data/log/pmu_event.txt)
+    perf stat -a -e $rand -e $rand2 -I 200 sleep 10s >& ${PERF_TOP_DIR}/data/log/perf_statu.log
+    if [ `cat ${PERF_TOP_DIR}/data/log/perf_statu.log | grep -i "dump" | wc -l` -le 7 ];then 
       MESSAGE="Fail\t $1 Event disable/enable Function Test Fail!"
     else
       MESSAGE="Pass"

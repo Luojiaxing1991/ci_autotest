@@ -1,0 +1,175 @@
+port=18515,servername:(null)!
+
+ [prtest_init_connection : 341] !
+ [prtest_init_connection : 350] SERVER connection start!
+ [main : 20849] prtest_init_connection ok!
+ [main : 20857] pr_socket : name (null), port 18515, machine 0, sockfd 4
+ [main : 20868] prtest_find_prdev ok!
+ [main : 20885] ibv_open_device ok! Link type is Ethernet
+
+ loop 0********************************* Mtu : 256
+
+ set mtu ok.
+ alloc pd ok.
+ addr = 0xffff8e05d010,lkey = rkey = 0x700
+ addr = 0xffff8e15d010,lkey = rkey = 0x800
+ create recv cq ok.
+ create send cq ok.
+ create qp ok.hr_qp->port_num= 0x2
+
+ modify qp init ok.
+ set up connection ok.
+ modify qp rtr ok.
+ modify qp rts ok.
+ shake hand ok.
+ loop 1********************************* Mtu : 512
+
+ set mtu ok.
+ alloc pd ok.
+ addr = 0xffff8de5c010,lkey = rkey = 0x900
+ addr = 0xffff8df5c010,lkey = rkey = 0xa00
+ create recv cq ok.
+ create send cq ok.
+ create qp ok.hr_qp->port_num= 0x2
+
+ modify qp init ok.
+ set up connection ok.
+ modify qp rtr ok.
+ modify qp rts ok.
+ shake hand ok.
+ loop 2********************************* Mtu : 1024
+
+ set mtu ok.
+ alloc pd ok.
+ addr = 0xffff8dc5b010,lkey = rkey = 0xb00
+ addr = 0xffff8dd5b010,lkey = rkey = 0xc00
+ create recv cq ok.
+ create send cq ok.
+ create qp ok.hr_qp->port_num= 0x2
+
+ modify qp init ok.
+ set up connection ok.
+ modify qp rtr ok.
+ modify qp rts ok.
+ shake hand ok.
+ loop 3*********************************Requested mtu is higher than active mtu 
+Changing to active mtu 
+ Mtu : 1024
+
+ set mtu ok.
+ alloc pd ok.
+ addr = 0xffff8da5a010,lkey = rkey = 0xd00
+ addr = 0xffff8db5a010,lkey = rkey = 0xe00
+ create recv cq ok.
+ create send cq ok.
+ create qp ok.hr_qp->port_num= 0x2
+
+ modify qp init ok.
+ set up connection ok.
+ modify qp rtr ok.
+ modify qp rts ok.
+ shake hand ok.
+ loop 4********************************* Mtu : 256
+
+ set mtu ok.
+ alloc pd ok.
+ addr = 0xffff8d859010,lkey = rkey = 0xf00
+ addr = 0xffff8d959010,lkey = rkey = 0x1000
+ create recv cq ok.
+ create send cq ok.
+ create qp ok.hr_qp->port_num= 0x2
+
+ modify qp init ok.
+ set up connection ok.
+ modify qp rtr ok.
+ modify qp rts ok.
+ shake hand ok.
+ loop 5********************************* Mtu : 512
+
+ set mtu ok.
+ alloc pd ok.
+ addr = 0xffff8d658010,lkey = rkey = 0x1100
+ addr = 0xffff8d758010,lkey = rkey = 0x1200
+ create recv cq ok.
+ create send cq ok.
+ create qp ok.hr_qp->port_num= 0x2
+
+ modify qp init ok.
+ set up connection ok.
+ modify qp rtr ok.
+ modify qp rts ok.
+ shake hand ok.
+ loop 6********************************* Mtu : 1024
+
+ set mtu ok.
+ alloc pd ok.
+ addr = 0xffff8d457010,lkey = rkey = 0x1300
+ addr = 0xffff8d557010,lkey = rkey = 0x1400
+ create recv cq ok.
+ create send cq ok.
+ create qp ok.hr_qp->port_num= 0x2
+
+ modify qp init ok.
+ set up connection ok.
+ modify qp rtr ok.
+ modify qp rts ok.
+ shake hand ok.
+ loop 7*********************************Requested mtu is higher than active mtu 
+Changing to active mtu 
+ Mtu : 1024
+
+ set mtu ok.
+ alloc pd ok.
+ addr = 0xffff8d256010,lkey = rkey = 0x1500
+ addr = 0xffff8d356010,lkey = rkey = 0x1600
+ create recv cq ok.
+ create send cq ok.
+ create qp ok.hr_qp->port_num= 0x2
+
+ modify qp init ok.
+ set up connection ok.
+ modify qp rtr ok.
+ modify qp rts ok.
+ shake hand ok.
+ loop end*********************************
+ send_wr = 0x23cf2258, recv_wr = 0x23cf2228
+ qp 0, test 0, data_len= 0x0
+ qp 1, test 0, data_len= 0x0
+ qp 2, test 0, data_len= 0x0
+ qp 3, test 0, data_len= 0x0
+ qp 4, test 0, data_len= 0x0
+ qp 5, test 0, data_len= 0x0
+ qp 6, test 0, data_len= 0x0
+ qp 7, test 0, data_len= 0x0
+ qp 0, test 1, data_len= 0x1
+ qp 1, test 1, data_len= 0x1
+ qp 2, test 1, data_len= 0x1
+ qp 3, test 1, data_len= 0x1
+ qp 4, test 1, data_len= 0x1
+ qp 5, test 1, data_len= 0x1
+ qp 6, test 1, data_len= 0x1
+ qp 7, test 1, data_len= 0x1
+ qp 0, test 2, data_len= 0x1f
+ qp 1, test 2, data_len= 0x1f
+ qp 2, test 2, data_len= 0x1f
+ qp 3, test 2, data_len= 0x1f
+ qp 4, test 2, data_len= 0x1f
+ qp 5, test 2, data_len= 0x1f
+ qp 6, test 2, data_len= 0x1f
+ qp 7, test 2, data_len= 0x1f
+ qp 0, test 3, data_len= 0x20
+ qp 1, test 3, data_len= 0x20
+ qp 2, test 3, data_len= 0x20
+ qp 3, test 3, data_len= 0x20
+ qp 4, test 3, data_len= 0x20
+ qp 5, test 3, data_len= 0x20
+ qp 6, test 3, data_len= 0x20
+ qp 7, test 3, data_len= 0x20
+ qp 0, test 4, data_len= 0x21
+ qp 1, test 4, data_len= 0x21
+ qp 2, test 4, data_len= 0x21
+ qp 3, test 4, data_len= 0x21
+ qp 4, test 4, data_len= 0x21
+ qp 5, test 4, data_len= 0x21
+ qp 6, test 4, data_len= 0x21
+ qp 7, test 4, data_len= 0x21######### total: 41  , pass: 1  , failed :0   ############

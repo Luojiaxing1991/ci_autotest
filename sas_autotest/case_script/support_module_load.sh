@@ -8,7 +8,9 @@ function module_load_uninstall()
 {
     Test_Case_Title="module_load_uninstall"
 
-    for ko in `echo ${MODULE_KO_FILE} | sed 's/|/ /g'`
+    local ko_info
+    ko_info=`echo ${MODULE_KO_FILE} | sed 's/|/ /g'`
+    for ko in ${ko_info}
     do
         insmod ${ko}
         return_num=$?
@@ -34,7 +36,7 @@ function module_load_uninstall()
         umount ${dev}
     done
 
-    for ko in `echo ${MODULE_KO_FILE} | sed 's/|/ /g'`
+    for ko in ${ko_info}
     do
         rmmod ${ko}
         return_num=$?

@@ -58,7 +58,7 @@ cq1		        name
 0                   retry_times
 60000               port_num
 128                 length
-192.168.2.120       servername
+192.168.13.120       servername
 1                   machine_type		//0：server, 1:client
 16               	sq_depth
 16					rq_depth

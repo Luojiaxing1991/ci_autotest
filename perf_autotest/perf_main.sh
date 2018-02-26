@@ -16,25 +16,36 @@ PERF_TOP_DIR=$(cd "`dirname $0`" ; pwd)
 # OUT: N/A
 function main()
 {
-    cat ${TEST_CASE_DB_FILE} | while read line
-    do
+    echo "Begin to run PERF test!"
+
+    cat ${PERF_TOP_DIR}/${TEST_CASE_DB_FILE} | while read line
+    do         
         exec_script=`echo "${line}" | awk -F '\t' '{print $6}'`
         TEST_CASE_FUNCTION_NAME=`echo "${line}" | awk -F '\t' '{print $7}'`
         TEST_CASE_FUNCTION_SWITCH=`echo "${line}" | awk -F '\t' '{print $8}'`
 
+        #Get the test title from testcase.table
+	TEST_CASE_TITLE=`echo "${line}" | awk -F '\t' '{print $5}'`
+
+        echo "CaseInfo "${TEST_CASE_TITLE}" "${exec_script}" "${TEST_CASE_FUNCTION_NAME}" "${TEST_CASE_FUNCTION_SWITCH}
+
         if [ x"${exec_script}" == x"" ]
         then
             MESSAGE="unimplemented automated test cases."
+	    echo ${MESSAGE}
         else
-            if [ ! -f "case_script/${exec_script}" ]
+            if [ ! -f "${PERF_TOP_DIR}/case_script/${exec_script}" ]
             then
                 MESSAGE="FILE\tcase_script/${exec_script} execution script does not exist, please check."
+		echo ${MESSAGE}
             else
-                source case_script/${exec_script}
+		echo "Begin to run test "${TEST_CASE_TITLE}
+                source ${PERF_TOP_DIR}/case_script/${exec_script}
             fi
         fi
-        echo -e "${line}\t${MESSAGE}" >> ${OUTPUT_TEST_DB_FILE}
+        echo -e "${line}\t${MESSAGE}" >> ${PERF_TOP_DIR}/${OUTPUT_TEST_DB_FILE}
         MESSAGE=""
+	echo "Finish run test "${TEST_CASE_TITLE}
     done
 }
 

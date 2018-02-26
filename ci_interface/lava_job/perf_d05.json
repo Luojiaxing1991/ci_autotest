@@ -1,0 +1,60 @@
+{    "actions": [
+        {
+            "command": "deploy_linaro_kernel",
+            "metadata": {
+                "boot.type": "ACPI",
+                "image.type": "kernel-ci",
+                "image.url": "http://localhost:8083/debug-plinth-ci/debug-perf-4.15.0+_+20180209",
+                "kernel.defconfig": "arm64-debug",
+                "kernel.endian": "little",
+                "kernel.tree": "plinth",
+                "kernel.version": "debug-perf-4.15.0+_+20180209",
+                "platform.fastboot": "false",
+                "test.plan": "sas roce pcie hns debug test"
+            },
+            "parameters": {
+                "bootloadertype": "ipxe",
+                "dtb": "http://localhost:8083/debug-plinth-ci/debug-perf-4.15.0+_+20180209/arm64-debug/hip07-d05.dtb",
+                "kernel": "http://localhost:8083/debug-plinth-ci/debug-perf-4.15.0+_+20180209/arm64-debug/Image",
+                "target_type": "ubuntu"
+            }
+        },
+        {
+            "command": "boot_linaro_image",
+            "parameters": {
+                "options": [
+                    "boot_cmds=boot_cmds_disc_acpi"
+                ]
+            }
+        },
+
+        {
+            "command": "lava_test_shell",
+            "parameters": {
+                "testdef_repos": [
+                    {
+                        "git-repo": "https://github.com/Luojiaxing1991/ci_autotest.git",
+			"parameters":{
+			     "Maintainer": "Luojiaxing"
+			},
+			"testdef": "perf_autotest/perf_autotest.yaml"
+                    }
+                ],
+                "timeout": 172800
+            }
+        },
+        {
+            "command": "submit_results",
+            "parameters": {
+                "server": "http://localhost:8089/RPC2/",
+                "stream": "/anonymous/plinth/"
+            }
+        }
+    ],
+    "device_type": "hip07-d05",
+    "job_name": "PERF Test",
+    "logging_level": "DEBUG",
+    "priority": "high",
+    "timeout": 172800
+}
+

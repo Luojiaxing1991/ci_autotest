@@ -1,16 +1,35 @@
 #!/bin/bash
 # 
+## Utility function
+. ${HNS_TOP_DIR}/../config/common_lib
+
+function test_case_switch()
+{
+    if [ x"${TEST_CASE_FUNCTION_SWITCH}" == x"on" ]
+    then
+        ${TEST_CASE_FUNCTION_NAME}
+        if [ x"${MESSAGE}" == x"PASS" ];then
+		lava_report "${TEST_CASE_TITLE}" pass
+	else
+		lava_report "${TEST_CASE_TITLE}" fail
+	fi
+
+    else
+        MESSAGE="BLOCK\tno automated use cases were implemented."
+    fi
+}
 
 ## Utility function
 function init_net_ip()
 {
+    echo "Begin to check net ip"
     LOCAL_IP=`ifconfig eth0 | grep 'inet addr:' | awk '{print $2}' | awk -F':' '{print $2}'`
+    echo "The local ip of eth0 is "${LOCAL_IP}
     for tmpip in "${!initial_ip[@]}"
     do
-        #echo $tmpip
         if [ "$tmpip"x = "$LOCAL_IP"x ];then
             BACK_IP=${initial_ip[$tmpip]}
-            echo $BACK_IP
+            echo "The slave ip is "$BACK_IP
         fi
     done
 }
@@ -21,44 +40,121 @@ function init_net_export()
     declare -a local_fibre_list
     declare -a remote_tp_list
     declare -a remote_fibre_list
-    local_netport_list=`ifconfig -a | grep 'eth' | awk '{print $1}'`
-    for i in $local_netport_list
+    #local_netport_list=`ifconfig -a | grep 'eth' | awk '{print $1}'`
+    #for i in $local_netport_list
+    #do
+    #    ethtool $i | grep "TP"
+    #    if [ $? = 0 ];then
+    #        local_tp_list=(${local_tp_list[*]} $i)
+    #    else
+    #        local_fibre_list=(${local_fibre_list[*]} $i)
+    #    fi
+    #done
+    echo "Begin to check eth rename info!"
+
+    declare -A eth_map
+    eth_map=(
+    ["eth0"]="eth0"
+    ["eth1"]="eth1"
+    ["eth2"]="eth2"
+    ["eth3"]="eth3"
+    )
+
+    #we update the eth rename info to eth_map,then update TP/FIBRE info
+    tmp_tp=0
+    tmp_fi=0
+    for i in ${!eth_map[*]}
     do
-        ethtool $i | grep "TP"
-        if [ $? = 0 ];then
-            local_tp_list=(${local_tp_list[*]} $i)
-        else
-            local_fibre_list=(${local_fibre_list[*]} $i)
-        fi
+         tmp=`dmesg | grep -i "renamed from "${i} -w`
+	 if [ x"${tmp}" == x"" ]
+	 then
+		 echo "The name of "${i}" is not renamed,Stay as "${eth_map[${i}]} 
+	 else
+	         tmp=`echo ${tmp%:*}`
+	         tmp=`echo ${tmp##* }`
+	         eth_map[${i}]=${tmp}
+	         echo "The name of "${i}" is renamed as "${eth_map[${i}]}
+	 fi
+
+	 #we update the TP/FIBRE info intolocal_tp/fibre_list
+         ethtool ${eth_map[${i}]} | grep "TP"
+         if [ $? = 0 ];then
+            local_tp_list=(${local_tp_list[*]} ${eth_map[${i}]})
+         else
+            local_fibre_list=(${local_fibre_list[*]} ${eth_map[${i}]})
+         fi
     done
 
+    local_tp0=${local_tp_list[1]}
+    echo "The First TP port is "${local_tp0}
     local_tp1=${local_tp_list[0]}
-    local_tp2=${local_tp_list[1]}
-    local_fibre1=${local_fibre_list[0]}
-    local_fibre2=${local_fibre_list[1]}
+    echo "The second TP port is "${local_tp1}
+    local_fibre1=${local_fibre_list[1]}
+    echo "The First FIBRE port is "${local_fibre1}
+    local_fibre2=${local_fibre_list[0]}
+    echo "The second FIBRE port is"${local_fibre2}
 
-    remote_netport_list=$(ssh root@192.168.1.181 ifconfig -a | grep 'eth' | awk '{print $1}')
-    for i in $remote_netport_list
+    #remote_netport_list=$(ssh root@192.168.1.181 ifconfig -a | grep 'eth' | awk '{print $1}')
+    #for i in $remote_netport_list
+    #do
+    #    ssh root@192.168.1.181 "ethtool $i | grep 'TP'"
+    #    if [ $? = 0 ];then
+    #        remote_tp_list=(${remote_tp_list[*]} $i)
+    #    else
+    #        remote_fibre_list=(${remote_fibre_list[*]} $i)
+    #    fi
+    #done
+    declare -A eth_map_r
+    eth_map_r=(
+    ["eth0"]="eth0"
+    ["eth1"]="eth1"
+    ["eth2"]="eth2"
+    ["eth3"]="eth3"
+    )
+
+    #we update the eth rename info to eth_map,then update TP/FIBRE info
+    tmp_tp=0
+    tmp_fi=0
+    for i in ${!eth_map_r[*]}
     do
-        ssh root@192.168.1.181 "ethtool $i | grep 'TP'"
-        if [ $? = 0 ];then
-            remote_tp_list=(${remote_tp_list[*]} $i)
-        else
-            remote_fibre_list=(${remote_fibre_list[*]} $i)
-        fi
+         tmp=`ssh root@${BACK_IP} 'dmesg | grep -i "renamed from '${i}'" -w'`
+	 if [ x"${tmp}" == x"" ]
+	 then
+		 echo "The name of remote "${i}" is not renamed,Stay as "${eth_map_r[${i}]} 
+	 else
+	         tmp=`echo ${tmp%:*}`
+	         tmp=`echo ${tmp##* }`
+	         eth_map_r[${i}]=${tmp}
+	         echo "The name of remote "${i}" is renamed as "${eth_map_r[${i}]}
+	 fi
+
+	 #we update the TP/FIBRE info intolocal_tp/fibre_list
+         tmp=`ssh root@${BACK_IP} 'ethtool '${eth_map_r[${i}]}' | grep "TP"'`
+         if [ "${tmp}"x = ""x ];then
+            remote_fibre_list=(${remote_fibre_list[*]} ${eth_map_r[${i}]})
+         else
+            remote_tp_list=(${remote_tp_list[*]} ${eth_map_r[${i}]})
+         fi
     done
 
-
+    remote_tp0=${remote_tp_list[1]}
     remote_tp1=${remote_tp_list[0]}
-    remote_tp2=${remote_tp_list[1]}
-    remote_fibre1=${remote_fibre_list[0]}
-    remote_fibre2=${remote_fibre_list[1]}
+    echo "The remote Tp port is as blow: "
+    echo ${remote_tp0}
+    echo ${remote_tp1}
+    remote_fibre1=${remote_fibre_list[1]}
+    remote_fibre2=${remote_fibre_list[0]}
+    echo "The rempte FIBRE port is as blow:"
+    echo ${remote_fibre1}
+    echo ${remote_fibre2}
+
     echo $remote_tp1 $remote_tp2 $remote_fibre1 $remote_fibre2
     #echo $local_tp_list $local_fibre_list $remote_tp_list $remote_fibre_list
 }
 
 function setTrustRelation()
 {
+    echo "Begin to Set Trust Relation!"
     rm -f ~/.ssh/*
     expect -c '
         set timeout -1
@@ -85,3 +181,11 @@ function setTrustRelation()
     return 0
 }
 
+function determine_iperf_exists()
+{
+    local_iperf_tools=$(which iperf)
+    remote_iperf_tool=$(ssh root@${BACK_IP} "which iperf")
+    if [ x"$local_iperf_tools" == x"" -o x"$remote_iperf_tool" == x"" ];then
+        return 1
+    fi
+}

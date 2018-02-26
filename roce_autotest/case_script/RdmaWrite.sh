@@ -3,34 +3,75 @@
 #Support of RDMA Write operation.
 #IN	:N/A
 #OUT:N/A
-function RdmaWrite()
+function RdmaWrite_MTU()
 {
-	./${TEST_CASE_PATH}/roce-test -m 2 -s 8 -e 10 -r -f ${TEST_CASE_PATH}/test/test_case_list_server > ${FUNCNAME}_server.log &
-	ClientFlag=`ssh root@${BACK_IP} "cd ${CASEPATH}/; ./roce-test -m 2 -s 8 -e 10 -r -f test_case_list_client > ../${FUNCNAME}_client.log; cd ../; grep -c \"\-test case success\" ${FUNCNAME}_client.log " `
+	pushd ${ROCE_CASE_DIR}
+
+	./roce-test -m 2 -s 8 -e 8 -r -f test/test_case_list_server > ${FUNCNAME}_server.log &
+	ClientFlag=`ssh root@${BACK_IP} "cd ${CASEPATH}/; ./roce-test -m 2 -s 8 -e 8 -r -f test_case_list_client > ../${FUNCNAME}_client.log; cd ../; grep -c \"\-test case success\" ${FUNCNAME}_client.log " `
 
 	wait
 	ServerFlag=`grep -c "\-test case success" ${FUNCNAME}_server.log`
 
-	if [ $ServerFlag == 3 -a $ClientFlag == 3 ]
+	if [ $ServerFlag == 1 -a $ClientFlag == 1 ]
 	then
-		writePass "Rdma write  success."
+		MESSAGE="PASS"
 		rm ${FUNCNAME}_server.log log_00*
-		ssh root@${BACK_IP} "rm ${FUNCNAME}_client.log log_00*"
+		ssh root@${BACK_IP} "rm ${FUNCNAME}_client.log ${CASEPATH}/log_00*"
 	else
-		writeFail "Rdma write fail, please check!!!"
+		MESSAGE="FAIL\tVerify RDMA write with MTU length failed, please check!"
 	fi
 
-	return 0
+	popd
+}
+
+function RdmaWrite_Gt_MTU()
+{
+	pushd ${ROCE_CASE_DIR}
+
+	./roce-test -m 2 -s 9 -e 9 -r -f test/test_case_list_server > ${FUNCNAME}_server.log &
+	ClientFlag=`ssh root@${BACK_IP} "cd ${CASEPATH}/; ./roce-test -m 2 -s 9 -e 9 -r -f test_case_list_client > ../${FUNCNAME}_client.log; cd ../; grep -c \"\-test case success\" ${FUNCNAME}_client.log " `
+
+	wait
+	ServerFlag=`grep -c "\-test case success" ${FUNCNAME}_server.log`
+
+	if [ $ServerFlag == 1 -a $ClientFlag == 1 ]
+	then
+		MESSAGE="PASS"
+		rm ${FUNCNAME}_server.log log_00*
+		ssh root@${BACK_IP} "rm ${FUNCNAME}_client.log ${CASEPATH}/log_00*"
+	else
+		MESSAGE="FAIL\tVerify RDMA write with the length which is greater than MTU and less than 2MTU failed, please check!"
+	fi
+
+	popd
+}
+
+function RdmaWrite_Gt_2MTU()
+{
+	pushd ${ROCE_CASE_DIR}
+
+	./roce-test -m 2 -s 10 -e 10 -r -f test/test_case_list_server > ${FUNCNAME}_server.log &
+	ClientFlag=`ssh root@${BACK_IP} "cd ${CASEPATH}/; ./roce-test -m 2 -s 10 -e 10 -r -f test_case_list_client > ../${FUNCNAME}_client.log; cd ../; grep -c \"\-test case success\" ${FUNCNAME}_client.log " `
+
+	wait
+	ServerFlag=`grep -c "\-test case success" ${FUNCNAME}_server.log`
+
+	if [ $ServerFlag == 1 -a $ClientFlag == 1 ]
+	then
+		MESSAGE="PASS"
+		rm ${FUNCNAME}_server.log log_00*
+		ssh root@${BACK_IP} "rm ${FUNCNAME}_client.log ${CASEPATH}/log_00*"
+	else
+		MESSAGE="FAIL\tVerify RDMA write with the length which is greater than 2MTU and less than 3MTU failed, please check!"
+	fi
+
+	popd
 }
 
 function main()
 {
-	JIRA_ID="PV-337"
-	Designed_Requirement_ID="R.ROCE.F005.A"
-	Test_Case_ID="ST-ROCE-53/54/55"
-	Test_Item="Support of RDMA Write operation"
-	Test_Case_Title=""
-
-	RdmaWrite
+	# call the implementation of the automation use cases
+    test_case_function_run
 }
 main
