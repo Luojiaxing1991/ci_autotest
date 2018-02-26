@@ -1,0 +1,264 @@
+--------------------流程---------------------------------
+
+        C                       S
+    CONNECT                 LISTEN    
+    REG MR0                 REG MR0  
+    POST RECV             	POST RECV
+    POLL RCQ                
+        |                    ...
+        |                   POST SEND
+        |                   POLL SCQ
+        |                   POLL RCQ
+       ...                     |
+    POST SEND                  |
+    POLL SCQ                   |           
+***************初始化结束，两端各有一个接收sge为mr0的rqe空闲******************
+    POLL RCQ                POST SEND(send mr info)
+        |                   POLL SCQ
+        |                   
+    (save remote mr info)       
+    POST SEND(write)        
+    POLL SCQ
+***************业务测试结束，进行关闭握手******************
+    POST SEND(send close)   POLL RCQ
+    POLL SCQ
+                FINISH
+--------------------流程----------------------------------
+
+
+
+---test_case_start---                   //该行不能动，表示test case参数开始
+5               test_id
+qp_depth        name
+1               num
+0               new_thread
+-1              conn_index			            //可变参数列表
+
+/*------------------------------------------------------------------
+-- ROCE_KTEST_OPCODE_STOP               0
+-- ROCE_KTEST_OPCODE_CONNECT            1
+-- ROCE_KTEST_OPCODE_LISTEN             2
+-- ROCE_KTEST_OPCODE_MR                 3
+-- ROCE_KTEST_OPCODE_SEND               4
+-- ROCE_KTEST_OPCODE_RECV               5
+-- ROCE_KTEST_OPCODE_POLL               6
+-- ROCE_KTEST_OPCODE_ARM                7
+-- ROCE_TEST_OPCODE_RELEASE_CONN        8
+-- ROCE_TEST_OPCODE_DEREG_MR            9
+-- ROCE_TEST_OPCODE_MODIFY_ARG          10
+---------------------------------------------------------------*/
+//info 0 start, 以下开始命令参数，同一条命令参数之间不可加空行，顺序不可乱，参数内不可用空格
+---test_cmd_start---                   		//该行不能动，表示test case参数开始
+1                   opcode			//ROCE_KTEST_OPCODE_CONNECT
+1                   repeat_times
+1                   repeat_cmd_num
+1                   conn_index_opcode           //0: nothing, 1:set, 2:add(可以加负数)
+0                   conn_index_value            //
+5                   expect_res
+0                   retry_times
+60000               port_num
+128                 length
+192.168.2.120       servername
+1                   machine_type		//0：server, 1:client
+2               	sq_depth
+2               	rq_depth
+2                   sq_sge_num
+2                   rq_sge_num
+8                   ord
+8                   ird
+32                  inline_data_len
+0                   ib_sig_type                 //0: IB_SIGNAL_ALL_WR, 1: IB_SIGNAL_REQ_WR
+1                   cq_type                     //0: INDEPENDENT_CQ, 1: COMMON_CQ
+0                   cq_notify_flag		//0：disable, 1;enable
+0                   flow_ctrl_flag		//0：disable, 1;enable
+0                   reg_mem_type		//0: GET_DMA_MR, 1:REG_USR_MR, 2:REG_MR_BUT
+0                   use_rdma_cm                 //0: socket, 1: cm
+0                   psn
+1                   gid_index
+1024                mtu
+0                   sl
+2                   ib_port
+7                   res_flag
+1000000             timeout                     //ms
+
+
+
+*****************************************recv mr申请*************************************
+---test_cmd_start---                   		//该行不能动，表示test case参数开始
+3                   opcode			//REG MR
+1                   repeat_times
+1                   repeat_cmd_num
+0                   conn_index_opcode           //0: nothing, 1:set, 2:add(可以加负数)
+0                   conn_index_value            //
+0                   expect_res
+0                   retry_times
+0                   mr_index                    //mr序号
+128                 length                      //mr length
+1                   reg_mem_type;               //0: GET_DMA_MR, 1:REG_USR_MR, 2:REG_MR_BUT
+0                   init_value;
+7                   mr_access                   //具体见ib_access_flags
+
+---test_cmd_start---                   		//该行不能动，表示test case参数开始
+3                   opcode			//REG MR
+1					repeat_times
+1                   repeat_cmd_num
+0x10                conn_index_opcode           //0: nothing, 1:set, 2:add(可以加负数)
+0                   conn_index_value            //
+0                   expect_res
+0                   retry_times
+1                   mr_index                    //mr序号
+128                 length                      //mr length
+1                   reg_mem_type;               //0: GET_DMA_MR, 1:REG_USR_MR, 2:REG_MR_BUT
+0                   init_value;
+7                   mr_access                   //具体见ib_access_flags
+
+
+*****************************************send mr申请*************************************
+---test_cmd_start---                   		//该行不能动，表示test case参数开始
+3                   opcode			//REG MR
+2					repeat_times
+1                   repeat_cmd_num
+0x10                conn_index_opcode           //0: nothing, 1:set, 2:add(可以加负数)
+0                   conn_index_value            //
+0                   expect_res
+0                   retry_times
+1                   mr_index                    //mr序号
+128                 length                      //mr length
+1                   reg_mem_type;               //0: GET_DMA_MR, 1:REG_USR_MR, 2:REG_MR_BUT
+0x12345678          init_value;
+7                   mr_access                   //具体见ib_access_flags
+
+
+*****************************************第一次握手*************************************
+
+---test_cmd_start---                   		//该行不能动，表示test case参数开始
+4                   opcode			//ROCE_KTEST_OPCODE_SEND
+1                   repeat_times
+1                   repeat_cmd_num
+1                   conn_index_opcode           //0: nothing, 1:set, 2:add(可以加负数)
+0                   conn_index_value            //
+0                   expect_res
+0                   retry_times
+2                   ib_opcode
+2                   send_flags
+1                   sge_num
+0                   local_sge0_mr_index
+-1                  local_sge1_mr_index
+-1                  remote_sge0_mr_index
+-1                  remote_sge1_mr_index
+0x1234              imm_data
+
+
+---test_cmd_start---                   		//该行不能动，表示test case参数开始
+6                   opcode			//ROCE_KTEST_OPCODE_POLL
+1                   repeat_times
+1                   repeat_cmd_num
+1                   conn_index_opcode           //0: nothing, 1:set, 2:add(可以加负数)
+0                   conn_index_value            //
+2                   expect_res
+0                   retry_times
+0                   cq_flag
+2                   poll_num
+5000	            wait_time
+0                   check_flag
+-1                  imme_value
+-1                  mr_index
+-1                  mr_value
+-1                  mr_index
+-1                  mr_value
+
+
+*****************************************填充SQ,RQ*************************************
+---test_cmd_start---                   		//该行不能动，表示test case参数开始
+5                   opcode			//ROCE_KTEST_OPCODE_RECV
+1                   repeat_times
+1                   repeat_cmd_num
+0                   conn_index_opcode           //local_sge0=0
+0                   conn_index_value            //
+0                   expect_res
+0                   retry_times
+1                   sge_num
+0                   local_sge0_mr_index
+-1                  local_sge1_mr_index
+
+
+---test_cmd_start---                   		//该行不能动，表示test case参数开始
+5                   opcode			//ROCE_KTEST_OPCODE_RECV
+1					repeat_times
+1                   repeat_cmd_num
+0x20                conn_index_opcode           //local_sge0=1~16383
+0                   conn_index_value            //
+0                   expect_res
+0                   retry_times
+1                   sge_num
+1                   local_sge0_mr_index
+-1                  local_sge1_mr_index
+
+
+---test_cmd_start---                   		//该行不能动，表示test case参数开始
+4                   opcode			//ROCE_KTEST_OPCODE_SEND
+2					repeat_times
+1                   repeat_cmd_num
+0x20                conn_index_opcode           //local_sge0=16384~32767
+0                   conn_index_value            //
+0                   expect_res
+0                   retry_times
+2                   ib_opcode
+2                   send_flags
+1                   sge_num
+1                   local_sge0_mr_index
+-1                  local_sge1_mr_index
+-1                  remote_sge0_mr_index
+-1                  remote_sge1_mr_index
+0x1234              imm_data
+
+*****************************************等待SQ发完，RQ收完，CQ填满*************************************
+---test_cmd_start---                   		//该行不能动，表示test case参数开始
+11                  opcode			//ROCE_KTEST_OPCODE_WAIT
+5					repeat_times
+1                   repeat_cmd_num
+0                   conn_index_opcode           //0: nothing, 1:set, 2:add(可以加负数)
+0                   conn_index_value            //
+0                   expect_res
+0                   retry_times
+
+
+***************************************** 检查CQ *************************************
+---test_cmd_start---                   		//该行不能动，表示test case参数开始
+6                   opcode			//ROCE_KTEST_OPCODE_POLL
+1                   repeat_times
+1                   repeat_cmd_num
+1                   conn_index_opcode           //0: nothing, 1:set, 2:add(可以加负数)
+0                   conn_index_value            //
+1                   expect_res
+0                   retry_times
+0                   cq_flag
+1                   poll_num
+5000	            wait_time
+2                   check_flag
+-1                  imme_value
+0                   mr_index
+0x12345678          mr_value
+-1                  mr_index
+-1                  mr_value
+
+---test_cmd_start---                   		//该行不能动，表示test case参数开始
+6                   opcode			//ROCE_KTEST_OPCODE_POLL
+3               	repeat_times
+1                   repeat_cmd_num
+0x100               conn_index_opcode           //0: nothing, 1:set, 2:add(可以加负数)
+0                   conn_index_value            //
+1                   expect_res
+0                   retry_times
+0                   cq_flag
+1                   poll_num
+5000	            wait_time
+2                   check_flag
+-1                  imme_value
+1                   mr_index
+0x12345678          mr_value
+-1                  mr_index
+-1                  mr_value
+
+
+
