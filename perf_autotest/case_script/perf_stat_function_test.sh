@@ -7,8 +7,8 @@
 function fun_perf_list()
 {
   :> ${PERF_TOP_DIR}/data/log/pmu_event.txt
+  :> ${PERF_TOP_DIR}/data/log/test_flag.txt
   trap - INT
-  mflag=0
   perf list | grep $1| awk -F'[ \t]+' '{print $2}' > ${PERF_TOP_DIR}/data/log/pmu_event.txt
   msum=$(cat ${PERF_TOP_DIR}/data/log/pmu_event.txt | grep $1 | wc -l) 
   if [[ $msum -le 0 ]];then
@@ -20,20 +20,20 @@ function fun_perf_list()
       perf stat -a -e $myline -I 200 sleep 10s >& ${PERF_TOP_DIR}/data/log/perf_statu.log
       cat ${PERF_TOP_DIR}/data/log/perf_statu.log | awk -F '[ \t]+'  '{print $3}' | sed 's/counts//g' > ${PERF_TOP_DIR}/data/log/counts.txt
       sleep 1
-      if [ `cat ${PERF_TOP_DIR}/data/log/counts.txt | grep -i "not" | wc -l` -le -1 ];then 
-        mflag=1
+      if [ `cat ${PERF_TOP_DIR}/data/log/counts.txt | grep -i "not" | wc -l` -le 0 ];then 
+	echo 1 >> ${PERF_TOP_DIR}/data/log/test_flag.txt
 	echo pass
+	# break
       else
-        mflag=0
-        echo fail	
+	echo 0 >> ${PERF_TOP_DIR}/data/log/test_flag.txt
+        echo fail
+	MESSAGE="Fail\t $1 Event Run Error!"	
         break
       fi
     done
-    echo mflag $mflag
-    if [ $mflag -eq 1 ];then
+    if [ `cat ${PERF_TOP_DIR}/data/log/test_flag.txt | grep "0" | wc -l` -le 0 ];then
       MESSAGE="Pass"
-    else
-      MESSAGE="Fail\t $1 Event Run Error!"
+      echo Pass
     fi
   fi
 }
