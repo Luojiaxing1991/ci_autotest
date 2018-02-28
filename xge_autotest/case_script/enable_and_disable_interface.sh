@@ -46,7 +46,7 @@ function ge_continued_enable_and_disable_interface()
     i=1
     Test_Case_Title="Continued_enable_and_disable_interface"
     echo "Begin to Run "${Test_Case_Title}
-
+    MESSAGE="PASS"
     while(($i<=10))
     do
         echo "begin cycle "$i
@@ -57,6 +57,8 @@ function ge_continued_enable_and_disable_interface()
         cat ${HNS_TOP_DIR}/data/log/continued_enable_and_disable_interface.txt | grep "received, 0% packet loss" >/dev/null
         if [ $? -eq 0 ];then
            enableok=1
+        else
+           enableok=0
         fi
         ssh root@$BACK_IP "ifconfig ${remote_tp1} down"
         ping ${remote_tp1_ip} -c 5 > ${HNS_TOP_DIR}/data/log/continued_enable_and_disable_interface.txt &
@@ -64,6 +66,8 @@ function ge_continued_enable_and_disable_interface()
         cat ${HNS_TOP_DIR}/data/log/continued_enable_and_disable_interface.txt | grep "received, 0% packet loss" >/dev/null
         if [ $? -eq 1 ];then
            disableok=1
+        else
+           disableok=0
         fi
         if [ $enableok -eq 0 -o $disableok -eq 0 ];then
             MESSAGE="FAIL\tNet export many times up/down , Ping packet failure"
@@ -72,17 +76,14 @@ function ge_continued_enable_and_disable_interface()
         echo "${MESSAGE}"
         i=$(($i+1))
     done
-    MESSAGE="PASS"
-    if [ $enableok -eq 1 -a $disableok -eq 1 ];then
-        writePass
-    else
-        writeFail
-    fi
+    #MESSAGE="PASS"
 }
 
 function ge_flow_enable_and_disable_interface()
 {
     Test_Case_Title="ge_flow_enable_and_disable_interface"
+    enableok=0
+    disable0k=0
     ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
     ssh root@$BACK_IP "ifconfig ${remote_tp1} up; ifconfig ${remote_tp1} ${remote_tp1_ip}; sleep 5"
     ping ${remote_tp1_ip} > ${HNS_TOP_DIR}/data/log/flow_enable_and_disable_interface.txt &
@@ -116,6 +117,8 @@ function ge_flow_continued_enable_and_disable_interface()
     ssh root@$BACK_IP 'ifconfig ${remote_tp1} up; ifconfig ${remote_tp1} ${remote_tp1_ip}; sleep 5;'
     ping ${remote_tp1_ip} > ${HNS_TOP_DIR}/data/log/flow_continued_enable_and_disable_interface.txt &
     i=1
+    enableok=0
+    disable0k=0
     while(($i<=10))
     do
         ssh root@$BACK_IP 'ifconfig ${remote_tp1} up;sleep 2'
@@ -153,6 +156,9 @@ function xge_enable_and_disable_interface()
     ssh root@${BACK_IP} "ifconfig ${remote_fibre1} up;ifconfig ${remote_fibre1} ${remote_fibre1_ip}; sleep 5"
     ping ${remote_fibre1_ip} -c 5 > ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt &
     sleep 10
+    enableok=0
+    disable0k=0
+
     cat ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt | grep "received, 0% packet loss" >/dev/null
     if [ $? -eq 0 ];then
        enableok=1
@@ -175,6 +181,9 @@ function xge_continued_enable_and_disable_interface()
 {
     Test_Case_Title="xge_continued_enable_and_disable_interface"
     i=1
+    enableok=0
+    disable0k=0
+
     while(($i<=10))
     do
         ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
@@ -204,6 +213,9 @@ function xge_continued_enable_and_disable_interface()
 function xge_flow_enable_and_disable_interface()
 {
     Test_Case_Title="xge_flow_enable_and_disable_interface"
+    enableok=0
+    disable0k=0
+
     ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
     ssh root@$BACK_IP "ifconfig ${remote_fibre1} up; ifconfig ${remote_fibre1} ${remote_fibre1_ip}; sleep 5"
     ping ${remote_fibre1_ip} > ${HNS_TOP_DIR}/data/log/flow_enable_and_disable_interface.txt &
@@ -233,6 +245,9 @@ function xge_flow_enable_and_disable_interface()
 function xge_flow_continued_enable_and_disable_interface()
 {
     Test_Case_Title="xge_flow_continued_enable_and_disable_interface"
+    enableok=0
+    disable0k=0
+
     ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
     ssh root@$BACK_IP 'ifconfig ${remote_fibre1} up; ifconfig ${remote_fibre1} ${remote_fibre1_ip}; sleep 5;'
     ping ${remote_fibre1_ip} > ${HNS_TOP_DIR}/data/log/flow_continued_enable_and_disable_interface.txt &

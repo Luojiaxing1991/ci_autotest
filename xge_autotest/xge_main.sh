@@ -69,6 +69,9 @@ setTrustRelation
 #ifconfig net export
 init_net_export
 
+#performance init
+perf_init
+
 main
 
 # clean exit so lava-test can trust the results
