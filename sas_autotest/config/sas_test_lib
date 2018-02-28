@@ -45,9 +45,15 @@ function writeLogHeader
 #  OUT: N/A
 function judgment_network_env()
 {
+    SYS_TYPE=`cat /etc/hostname`
     info=`${DEVMEM} ${CURR_ENV_REG_ADDR} w`
-    [ x"${info}" == x"0x00000000" ] && return 0
-
+    if [ x"${SYS_TYPE}" = x"ubuntu" ]
+    then
+        value=`echo ${info} | sed -n '$p' | awk -F ' ' '{print $NF}'`
+        [ x"${value}" == x"0x0" ] && return 0
+    else
+        [ x"${info}" == x"0x00000000" ] && return 0
+    fi
     return 1
 }
 
@@ -56,34 +62,19 @@ function judgment_network_env()
 #  OUT: N/A
 function get_all_disk_part()
 {
-    echo "Begin to get_all_disk_part"
+    local assert=""
 
-    maindisk=`mount | grep -w 'on /'`
-    maindisk=`echo ${maindisk%% *}`
+    mout_info=`mount | grep "/dev/[a-z]d[a-z][1-9]" | awk -F ' ' '{print $1}'`
+    dev_info=`fdisk -l | grep -o "/dev/[a-z]d[a-z][1-9]"`
 
-    echo "The system disk is "${maindisk}
-
-    for name in `fdisk -l | grep -o "/dev/[a-z]d[a-z][1-9]"`
+    for name in ${dev_info}
     do
-        for dev_name in `mount | grep "/dev/[a-z]d[a-z][1-9]" | awk -F ' ' '{print $1}'`
-        do
-            if [ x"$name" == x"${dev_name}" ]
-            then
-                continue
-            fi
-        done
-        if [ $name != $maindisk ]
+        assert=`echo ${mout_info} | grep ${name}`
+        if [ x"${assert}" == x"" ]
         then
-            tmp=`fdisk -l | grep $name`
-            tmp=`echo $tmp | grep "Linux filesystem"`
-            if [ x"${tmp}" == x"" ]
-            then
-                echo $name" type is not Linux filesystem,skip."
-            else
-                ALL_DISK_PART_NAME[${#ALL_DISK_PART_NAME[*]}]=$name
-                echo $name
-            fi
+            ALL_DISK_PART_NAME[${#ALL_DISK_PART_NAME[*]}]=$name
         fi
+        assert=""
     done
 }
 
@@ -93,14 +84,14 @@ function get_all_disk_part()
 function mount_disk()
 {
     disk_name=$1
-    info=`mount | grep -w "^${disk_name}"`
-    [ x"${info}" != x"" ] && umount ${disk_name}
+    mount_info=`mount | grep -w "^${disk_name}"`
+    [ x"${mount_info}" != x"" ] && umount ${disk_name}
 
     echo "y" | mkfs.ext4 ${disk_name} 1>/dev/null
     mount -t ext4 ${disk_name} /mnt 1>/dev/null
     [ $? -ne 0 ] && return 1
 
-    info=`mount | grep -w "^${disk_name}"`
+    mount_info=`mount | grep -w "^${disk_name}"`
     [ "${info}" = x"" ] && return 1
     return 0
 }
@@ -183,14 +174,22 @@ function phy_ops()
 function change_sas_phy_file()
 {
     dir_info=`ls ${PHY_FILE_PATH}`
+    mout_info=`mount | grep "/dev/[a-z]d[a-z][1-9]" | awk -F ' ' '{print $1}'`
+    deive_letter_path="device/port/end_device-*/target0*/0:0*/block"
 
     for dir in ${dir_info}
     do
-        str=`cat ${PHY_FILE_PATH}/${dir}/target_port_protocols`
-        num=`echo "${dir}" | awk -F":" '{print $NF}'`
+        str=`cat ${PHY_FILE_PATH}/${dir}/device_type`
+        num=`echo "${dir}" | awk -F ":" '{print $NF}'`
 
-        if [ x"${str}" != x"none" ] && [ ${num} -le ${EFFECTIVE_PHY_NUM} ]
+        if [ x"${str}" == x"end device" ] && [ ${num} -le ${EFFECTIVE_PHY_NUM} ]
         then
+            if [ -d ${PHY_FILE_PATH}/${dir}/${deive_letter_path} ]
+            then
+                drive_letter=`ls ${PHY_FILE_PATH}/${dir}/${deive_letter_path}`
+                info=`echo ${mout_info} | grep ${drive_letter}`
+                [ x"${info}" != x"" ] && continue
+            fi
             echo $1 > ${PHY_FILE_PATH}/${dir}/$2
             sleep 2
         fi
