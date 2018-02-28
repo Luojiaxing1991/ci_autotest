@@ -9,6 +9,8 @@ function ge_set_mtu_value()
     Test_Case_Title="ge_set_mtu_value"
     echo ${Test_Case_Title}
     valuelist="68 1500 1501 9706"
+    MESSAGE="PASS"
+
     for value in $valuelist
     do
         echo $value
@@ -19,7 +21,7 @@ function ge_set_mtu_value()
 	    echo ${MESSAGE}
         fi
     done
-    MESSAGE="PASS"
+    #MESSAGE="PASS"
     echo ${MESSAGE}
 }
 
@@ -27,6 +29,8 @@ function ge_set_fail_mtu_value()
 {
     Test_Case_Title="ge_set_fail_mtu_value"
     echo ${Test_Case_Title}
+    MESSAGE="PASS"
+
     valuelist="67 9707"
     for value in $valuelist
     do
@@ -37,7 +41,7 @@ function ge_set_fail_mtu_value()
 	    echo ${MESSAGE}
         fi
     done
-    MESSAGE="PASS" 
+    #MESSAGE="PASS" 
     echo $MESSAGE   
 }
 
@@ -45,6 +49,8 @@ function ge_iperf_set_mtu_value()
 {
     Test_Case_Title="ge_iperf_set_mtu_value"
     echo ${Test_Case_Title}
+    #MESSAGE="PASS"
+
     ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
     #??iperf????
     determine_iperf_exists
@@ -53,6 +59,7 @@ function ge_iperf_set_mtu_value()
 	echo ${MESSAGE}
         return 1
     fi
+    MESSAGE="PASS"
     ssh root@${BACK_IP} "ifconfig ${remote_tp1} up; ifconfig ${remote_tp1} ${remote_tp1_ip}; sleep 5;iperf -s >/dev/null 2>&1 &"
     iperf -c ${remote_tp1_ip} -t 3600 -i 2 -P 3 > ${HNS_TOP_DIR}/data/log/iperf_set_mtu_value.txt &
     valuelist="68 1500 9706"
@@ -73,7 +80,7 @@ function ge_iperf_set_mtu_value()
     done
     killall iperf
     ssh root@${BACK_IP} "killall iperf"
-    MESSAGE="PASS"
+    #MESSAGE="PASS"
     echo ${MESSAGE}
 }
 
@@ -82,6 +89,8 @@ function ge_iperf_set_mtu_value()
 function xge_set_mtu_value()
 {
     Test_Case_Title="xge_set_mtu_value"
+    MESSAGE="PASS"
+
     echo ${Test_Case_Title}
     valuelist="68 1500 1501 9706"
     for value in $valuelist
@@ -94,7 +103,7 @@ function xge_set_mtu_value()
 	    echo ${MESSAGE}
         fi
     done
-    MESSAGE="PASS"
+    #MESSAGE="PASS"
     echo ${MESSAGE}
 }
 
@@ -102,6 +111,8 @@ function xge_set_fail_mtu_value()
 {
     Test_Case_Title="xge_set_fail_mtu_value"
     valuelist="67 9707"
+    MESSAGE="PASS"
+
     for value in $valuelist
     do
         #echo $value
@@ -110,14 +121,15 @@ function xge_set_fail_mtu_value()
             MESSAGE="FAIL\t MTU Incoming error parameters set fail "
         fi
     done
-    MESSAGE="PASS"    
+    #MESSAGE="PASS"    
 }
 
 function xge_iperf_set_mtu_value()
 {
     Test_Case_Title="xge_iperf_set_mtu_value"
     ifconfig ${local_fibre1} up; ifconfig ${local_fibre1} ${local_fibre1_ip}
-    
+    MESSAGE="PASS"
+
     #??iperf????
     determine_iperf_exists
     if [ $? -eq 1 ];then
@@ -145,7 +157,7 @@ function xge_iperf_set_mtu_value()
     done
     killall iperf
     ssh root@${BACK_IP} "killall iperf"
-    MESSAGE="PASS"
+    #MESSAGE="PASS"
 }
 
 function main()
