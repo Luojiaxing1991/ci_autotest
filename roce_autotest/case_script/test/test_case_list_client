@@ -25,3 +25,4 @@ test_case_023      mr-read				client_socket2_80						$
 test_case_024      read-mr				client_socket2_81						$
 test_case_025      write-mr				client_socket2_82						$
 test_case_026      notify				client_socket2_test_notify				$
+test_case_027      qp_depth2            client_socket2_qp_depth2                $
