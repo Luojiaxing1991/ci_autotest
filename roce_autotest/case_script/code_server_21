@@ -1,0 +1,45 @@
+port=18515,servername:(null)!
+
+ [prtest_init_connection : 341] !
+ [prtest_init_connection : 350] SERVER connection start!
+ [main : 20849] prtest_init_connection ok!
+ [main : 20857] pr_socket : name (null), port 18515, machine 0, sockfd 4
+ [main : 20868] prtest_find_prdev ok!
+ [main : 20885] ibv_open_device ok!
+ [ROCEE_set_tsp_bp : 7688] mmap ok, mappedAddr = 0xffff9a64c000
+ [set_tsp_bp_enable : 7533] RoceBpRegAddr = 0xffff9a653ad4
+ [set_tsp_bp_enable : 7537] RoceBpReg = 0x0
+ [set_tsp_bp_enable : 7544] RoceBpReg = 0x10000000, reg_val = 0x0
+ [set_tsp_bp_enable : 7533] RoceBpRegAddr = 0xffff9a653ad4
+ [set_tsp_bp_enable : 7537] RoceBpReg = 0x0
+ [set_tsp_bp_enable : 7551] RoceBpReg = 0x0, reg_val = 0x0
+ [set_tsp_bp_enable : 7533] RoceBpRegAddr = 0xffff9a653ad4
+ [set_tsp_bp_enable : 7537] RoceBpReg = 0x0
+ [set_tsp_bp_enable : 7544] RoceBpReg = 0x10000000, reg_val = 0x0
+ [set_tsp_bp_enable : 7533] RoceBpRegAddr = 0xffff9a653ad4
+ [set_tsp_bp_enable : 7537] RoceBpReg = 0x0
+ [set_tsp_bp_enable : 7551] RoceBpReg = 0x0, reg_val = 0x0
+ [set_tsp_bp_enable : 7533] RoceBpRegAddr = 0xffff9a653ad4
+ [set_tsp_bp_enable : 7537] RoceBpReg = 0x0
+ [set_tsp_bp_enable : 7544] RoceBpReg = 0x10000000, reg_val = 0x0
+ [set_tsp_bp_enable : 7533] RoceBpRegAddr = 0xffff9a653ad4
+ [set_tsp_bp_enable : 7537] RoceBpReg = 0x0
+ [set_tsp_bp_enable : 7551] RoceBpReg = 0x0, reg_val = 0x0
+ [set_tsp_bp_enable : 7533] RoceBpRegAddr = 0xffff9a653ad4
+ [set_tsp_bp_enable : 7537] RoceBpReg = 0x0
+ [set_tsp_bp_enable : 7544] RoceBpReg = 0x10000000, reg_val = 0x0
+ [set_tsp_bp_enable : 7533] RoceBpRegAddr = 0xffff9a653ad4
+ [set_tsp_bp_enable : 7537] RoceBpReg = 0x0
+ [set_tsp_bp_enable : 7551] RoceBpReg = 0x0, reg_val = 0x0
+ [set_tsp_bp_enable : 7533] RoceBpRegAddr = 0xffff9a653ad4
+ [set_tsp_bp_enable : 7537] RoceBpReg = 0x0
+ [set_tsp_bp_enable : 7544] RoceBpReg = 0x10000000, reg_val = 0x0
+ [set_tsp_bp_enable : 7533] RoceBpRegAddr = 0xffff9a653ad4
+ [set_tsp_bp_enable : 7537] RoceBpReg = 0x0
+ [set_tsp_bp_enable : 7551] RoceBpReg = 0x0, reg_val = 0x0
+ [set_tsp_bp_enable : 7533] RoceBpRegAddr = 0xffff9a653ad4
+ [set_tsp_bp_enable : 7537] RoceBpReg = 0x0
+ [set_tsp_bp_enable : 7544] RoceBpReg = 0x10000000, reg_val = 0x0
+ [set_tsp_bp_enable : 7533] RoceBpRegAddr = 0xffff9a653ad4
+ [set_tsp_bp_enable : 7537] RoceBpReg = 0x0
+ [set_tsp_bp_enable : 7551] RoceBpReg = 0x0, reg_val = 0x0######### total: 41  , pass: 1  , failed :0   ############

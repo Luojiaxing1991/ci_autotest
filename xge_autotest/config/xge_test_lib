@@ -189,3 +189,16 @@ function determine_iperf_exists()
         return 1
     fi
 }
+
+function perf_init()
+{
+    Ipv6Single=0
+    Ipv6Dual=0
+    Ipv4Single=0
+    Ipv4Dual=0
+    NetperfSingle=0
+    NetperfDual=0
+    QperfTest=0
+    killall iperf netperf qperf
+    ssh root@$BACK_IP "killall iperf netperf qperf"
+}

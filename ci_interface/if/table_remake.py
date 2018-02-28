@@ -40,7 +40,7 @@ linelist=[]
 for line in f:
     str=line.replace('\t','@!').rstrip()
     str=str + " "
-    str=str.replace('on@!','off@!').rstrip()
+    str=str.replace('@!on@!','@!off@!').rstrip()
     str=str.replace('@!','\t').rstrip()
     str=str + '\n'
     linelist.append(str)

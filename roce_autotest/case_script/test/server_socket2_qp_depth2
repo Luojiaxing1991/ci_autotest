@@ -41,7 +41,7 @@ qp_depth        name
 0                   retry_times
 60000               port_num
 128                 length
-192.168.2.120       servername
+192.168.13.120       servername
 0                   machine_type		//0£ºserver, 1:client
 2					sq_depth
 2					rq_depth

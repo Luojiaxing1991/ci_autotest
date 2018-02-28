@@ -1,0 +1,8 @@
+start_id=18, end_id=18 
+---------test_case_018: mr2gdma start--------
+test file name: test/server_socket2_73
+hr_qp->port_num= 0x2
+----------------------------------------
+test 0(read) res is 0 
+//--test case success!--//
+clean test case success!

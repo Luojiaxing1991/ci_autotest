@@ -1,0 +1,31 @@
+port=18515,servername:(null)!
+
+ [prtest_init_connection : 341] !
+ [prtest_init_connection : 350] SERVER connection start!
+ [main : 20849] prtest_init_connection ok!
+ [main : 20857] pr_socket : name (null), port 18515, machine 0, sockfd 4
+ [main : 20868] prtest_find_prdev ok!
+ [main : 20885] ibv_open_device ok! Link type is Ethernet
+ Mtu : 1024
+
+ lkey = rkey = 0x700
+ lkey = rkey = 0x800hr_qp->port_num= 0x2
+config->gid_index = 0
+
+ [prtest_set_up_connection_n : 298] my_dest->vaddr = 0xffff8c76a010
+ [prtest_set_up_connection_n : 299] my_dest->rkey  = 0x700
+ [prtest_set_up_connection_n : 300] my_dest->psn   = 0xb3332b
+dest lid      out_reads qpn        psn         rkey     vaddr
+my : 0        16        157      0xb3332b    0x700      0xffff8c76a010
+rem: 0        16        156      0x63d25f    0x500      0xffffa4f12010
+ my_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:159:00:01
+rem_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:138:00:01
+
+ data_len= 0xb4567, test_rad[0] = 0x0
+ [prtest_run_send_cmp-4272]ne = 0x1 ,wc_status = 0x0, wc.opcode = 0x0
+ data_len= 0xb23c6, test_rad[1] = 0x1
+ [prtest_run_send_imd_cmp-4398]ne = 0x1 ,wc_status = 0x0, wc.opcode = 0x80
+ [prtest_run_send_imd_cmp-4445]ne = 0x1 ,wc_status = 0x0, wc.opcode = 0x0
+ data_len= 0xc9869, test_rad[2] = 0x2
+ data_len= 0x34873, test_rad[3] = 0x3
+ data_len= 0xdc51, test_rad[4] = 0x4######### total: 41  , pass: 1  , failed :0   ############

@@ -51,7 +51,7 @@ PV-342	R.ROCE.F014.A	ST-ROCE-56	Support of PD.	创建1个PD，创建成功，创建的PD能释
 PV-342	R.ROCE.F014.A	ST-ROCE-57		创建32767(0x7FFF)个PD，每个都能创建成功，创建的PD其PDID互不相同，创建的PD都能释放	SupportPD.sh	Max_PD_32k	off	
 PV-344	R.ROCE.F016.A	ST-ROCE-59	Support of RC QP	支持同时创建262,144 (0x3FFFF)个QP，且每个QP都能正常工作	SupportQP.sh	Up_to_256k_QP	off	
 PV-344	R.ROCE.F016.A	ST-ROCE-61		支持创建的QP其WQE深度最大为16383，QP能正常工作，能向QP提交最多16383个WQE。	SupportQP.sh	Max_QP_WQE_Depth	off	
-PV-344	R.ROCE.F016.A	ST-ROCE-63		支持创建的QP其WQE深度最大为1时，QP能正常工作	SupportQP.sh	QP_WQE_One_Depth	on	
+PV-344	R.ROCE.F016.A	ST-ROCE-63		支持创建的QP其WQE深度最大为1时，QP能正常工作	SupportQP.sh	QP_WQE_One_D	
 PV-351	R.ROCE.F023.A	ST-ROCE-64	Support of CQ	支持创建1个CQ，创建的CQ能同时和1个QP的SQ、RQ关联	SupportCQ.sh	One_CQ_One_QP	on	
 PV-351	R.ROCE.F023.A	ST-ROCE-65		支持创建1个CQ，创建的CQ能同时和多个QP的SQ、RQ关联	SupportCQ.sh	One_CQ_Mul_QP	on	
 PV-351	R.ROCE.F023.A	ST-ROCE-66		支持同时创建65536 (0x10000)个CQ	SupportCQ.sh	Max_CQ_64k	off	

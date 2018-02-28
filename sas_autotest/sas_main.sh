@@ -23,9 +23,9 @@ function main()
         TEST_CASE_FUNCTION_NAME=`echo "${line}" | awk -F '\t' '{print $7}'`
         TEST_CASE_FUNCTION_SWITCH=`echo "${line}" | awk -F '\t' '{print $8}'`
         #Get the test title from testcase.table
-        TEST_CASE_TITLE=`echo "${line}" | awk -F '\t' '{print $3}'`
-
-        echo "CaseInfo "$TEST_CASE_TITLE" "$exec_script" "$TEST_CASE_FUNCTION_NAME" "$TEST_CASE_FUNCTION_SWITCH
+        TEST_CASE_TITLE=`echo "${line}" | awk -F '\t' '{print $5}'`
+        echo "script is "${exec_script}
+        echo "CaseInfo "${TEST_CASE_TITLE}" "${exec_script}" "${TEST_CASE_FUNCTION_NAME}" "${TEST_CASE_FUNCTION_SWITCH}
 
         if [ x"${exec_script}" == x"" ]
         then
@@ -37,7 +37,7 @@ function main()
             else
 		#if [ x"$TEST_CASE_FUNCTION_SWITCH" == x"on" ]
 		#then
-		#	echo "Begin to run script: "${exec_script}
+			echo "Begin to run script: "${exec_script}
                 source ${SAS_TOP_DIR}/case_script/${exec_script}
 		#else
 		#	echo "Skip the Scirpt: "${exec_script}
@@ -45,6 +45,7 @@ function main()
             fi
         fi
         echo -e "${line}\t${MESSAGE}" >> ${SAS_TOP_DIR}/${OUTPUT_TEST_DB_FILE}
+        echo ${MESSAGE}
         MESSAGE=""
     done
     echo "Finish to Run SAS Test"
