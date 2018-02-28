@@ -142,6 +142,10 @@ function ipv6_data_integration()
 
 function ipv6_iperf_single()
 { 
+    if [ $Ipv6Single -eq 1 ];then
+        MESSAGE="PASS"
+        return 0
+    fi
     REMOTE1_IPV6_IP=$(ssh root@$BACK_IP "ifconfig ${remote_fibre1} | grep 'inet6 addr:' | awk '{print \$3}' | awk -F'/' '{print \$1}' | head -n 1")
     REMOTE2_IPV6_IP=$(ssh root@$BACK_IP "ifconfig ${remote_fibre2} | grep 'inet6 addr:' | awk '{print \$3}' | awk -F'/' '{print \$1}' | head -n 1")
     process="iperf"
@@ -190,10 +194,17 @@ function ipv6_iperf_single()
         check_single_process
         ipv6_data_integration
     done
+    Ipv6Single=1
+    MESSAGE="PASS"
+    return 0
 }
 
 function ipv6_iperf_dual()
 {
+    if [ $Ipv6Dual -eq 1 ];then
+        MESSAGE="PASS"
+        return 0
+    fi
     LOCAL1_IPV6_IP=$(ifconfig ${local_fibre1_ip} | grep 'inet6 addr:' | awk '{print $3}' | awk -F'/' '{print $1}' | head -n 1)
     LOCAL2_IPV6_IP=$(ifconfig ${local_fibre2_ip} | grep 'inet6 addr:' | awk '{print $3}' | awk -F'/' '{print $1}' | head -n 1)
     REMOTE1_IPV6_IP=$(ssh root@$BACK_IP "ifconfig ${remote_fibre1_ip} | grep 'inet6 addr:' | awk '{print \$3}' | awk -F'/' '{print \$1}' | head -n 1")
@@ -252,10 +263,17 @@ function ipv6_iperf_dual()
         check_dual_process
         ipv6_data_integration
     done
+    Ipv6Dual=1
+    MESSAGE="PASS"
+    return 0
 }
 
 function iperf_single()
 {
+    if [ $Ipv4Single -eq 1 ];then
+        MESSAGE="PASS"
+        return 0
+    fi
     process="iperf"
     killall iperf
     ssh root@$BACK_IP "killall iperf;iperf -s >/dev/null 2>&1 &"
@@ -304,10 +322,17 @@ function iperf_single()
         data_integration
       done
     fi
+    Ipv4Single=1
+    MESSAGE="PASS"
+    return 0 
 }
 
 function iperf_dual()
 {
+    if [ $Ipv4Dual -eq 1 ];then
+        MESSAGE="PASS"
+        return 0
+    fi
     process="iperf"
     killall iperf
     iperf -s >/dev/null 2>&1 &
@@ -362,10 +387,17 @@ function iperf_dual()
         check_dual_process
         data_integration
     done
+    Ipv4Dual=1
+    MESSAGE="PASS"
+    return 0 
 }
 
 function netperf_single()
 {
+    if [ $NetperfSingle -eq 1 ];then
+        MESSAGE="PASS"
+        return 0
+    fi
     echo "#############################"
     echo "Run netperf Single port TCP/UDP STREAM..."
     echo "#############################"
@@ -437,10 +469,17 @@ function netperf_single()
             done
         fi
     done
+    NetperfSingle=1
+    MESSAGE="PASS"
+    return 0
 }
 
 function netperf_dual
 {
+    if [ $NetperfDual -eq 1 ];then
+        MESSAGE="PASS"
+        return 0
+    fi
     echo "#############################"
     echo "Run netperf dual port TCP/UDP Message..."
     echo "#############################"
@@ -487,11 +526,18 @@ function netperf_dual
         check_single_process
         echo -e "\n" >> $LOG_DIR/$NETPERFDIR/Dual_port_UDP_RR.log
     done
+    NetperfDual=1
+    MESSAGE="PASS"
+    return 0 
 }
 
 
 function qperf_test()
 {
+    if [ $QperfTest -eq 1 ];then
+        MESSAGE="PASS"
+        return 0
+    fi
     echo "#############################"
     echo "Run qperf test..."
     echo "#############################"
@@ -517,71 +563,24 @@ function qperf_test()
             check_single_process
         fi
     done
+    QperfTest=1
+    MESSAGE="PASS"
+    return 0 
 }
 
-#if not, create
-if [ $# = 0 ];then
-	test_type=all;
-else
-	test_type="$1"
-fi
+function main()
+{
+    test_case_switch
+}
+
 
 #check the log directory is existed or not.
 prepare_log_dir
 
 #ifconfig IP
-ifconfig $local_tp1 ${local_tp1_ip}
-ifconfig $local_fibr2 ${local_fibre2_ip}
+ifconfig $NETPORT1 ${local_fibre1_ip}
+ifconfig $NETPORT2 ${local_fibre2_ip}
 ssh root@$BACK_IP "ifconfig $NETPORT1 ${remote_fibre1_ip};ifconfig $NETPORT2 ${remote_fibre2_ip};"
-iperf_single
-iperf_dual
-ssh root@$BACK_IP "killall iperf" 
-   
-case $test_type in 
-"all")
-    echo "testing  iperf ..."
-    iperf_single
-    iperf_dual
-    ssh root@$BACK_IP "killall iperf" 
-    echo "testing  qperf ..."
-    qperf_test
-    echo "testing  netperf ..."
-    netperf_single
-    netperf_dual
-    ssh root@$BACK_IP "killall netserver"
-;;
-"iperf")
-    echo "testing  iperf ..."
-    iperf_single
-    iperf_dual
-    ssh root@$BACK_IP "killall iperf" 
-    echo "Complete the iperf test"
-;;
-"qperf")
-    echo "test qperf"
-    qperf_test
-    ssh root@$BACK_IP "killall qperf"
-    echo "Complete the qperf test"
-;;
-"netperf")
-    echo "test netperf"
-    netperf_single
-    netperf_dual
-    ssh root@$BACK_IP "killall netserver"
-    echo "Complete the netserver test"
-;;
-"ipv6_iperf")
-    echo "test ipv6"
-    ipv6_iperf_single
-    ipv6_iperf_dual
-    ssh root@$BACK_IP "killall iperf"
-    echo "Complete the ipv6_iperf test"
-;;
-*)
-    echo "Unknow argument"
-    usage
-    exit
-;;
-esac
 
+main
 
