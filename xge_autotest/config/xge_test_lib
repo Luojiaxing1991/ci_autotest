@@ -89,10 +89,18 @@ function init_net_export()
     echo "The First TP port is "${local_tp0}
     local_tp1=${local_tp_list[0]}
     echo "The second TP port is "${local_tp1}
-    local_fibre1=${local_fibre_list[1]}
-    echo "The First FIBRE port is "${local_fibre1}
-    local_fibre2=${local_fibre_list[0]}
-    echo "The second FIBRE port is"${local_fibre2}
+    if [ x"${BACK_IP}" = x"192.168.3.237" ]
+    then
+    	local_fibre1=${local_fibre_list[0]}
+    	echo "The First FIBRE port is "${local_fibre1}
+    	local_fibre2=${local_fibre_list[1]}
+    	echo "The second FIBRE port is"${local_fibre2}
+    else
+        local_fibre1=${local_fibre_list[1]}
+    	echo "The First FIBRE port is "${local_fibre1}
+    	local_fibre2=${local_fibre_list[0]}
+    	echo "The second FIBRE port is"${local_fibre2}
+    fi
 
     #remote_netport_list=$(ssh root@192.168.1.181 ifconfig -a | grep 'eth' | awk '{print $1}')
     #for i in $remote_netport_list
@@ -142,12 +150,18 @@ function init_net_export()
     echo "The remote Tp port is as blow: "
     echo ${remote_tp0}
     echo ${remote_tp1}
-    remote_fibre1=${remote_fibre_list[1]}
-    remote_fibre2=${remote_fibre_list[0]}
+    if [ x"${BACK_IP}" = x"192.168.3.229" ]
+    then
+    	remote_fibre1=${remote_fibre_list[0]}
+    	remote_fibre2=${remote_fibre_list[1]}
+    else
+        remote_fibre1=${remote_fibre_list[1]}
+    	remote_fibre2=${remote_fibre_list[0]}
+    fi
     echo "The rempte FIBRE port is as blow:"
     echo ${remote_fibre1}
     echo ${remote_fibre2}
-
+    
     echo $remote_tp1 $remote_tp2 $remote_fibre1 $remote_fibre2
     #echo $local_tp_list $local_fibre_list $remote_tp_list $remote_fibre_list
 }

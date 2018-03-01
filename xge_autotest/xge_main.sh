@@ -72,7 +72,7 @@ init_net_export
 #performance init
 perf_init
 
-main
+#main
 
 # clean exit so lava-test can trust the results
 exit 0
