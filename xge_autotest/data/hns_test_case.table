@@ -10,15 +10,15 @@ PV-434	R.HNS.F001.A	ST_XGE_PORT_CTRL_015		XGE收发包过程中多次打开和关闭网口	enab
 PV-434	R.HNS.F001.A	ST_XGE_PORT_CTRL_020		XGE停止收发包后多次打开和关闭网口	enable_and_disable_interface.sh	xge_continued_enable_and_disable_interface	off	
 PV-435	R.HNS.F002.A	ST_GE_TX_RX_01	GE基本收发报文功能	GE网口与对端ping操作	rx_tx_functionality.sh	ge_two_ends_receiving_and_sending	off	
 PV-435	R.HNS.F002.A	ST_XGE_TX_RX_01	XGE基本收发报文功能	XGE网口与对端ping操作	rx_tx_functionality.sh	xge_two_ends_receiving_and_sending	off	
-PV-438	R.HNS.F005.A	ST_GE_VLAN_01	GE网口Vlan基本功能	GE Vlan ping包功能正常	vlan_tagged_traffic_support.sh	ge_set_vlan	on	
-PV-438	R.HNS.F005.A	ST_GE_VLAN_02		设置Vlan网口	vlan_tagged_traffic_support.sh	ge_set_vlan	on	
-PV-438	R.HNS.F005.A	ST_GE_VLAN_03		多端口Vlan ping包功能正常	vlan_tagged_traffic_support.sh	ge_vlan_multi_port	on	
-PV-438	R.HNS.F005.A	ST_GE_VLAN_04		Vlan配置容错功能测试	vlan_tagged_traffic_support.sh	vlan_fault_tolerant	on	
-#N/A	R.HNS.F005A	ST_GE_VLAN_05		HNS创建GE Vlan后，直接将网口关闭	vlan_tagged_traffic_support.sh	ge_vlan_up_down	on	
-PV-438	R.HNS.F005.A	ST_XGE_VLAN_01	XGE/LGE网口Vlan基本功能	XGE Vlan ping包功能正常	vlan_tagged_traffic_support.sh	xge_set_vlan	on	
-PV-438	R.HNS.F005.A	ST_XGE_VLAN_02		多端口Vlan ping包功能正常	vlan_tagged_traffic_support.sh	xge_vlan_multi_port	on	
-PV-438	R.HNS.F005.A	ST_XGE_VLAN_03		XGE设置Vlan网口	vlan_tagged_traffic_support.sh	xge_set_vlan	on	
-#N/A	R.HNS.F005A	ST_XGE_VLAN_04		HNS创建XGE Vlan后，直接将网口关闭	vlan_tagged_traffic_support.sh	ge_vlan_up_down	on	
+PV-438	R.HNS.F005.A	ST_GE_VLAN_01	GE网口Vlan基本功能	GE Vlan ping包功能正常	vlan_tagged_traffic_support.sh	ge_set_vlan	off	
+PV-438	R.HNS.F005.A	ST_GE_VLAN_02		设置Vlan网口	vlan_tagged_traffic_support.sh	ge_set_vlan	off	
+PV-438	R.HNS.F005.A	ST_GE_VLAN_03		多端口Vlan ping包功能正常	vlan_tagged_traffic_support.sh	ge_vlan_multi_port	off	
+PV-438	R.HNS.F005.A	ST_GE_VLAN_04		Vlan配置容错功能测试	vlan_tagged_traffic_support.sh	vlan_fault_tolerant	off	
+#N/A	R.HNS.F005A	ST_GE_VLAN_05		HNS创建GE Vlan后，直接将网口关闭	vlan_tagged_traffic_support.sh	ge_vlan_up_down	off	
+PV-438	R.HNS.F005.A	ST_XGE_VLAN_01	XGE/LGE网口Vlan基本功能	XGE Vlan ping包功能正常	vlan_tagged_traffic_support.sh	xge_set_vlan	off	
+PV-438	R.HNS.F005.A	ST_XGE_VLAN_02		多端口Vlan ping包功能正常	vlan_tagged_traffic_support.sh	xge_vlan_multi_port	off	
+PV-438	R.HNS.F005.A	ST_XGE_VLAN_03		XGE设置Vlan网口	vlan_tagged_traffic_support.sh	xge_set_vlan	off	
+#N/A	R.HNS.F005A	ST_XGE_VLAN_04		HNS创建XGE Vlan后，直接将网口关闭	vlan_tagged_traffic_support.sh	ge_vlan_up_down	off	
 PV-439	R.HNS.F006.A	ST_GE_RESET_01	GE重新自协商	GE电口重新自协商成功	auto_negotiation_support.sh	ge_restarts_auto_negotiation	off	
 PV-439	R.HNS.F006.A	ST_XGE_RESET_02		GE电口大流量反复重新自协商成功	auto_negotiation_support.sh	ge_iperf_auto_negotiation	off	
 PV-439	R.HNS.F006.A	ST_XGE_RESET_03		GE电口关闭自协商后重新自协商功能正常	auto_negotiation_support.sh		off	
