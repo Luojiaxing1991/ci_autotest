@@ -67,7 +67,6 @@ PV-340	R.ROCE.F011.A	ST-ROCE-79	Verify basic RoCE feature	Get device attribute	c
 PV-341	R.ROCE.F012.A	ST-ROCE-80	Verify basic RoCE feature	Get port information	codecase.sh	codecase99	on	
 PV-963	R.ROCE.F013.A	ST-ROCE-81	Verify basic RoCE feature	Get GID information	codecase.sh	codecase99	on	
 PV-352	R.ROCE.F024.A	ST-ROCE-82	Verify Completion Event	 Request completion notification on a CQ and get CQ completion event.	Completion_Event.sh	Completion_Event	on	
-PV-343	R.ROCE.F015.A	ST-ROCE-83	Verify create and destroy AH	Creat AH ,then destroy it	codecase.sh	codecase40	on	
 PV-1827	R.ROCE.N004.B	ST-ROCE-84	Support RoCEv1 in hi161x	Verify RoCEv1 in hi161x	codecase.sh	codecase0	on	
 PV-366	R.ROCE.N006.B	ST-ROCE-85	Verify rocee is Linux platform device	Check platform device	platformdev.sh	platformdev	on	
 #N/A		ST-ROCE-87	Verify load/remove the RoCE kernel driver	Load the RoCE kernel driver	Load_Unload_kernel_driver.sh	 Load_kernel_driver	on	
