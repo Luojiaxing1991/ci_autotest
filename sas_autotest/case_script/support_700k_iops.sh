@@ -16,7 +16,7 @@ function fio_iops_controller()
         iops=`echo ${info} | awk -F ',' '{print $3}' | awk -F '=' '{print $2}'`
 
         let iops=${iops}/1024
-        echo "iodepth: ${iodepth},iops :${iops}" >> ${FIO_IOPS_DB_FILE}
+        echo "iodepth: ${iodepth},iops :${iops}" >> ${SAS_TOP_DIR}/${FIO_IOPS_DB_FILE}
     done
 
     sed -i "{s/^iodepth=.*/iodepth=${FIO_IOPS_IODEPTH}/g;}" fio.conf
