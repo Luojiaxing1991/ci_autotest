@@ -74,7 +74,7 @@ group_reporting=1
 ;gtod_reduce=1
 ;iodepth_batch=2
 ;iodepth_batch_complete=2
-runtime=300
+runtime=20
 ;thread
 loops=10
 "
@@ -130,9 +130,9 @@ BSSPLIT="4k/30:8k/40:16k/30"
 
 ## 7 - support full sas function on all available phys
 #  cycle the number of all proximal phy switches, Default value is 100.
-LOOP_PHY_COUNT=100
+LOOP_PHY_COUNT=2
 #  cycle reset distal phy number, Default value is 1000.
-RESET_PHY_COUNT=1000
+RESET_PHY_COUNT=2
 #  fio tool business run time.
 LOOP_PHY_TIME=10
 
@@ -144,7 +144,7 @@ FIO_RESET_COUNT=5
 
 ## 9 - support hotplug
 # fio tool business run time.
-FIO_ENABLE_TIME=300
+FIO_ENABLE_TIME=180
 
 ## 10 - support smart
 # query enable smart keyword.
@@ -155,7 +155,7 @@ STATUS_SMART_KEYWORD="PASSED|OK"
 
 ## 12 - support Max devices
 # The number of disks.
-MAX_DEV_NUM=1
+MAX_DEV_NUM=2
 
 ## 13 - RAS support
 # 1bit error injection, injection CFG_ECCERR_INJECT0_EN register value.
