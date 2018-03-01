@@ -4,9 +4,9 @@ PV-1589	R.SAS.F003.A	ST.FUNC.003	The driver must support STP	SATA≈Ã£¨expander£¨ª
 PV-1945	R.SAS.F004.A	ST.FUNC.004	Support Max Devices	SAS≈Ã£¨SATA≈Ã£¨expander£¨¬˙‘ÿ∑˚∫œ≤‚ ‘	support_max_devices.sh	support_max_devices	on	
 PV-1604	R.SAS.F007.A	ST.FUNC.005	Support 12Gbit/s physical data rate	SAS≈Ã£¨÷±¡¨£¨ÀŸ¬ –≠…Ã≤‚ ‘(1.5Gbit/s, 3Gbit/s, 6Gbit/s, 12Gbits)	physical_data_rate.sh	disk_negotiated_link_rate_query	off	
 PV-1597	R.SAS.F006.A	ST.FUNC.006	6Gbit/s physical data rate	SATA≈Ã£¨÷±¡¨£¨ÀŸ¬ –≠…Ã≤‚ ‘(1.5Gbit/s, 3Gbit/s, 6Gbit/s)	physical_data_rate.sh	disk_negotiated_link_rate_query	off	
-PV-1603	R.SAS.F017.A	ST.FUNC.007	PHY control through sysfs	SAS≈Ã£¨÷±¡¨£¨÷ß≥÷ÀŸ¬ …Ë÷√	phy_control_through_sysfs.sh	rate_set_up	on	
-PV-1603	R.SAS.F017.A	ST.FUNC.008	PHY control through sysfs	SATA≈Ã£¨÷±¡¨£¨÷ß≥÷ÀŸ¬ …Ë÷√	phy_control_through_sysfs.sh	rate_set_up	on	
-PV-1603	R.SAS.F017.A	ST.FUNC.009	PHY control through sysfs	SAS/SATA≈Ã£¨÷±¡¨£¨÷ß≥÷÷ÿ∏¥ÀŸ¬ …Ë÷√	phy_control_through_sysfs.sh	loop_rate_set_up	on	
+PV-1603	R.SAS.F017.A	ST.FUNC.007	PHY control through sysfs	SAS≈Ã£¨÷±¡¨£¨÷ß≥÷ÀŸ¬ …Ë÷√	phy_control_through_sysfs.sh	rate_set_up	off	
+PV-1603	R.SAS.F017.A	ST.FUNC.008	PHY control through sysfs	SATA≈Ã£¨÷±¡¨£¨÷ß≥÷ÀŸ¬ …Ë÷√	phy_control_through_sysfs.sh	rate_set_up	off	
+PV-1603	R.SAS.F017.A	ST.FUNC.009	PHY control through sysfs	SAS/SATA≈Ã£¨÷±¡¨£¨÷ß≥÷÷ÿ∏¥ÀŸ¬ …Ë÷√	phy_control_through_sysfs.sh	loop_rate_set_up	off	
 #N/A	R.SAS.N005.A	ST.FUNC.014	 No cable unplug OOPs	SAS≈Ã£¨÷±¡¨£¨≥§ ±º‰ÀŸ¬  ˝æ›¥´ ‰	no_cable_unplug_oops.sh	loog_time_IO_read_write	off	
 #N/A	R.SAS.N005.A	ST.FUNC.015	 No cable unplug OOPs	SAS≈Ã£¨÷±¡¨£¨∑¥∏¥∂¡–¥¥≈≈Ã	no_cable_unplug_oops.sh	repeat_IO_read_write	off	
 #N/A	R.SAS.N005.A	ST.FUNC.016	 No cable unplug OOPs	SAS≈Ã£¨÷±¡¨£¨ ˝æ›“ª÷¬–‘≤‚ ‘	no_cable_unplug_oops.sh	disk_file_data_consistency_test	off	
