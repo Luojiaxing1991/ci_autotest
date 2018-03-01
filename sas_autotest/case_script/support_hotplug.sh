@@ -16,9 +16,9 @@ function fio_single_enable()
     change_sas_phy_file 0 "enable"
 
     wait
-    end_count=`fdisk -l | grep /dev/sd | wc -l`
     change_sas_phy_file 1 "enable"
     sleep 60
+    end_count=`fdisk -l | grep /dev/sd | wc -l`
     if [ ${beg_count} -ne ${end_count} ]
     then
         MESSAGE="FAIL\tdisk runing business, switch enable disk, the number of disks is missing."
@@ -38,4 +38,3 @@ function main()
 }
 
 main
-
