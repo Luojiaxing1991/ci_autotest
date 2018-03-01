@@ -148,10 +148,10 @@ FIO_ENABLE_TIME=300
 
 ## 10 - support smart
 # query enable smart keyword.
-SUPPORT_SMART_KEYWORD="Available - device has SMART capability"
-DISABLED_SMART_KEYWORD="Exceptions (SMART) disabled"
-ENABLED_SMART_KEYWORD="Exceptions (SMART) enabled"
-STATUS_SMART_KEYWORD="SMART Health Status: OK"
+SUPPORT_SMART_KEYWORD="Enabled"
+DISABLED_SMART_KEYWORD="Disabled"
+ENABLED_SMART_KEYWORD="Enabled"
+STATUS_SMART_KEYWORD="PASSED|OK"
 
 ## 12 - support Max devices
 # The number of disks.
