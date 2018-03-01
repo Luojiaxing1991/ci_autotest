@@ -155,7 +155,7 @@ STATUS_SMART_KEYWORD="SMART Health Status: OK"
 
 ## 12 - support Max devices
 # The number of disks.
-MAX_DEV_NUM=12
+MAX_DEV_NUM=1
 
 ## 13 - RAS support
 # 1bit error injection, injection CFG_ECCERR_INJECT0_EN register value.

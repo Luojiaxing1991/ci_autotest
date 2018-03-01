@@ -37,12 +37,29 @@
 			"parameters":{
 			     "Maintainer": "Luojiaxing"
 			},
-			"testdef": "xge_autotest/xge_autotest.yaml"
+			"testdef": "sas_autotest/sas_autotest.yaml"
                     }
                 ],
                 "timeout": 172800
             }
         },
+
+        {
+            "command": "lava_test_shell",
+            "parameters": {
+                "testdef_repos": [
+                    {
+                        "git-repo": "https://github.com/Luojiaxing1991/ci_autotest.git",
+			"parameters":{
+			     "Maintainer": "Luojiaxing"
+			},
+			"testdef": "pcie_autotest/pcie_autotest.yaml"
+                    }
+                ],
+                "timeout": 172800
+            }
+        },
+
         {
             "command": "submit_results",
             "parameters": {
