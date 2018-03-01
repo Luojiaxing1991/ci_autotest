@@ -1,6 +1,6 @@
-PV-315	R.PCIE.F001.A	ST.FUNC.001	Multiple Root Complex support (Hi161x) V testing	Verify all PCIe ports on D05 boards function	multiple_root_complex.sh	MultipleRootComplex	off	
-PV-568	R.PCIE.F088.A	ST.FUNC.002	PCIe: ACPI: Hip05, Hip06, Hip07 Driver	ACPI: Hip05, Hip06, Hip07 Driver on 1616 boards function	hip_driver.sh	HipDriver	off	
-PV-1432	R.PCIE.F104.A	ST.FUNC.003	PCIe ACPI Root Driver dependency	PCI ACPI Root Driver dependency on D05 boards function	acpi.sh	CmdACPI	off	
+PV-315	R.PCIE.F001.A	ST.FUNC.001	Multiple Root Complex support (Hi161x) V testing	Verify all PCIe ports on D05 boards function	multiple_root_complex.sh	MultipleRootComplex	on	
+PV-568	R.PCIE.F088.A	ST.FUNC.002	PCIe: ACPI: Hip05, Hip06, Hip07 Driver	ACPI: Hip05, Hip06, Hip07 Driver on 1616 boards function	hip_driver.sh	HipDriver	on	
+PV-1432	R.PCIE.F104.A	ST.FUNC.003	PCIe ACPI Root Driver dependency	PCI ACPI Root Driver dependency on D05 boards function	acpi.sh	CmdACPI	on	
 PV-1430	R.PCIE.F102.A	ST.FUNC.004	PCIE: UEFI dependency	PCIE: UEFI dependency on D05 boards function			off	
 PV-1420	R.PCIE.F080.A	ST.FUNC.005	PCIE: PCS configuration in BIOS	PCIE: PCS configuration in BIOS on D05 boards function			off	
 PV-1425	R.PCIE.F086.A	ST.FUNC.006	PCIE: HiSilicon PCIe re-use	PCIE: HiSilicon PCIe re-use Image -1612&1616			off	
