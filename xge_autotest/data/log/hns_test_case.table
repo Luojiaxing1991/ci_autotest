@@ -1,15 +1,15 @@
-PV-434	R.HNS.F001.A	ST_GE_PORT_CTRL_000	GEÍø¿ÚµÄ´ò¿ªºÍ¹Ø±Õ½Ó¿Ú	GE³õÊ¼»¯ºó´ò¿ªºÍ¹Ø±ÕÍø¿Ú	enable_and_disable_interface.sh	ge_enable_and_disable_interface	on	
-PV-434	R.HNS.F001.A	ST_GE_PORT_CTRL_005		GE³õÊ¼»¯ºó¶à´Î´ò¿ªºÍ¹Ø±ÕÍø¿Ú	enable_and_disable_interface.sh	ge_continued_enable_and_disable_interface	on	
-PV-434	R.HNS.F001.A	ST_GE_PORT_CTRL_010		GEÊÕ·¢°ü¹ı³ÌÖĞ´ò¿ªºÍ¹Ø±ÕÍø¿Ú	enable_and_disable_interface.sh	ge_flow_enable_and_disable_interface	on	
-PV-434	R.HNS.F001.A	ST_GE_PORT_CTRL_015		GEÊÕ·¢°ü¹ı³ÌÖĞ¶à´Î´ò¿ªºÍ¹Ø±ÕÍø¿Ú	enable_and_disable_interface.sh	ge_flow_continued_enable_and_disable_interface	on	
-PV-434	R.HNS.F001.A	ST_GE_PORT_CTRL_020		GEÍ£Ö¹ÊÕ·¢°üºó¶à´Î´ò¿ªºÍ¹Ø±ÕÍø¿Ú	enable_and_disable_interface.sh	ge_continued_enable_and_disable_interface	on	
-PV-434	R.HNS.F001.A	ST_XGE_PORT_CTRL_000	XGE/LGEÍø¿ÚµÄ´ò¿ªºÍ¹Ø±Õ½Ó¿Ú	XGE³õÊ¼»¯ºó´ò¿ªºÍ¹Ø±ÕÍø¿Ú	enable_and_disable_interface.sh	xge_enable_and_disable_interface	on	
-PV-434	R.HNS.F001.A	ST_XGE_PORT_CTRL_005		XGE³õÊ¼»¯ºó¶à´Î´ò¿ªºÍ¹Ø±ÕÍø¿Ú	enable_and_disable_interface.sh	xge_continued_enable_and_disable_interface	on	
-PV-434	R.HNS.F001.A	ST_XGE_PORT_CTRL_010		XGEÊÕ·¢°ü¹ı³ÌÖĞ´ò¿ªºÍ¹Ø±ÕÍø¿Ú	enable_and_disable_interface.sh	xge_flow_enable_and_disable_interface	on	
-PV-434	R.HNS.F001.A	ST_XGE_PORT_CTRL_015		XGEÊÕ·¢°ü¹ı³ÌÖĞ¶à´Î´ò¿ªºÍ¹Ø±ÕÍø¿Ú	enable_and_disable_interface.sh	xge_flow_continued_enable_and_disable_interface	on	
-PV-434	R.HNS.F001.A	ST_XGE_PORT_CTRL_020		XGEÍ£Ö¹ÊÕ·¢°üºó¶à´Î´ò¿ªºÍ¹Ø±ÕÍø¿Ú	enable_and_disable_interface.sh	xge_continued_enable_and_disable_interface	on	
-PV-435	R.HNS.F002.A	ST_GE_TX_RX_01	GE»ù±¾ÊÕ·¢±¨ÎÄ¹¦ÄÜ	GEÍø¿ÚÓë¶Ô¶Ëping²Ù×÷	rx_tx_functionality.sh	ge_two_ends_receiving_and_sending	on	
-PV-435	R.HNS.F002.A	ST_XGE_TX_RX_01	XGE»ù±¾ÊÕ·¢±¨ÎÄ¹¦ÄÜ	XGEÍø¿ÚÓë¶Ô¶Ëping²Ù×÷	rx_tx_functionality.sh	xge_two_ends_receiving_and_sending	on	
+PV-434	R.HNS.F001.A	ST_GE_PORT_CTRL_000	GEÍø¿ÚµÄ´ò¿ªºÍ¹Ø±Õ½Ó¿Ú	GE³õÊ¼»¯ºó´ò¿ªºÍ¹Ø±ÕÍø¿Ú	enable_and_disable_interface.sh	ge_enable_and_disable_interface	off	
+PV-434	R.HNS.F001.A	ST_GE_PORT_CTRL_005		GE³õÊ¼»¯ºó¶à´Î´ò¿ªºÍ¹Ø±ÕÍø¿Ú	enable_and_disable_interface.sh	ge_continued_enable_and_disable_interface	off	
+PV-434	R.HNS.F001.A	ST_GE_PORT_CTRL_010		GEÊÕ·¢°ü¹ı³ÌÖĞ´ò¿ªºÍ¹Ø±ÕÍø¿Ú	enable_and_disable_interface.sh	ge_flow_enable_and_disable_interface	off	
+PV-434	R.HNS.F001.A	ST_GE_PORT_CTRL_015		GEÊÕ·¢°ü¹ı³ÌÖĞ¶à´Î´ò¿ªºÍ¹Ø±ÕÍø¿Ú	enable_and_disable_interface.sh	ge_flow_continued_enable_and_disable_interface	off	
+PV-434	R.HNS.F001.A	ST_GE_PORT_CTRL_020		GEÍ£Ö¹ÊÕ·¢°üºó¶à´Î´ò¿ªºÍ¹Ø±ÕÍø¿Ú	enable_and_disable_interface.sh	ge_continued_enable_and_disable_interface	off	
+PV-434	R.HNS.F001.A	ST_XGE_PORT_CTRL_000	XGE/LGEÍø¿ÚµÄ´ò¿ªºÍ¹Ø±Õ½Ó¿Ú	XGE³õÊ¼»¯ºó´ò¿ªºÍ¹Ø±ÕÍø¿Ú	enable_and_disable_interface.sh	xge_enable_and_disable_interface	off	
+PV-434	R.HNS.F001.A	ST_XGE_PORT_CTRL_005		XGE³õÊ¼»¯ºó¶à´Î´ò¿ªºÍ¹Ø±ÕÍø¿Ú	enable_and_disable_interface.sh	xge_continued_enable_and_disable_interface	off	
+PV-434	R.HNS.F001.A	ST_XGE_PORT_CTRL_010		XGEÊÕ·¢°ü¹ı³ÌÖĞ´ò¿ªºÍ¹Ø±ÕÍø¿Ú	enable_and_disable_interface.sh	xge_flow_enable_and_disable_interface	off	
+PV-434	R.HNS.F001.A	ST_XGE_PORT_CTRL_015		XGEÊÕ·¢°ü¹ı³ÌÖĞ¶à´Î´ò¿ªºÍ¹Ø±ÕÍø¿Ú	enable_and_disable_interface.sh	xge_flow_continued_enable_and_disable_interface	off	
+PV-434	R.HNS.F001.A	ST_XGE_PORT_CTRL_020		XGEÍ£Ö¹ÊÕ·¢°üºó¶à´Î´ò¿ªºÍ¹Ø±ÕÍø¿Ú	enable_and_disable_interface.sh	xge_continued_enable_and_disable_interface	off	
+PV-435	R.HNS.F002.A	ST_GE_TX_RX_01	GE»ù±¾ÊÕ·¢±¨ÎÄ¹¦ÄÜ	GEÍø¿ÚÓë¶Ô¶Ëping²Ù×÷	rx_tx_functionality.sh	ge_two_ends_receiving_and_sending	off	
+PV-435	R.HNS.F002.A	ST_XGE_TX_RX_01	XGE»ù±¾ÊÕ·¢±¨ÎÄ¹¦ÄÜ	XGEÍø¿ÚÓë¶Ô¶Ëping²Ù×÷	rx_tx_functionality.sh	xge_two_ends_receiving_and_sending	off	
 PV-438	R.HNS.F005.A	ST_GE_VLAN_01	GEÍø¿ÚVlan»ù±¾¹¦ÄÜ	GE Vlan ping°ü¹¦ÄÜÕı³£	vlan_tagged_traffic_support.sh	ge_set_vlan	off	
 PV-438	R.HNS.F005.A	ST_GE_VLAN_02		ÉèÖÃVlanÍø¿Ú	vlan_tagged_traffic_support.sh	ge_set_vlan	off	
 PV-438	R.HNS.F005.A	ST_GE_VLAN_03		¶à¶Ë¿ÚVlan ping°ü¹¦ÄÜÕı³£	vlan_tagged_traffic_support.sh	ge_vlan_multi_port	off	
@@ -19,40 +19,40 @@ PV-438	R.HNS.F005.A	ST_XGE_VLAN_01	XGE/LGEÍø¿ÚVlan»ù±¾¹¦ÄÜ	XGE Vlan ping°ü¹¦ÄÜÕı
 PV-438	R.HNS.F005.A	ST_XGE_VLAN_02		¶à¶Ë¿ÚVlan ping°ü¹¦ÄÜÕı³£	vlan_tagged_traffic_support.sh	xge_vlan_multi_port	off	
 PV-438	R.HNS.F005.A	ST_XGE_VLAN_03		XGEÉèÖÃVlanÍø¿Ú	vlan_tagged_traffic_support.sh	xge_set_vlan	off	
 #N/A	R.HNS.F005A	ST_XGE_VLAN_04		HNS´´½¨XGE Vlanºó£¬Ö±½Ó½«Íø¿Ú¹Ø±Õ	vlan_tagged_traffic_support.sh	ge_vlan_up_down	off	
-PV-439	R.HNS.F006.A	ST_GE_RESET_01	GEÖØĞÂ×ÔĞ­ÉÌ	GEµç¿ÚÖØĞÂ×ÔĞ­ÉÌ³É¹¦	auto_negotiation_support.sh	ge_restarts_auto_negotiation	on	
-PV-439	R.HNS.F006.A	ST_XGE_RESET_02		GEµç¿Ú´óÁ÷Á¿·´¸´ÖØĞÂ×ÔĞ­ÉÌ³É¹¦	auto_negotiation_support.sh	ge_iperf_auto_negotiation	on	
+PV-439	R.HNS.F006.A	ST_GE_RESET_01	GEÖØĞÂ×ÔĞ­ÉÌ	GEµç¿ÚÖØĞÂ×ÔĞ­ÉÌ³É¹¦	auto_negotiation_support.sh	ge_restarts_auto_negotiation	off	
+PV-439	R.HNS.F006.A	ST_XGE_RESET_02		GEµç¿Ú´óÁ÷Á¿·´¸´ÖØĞÂ×ÔĞ­ÉÌ³É¹¦	auto_negotiation_support.sh	ge_iperf_auto_negotiation	off	
 PV-439	R.HNS.F006.A	ST_XGE_RESET_03		GEµç¿Ú¹Ø±Õ×ÔĞ­ÉÌºóÖØĞÂ×ÔĞ­ÉÌ¹¦ÄÜÕı³£	auto_negotiation_support.sh		off	
-PV-439	R.HNS.F006.A	ST_XGE_RESET_01		XGE¹â¿ÚÖØĞÂ×ÔĞ­ÉÌ³É¹¦	auto_negotiation_support.sh	xge_restarts_auto_negotiation	on	
-PV-439	R.HNS.F006.A	ST_XGE_RESET_02		XGE¹â¿Ú´óÁ÷Á¿·´¸´ÖØĞÂ×ÔĞ­ÉÌ³É¹¦	auto_negotiation_support.sh	xge_iperf_auto_negotiation	on	
-PV-442	R.HNS.F009.A	ST_GE_PHY_IOCTL_01	Í¨¹ıMiiTools¶ÁĞ´ge phy¼Ä´æÆ÷	GEµç¿ÚÕıÈ·¶ÁÈ¡Phy¼Ä´æÆ÷	support_of_mdio.sh	ge_read_phy_register	on	
-PV-442	R.HNS.F009.A	ST_GE_PHY_IOCTL_02		GEµç¿ÚÕıÈ·Ğ´Phy¼Ä´æÆ÷	support_of_mdio.sh	ge_iperf_read_phy_register	on	
-PV-442	R.HNS.F009.A	ST_XGE_PHY_IOCTL_01		XGE¹â¿Ú¶Áphy¼Ä´æÆ÷Ê§°Ü	support_of_mdio.sh	xge_read_phy_register	on	
+PV-439	R.HNS.F006.A	ST_XGE_RESET_01		XGE¹â¿ÚÖØĞÂ×ÔĞ­ÉÌ³É¹¦	auto_negotiation_support.sh	xge_restarts_auto_negotiation	off	
+PV-439	R.HNS.F006.A	ST_XGE_RESET_02		XGE¹â¿Ú´óÁ÷Á¿·´¸´ÖØĞÂ×ÔĞ­ÉÌ³É¹¦	auto_negotiation_support.sh	xge_iperf_auto_negotiation	off	
+PV-442	R.HNS.F009.A	ST_GE_PHY_IOCTL_01	Í¨¹ıMiiTools¶ÁĞ´ge phy¼Ä´æÆ÷	GEµç¿ÚÕıÈ·¶ÁÈ¡Phy¼Ä´æÆ÷	support_of_mdio.sh	ge_read_phy_register	off	
+PV-442	R.HNS.F009.A	ST_GE_PHY_IOCTL_02		GEµç¿ÚÕıÈ·Ğ´Phy¼Ä´æÆ÷	support_of_mdio.sh	ge_iperf_read_phy_register	off	
+PV-442	R.HNS.F009.A	ST_XGE_PHY_IOCTL_01		XGE¹â¿Ú¶Áphy¼Ä´æÆ÷Ê§°Ü	support_of_mdio.sh	xge_read_phy_register	off	
 PV-443	R.HNS.F010.A	ST_GE_MAC_ERROR_01	GEÍø¿ÚMACµØÖ·ÉèÖÃ	GEÍø¿ÚMacµØÖ·ÉèÖÃÈİ´í²âÊÔ	support_to_change_mac_address.sh	ge_mac_address_fault_tolerant	on	
-PV-443	R.HNS.F010.A	SET_GE_SET_MAC_01		GE±ê×¼macµØÖ·ÉèÖÃ³É¹¦	support_to_change_mac_address.sh	ge_set_standard_mac_address	on	
-PV-443	R.HNS.F010.A	SET_GE_SET_MAC_02		GEÏßĞÔmacµØÖ·ÉèÖÃ	support_to_change_mac_address.sh	ge_set_linear_mac_address	on	
-PV-443	R.HNS.F010.A	SET_GE_SET_MAC_03		GEµç¿Ú³õÊ¼»¯ºómacµØÖ·Ëæ»úÉú³É	support_to_change_mac_address.sh	ge_mac_address_random_generation	on	
-PV-443	R.HNS.F010.A	ST_XGE_MAC_ERROR_01	XGEÍø¿ÚMACµØÖ·ÉèÖÃ	XGEÍø¿ÚMacµØÖ·ÉèÖÃÈİ´í²âÊÔ	support_to_change_mac_address.sh	xge_mac_address_fault_tolerant	on	
-PV-443	R.HNS.F010.A	SET_XGE_SET_MAC_01		XGE±ê×¼macµØÖ·ÉèÖÃ³É¹¦	support_to_change_mac_address.sh	xge_set_standard_mac_address	on	
-PV-443	R.HNS.F010.A	SET_XGE_SET_MAC_02		XGEÏßĞÔmacµØÖ·ÉèÖÃ	support_to_change_mac_address.sh	xge_set_linear_mac_address	on	
-PV-443	R.HNS.F010.A	SET_XGE_SET_MAC_03		XGEµç¿Ú³õÊ¼»¯ºómacµØÖ·Ëæ»úÉú³É	support_to_change_mac_address.sh	xge_mac_address_random_generation	on	
-PV-444	R.HNS.F011.A	ST_GE_SET_MTU_01	GEÉèÖÃMTU	GE MTUĞŞ¸Äºó¹¦ÄÜÕı³£	support_of_mtu_setting.sh	ge_set_mtu_value	on	
-PV-444	R.HNS.F011.A	ST_GE_SET_MTU_04		GE MTU´«Èë´íÎóµ¼ÖÂÅäÖÃÊ§°Ü	support_of_mtu_setting.sh	ge_set_fail_mtu_value	on	
-PV-444	R.HNS.F011.A	ST_GE_SET_MTU_05		GE´óÁ÷Á¿ÊÕ·¢°üÊ±MTUĞŞ¸Äºó¹¦ÄÜÕı³£	support_of_mtu_setting.sh	ge_iperf_set_mtu_value	on	
-PV-444	R.HNS.F011.A	ST_XGE_SET_MTU_01	XGEÉèÖÃMTU	XGE MTUĞŞ¸Äºó¹¦ÄÜÕı³£	support_of_mtu_setting.sh	xge_set_mtu_value	on	
-PV-444	R.HNS.F011.A	ST_XGE_SET_MTU_04		XGE MTU´«Èë´íÎóµ¼ÖÂÅäÖÃÊ§°Ü	support_of_mtu_setting.sh	xge_set_fail_mtu_value	on	
-PV-444	R.HNS.F011.A	ST_XGE_SET_MTU_05		XGE´óÁ÷Á¿ÊÕ·¢°üÊ±MTUĞŞ¸Äºó¹¦ÄÜÕı³£	support_of_mtu_setting.sh	xge_iperf_set_mtu_value	on	
+PV-443	R.HNS.F010.A	SET_GE_SET_MAC_01		GE±ê×¼macµØÖ·ÉèÖÃ³É¹¦	support_to_change_mac_address.sh	ge_set_standard_mac_address	off	
+PV-443	R.HNS.F010.A	SET_GE_SET_MAC_02		GEÏßĞÔmacµØÖ·ÉèÖÃ	support_to_change_mac_address.sh	ge_set_linear_mac_address	off	
+PV-443	R.HNS.F010.A	SET_GE_SET_MAC_03		GEµç¿Ú³õÊ¼»¯ºómacµØÖ·Ëæ»úÉú³É	support_to_change_mac_address.sh	ge_mac_address_random_generation	off	
+PV-443	R.HNS.F010.A	ST_XGE_MAC_ERROR_01	XGEÍø¿ÚMACµØÖ·ÉèÖÃ	XGEÍø¿ÚMacµØÖ·ÉèÖÃÈİ´í²âÊÔ	support_to_change_mac_address.sh	xge_mac_address_fault_tolerant	off	
+PV-443	R.HNS.F010.A	SET_XGE_SET_MAC_01		XGE±ê×¼macµØÖ·ÉèÖÃ³É¹¦	support_to_change_mac_address.sh	xge_set_standard_mac_address	off	
+PV-443	R.HNS.F010.A	SET_XGE_SET_MAC_02		XGEÏßĞÔmacµØÖ·ÉèÖÃ	support_to_change_mac_address.sh	xge_set_linear_mac_address	off	
+PV-443	R.HNS.F010.A	SET_XGE_SET_MAC_03		XGEµç¿Ú³õÊ¼»¯ºómacµØÖ·Ëæ»úÉú³É	support_to_change_mac_address.sh	xge_mac_address_random_generation	off	
+PV-444	R.HNS.F011.A	ST_GE_SET_MTU_01	GEÉèÖÃMTU	GE MTUĞŞ¸Äºó¹¦ÄÜÕı³£	support_of_mtu_setting.sh	ge_set_mtu_value	off	
+PV-444	R.HNS.F011.A	ST_GE_SET_MTU_04		GE MTU´«Èë´íÎóµ¼ÖÂÅäÖÃÊ§°Ü	support_of_mtu_setting.sh	ge_set_fail_mtu_value	off	
+PV-444	R.HNS.F011.A	ST_GE_SET_MTU_05		GE´óÁ÷Á¿ÊÕ·¢°üÊ±MTUĞŞ¸Äºó¹¦ÄÜÕı³£	support_of_mtu_setting.sh	ge_iperf_set_mtu_valuff	off	
+PV-444	R.HNS.F011.A	ST_XGE_SET_MTU_01	XGEÉèÖÃMTU	XGE MTUĞŞ¸Äºó¹¦ÄÜÕı³£	support_of_mtu_setting.sh	xge_set_mtu_value	off	
+PV-444	R.HNS.F011.A	ST_XGE_SET_MTU_04		XGE MTU´«Èë´íÎóµ¼ÖÂÅäÖÃÊ§°Ü	support_of_mtu_setting.sh	xge_set_fail_mtu_value	off	
+PV-444	R.HNS.F011.A	ST_XGE_SET_MTU_05		XGE´óÁ÷Á¿ÊÕ·¢°üÊ±MTUĞŞ¸Äºó¹¦ÄÜÕı³£	support_of_mtu_setting.sh	xge_iperf_set_mtu_value	off	
 PV-446	R.HNS.F013.A	ST_GE_IPV6_01	GEÍø¿ÚIPv6»ù±¾¹¦ÄÜ	GE IPv6 ping°ü¹¦ÄÜÕı³£	support_to_ipv6.sh	ge_ipv6_ping_pack	on	
 PV-446	R.HNS.F013.A	ST_GE_IPV6_02		ÉèÖÃIPv6 µØÖ·	support_to_ipv6.sh	ge_set_ipv6_address	on	
 PV-446	R.HNS.F013.A	ST_XGE_IPV6_01	XGEÍø¿ÚIPv6»ù±¾¹¦ÄÜ	XGE IPv6 ping°ü¹¦ÄÜÕı³£	support_to_ipv6.sh	xge_ipv6_ping_pack	on	
 PV-446	R.HNS.F013.A	ST_XGE_IPV6_02		XGEÉèÖÃIPv6 µØÖ·	support_to_ipv6.sh	xge_set_ipv6_address	on	
-PV-411	R.HNS.F026.A	ST_GE_LINK_GET_015	GE link×´Ì¬²éÑ¯	GEÍ¨¹ıµç¿ÚÁ¬½Ó²éÑ¯link×´Ì¬ÕıÈ·	support_to_query_port_status.sh	ge_query_link_state	on	
+PV-411	R.HNS.F026.A	ST_GE_LINK_GET_015	GE link×´Ì¬²éÑ¯	GEÍ¨¹ıµç¿ÚÁ¬½Ó²éÑ¯link×´Ì¬ÕıÈ·	support_to_query_port_status.sh	ge_query_link_state	off	
 PV-411	R.HNS.F026.A	ST_GE_LINK_GET_ERROR_015		GEÍø¿ÚÁ´Â·×´Ì¬²éÑ¯Èİ´í²âÊÔ	support_to_query_port_status.sh	ge_link_statefault_tolerant	on	
-PV-411	R.HNS.F026.A	ST_GE_LINK_GET_015	XGE link×´Ì¬²éÑ¯	XGE¹â¿ÚÁ¬½Ó²éÑ¯link×´Ì¬ÕıÈ·	support_to_query_port_status.sh	xge_query_link_state	on	
-PV-416	R.HNS.F028.A	ST_SGE_GET_DRVINFO_000	GEÍø¿ÚÇı¶¯°æ±¾ĞÅÏ¢²éÑ¯	GEÍø¿ÚÇı¶¯°æ±¾ĞÅÏ¢²éÑ¯ÕıÈ·	support_to_get_driver_informations.sh	ge_query_driven_version_information	on	
-PV-416	R.HNS.F028.A	ST_SGE_GET_DRVINFO_ERROR_000		GEÍø¿ÚÇı¶¯°æ±¾ĞÅÏ¢²éÑ¯Èİ´í²âÊÔ	support_to_get_driver_informations.sh	ge_query_driven_version_fault_tolerant	on	
-PV-416	R.HNS.F028.A	ST_SGE_GET_DRVINFO_000	XGEÍø¿ÚÇı¶¯°æ±¾ĞÅÏ¢²éÑ¯	XGEÍø¿ÚÇı¶¯°æ±¾ĞÅÏ¢²éÑ¯ÕıÈ·	support_to_get_driver_informations.sh	xge_query_driven_version_information	on	
-PV-418	R.HNS.F029.A	ST_GE_RINGBD_000	ÊÕ·¢¶ÓÁĞBD¸öÊı²éÑ¯	GEÍø¿ÚÊÕ·¢¶ÓÁĞBD¸öÊı²éÑ¯ÕıÈ·	support_of_ring_parameter_gettings.sh	ge_query_ring_parameter_gettings	on	
-PV-418	R.HNS.F029.A	ST_XGE_RINGBD_000		XGEÍø¿ÚÊÕ·¢¶ÓÁĞBD¸öÊı²éÑ¯ÕıÈ·	support_of_ring_parameter_gettings.sh	xge_query_ring_parameter_gettings	on	
+PV-411	R.HNS.F026.A	ST_GE_LINK_GET_015	XGE link×´Ì¬²éÑ¯	XGE¹â¿ÚÁ¬½Ó²éÑ¯link×´Ì¬ÕıÈ·	support_to_query_port_status.sh	xge_query_link_state	off	
+PV-416	R.HNS.F028.A	ST_SGE_GET_DRVINFO_000	GEÍø¿ÚÇı¶¯°æ±¾ĞÅÏ¢²éÑ¯	GEÍø¿ÚÇı¶¯°æ±¾ĞÅÏ¢²éÑ¯ÕıÈ·	support_to_get_driver_informations.sh	ge_query_driven_version_information	off	
+PV-416	R.HNS.F028.A	ST_SGE_GET_DRVINFO_ERROR_000		GEÍø¿ÚÇı¶¯°æ±¾ĞÅÏ¢²éÑ¯Èİ´í²âÊÔ	support_to_get_driver_informations.sh	ge_query_driven_version_fault_tolerant	off	
+PV-416	R.HNS.F028.A	ST_SGE_GET_DRVINFO_000	XGEÍø¿ÚÇı¶¯°æ±¾ĞÅÏ¢²éÑ¯	XGEÍø¿ÚÇı¶¯°æ±¾ĞÅÏ¢²éÑ¯ÕıÈ·	support_to_get_driver_informations.sh	xge_query_driven_version_information	off	
+PV-418	R.HNS.F029.A	ST_GE_RINGBD_000	ÊÕ·¢¶ÓÁĞBD¸öÊı²éÑ¯	GEÍø¿ÚÊÕ·¢¶ÓÁĞBD¸öÊı²éÑ¯ÕıÈ·	support_of_ring_parameter_gettings.sh	ge_query_ring_parameter_gettings	off	
+PV-418	R.HNS.F029.A	ST_XGE_RINGBD_000		XGEÍø¿ÚÊÕ·¢¶ÓÁĞBD¸öÊı²éÑ¯ÕıÈ·	support_of_ring_parameter_gettings.sh	xge_query_ring_parameter_gettings	off	
 PV-418	R.HNS.F029.A	ST_SGE_GET_RINGBD_ERROR_000		Íø¿ÚÊÕ·¢¶ÓÁĞBD¸öÊı²éÑ¯Èİ´í²âÊÔ	support_of_ring_parameter_gettings.sh	query_ring_parameter_fault_tolerant	on	
 PV-438	R.HNS.F005.A	ST_GE_VLAN_PERF_01	GE Vlan°üÍø¿Ú´ø¿í²âÊÔ	GEµ¥Íø¿Ú vlan iperf ²âÊÔ-µ¥°å×÷Îª¿Í»§¶Ë	performance.sh		off	
 PV-438	R.HNS.F005.A	ST_GE_VLAN_PERF_02		GEµ¥Íø¿Ú vlan iperf ²âÊÔ-µ¥°å×÷Îª·şÎñÆ÷¶Ë	performance.sh		off	
@@ -66,41 +66,41 @@ PV-438	R.HNS.F005.A	ST_XGE_VLAN_PERF_03		XGEµ¥Íø¿Ú vlan iperf ²âÊÔ-µ¥°åÍ¬Ê±×÷Îª·
 PV-438	R.HNS.F005.A	ST_XGE_VLAN_PERF_04		XGEË«Íø¿Ú vlan iperf ²âÊÔ-µ¥°å×÷Îª¿Í»§¶Ë	performance.sh		off	
 PV-438	R.HNS.F005.A	ST_XGE_VLAN_PERF_05		XGEË«Íø¿Ú vlan iperf ²âÊÔ-µ¥°å×÷Îª·şÎñÆ÷¶Ë	performance.sh		off	
 PV-438	R.HNS.F005.A	ST_XGE_VLAN_PERF_06		XGEË«Íø¿Ú vlan iperf ²âÊÔ-µ¥°åÍ¬Ê±×÷Îª·şÎñÆ÷¶ËºÍ¿Í»§¶Ë	performance.sh		off	
-PV-446	R.HNS.F013.A	ST_GE_IPV6_PERF_01	GE IPv6Íø¿Ú´ø¿í²âÊÔ	GEµ¥Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°å×÷Îª¿Í»§¶Ë	performance.sh		off	
-PV-446	R.HNS.F013.A	ST_GE_IPV6_PERF_02		GEµ¥Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°å×÷Îª·şÎñÆ÷¶Ë	performance.sh		off	
-PV-446	R.HNS.F013.A	ST_GE_IPV6_PERF_03		GEµ¥Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°åÍ¬Ê±×÷Îª·şÎñÆ÷¶ËºÍ¿Í»§¶Ë	performance.sh		off	
-PV-446	R.HNS.F013.A	ST_GE_IPV6_PERF_04		GEË«Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°å×÷Îª¿Í»§¶Ë	performance.sh		off	
-PV-446	R.HNS.F013.A	ST_GE_IPV6_PERF_05		GEË«Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°å×÷Îª·şÎñÆ÷¶Ë	performance.sh		off	
-PV-446	R.HNS.F013.A	ST_GE_IPV6_PERF_06		GEË«Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°åÍ¬Ê±×÷Îª·şÎñÆ÷¶ËºÍ¿Í»§¶Ë	performance.sh		off	
-PV-446	R.HNS.F013.A	ST_XGE_IPV6_PERF_01	XGE IPv6Íø¿Ú´ø¿í²âÊÔ	XGEµ¥Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°å×÷Îª¿Í»§¶Ë	performance.sh		off	
-PV-446	R.HNS.F013.A	ST_XGE_IPV6_PERF_02		XGEµ¥Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°å×÷Îª·şÎñÆ÷¶Ë	performance.sh		off	
-PV-446	R.HNS.F013.A	ST_XGE_IPV6_PERF_03		XGEµ¥Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°åÍ¬Ê±×÷Îª·şÎñÆ÷¶ËºÍ¿Í»§¶Ë	performance.sh		off	
-PV-446	R.HNS.F013.A	ST_XGE_IPV6_PERF_04		XGEË«Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°å×÷Îª¿Í»§¶Ë	performance.sh		off	
-PV-446	R.HNS.F013.A	ST_XGE_IPV6_PERF_05		XGEË«Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°å×÷Îª·şÎñÆ÷¶Ë	performance.sh		off	
-PV-446	R.HNS.F013.A	ST_XGE_IPV6_PERF_06		XGEË«Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°åÍ¬Ê±×÷Îª·şÎñÆ÷¶ËºÍ¿Í»§¶Ë	performance.sh		off	
-PV-1516	R.HNS.P001.B	ST_GE_IPV4_PERF_000	GE IPv4Íø¿Ú´ø¿í²âÊÔ	GEµ¥Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°å×÷Îª¿Í»§¶Ë	performance.sh		off	
-PV-1516	R.HNS.P001.B	ST_GE_IPV4_PERF_005		GEµ¥Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°å×÷Îª·şÎñÆ÷¶Ë	performance.sh		off	
-PV-1516	R.HNS.P001.B	ST_GE_IPV4_PERF_010		GEµ¥Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°åÍ¬Ê±×÷Îª·şÎñÆ÷¶ËºÍ¿Í»§¶Ë	performance.sh		off	
-PV-1516	R.HNS.P001.B	ST_GE_IPV4_PERF_015		GEË«Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°å×÷Îª¿Í»§¶Ë	performance.sh		off	
-PV-1516	R.HNS.P001.B	ST_GE_IPV4_PERF_020		GEË«Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°å×÷Îª·şÎñÆ÷¶Ë	performance.sh		off	
-PV-1516	R.HNS.P001.B	ST_GE_IPV4_PERF_025		GEË«Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°åÍ¬Ê±×÷Îª·şÎñÆ÷¶ËºÍ¿Í»§¶Ë	performance.sh		off	
-PV-1516	R.HNS.P001.B	ST_XGE_IPV4_PERF_01	XGE IPv4Íø¿Ú´ø¿í²âÊÔ	XGEµ¥Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°å×÷Îª¿Í»§¶Ë	performance.sh		off	
-PV-1516	R.HNS.P001.B	ST_XGE_IPV4_PERF_02		XGEµ¥Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°å×÷Îª·şÎñÆ÷¶Ë	performance.sh		off	
-PV-1516	R.HNS.P001.B	ST_XGE_IPV4_PERF_03		XGEµ¥Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°åÍ¬Ê±×÷Îª·şÎñÆ÷¶ËºÍ¿Í»§¶Ë	performance.sh		off	
-PV-1516	R.HNS.P001.B	ST_XGE_IPV4_PERF_04		XGEË«Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°å×÷Îª¿Í»§¶Ë	performance.sh		off	
-PV-1516	R.HNS.P001.B	ST_XGE_IPV4_PERF_05		XGEË«Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°å×÷Îª·şÎñÆ÷¶Ë	performance.sh		off	
-PV-1516	R.HNS.P001.B	ST_XGE_IPV4_PERF_06		XGEË«Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°åÍ¬Ê±×÷Îª·şÎñÆ÷¶ËºÍ¿Í»§¶Ë	performance.sh		off	
-PV-1517	R.HNS.P003.B	ST_GE_NETPERF_000	Íø¿Únetperf²âÊÔ	GEÍø¿Únetperf TCP_STREAM²âÊÔ	performance.sh		off	
-PV-1517	R.HNS.P003.B	ST_GE_NETPERF_005		GEÍø¿Únetperf TCP_RR²âÊÔ	performance.sh		off	
-PV-1517	R.HNS.P003.B	ST_GE_NETPERF_010		GEÍø¿Únetperf TCP_CRR²âÊÔ	performance.sh		off	
-PV-1517	R.HNS.P003.B	ST_GE_NETPERF_015		GEÍø¿Únetperf UDP_STREAM²âÊÔ	performance.sh		off	
-PV-1517	R.HNS.P003.B	ST_GE_NETPERF_020		GEÍø¿Únetperf UDP_RR²âÊÔ	performance.sh		off	
-PV-1517	R.HNS.P003.B	ST_XGE_NETPERF_01		XGEÍø¿Únetperf TCP_STREAM²âÊÔ	performance.sh		off	
-PV-1517	R.HNS.P003.B	ST_XGE_NETPERF_02		XGEÍø¿Únetperf TCP_RR²âÊÔ	performance.sh		off	
-PV-1517	R.HNS.P003.B	ST_XGE_NETPERF_03		XGEÍø¿Únetperf TCP_CRR²âÊÔ	performance.sh		off	
-PV-1517	R.HNS.P003.B	ST_XGE_NETPERF_04		XGEÍø¿Únetperf UDP_STREAM²âÊÔ	performance.sh		off	
-PV-1517	R.HNS.P003.B	ST_XGE_NETPERF_05		XGEÍø¿Únetperf UDP_RR²âÊÔ	performance.sh		off	
-PV-1517	R.HNS.P003.B	ST_GE_QPERF_01	Íø¿ÚÊ±ÑÓ²âÊÔ	GEÍø¿ÚtcpÊ±ÑÓ²âÊÔ	performance.sh		off	
-PV-1517	R.HNS.P003.B	ST_GE_QPERF_02		GEÍø¿ÚudpÊ±ÑÓ²âÊÔ	performance.sh		off	
-PV-1517	R.HNS.P003.B	ST_XGE_QPERF_01		XGEÍø¿ÚtcpÊ±ÑÓ²âÊÔ	performance.sh		off	
-PV-1517	R.HNS.P003.B	ST_XGE_QPERF_02		XGEÍø¿ÚudpÊ±ÑÓ²âÊÔ	performance.sh		off	
+PV-446	R.HNS.F013.A	ST_GE_IPV6_PERF_01	GE IPv6Íø¿Ú´ø¿í²âÊÔ	GEµ¥Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°å×÷Îª¿Í»§¶Ë	performance.sh	ipv6_iperf_single	off	
+PV-446	R.HNS.F013.A	ST_GE_IPV6_PERF_02		GEµ¥Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°å×÷Îª·şÎñÆ÷¶Ë	performance.sh	ipv6_iperf_single	off	
+PV-446	R.HNS.F013.A	ST_GE_IPV6_PERF_03		GEµ¥Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°åÍ¬Ê±×÷Îª·şÎñÆ÷¶ËºÍ¿Í»§¶Ë	performance.sh	ipv6_iperf_dual	off	
+PV-446	R.HNS.F013.A	ST_GE_IPV6_PERF_04		GEË«Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°å×÷Îª¿Í»§¶Ë	performance.sh	ipv6_iperf_single	off	
+PV-446	R.HNS.F013.A	ST_GE_IPV6_PERF_05		GEË«Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°å×÷Îª·şÎñÆ÷¶Ë	performance.sh	ipv6_iperf_single	off	
+PV-446	R.HNS.F013.A	ST_GE_IPV6_PERF_06		GEË«Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°åÍ¬Ê±×÷Îª·şÎñÆ÷¶ËºÍ¿Í»§¶Ë	performance.sh	ipv6_iperf_dual	off	
+PV-446	R.HNS.F013.A	ST_XGE_IPV6_PERF_01	XGE IPv6Íø¿Ú´ø¿í²âÊÔ	XGEµ¥Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°å×÷Îª¿Í»§¶Ë	performance.sh	ipv6_iperf_single	on	
+PV-446	R.HNS.F013.A	ST_XGE_IPV6_PERF_02		XGEµ¥Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°å×÷Îª·şÎñÆ÷¶Ë	performance.sh	ipv6_iperf_single	on	
+PV-446	R.HNS.F013.A	ST_XGE_IPV6_PERF_03		XGEµ¥Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°åÍ¬Ê±×÷Îª·şÎñÆ÷¶ËºÍ¿Í»§¶Ë	performance.sh	ipv6_iperf_dual	on	
+PV-446	R.HNS.F013.A	ST_XGE_IPV6_PERF_04		XGEË«Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°å×÷Îª¿Í»§¶Ë	performance.sh	ipv6_iperf_single	on	
+PV-446	R.HNS.F013.A	ST_XGE_IPV6_PERF_05		XGEË«Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°å×÷Îª·şÎñÆ÷¶Ë	performance.sh	ipv6_iperf_single	on	
+PV-446	R.HNS.F013.A	ST_XGE_IPV6_PERF_06		XGEË«Íø¿Ú IPv6 iperf ²âÊÔ-µ¥°åÍ¬Ê±×÷Îª·şÎñÆ÷¶ËºÍ¿Í»§¶Ë	performance.sh	ipv6_iperf_dual	on	
+PV-1516	R.HNS.P001.B	ST_GE_IPV4_PERF_000	GE IPv4Íø¿Ú´ø¿í²âÊÔ	GEµ¥Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°å×÷Îª¿Í»§¶Ë	performance.sh	iperf_single	off	
+PV-1516	R.HNS.P001.B	ST_GE_IPV4_PERF_005		GEµ¥Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°å×÷Îª·şÎñÆ÷¶Ë	performance.sh	iperf_single	off	
+PV-1516	R.HNS.P001.B	ST_GE_IPV4_PERF_010		GEµ¥Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°åÍ¬Ê±×÷Îª·şÎñÆ÷¶ËºÍ¿Í»§¶Ë	performance.sh	iperf_dual	off	
+PV-1516	R.HNS.P001.B	ST_GE_IPV4_PERF_015		GEË«Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°å×÷Îª¿Í»§¶Ë	performance.sh	iperf_single	off	
+PV-1516	R.HNS.P001.B	ST_GE_IPV4_PERF_020		GEË«Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°å×÷Îª·şÎñÆ÷¶Ë	performance.sh	iperf_single	off	
+PV-1516	R.HNS.P001.B	ST_GE_IPV4_PERF_025		GEË«Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°åÍ¬Ê±×÷Îª·şÎñÆ÷¶ËºÍ¿Í»§¶Ë	performance.sh	iperf_dual	off	
+PV-1516	R.HNS.P001.B	ST_XGE_IPV4_PERF_01	XGE IPv4Íø¿Ú´ø¿í²âÊÔ	XGEµ¥Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°å×÷Îª¿Í»§¶Ë	performance.sh	iperf_single	on	
+PV-1516	R.HNS.P001.B	ST_XGE_IPV4_PERF_02		XGEµ¥Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°å×÷Îª·şÎñÆ÷¶Ë	performance.sh	iperf_single	on	
+PV-1516	R.HNS.P001.B	ST_XGE_IPV4_PERF_03		XGEµ¥Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°åÍ¬Ê±×÷Îª·şÎñÆ÷¶ËºÍ¿Í»§¶Ë	performance.sh	iperf_dual	on	
+PV-1516	R.HNS.P001.B	ST_XGE_IPV4_PERF_04		XGEË«Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°å×÷Îª¿Í»§¶Ë	performance.sh	iperf_single	on	
+PV-1516	R.HNS.P001.B	ST_XGE_IPV4_PERF_05		XGEË«Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°å×÷Îª·şÎñÆ÷¶Ë	performance.sh	iperf_single	off	
+PV-1516	R.HNS.P001.B	ST_XGE_IPV4_PERF_06		XGEË«Íø¿Ú IPv4 iperf ²âÊÔ-µ¥°åÍ¬Ê±×÷Îª·şÎñÆ÷¶ËºÍ¿Í»§¶Ë	performance.sh	iperf_dual	on	
+PV-1517	R.HNS.P003.B	ST_GE_NETPERF_000	Íø¿Únetperf²âÊÔ	GEÍø¿Únetperf TCP_STREAM²âÊÔ	performance.sh	netperf_single	off	
+PV-1517	R.HNS.P003.B	ST_GE_NETPERF_005		GEÍø¿Únetperf TCP_RR²âÊÔ	performance.sh	netperf_single	off	
+PV-1517	R.HNS.P003.B	ST_GE_NETPERF_010		GEÍø¿Únetperf TCP_CRR²âÊÔ	performance.sh	netperf_single	off	
+PV-1517	R.HNS.P003.B	ST_GE_NETPERF_015		GEÍø¿Únetperf UDP_STREAM²âÊÔ	performance.sh	netperf_single	off	
+PV-1517	R.HNS.P003.B	ST_GE_NETPERF_020		GEÍø¿Únetperf UDP_RR²âÊÔ	performance.sh	netperf_single	off	
+PV-1517	R.HNS.P003.B	ST_XGE_NETPERF_01		XGEÍø¿Únetperf TCP_STREAM²âÊÔ	performance.sh	netperf_single	off	
+PV-1517	R.HNS.P003.B	ST_XGE_NETPERF_02		XGEÍø¿Únetperf TCP_RR²âÊÔ	performance.sh	netperf_single	off	
+PV-1517	R.HNS.P003.B	ST_XGE_NETPERF_03		XGEÍø¿Únetperf TCP_CRR²âÊÔ	performance.sh	netperf_single	off	
+PV-1517	R.HNS.P003.B	ST_XGE_NETPERF_04		XGEÍø¿Únetperf UDP_STREAM²âÊÔ	performance.sh	netperf_single	off	
+PV-1517	R.HNS.P003.B	ST_XGE_NETPERF_05		XGEÍø¿Únetperf UDP_RR²âÊÔ	performance.sh	netperf_single	off	
+PV-1517	R.HNS.P003.B	ST_GE_QPERF_01	Íø¿ÚÊ±ÑÓ²âÊÔ	GEÍø¿ÚtcpÊ±ÑÓ²âÊÔ	performance.sh	qperf_test	off	
+PV-1517	R.HNS.P003.B	ST_GE_QPERF_02		GEÍø¿ÚudpÊ±ÑÓ²âÊÔ	performance.sh	qperf_test	off	
+PV-1517	R.HNS.P003.B	ST_XGE_QPERF_01		XGEÍø¿ÚtcpÊ±ÑÓ²âÊÔ	performance.sh	qperf_test	on	
+PV-1517	R.HNS.P003.B	ST_XGE_QPERF_02		XGEÍø¿ÚudpÊ±ÑÓ²âÊÔ	performance.sh	qperf_test	on	
