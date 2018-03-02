@@ -1,10 +1,8 @@
 PING 192.168.3.210 (192.168.3.210) 56(84) bytes of data.
-64 bytes from 192.168.3.210: icmp_seq=1 ttl=64 time=0.058 ms
-64 bytes from 192.168.3.210: icmp_seq=2 ttl=64 time=0.011 ms
-64 bytes from 192.168.3.210: icmp_seq=3 ttl=64 time=0.009 ms
-64 bytes from 192.168.3.210: icmp_seq=4 ttl=64 time=0.009 ms
-64 bytes from 192.168.3.210: icmp_seq=5 ttl=64 time=0.009 ms
+64 bytes from 192.168.3.210: icmp_seq=1 ttl=64 time=0.101 ms
+64 bytes from 192.168.3.210: icmp_seq=2 ttl=64 time=0.092 ms
+64 bytes from 192.168.3.210: icmp_seq=3 ttl=64 time=0.073 ms
 
 --- 192.168.3.210 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 4088ms
-rtt min/avg/max/mdev = 0.009/0.019/0.058/0.019 ms
+3 packets transmitted, 3 received, 0% packet loss, time 2032ms
+rtt min/avg/max/mdev = 0.073/0.088/0.101/0.015 ms

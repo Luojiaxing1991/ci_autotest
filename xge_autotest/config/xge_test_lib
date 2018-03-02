@@ -55,9 +55,9 @@ function init_net_export()
     declare -A eth_map
     eth_map=(
     ["eth0"]="eth0"
-    ["eth1"]="eth1"
-    ["eth2"]="eth2"
-    ["eth3"]="eth3"
+    ["eth1"]="enahisic2i1"
+    ["eth2"]="enahisic2i2"
+    ["eth3"]="enahisic2i3"
     )
 
     #we update the eth rename info to eth_map,then update TP/FIBRE info

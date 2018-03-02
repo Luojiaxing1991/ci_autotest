@@ -1,4 +1,4 @@
-PV-434	R.HNS.F001.A	ST_GE_PORT_CTRL_000	GE网口的打开和关闭接口	GE初始化后打开和关闭网口	enable_and_disable_interface.sh	ge_enable_and_disable_interface	off	
+PV-434	R.HNS.F001.A	ST_GE_PORT_CTRL_000	GE网口的打开和关闭接口	GE初始化后打开和关闭网口	enable_and_disable_interface.sh	ge_enable_and_disable_interface	on	
 PV-434	R.HNS.F001.A	ST_GE_PORT_CTRL_005		GE初始化后多次打开和关闭网口	enable_and_disable_interface.sh	ge_continued_enable_and_disable_interface	off	
 PV-434	R.HNS.F001.A	ST_GE_PORT_CTRL_010		GE收发包过程中打开和关闭网口	enable_and_disable_interface.sh	ge_flow_enable_and_disable_interface	off	
 PV-434	R.HNS.F001.A	ST_GE_PORT_CTRL_015		GE收发包过程中多次打开和关闭网口	enable_and_disable_interface.sh	ge_flow_continued_enable_and_disable_interface	off	
