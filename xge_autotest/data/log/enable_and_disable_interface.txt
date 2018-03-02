@@ -1,7 +1,5 @@
 PING 192.168.11.210 (192.168.11.210) 56(84) bytes of data.
-64 bytes from 192.168.11.210: icmp_seq=1 ttl=64 time=0.183 ms
-64 bytes from 192.168.11.210: icmp_seq=2 ttl=64 time=0.066 ms
 
 --- 192.168.11.210 ping statistics ---
-2 packets transmitted, 2 received, 0% packet loss, time 1031ms
-rtt min/avg/max/mdev = 0.066/0.124/0.183/0.059 ms
+5 packets transmitted, 0 received, 100% packet loss, time 4090ms
+
