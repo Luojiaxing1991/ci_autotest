@@ -28,7 +28,7 @@ function ge_enable_and_disable_interface()
     ping ${remote_tp1_ip} -c 5 > ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt &
     sleep 10
     cat ${HNS_TOP_DIR}/data/log/enable_and_disable_interface.txt | grep "received, 0% packet loss" >/dev/null
-    if [ $? -eq 0 ];then
+    if [ $? -eq 1 ];then
        disableok=1
     fi
     echo "disableok "${disableok}
