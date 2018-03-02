@@ -1,0 +1,10 @@
+PING 192.168.21.20 (192.168.21.20) 56(84) bytes of data.
+
+--- 192.168.21.20 ping statistics ---
+5 packets transmitted, 0 received, 100% packet loss, time 4091ms
+
+PING 192.168.21.20 (192.168.21.20) 56(84) bytes of data.
+
+--- 192.168.21.20 ping statistics ---
+5 packets transmitted, 0 received, 100% packet loss, time 4090ms
+

@@ -1,0 +1,5 @@
+PING 192.168.22.20 (192.168.22.20) 56(124) bytes of data.
+
+--- 192.168.22.20 ping statistics ---
+5 packets transmitted, 0 received, 100% packet loss, time 3999ms
+

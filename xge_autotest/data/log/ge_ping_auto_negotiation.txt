@@ -6,5 +6,5 @@ From 192.168.1.10 icmp_seq=4 Destination Host Unreachable
 From 192.168.1.10 icmp_seq=5 Destination Host Unreachable
 
 --- 192.168.1.20 ping statistics ---
-5 packets transmitted, 0 received, +5 errors, 100% packet loss, time 4087ms
+5 packets transmitted, 0 received, +5 errors, 100% packet loss, time 4085ms
 pipe 4

@@ -15,7 +15,7 @@ function ge_set_mtu_value()
     do
         echo $value
         ifconfig ${local_tp1} mtu $value
-        NewMtuValue=$(ifconfig eth1 | grep "MTU" | awk '{print $(NF-1)}' | awk -F':' '{print $NF}')
+        NewMtuValue=$(ifconfig ${local_tp1} | grep "MTU" | awk '{print $(NF-1)}' | awk -F':' '{print $NF}')
         if [ $value -ne $NewMtuValue ];then
             MESSAGE="FAIL\t MTU value set fail "
 	    echo ${MESSAGE}
@@ -36,7 +36,7 @@ function ge_set_fail_mtu_value()
     do
         echo $value
         ifconfig ${local_tp1} mtu $value
-        if [ $? -ne 0 ];then
+        if [ $? -ne 1 ];then
             MESSAGE="FAIL\t MTU Incoming error parameters set fail "
 	    echo ${MESSAGE}
         fi
@@ -68,7 +68,7 @@ function ge_iperf_set_mtu_value()
         for value in $valuelist
         do
             ifconfig ${local_tp1} mtu $value;sleep 5
-            NewMtuValue=$(ifconfig eth1 | grep "MTU" | awk '{print $(NF-1)}' | awk -F':' '{print $NF}')
+            NewMtuValue=$(ifconfig ${local_tp1} | grep "MTU" | awk '{print $(NF-1)}' | awk -F':' '{print $NF}')
             bandwidth=$(cat ${HNS_TOP_DIR}/data/log/iperf_set_mtu_value.txt | tail -1 | awk '{print $(NF-1)}')
             if [ $value -ne $NewMtuValue ] || [ $bandwidth -le 0 ];then
                 killall iperf
@@ -97,7 +97,7 @@ function xge_set_mtu_value()
     do
         echo $value
         ifconfig ${local_fibre1} mtu $value
-        NewMtuValue=$(ifconfig eth1 | grep "MTU" | awk '{print $(NF-1)}' | awk -F':' '{print $NF}')
+        NewMtuValue=$(ifconfig ${local_fibre1} | grep "MTU" | awk '{print $(NF-1)}' | awk -F':' '{print $NF}')
         if [ $value -ne $NewMtuValue ];then
             MESSAGE="FAIL\t MTU value set fail "
 	    echo ${MESSAGE}
@@ -117,7 +117,7 @@ function xge_set_fail_mtu_value()
     do
         #echo $value
         ifconfig ${local_fibre1} mtu $value
-        if [ $? -ne 0 ];then
+        if [ $? -ne 1 ];then
             MESSAGE="FAIL\t MTU Incoming error parameters set fail "
         fi
     done
@@ -146,7 +146,7 @@ function xge_iperf_set_mtu_value()
             echo $i
             echo $value
             ifconfig ${local_fibre1} mtu $value;sleep 5
-            NewMtuValue=$(ifconfig eth1 | grep "MTU" | awk '{print $(NF-1)}' | awk -F':' '{print $NF}')
+            NewMtuValue=$(ifconfig ${local_fibre1} | grep "MTU" | awk '{print $(NF-1)}' | awk -F':' '{print $NF}')
             bandwidth=$(cat ${HNS_TOP_DIR}/data/log/iperf_set_mtu_value.txt | tail -1 | awk '{print $(NF-1)}')
             if [ $value -ne $NewMtuValue ] || [ $bandwidth -le 0 ];then
                 killall iperf
