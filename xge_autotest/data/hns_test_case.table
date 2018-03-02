@@ -1,4 +1,4 @@
-PV-434	R.HNS.F001.A	ST_GE_PORT_CTRL_000	GE网口的打开和关闭接口	GE初始化后打开和关闭网口	enable_and_disable_interface.sh	ge_enable_and_disable_interface	on	
+PV-434	R.HNS.F001.A	ST_GE_PORT_CTRL_000	GE网口的打开和关闭接口	GE初始化后打开和关闭网口	enable_and_disable_interface.sh	ge_enable_and_disable_interface	off	
 PV-434	R.HNS.F001.A	ST_GE_PORT_CTRL_005		GE初始化后多次打开和关闭网口	enable_and_disable_interface.sh	ge_continued_enable_and_disable_interface	off	
 PV-434	R.HNS.F001.A	ST_GE_PORT_CTRL_010		GE收发包过程中打开和关闭网口	enable_and_disable_interface.sh	ge_flow_enable_and_disable_interface	off	
 PV-434	R.HNS.F001.A	ST_GE_PORT_CTRL_015		GE收发包过程中多次打开和关闭网口	enable_and_disable_interface.sh	ge_flow_continued_enable_and_disable_interface	off	
@@ -20,9 +20,9 @@ PV-438	R.HNS.F005.A	ST_XGE_VLAN_02		多端口Vlan ping包功能正常	vlan_tagged_traffi
 PV-438	R.HNS.F005.A	ST_XGE_VLAN_03		XGE设置Vlan网口	vlan_tagged_traffic_support.sh	xge_set_vlan	off	
 #N/A	R.HNS.F005A	ST_XGE_VLAN_04		HNS创建XGE Vlan后，直接将网口关闭	vlan_tagged_traffic_support.sh	ge_vlan_up_down	off	
 PV-439	R.HNS.F006.A	ST_GE_RESET_01	GE重新自协商	GE电口重新自协商成功	auto_negotiation_support.sh	ge_restarts_auto_negotiation	off	
-PV-439	R.HNS.F006.A	ST_XGE_RESET_02		GE电口大流量反复重新自协商成功	auto_negotiation_support.sh	ge_iperf_auto_negotiation	on	
+PV-439	R.HNS.F006.A	ST_XGE_RESET_02		GE电口大流量反复重新自协商成功	auto_negotiation_support.sh	ge_iperf_auto_negotiation	off	
 PV-439	R.HNS.F006.A	ST_XGE_RESET_03		GE电口关闭自协商后重新自协商功能正常	auto_negotiation_support.sh		off	
-PV-439	R.HNS.F006.A	ST_XGE_RESET_01		XGE光口重新自协商成功	auto_negotiation_support.sh	xge_restarts_auto_negotiation	on	
+PV-439	R.HNS.F006.A	ST_XGE_RESET_01		XGE光口重新自协商成功	auto_negotiation_support.sh	xge_restarts_auto_negotiation	off	
 PV-439	R.HNS.F006.A	ST_XGE_RESET_02		XGE光口大流量反复重新自协商成功	auto_negotiation_support.sh	xge_iperf_auto_negotiation	off	
 PV-442	R.HNS.F009.A	ST_GE_PHY_IOCTL_01	通过MiiTools读写ge phy寄存器	GE电口正确读取Phy寄存器	support_of_mdio.sh	ge_read_phy_register	off	
 PV-442	R.HNS.F009.A	ST_GE_PHY_IOCTL_02		GE电口正确写Phy寄存器	support_of_mdio.sh	ge_iperf_read_phy_register	off	
