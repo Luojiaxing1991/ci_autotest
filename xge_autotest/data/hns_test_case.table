@@ -35,12 +35,12 @@ PV-443	R.HNS.F010.A	ST_XGE_MAC_ERROR_01	XGEÍø¿ÚMACµØÖ·ÉèÖÃ	XGEÍø¿ÚMacµØÖ·ÉèÖÃÈİ´
 PV-443	R.HNS.F010.A	SET_XGE_SET_MAC_01		XGE±ê×¼macµØÖ·ÉèÖÃ³É¹¦	support_to_change_mac_address.sh	xge_set_standard_mac_address	off	
 PV-443	R.HNS.F010.A	SET_XGE_SET_MAC_02		XGEÏßĞÔmacµØÖ·ÉèÖÃ	support_to_change_mac_address.sh	xge_set_linear_mac_address	off	
 PV-443	R.HNS.F010.A	SET_XGE_SET_MAC_03		XGEµç¿Ú³õÊ¼»¯ºómacµØÖ·Ëæ»úÉú³É	support_to_change_mac_address.sh	xge_mac_address_random_generation	off	
-PV-444	R.HNS.F011.A	ST_GE_SET_MTU_01	GEÉèÖÃMTU	GE MTUĞŞ¸Äºó¹¦ÄÜÕı³£	support_of_mtu_setting.sh	ge_set_mtu_value	on	
-PV-444	R.HNS.F011.A	ST_GE_SET_MTU_04		GE MTU´«Èë´íÎóµ¼ÖÂÅäÖÃÊ§°Ü	support_of_mtu_setting.sh	ge_set_fail_mtu_value	on	
-PV-444	R.HNS.F011.A	ST_GE_SET_MTU_05		GE´óÁ÷Á¿ÊÕ·¢°üÊ±MTUĞŞ¸Äºó¹¦ÄÜÕı³£	support_of_mtu_setting.sh	ge_iperf_set_mtu_value	on	
+PV-444	R.HNS.F011.A	ST_GE_SET_MTU_01	GEÉèÖÃMTU	GE MTUĞŞ¸Äºó¹¦ÄÜÕı³£	support_of_mtu_setting.sh	ge_set_mtu_value	off	
+PV-444	R.HNS.F011.A	ST_GE_SET_MTU_04		GE MTU´«Èë´íÎóµ¼ÖÂÅäÖÃÊ§°Ü	support_of_mtu_setting.sh	ge_set_fail_mtu_value	off	
+PV-444	R.HNS.F011.A	ST_GE_SET_MTU_05		GE´óÁ÷Á¿ÊÕ·¢°üÊ±MTUĞŞ¸Äºó¹¦ÄÜÕı³£	support_of_mtu_setting.sh	ge_iperf_set_mtu_valuff	off	
 PV-444	R.HNS.F011.A	ST_XGE_SET_MTU_01	XGEÉèÖÃMTU	XGE MTUĞŞ¸Äºó¹¦ÄÜÕı³£	support_of_mtu_setting.sh	xge_set_mtu_value	on	
 PV-444	R.HNS.F011.A	ST_XGE_SET_MTU_04		XGE MTU´«Èë´íÎóµ¼ÖÂÅäÖÃÊ§°Ü	support_of_mtu_setting.sh	xge_set_fail_mtu_value	on	
-PV-444	R.HNS.F011.A	ST_XGE_SET_MTU_05		XGE´óÁ÷Á¿ÊÕ·¢°üÊ±MTUĞŞ¸Äºó¹¦ÄÜÕı³£	support_of_mtu_setting.sh	xge_iperf_set_mtu_value	on	
+PV-444	R.HNS.F011.A	ST_XGE_SET_MTU_05		XGE´óÁ÷Á¿ÊÕ·¢°üÊ±MTUĞŞ¸Äºó¹¦ÄÜÕı³£	support_of_mtu_setting.sh	xge_iperf_set_mtu_value	off	
 PV-446	R.HNS.F013.A	ST_GE_IPV6_01	GEÍø¿ÚIPv6»ù±¾¹¦ÄÜ	GE IPv6 ping°ü¹¦ÄÜÕı³£	support_to_ipv6.sh	ge_ipv6_ping_pack	on	
 PV-446	R.HNS.F013.A	ST_GE_IPV6_02		ÉèÖÃIPv6 µØÖ·	support_to_ipv6.sh	ge_set_ipv6_address	on	
 PV-446	R.HNS.F013.A	ST_XGE_IPV6_01	XGEÍø¿ÚIPv6»ù±¾¹¦ÄÜ	XGE IPv6 ping°ü¹¦ÄÜÕı³£	support_to_ipv6.sh	xge_ipv6_ping_pack	on	

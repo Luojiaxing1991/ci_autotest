@@ -36,7 +36,7 @@ function ge_set_fail_mtu_value()
     do
         echo $value
         ifconfig ${local_tp1} mtu $value
-        if [ $? -ne 0 ];then
+        if [ $? -ne 1 ];then
             MESSAGE="FAIL\t MTU Incoming error parameters set fail "
 	    echo ${MESSAGE}
         fi
@@ -117,7 +117,7 @@ function xge_set_fail_mtu_value()
     do
         #echo $value
         ifconfig ${local_fibre1} mtu $value
-        if [ $? -ne 0 ];then
+        if [ $? -ne 1 ];then
             MESSAGE="FAIL\t MTU Incoming error parameters set fail "
         fi
     done
