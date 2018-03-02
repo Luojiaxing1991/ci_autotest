@@ -23,7 +23,7 @@ function main()
         TEST_CASE_FUNCTION_NAME=`echo "${line}" | awk -F '\t' '{print $7}'`
         TEST_CASE_FUNCTION_SWITCH=`echo "${line}" | awk -F '\t' '{print $8}'`
         #Get the test title from testcase.table
-        TEST_CASE_TITLE=`echo "${line}" | awk -F '\t' '{print $5}'`
+        TEST_CASE_TITLE=`echo "${line}" | awk -F '\t' '{print $3}'`
         echo "script is "${exec_script}
         echo "CaseInfo "${TEST_CASE_TITLE}" "${exec_script}" "${TEST_CASE_FUNCTION_NAME}" "${TEST_CASE_FUNCTION_SWITCH}
 

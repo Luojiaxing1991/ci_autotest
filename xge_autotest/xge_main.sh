@@ -18,6 +18,11 @@ HNS_TOP_DIR=$(cd "`dirname $0`" ; pwd)
 function main()
 {
     echo "Begin to Run XGE Test"
+    
+    if [ x"${BACK_IP}" = x"192.168.3.229" ]
+    then
+	return 1
+    fi
 
     local MaxRow=$(sed -n '$=' "${HNS_TOP_DIR}/${TEST_CASE_DB_FILE}")
     local RowNum=0

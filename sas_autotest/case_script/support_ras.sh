@@ -30,7 +30,7 @@ function ecc_injection_process()
 
     begin_bit_count=`dmesg | grep ${ECC_INFO_KEY_QUERIES} | wc -l`
     ${DEVMEM} ${INJECT_REG_ADDR_VALUE} w ${ECC_BIT_REG_INJECT_VALUE}
-    fio fio.conf &
+    ${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
     sleep 10
 
     ${DEVMEM} ${INJECT_REG_ADDR_VALUE} w 0x0
@@ -164,10 +164,7 @@ function 2bit_ecc_injection()
 
 function main()
 {
-    #info=`echo ${TEST_CASE_FUNCTION_NAME} | awk -F '_' '{print $NF}'`
-    info=`echo ${TEST_CASE_FUNCTION_NAME##*_}`
-    echo "The info is "${info}
-    echo "The origin function name is "${TEST_CASE_FUNCTION_NAME}
+    info=`echo ${TEST_CASE_FUNCTION_NAME} | awk -F '_' '{print $NF}'`
     TEST_CASE_FUNCTION_NAME=`echo ${TEST_CASE_FUNCTION_NAME%_*}`
     echo "The using function name is "${TEST_CASE_FUNCTION_NAME}
     TEST_CASE_FUNCTION_NAME="${TEST_CASE_FUNCTION_NAME} 0x${info}"

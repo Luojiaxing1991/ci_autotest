@@ -116,7 +116,8 @@ function devmen_single_switch_phy()
     ${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
 
     beg_count=`fdisk -l | grep /dev/sd | wc -l`
-    if [ judgment_network_env -eq 1 ]
+    judgment_network_env
+    if [ $? -eq 1 ]
     then
         phy_ops close 0
         sleep 2
@@ -152,7 +153,8 @@ function devmem_multiple_switch_phy()
     ${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
 
     beg_count=`fdisk -l | grep /dev/sd | wc -l`
-    if [ judgment_network_env -eq 1 ]
+    judgment_network_env
+    if [ $? -eq 1 ]
     then
         phy_ops close 0
         phy_ops close 1
@@ -201,7 +203,12 @@ function devmem_polling_switch_phy()
 
     #Judge the current environment, directly connected environment or expander environment.
     judgment_network_env
-    [ $? -ne 0 ] && echo "the current environment is direct connection network, do not execute test case." && return 0
+    if [ $? -ne 0 ]
+    then
+        MESSAGE="BLOCK\tthe current environment is direct connection network, do not execute test case."
+        echo "the current environment is direct connection network, do not execute test case."
+        return 0
+    fi
 
     beg_count=`fdisk -l | grep /dev/sd | wc -l`
     sed -i "{s/^runtime=.*/runtime=${LOOP_PHY_TIME}/g;}" fio.conf
@@ -238,7 +245,12 @@ function devmem_all_switch_phy()
 
     #Judge the current environment, directly connected environment or expander environment.
     judgment_network_env
-    [ $? -ne 0 ] && echo "the current environment is direct connection network, do not execute test case." && return 0
+    if [ $? -ne 0 ]
+    then
+        MESSAGE="BLOCK\tthe current environment is direct connection network, do not execute test case."
+        echo "the current environment is direct connection network, do not execute test case."
+        return 0
+    fi
 
     beg_count=`fdisk -l | grep /dev/sd | wc -l`
     sed -i "{s/^runtime=.*/runtime=${LOOP_PHY_TIME}/g;}" fio.conf

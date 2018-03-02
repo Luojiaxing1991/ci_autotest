@@ -10,6 +10,8 @@ BOARD_TYPE=`dmidecode | grep "Product Name:" | sed -n "1p" | awk -F ' ' '{print 
 TEST_CASE_DB_FILE="data/sas_test_case.table"
 #Test case execution result save file.
 OUTPUT_TEST_DB_FILE="data/report.csv"
+#700k performance data sheet file
+FIO_IOPS_DB_FILE="data/iops700k.csv"
 #Test case execution switch.
 TEST_CASE_FUNCTION_SWITCH=""
 #Test case execution function name.
@@ -18,10 +20,8 @@ TEST_CASE_FUNCTION_NAME=""
 MESSAGE=""
 
 #
-TEST_CASE_TITLE=""
-#
-INFO=`cat /etc/hostname`
-if [ x"${INFO}" = x"estuary" ]
+SYS_TYPE=`cat /etc/hostname`
+if [ x"${SYS_TYPE}" = x"estuary" ]
 then
     DEVMEM="devmem"
 else
@@ -74,7 +74,7 @@ group_reporting=1
 ;gtod_reduce=1
 ;iodepth_batch=2
 ;iodepth_batch_complete=2
-runtime=300
+runtime=20
 ;thread
 loops=10
 "
@@ -130,9 +130,9 @@ BSSPLIT="4k/30:8k/40:16k/30"
 
 ## 7 - support full sas function on all available phys
 #  cycle the number of all proximal phy switches, Default value is 100.
-LOOP_PHY_COUNT=100
+LOOP_PHY_COUNT=2
 #  cycle reset distal phy number, Default value is 1000.
-REST_PHY_COUNT=5
+RESET_PHY_COUNT=2
 #  fio tool business run time.
 LOOP_PHY_TIME=10
 
@@ -144,33 +144,33 @@ FIO_RESET_COUNT=5
 
 ## 9 - support hotplug
 # fio tool business run time.
-FIO_ENABLE_TIME=300
+FIO_ENABLE_TIME=180
 
 ## 10 - support smart
 # query enable smart keyword.
-SUPPORT_SMART_KEYWORD="Available - device has SMART capability"
-DISABLED_SMART_KEYWORD="Exceptions (SMART) disabled"
-ENABLED_SMART_KEYWORD="Exceptions (SMART) enabled"
-STATUS_SMART_KEYWORD="SMART Health Status: OK"
+SUPPORT_SMART_KEYWORD="Enabled"
+DISABLED_SMART_KEYWORD="Disabled"
+ENABLED_SMART_KEYWORD="Enabled"
+STATUS_SMART_KEYWORD="PASSED|OK"
 
 ## 12 - support Max devices
 # The number of disks.
-MAX_DEV_NUM=12
+MAX_DEV_NUM=2
 
 ## 13 - RAS support
 # 1bit error injection, injection CFG_ECCERR_INJECT0_EN register value.
-ECC_1BIT_REG_INJECT0_VALUE=(
-"0x1" "0x2" "0x4" "0x8" "0x10" "0x20" "0x40" "0x80" "0x100" "0x200" "0x400""0x800"
-"0x1000" "0x2000" "0x4000" "0x8000" "0x10000" "0x20000" "0x40000" "0x80000" "0x100000"
-)
+#ECC_1BIT_REG_INJECT0_VALUE=(
+#"0x1" "0x2" "0x4" "0x8" "0x10" "0x20" "0x40" "0x80" "0x100" "0x200" "0x400""0x800"
+#"0x1000" "0x2000" "0x4000" "0x8000" "0x10000" "0x20000" "0x40000" "0x80000" "0x100000"
+#)
 # 1bit error injection, injection CFG_ECCERR_INJECT1_EN register value.
-ECC_1BIT_REG_INJECT1_VALUE=(
-"0x1" "0x4" "0x10" "0x40" "0x100" "0x400" "0x1000" "0x4000" "0x10000"
-)
+#ECC_1BIT_REG_INJECT1_VALUE=(
+#"0x1" "0x4" "0x10" "0x40" "0x100" "0x400" "0x1000" "0x4000" "0x10000"
+#)
 # 2bit error injection, injection CFG_ECCERR_INJECT1_EN register value.
-ECC_3BIT_REG_INJECT1_VALUE=(
-"0x2" "0x8" "0x20" "0x80" "0x200" "0x800" "0x2000" "0x8000" "0x20000"
-)
+#ECC_3BIT_REG_INJECT1_VALUE=(
+#"0x2" "0x8" "0x20" "0x80" "0x200" "0x800" "0x2000" "0x8000" "0x20000"
+#)
 # Value of SAS_ECCERR_MASK0 register address
 MASK_REG_ADDR_VALUE="0xa20001F0"
 # Value of CFG_ECCERR_INJECT0_EN register address
@@ -192,8 +192,18 @@ MODULE_KO_FILE=""
 # load ko after the success of the test disk file, for example "/dev/sda1", default is empty.
 MODULE_DISK_FILE=""
 
-## 15 -  the driver should support 700k iops per controller.
+## 15 - the driver should support 700k iops per controller.
 #
 FIO_IOPS_IODEPTH="1024"
 #
 IOPS_THRESHOLD="700"
+#
+FIO_IODEPTH_LIST=("1" "2" "4" "8" "16" "32" "64" "128" "256" "512" "1024" "2048" "4096")
+
+## 16 - controller reset for ECC error.
+#
+CONTROLLER_ECC_RESET_ADDR="0xa2000200"
+#
+CONTROLLER_ECC_ERROR="0xa20001F0"
+#
+CONTROLLER_ECC_IO_TIME=60

@@ -1,0 +1,54 @@
+PV-315	R.PCIE.F001.A	ST.FUNC.001	Multiple Root Complex support (Hi161x) V testing	Verify all PCIe ports on D05 boards function	multiple_root_complex.sh	MultipleRootComplex	on	
+PV-568	R.PCIE.F088.A	ST.FUNC.002	PCIe: ACPI: Hip05, Hip06, Hip07 Driver	ACPI: Hip05, Hip06, Hip07 Driver on 1616 boards function	hip_driver.sh	HipDriver	on	
+PV-1432	R.PCIE.F104.A	ST.FUNC.003	PCIe ACPI Root Driver dependency	PCI ACPI Root Driver dependency on D05 boards function	acpi.sh	CmdACPI	on	
+PV-1430	R.PCIE.F102.A	ST.FUNC.004	PCIE: UEFI dependency	PCIE: UEFI dependency on D05 boards function			off	
+PV-1420	R.PCIE.F080.A	ST.FUNC.005	PCIE: PCS configuration in BIOS	PCIE: PCS configuration in BIOS on D05 boards function			off	
+PV-1425	R.PCIE.F086.A	ST.FUNC.006	PCIE: HiSilicon PCIe re-use	PCIE: HiSilicon PCIe re-use Image -1612&1616			off	
+PV-316	R.PCIE.F005.A	ST.FUNC.007	MSI support (Hi161x) testing	support MSI interrupt_82599 on D05 boards function			off	
+PV-317	R.PCIE.F006.A	ST.FUNC.008	MSI-x support (Hi161x)	support MSI-x interrupt_82599 on D05 boards function	msix.sh	MSIx82599	off	
+PV-317	R.PCIE.F006.A	ST.FUNC.009	MSI-x support (Hi161x)	support MSI-x interrupt_P3600 on D05 boards function	msix.sh	MSIxP3600	off	
+PV-317	R.PCIE.F006.A	ST.FUNC.010	MSI-x support (Hi161x)	support MSI-x interrupt_I350 on D05 boards function	msix.sh	MSIxI350	off	
+PV-320	R.PCIE.F011.A	ST.FUNC.011	PCIe 3.0 equalization support (Hi161x)	Verify that gen3 type PCIe cards_P3600 on D05 boards are recognized?	driver_backward_compatibility.sh	DriverEqulizationGen3P3600	off	
+PV-320	R.PCIE.F011.A	ST.FUNC.012	PCIe 3.0 equalization support (Hi161x)	Verify that gen3 type PCIe cards_raid3008 on D05 boards are recognized?	driver_backward_compatibility.sh	DriverEqulizationGen3Raid3008	off	
+PV-324	R.PCIE.F019.A	ST.FUNC.013	PCIe 1.0 and 2.0 backward compatibility (Hi161x)	Verify that gen1 type PCIe cards_VGA on D05 boards are recognized?	driver_backward_compatibility.sh	DriverBackwardGen1VGA	on	
+PV-324	R.PCIE.F019.A	ST.FUNC.014	PCIe 1.0 and 2.0 backward compatibility (Hi161x)	Verify that gen2 type PCIe cards_I350 on D05 boards are recognized?	driver_backward_compatibility.sh	DriverBackwardGen2I350	off	
+PV-324	R.PCIE.F019.A	ST.FUNC.015	PCIe 1.0 and 2.0 backward compatibility (Hi161x)	Verify that gen2 type PCIe cards_82599 on D05 boards are recognized?	driver_backward_compatibility.sh	DriverBackwardGen282599	off	
+PV-326	R.PCIE.F021.A	ST.FUNC.016	ECAM support for non-RC devices	Verify configure the space access method.			off	
+PV-368	R.PCIE.F049.A	ST.FUNC.017	32b non-prefetchable memory address space support	32b non-prefetchable_VGA on D05 boards	prefetch.sh	Nonprefetch32bVGA	on	
+PV-368	R.PCIE.F049.A	ST.FUNC.018	32b non-prefetchable memory address space support	32b non-prefetchable_I350 on D05 boards	prefetch.sh	Nonprefetch32bI350	off	
+PV-369	R.PCIE.F050.A	ST.FUNC.019	32b prefetchable memory address space support	32b prefetchable_82599 on D05 boards 	prefetch.sh	Prefetch32b82599	off	
+PV-369	R.PCIE.F050.A	ST.FUNC.020	32b prefetchable memory address space support	32b prefetchable_P3600 on D05 boards	prefetch.sh	Prefetch32bP3600	off	
+PV-370	R.PCIE.F052.A	ST.FUNC.021	64b prefetchable memory address space support	64b prefetchable_P3600 on D05 boards	prefetch.sh	Prefetch64bP3600	off	
+PV-370	R.PCIE.F052.A	ST.FUNC.022	64b prefetchable memory address space support	64b prefetchable_82599 on D05 boards	prefetch.sh	Prefetch64b82599	off	
+#N/A	R.PCIE.F051.A	ST.FUNC.023	Configuration retry support	PCIe card read memory space configuration delay_raid3108 on D05 boards			off	
+PV-568	R.PCIE.F088.A	ST.FUNC.024	Linux ACPI support	support ACPI boot mode_82599	acpi.sh	CmdACPI82599	off	
+PV-568	R.PCIE.F088.A	ST.FUNC.025	Linux ACPI support	support ACPI boot mode_P3600	acpi.sh	CmdACPIP3600	off	
+PV-568	R.PCIE.F088.A	ST.FUNC.026	Linux ACPI support	support ACPI boot mode_I350	acpi.sh	CmdACPII350	off	
+PV-568	R.PCIE.F088.A	ST.FUNC.027	Linux ACPI support	support ACPI boot mode_QLE2562			off	
+PV-1402	R.PCIE.F025.A	ST.FUNC.028	Automatic payload size (Hi161x)	Automatic payload size (Hi161x)_I350	payload.sh	PayloadPerfI350	off	
+PV-1402	R.PCIE.F025.A	ST.FUNC.029	Automatic payload size (Hi161x)	Automatic payload size (Hi161x)_82599	payload.sh	PayloadPerf82599	off	
+PV-1402	R.PCIE.F025.A	ST.FUNC.030	Automatic payload size (Hi161x)	Automatic payload size (Hi161x)_P3600	payload.sh	PayloadPerfP3600	off	
+#N/A		ST.FUNC.031	Enumeration test	Enumeration test in D05 and D05 ec after boars all PCIe ports_QLE2562			off	
+#N/A		ST.FUNC.032	Enumeration test	Enumeration test in D05 and D05 ec after boars all PCIe ports_82599 	enum.sh	Enumeration82599	off	
+#N/A		ST.FUNC.033	Enumeration test	Enumeration test in D05 and D05 ec after boars all PCIe ports_raid3008 	enum.sh	EnumerationRaid3008	off	
+#N/A		ST.FUNC.034	Enumeration test	Enumeration test in D05 EC after board 1P NA square_PCIe port_raid3108	enum.sh	EnumerationRaid3108	off	
+#N/A		ST.FUNC.035	VGA test	VGA function test in D05 EC after board			off	
+#N/A		ST.FUNC.036	vpd test	sysfs_read_vpd function test in D05 EC after board			off	
+#N/A		ST.PERF.001	iperf_performance_D05_82599	on D05 EC after board use iperf tool for TCP one-way single-port test_82599	runcmd.sh	RunIperf "" 82599	off	
+#N/A		ST.PERF.002	iperf_performance_D05_82599	on D05 EC after board use iperf tool for TCP one-way dual-port test_82599			off	
+#N/A		ST.PERF.003	fio_performance_D05_raid3108	on D05 EC after board use fio tool for full load disk sequential read test_raid3108	runcmd.sh	RunFioUser "read" "1032.6KB/s" "3108" "sdc" 1	off	
+#N/A		ST.PERF.004	fio_performance_D05_raid3108	on D05 EC after board use fio tool for full load disk sequential write test_raid3108	runcmd.sh	RunFioUser "write" "1032.6KB/s" "3108" "sdc" 1	off	
+#N/A		ST.PERF.005	fio_performance_d05_raid3108	on D05 EC after board use fio tool for full load disk random read test_raid3108	runcmd.sh	RunFioUser "randread" "6000" "3108" "sdc" 1	off	
+#N/A		ST.PERF.006	fio_performance_d05_raid3108	on D05 EC after board use fio tool for full load disk random write test_raid3108	runcmd.sh	RunFioUser "randwrite" "6000" "3108" "sdc" 1	off	
+#N/A		ST.PERF.007	fio_performance_D05_ec_es3000	on D05 EC after board use fio tool for single disk sequential read test_es3000	runcmd.sh	RunFioUser "read" "2545.2MB/s" "ES3000" "nvme0n1" 1	off	
+#N/A		ST.PERF.008	fio_performance_D05_ec_es3000	on D05 EC after board use fio tool for single disk sequential write test_es3000	runcmd.sh	RunFioUser "write" "2545MB/s" "ES3000" "nvme0n1" 1	off	
+#N/A		ST.PERF.009	fio_performance_d05_ec_es3000	on D05 EC after board use fio tool single disk random read test_es3000	runcmd.sh	RunFioUser "randread" "800000" "ES3000" "nvme0n1" 1	off	
+#N/A		ST.PERF.010	fio_performance_d05_ec_es3000	on D05 EC after board use fio tool for single disk random write test_es3000	runcmd.sh	RunFioUser "randwrite" "800000" "ES3000" "nvme0n1" 1	off	
+#N/A		ST.PERF.011	cpu_cross_chip_d05_ec_82599	on D05 EC after board use iperf tool  for cpu cross-chip access test_82599			off	
+#N/A		ST.PERF.012	fio_performance_d05_ec_raid3108	on D05 EC after board use fio tool for full load disk sequential read test_raid3108			off	
+#N/A		ST.LONG_STRONG_PERF.001	fio&iperf_performance_d05_ec_raid3108&82599	on D05 EC after board use fio&iperf tool for long time and strong pressure test_cross_chip_3108&82599			off	
+#N/A		ST.TIMES_REBOOT.001	stability	reboot times on D05-EC-after_82599			off	
+#N/A		ST.PERF.013	small packages performance test	64Byte packages netperf TCP STREAM			off	
+#N/A		ST.PERF.014	small packages performance test	128Byte packages netperf TCP STREAM			off	
+#N/A		ST.PERF.015	small packages performance test	512Byte packages netperf TCP STREAM			off	
+#N/A		ST.PERF.016	small packages performance test	1024Byte packages netperf TCP STREAM			off	
