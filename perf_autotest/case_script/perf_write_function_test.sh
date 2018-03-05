@@ -13,12 +13,12 @@ function fun_perf_list()
     return
   else 
     rand=$(awk 'NR==2 {print $1}' ${PERF_TOP_DIR}/data/log/pmu_event.txt)
-    rand2=$(awk 'NR==16 {print $1}' ${PERF_TOP_DIR}/data/log/pmu_event.txt)
-    perf stat -a -e $rand -e $rand2 -I 200 sleep 10s >& ${PERF_TOP_DIR}/data/log/perf_statu.log
-    if [ `cat ${PERF_TOP_DIR}/data/log/perf_statu.log | grep -i "L3C_PERF_WRITE_TEST:" | wc -l` -le 1 ];then 
+    perf stat -a -e $rand -I 200 sleep 10s
+    dmesg | tail -200 | grep -i "PERF_WRITE_TEST:" > ${PERF_TOP_DIR}/data/log/write_dmesg.txt
+    if [ `cat ${PERF_TOP_DIR}/data/log/write_dmesg.txt | grep -i "PERF_WRITE_TEST:" | wc -l` -lt 1 ];then 
       MESSAGE="Fail\t $1 Event IRQ Function Test Fail!"
     else
-      sed 's/^[ \t]*L3C_PERF_WRITE_TEST:[ \t]*//' <<< "${sLine}"
+      sed 's/^[ \t]*L3C_PERF_WRITE_TEST:[ \t]*//' <<< "${sLine}" > ./mytest.txt
       MESSAGE="Pass"
     fi
   fi
