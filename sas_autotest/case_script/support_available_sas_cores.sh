@@ -61,7 +61,7 @@ function FIO_IO_RAIO_read_write()
     for rw in read write
     do
         echo "Begin FIO IO RAIO rw cycle: "${rw}
-        sed -i "{s/^rw=.*/rw=i${rw}/g;}" fio.conf
+        sed -i "{s/^rw=.*/rw=${rw}/g;}" fio.conf
         fio fio.conf
         [ $? -ne 0 ] && MESSAGE="FAIL\tfio tool ${rw} io read and write failed." && echo "Fail fio tool "${rw} & return 1
         echo "Success fio tool "${rw}
@@ -75,7 +75,5 @@ function main()
     # call the implementation of the automation use cases
     test_case_function_run
 }
-
-main
 
 main
