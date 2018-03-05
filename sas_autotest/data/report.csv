@@ -10,7 +10,7 @@ PV-1603	R.SAS.F017.A	ST.FUNC.008	PHY control through sysfs	SATA≈Ã£¨÷±¡¨£¨÷ß≥÷ÀŸ¬
 PV-1603	R.SAS.F017.A	ST.FUNC.009	PHY control through sysfs	SAS/SATA≈Ã£¨÷±¡¨£¨÷ß≥÷÷ÿ∏¥ÀŸ¬ …Ë÷√	phy_control_through_sysfs.sh	loop_rate_set_up	on	BLOCK	the current environment expander network, do not execute test cases.
 #N/A	R.SAS.N005.A	ST.FUNC.014	 No cable unplug OOPs	SAS≈Ã£¨÷±¡¨£¨≥§ ±º‰ÀŸ¬  ˝æ›¥´ ‰	no_cable_unplug_oops.sh	loog_time_IO_read_write	off	BLOCK	no automated use cases were implemented.
 #N/A	R.SAS.N005.A	ST.FUNC.015	 No cable unplug OOPs	SAS≈Ã£¨÷±¡¨£¨∑¥∏¥∂¡–¥¥≈≈Ã	no_cable_unplug_oops.sh	repeat_IO_read_write	off	BLOCK	no automated use cases were implemented.
-#N/A	R.SAS.N005.A	ST.FUNC.016	 No cable unplug OOPs	SAS≈Ã£¨÷±¡¨£¨ ˝æ›“ª÷¬–‘≤‚ ‘	no_cable_unplug_oops.sh	disk_file_data_consistency_test	off	BLOCK	no automated use cases were implemented.
+#N/A	R.SAS.N005.A	ST.FUNC.016	 No cable unplug OOPs	SAS≈Ã£¨÷±¡¨£¨ ˝æ›“ª÷¬–‘≤‚ ‘	no_cable_unplug_oops.sh	disk_file_data_consistency_test	on	PASS
 PV-1612	R.SAS.N007.A	ST.FUNC.017	Stable 2GB file transfer	SAS≈Ã£¨÷±¡¨£¨ ˝æ›Œ»∂®–‘≤‚ ‘	stable_2GB_file_transfer.sh	iozne_file_transfer_stability_test	off	BLOCK	no automated use cases were implemented.
 PV-1725	R.SAS.N004.A	ST.FUNC.018	SAS 3.0	SAS≈Ã£¨÷±¡¨£¨¥ÛIO∂¡–¥£®4M£©	support_available_sas_cores.sh	FIO_IO_read_write	off	BLOCK	no automated use cases were implemented.
 PV-1725	R.SAS.N004.A	ST.FUNC.019	SAS 3.0	SAS≈Ã£¨÷±¡¨£¨–°IO∂¡–¥£®512B£©	support_available_sas_cores.sh	FIO_IO_read_write	off	BLOCK	no automated use cases were implemented.
@@ -86,14 +86,14 @@ PV-1330	R.SAS.F025.A	ST.FUNC.088	RAS support	À´bit ECC£∫SAS_DMAC_RX_RAM Õ®µ¿7	su
 PV-1330	R.SAS.F025.A	ST.FUNC.089	RAS support	À´bit ECC£∫SAS_DMAC_RX_RAM Õ®µ¿8	support_ras.sh	2bit_ecc_injection_20000	off	BLOCK	no automated use cases were implemented.
 PV-1601	R.SAS.F010.A	ST.FUNC.090	Support full SAS function on all available PHYs	SAS≈Ã£¨÷±¡¨£¨ø™πÿΩ¸∂ÀPHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	off	BLOCK	no automated use cases were implemented.
 PV-1601	R.SAS.F010.A	ST.FUNC.091	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨ø™πÿΩ¸∂ÀPHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	off	BLOCK	no automated use cases were implemented.
-PV-1601	R.SAS.F010.A	ST.FUNC.092	Support full SAS function on all available PHYs	SAS≈Ã£¨÷±¡¨£¨hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	on	PASS
-PV-1601	R.SAS.F010.A	ST.FUNC.093	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	on	PASS
-PV-1601	R.SAS.F010.A	ST.FUNC.094	Support full SAS function on all available PHYs	SAS≈Ã£¨÷±¡¨£¨link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	on	PASS
-PV-1601	R.SAS.F010.A	ST.FUNC.095	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	on	PASS
-PV-1601	R.SAS.F010.A	ST.FUNC.096	Support full SAS function on all available PHYs	SAS≈Ã£¨÷±¡¨£¨ø™πÿenable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	on	PASS
-PV-1601	R.SAS.F010.A	ST.FUNC.097	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨ø™πÿenable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	on	PASS
-PV-1601	R.SAS.F010.A	ST.FUNC.098	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨ø™πÿenable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	on	PASS
-PV-1601	R.SAS.F010.A	ST.FUNC.099	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨ø™πÿenable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	on	PASS
+PV-1601	R.SAS.F010.A	ST.FUNC.092	Support full SAS function on all available PHYs	SAS≈Ã£¨÷±¡¨£¨hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.093	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.094	Support full SAS function on all available PHYs	SAS≈Ã£¨÷±¡¨£¨link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.095	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨link_reset	support_full_sas_function_all_available_phys.sh	cycle_link_reset_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.096	Support full SAS function on all available PHYs	SAS≈Ã£¨÷±¡¨£¨ø™πÿenable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.097	Support full SAS function on all available PHYs	SATA≈Ã£¨÷±¡¨£¨ø™πÿenable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.098	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨ø™πÿenable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	off	BLOCK	no automated use cases were implemented.
+PV-1601	R.SAS.F010.A	ST.FUNC.099	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨ø™πÿenable	support_full_sas_function_all_available_phys.sh	cycle_enable_phy	off	BLOCK	no automated use cases were implemented.
 PV-1601	R.SAS.F010.A	ST.FUNC.100	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨ø™πÿΩ¸∂ÀPHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	off	BLOCK	no automated use cases were implemented.
 PV-1601	R.SAS.F010.A	ST.FUNC.101	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨ø™πÿΩ¸∂ÀPHY	support_full_sas_function_all_available_phys.sh	devmem_switch_all_phy	off	BLOCK	no automated use cases were implemented.
 PV-1601	R.SAS.F010.A	ST.FUNC.102	Support full SAS function on all available PHYs	SAS≈Ã£¨expander£¨hard_reset	support_full_sas_function_all_available_phys.sh	cycle_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
@@ -133,18 +133,3 @@ PV-1601	R.SAS.F010.A	ST.FUNC.135	Support full SAS function on all available PHYs
 PV-1601	R.SAS.F010.A	ST.FUNC.136	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨IO∂¡–¥£¨∂‡∏ˆΩ¸∂Àphy∆µ∑±…¡∂œ	support_full_sas_function_all_available_phys.sh	devmem_multiple_switch_phy	off	BLOCK	no automated use cases were implemented.
 PV-1601	R.SAS.F010.A	ST.FUNC.137	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨IO∂¡–¥£¨πÿ±’À˘”–Ω¸∂Àphy	support_full_sas_function_all_available_phys.sh	devmem_all_switch_phy	off	BLOCK	no automated use cases were implemented.
 PV-1601	R.SAS.F010.A	ST.FUNC.138	Support full SAS function on all available PHYs	SATA≈Ã£¨expander£¨IO∂¡–¥£¨¬÷—Ø∑¥∏¥ø™πÿΩ¸∂Àphy	support_full_sas_function_all_available_phys.sh	devmem_polling_switch_phy	off	BLOCK	no automated use cases were implemented.
-PV-1606	R.SAS.F008.A	ST.FUNC.139	Support SAS Narrow and Wide Ports	SATA≈Ã£¨expander£¨IO∂¡–¥£¨link reset	narrow_and_wide_ports.sh	fio_single_link_reset_phy	off	BLOCK	no automated use cases were implemented.
-PV-1606	R.SAS.F008.A	ST.FUNC.140	Support SAS Narrow and Wide Ports	SATA≈Ã£¨expander£¨IO∂¡–¥£¨∂‡¥Œlink reset	narrow_and_wide_ports.sh	fio_cycle_link_reset_phy	off	BLOCK	no automated use cases were implemented.
-PV-1606	R.SAS.F008.A	ST.FUNC.141	Support SAS Narrow and Wide Ports	SATA≈Ã£¨expander£¨IO∂¡–¥£¨hard reset	narrow_and_wide_ports.sh	fio_single_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
-PV-1606	R.SAS.F008.A	ST.FUNC.142	Support SAS Narrow and Wide Ports	SATA≈Ã£¨expander£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
-PV-1606	R.SAS.F008.A	ST.FUNC.143	Support SAS Narrow and Wide Ports	SATA≈Ã£¨expander£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ã∂‡¥Œhard reset	narrow_and_wide_ports.sh	fio_cycle_hard_reset_phy	off	BLOCK	no automated use cases were implemented.
-PV-1598	R.SAS.F014.A	ST.FUNC.144	Support hotplug	SATA≈Ã£¨expander£¨IO∂¡–¥£¨µ•øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	off	BLOCK	no automated use cases were implemented.
-PV-1598	R.SAS.F014.A	ST.FUNC.145	Support hotplug	SATA≈Ã£¨expander£¨IO∂¡–¥£¨∂‡øÈ¥≈≈Ãenable	support_hotplug.sh	fio_single_enable	off	BLOCK	no automated use cases were implemented.
-PV-1607	R.SAS.F012.A	ST.FUNC.191	Support SATA NCQ	SATA≈Ã£¨expander£¨NCQ≤È—Ø	support_sata_ncq.sh	ncq_query	off	BLOCK	no automated use cases were implemented.
-PV-1608	R.SAS.F015.A	ST.FUNC.195	Support SMART	SATA£¨÷±¡¨£¨SMART	support_smart.sh	smart_disk_check	on	FAIL	/dev/sda1 disks do not support smart.
-PV-1608	R.SAS.F015.A	ST.FUNC.196	Support SMART	SAS£¨÷±¡¨£¨SMART	support_smart.sh	smart_disk_check	on	FAIL	/dev/sda1 disks do not support smart.
-PV-1608	R.SAS.F015.A	ST.FUNC.198	Support SMART	SATA≈Ã£¨expander£¨SMART	support_smart.sh	smart_disk_check	on	FAIL	/dev/sda1 disks do not support smart.
-PV-1608	R.SAS.F015.A	ST.FUNC.199	Support SMART	SAS≈Ã£¨expander£¨SMART	support_smart.sh	smart_disk_check	on	FAIL	/dev/sda1 disks do not support smart.
-#N/A	N/A	ST.FUNC.200	N/A	expander£¨º”‘ÿ°¢–∂‘ÿkoƒ£øÈ	support_module_load.sh	module_load_uninstall	off	BLOCK	no automated use cases were implemented.
-#N/A	N/A	ST.FUNC.201	N/A	÷±¡¨±≥∞Â£¨º”‘ÿ°¢–∂‘ÿkoƒ£øÈ	support_module_load.sh	module_load_uninstall	off	BLOCK	no automated use cases were implemented.
-PV-1946	R.SAS.F018.A	ST.FUNC.202	Support ACPI for probe and reset	÷ß≥÷ACPI∑Ω Ω∆Ù∂Ø	support_acpi.sh	check_acpi_start	on	PASS
