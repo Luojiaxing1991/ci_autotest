@@ -4,6 +4,15 @@ PV-1538	R.PERF.F001.A	PERF_FUNC_TEST_010	DDRC	DDRC perf stat function test	perf_
 PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_015	L3C	L3C perf list function test	perf_list_function_test.sh	l3c_perf_list_function_test	off	
 PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_020	MN	MN perf list function test	perf_list_function_test.sh	mn_perf_list_function_test	off	
 PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_015	DDRC	DDRC perf list function test	perf_list_function_test.sh	ddrc_perf_list_function_test	off	
+PV-1548	R.PERF.F003.A	PERF_FUNC_TEST_020	L3C	L3C perf read function test	perf_read_function_test.sh	l3c_perf_read_function_test	on	
+PV-1547	R.PERF.F004.A	PERF_FUNC_TEST_025	HHA	HHA perf read function test	perf_read_function_test.sh	mn_perf_read_function_test	on	
+PV-1541	R.PERF.F005.A	PERF_FUNC_TEST_030	DDRC	DDRC perf read function test	perf_read_function_test.sh	ddrc_perf_read_function_test	on	
+PV-1786	R.PERF.F006.A	PERF_FUNC_TEST_035	L3C	L3C perf write function test	perf_write_function_test.sh	l3c_perf_write_function_test	on	
+PV-1787	R.PERF.F007.A	PERF_FUNC_TEST_040	HHA	HHA perf write function test	perf_write_function_test.sh	mn_perf_write_function_test	on	
+PV-1539	R.PERF.F008.A	PERF_FUNC_TEST_045	DDRC	DDRC perf write function test	perf_write_function_test.sh	ddrc_perf_write_function_test	on	
+PV-1546	R.PERF.F009.A	PERF_FUNC_TEST_050	L3C	L3C perf event configure function test	perf_configure_function_test.sh	1	off	
+PV-1545	R.PERF.F010.A	PERF_FUNC_TEST_055	HHA	HHA perf event configure function test	perf_configure_function_test.sh	1	off	
+PV-1544	R.PERF.F011.A	PERF_FUNC_TEST_060	DDRC	DDRC perf event configure function test	perf_configure_function_test.sh	1	off	
 PV-1543	R.PERF.F012.A	PERF_FUNC_TEST_065	L3C	L3C perf disable/enable function test	perf_enable_function_test.sh	l3c_perf_enable_function_test	off	
 PV-1788	R.PERF.F013.A	PERF_FUNC_TEST_070	MN	MN perf disable/enable function test	perf_enable_function_test.sh	mn_perf_enable_function_test	off		
 PV-1542	R.PERF.F014.A	PERF_FUNC_TEST_075	L3C	L3C perf irq function test	perf_irq_function_test.sh	l3c_perf_irq_function_test	off	
