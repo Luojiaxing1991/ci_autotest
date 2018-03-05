@@ -43,7 +43,7 @@ function query_ring_parameter_fault_tolerant()
 {
     Test_Case_Title="query_ring_parameter_fault_tolerant"
     ethtool -i eth10 > ${HNS_TOP_DIR}/data/log/query_ring_parameter_fault_tolerant.txt 2>&1
-    cat ${HNS_TOP_DIR}/data/log/query_ring_parameter_fault_tolerant.txt | grep "Cannot get device ring settings: No such device"
+    cat ${HNS_TOP_DIR}/data/log/query_ring_parameter_fault_tolerant.txt | grep "No such device"
     if [ $? = 0 ];then
         MESSAGE="PASS"
     else

@@ -161,7 +161,7 @@ function ipv6_iperf_single()
             for owNum in $THREAD
             do
                 echo "Run single port $netport ${owNum}thread......"
-                iperf -c ${REMOTE1_IPV6_IP}%${netport} -V -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/Ipv6_single_one-way_${netport}_${owNum}thread.log
+                iperf -c ${REMOTE1_IPV6_IP}%${local_fibre1} -V -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/Ipv6_single_one-way_${netport}_${owNum}thread.log
                 check_single_process
                 ipv6_data_integration
             done
@@ -170,7 +170,7 @@ function ipv6_iperf_single()
             for owNum in $THREAD
             do
                 echo "Run single port $netport ${owNum}thread......"
-                iperf -c ${REMOTE2_IPV6_IP}%${netport} -V -t $IPERFDURATION -i 1 -P $owNum > $LOG_DIR/$IPERFDIR/Ipv6_single_one-way_${netport}_${owNum}thread.log
+                iperf -c ${REMOTE2_IPV6_IP}%${local_fibre2} -V -t $IPERFDURATION -i 1 -P $owNum > $LOG_DIR/$IPERFDIR/Ipv6_single_one-way_${netport}_${owNum}thread.log
                 check_single_process
                 ipv6_data_integration
             done
@@ -188,8 +188,8 @@ function ipv6_iperf_single()
     for twNum in $THREAD
     do
         echo "Run single port two-way ${twNum}thread......"
-        iperf -c ${REMOTE1_IPV6_IP}%${remote_fibre1_ip} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_Single_two-way_${NETPORT1}_${twNum}thread.log &
-        iperf -c ${REMOTE2_IPV6_IP}%${remote_fibre2_ip} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_Single_two-way_${NETPORT2}_${twNum}thread.log &
+        iperf -c ${REMOTE1_IPV6_IP}%${local_fibre1} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_Single_two-way_${NETPORT1}_${twNum}thread.log &
+        iperf -c ${REMOTE2_IPV6_IP}%${local_fibre2} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_Single_two-way_${NETPORT2}_${twNum}thread.log &
         sleep 25
         check_single_process
         ipv6_data_integration
@@ -205,10 +205,10 @@ function ipv6_iperf_dual()
         MESSAGE="PASS"
         return 0
     fi
-    LOCAL1_IPV6_IP=$(ifconfig ${local_fibre1_ip} | grep 'inet6 addr:' | awk '{print $3}' | awk -F'/' '{print $1}' | head -n 1)
-    LOCAL2_IPV6_IP=$(ifconfig ${local_fibre2_ip} | grep 'inet6 addr:' | awk '{print $3}' | awk -F'/' '{print $1}' | head -n 1)
-    REMOTE1_IPV6_IP=$(ssh root@$BACK_IP "ifconfig ${remote_fibre1_ip} | grep 'inet6 addr:' | awk '{print \$3}' | awk -F'/' '{print \$1}' | head -n 1")
-    REMOTE2_IPV6_IP=$(ssh root@$BACK_IP "ifconfig ${remote_fibre2_ip} | grep 'inet6 addr:' | awk '{print \$3}' | awk -F'/' '{print \$1}' | head -n 1")
+    LOCAL1_IPV6_IP=$(ifconfig ${local_fibre1} | grep 'inet6 addr:' | awk '{print $3}' | awk -F'/' '{print $1}' | head -n 1)
+    LOCAL2_IPV6_IP=$(ifconfig ${local_fibre2} | grep 'inet6 addr:' | awk '{print $3}' | awk -F'/' '{print $1}' | head -n 1)
+    REMOTE1_IPV6_IP=$(ssh root@$BACK_IP "ifconfig ${remote_fibre1} | grep 'inet6 addr:' | awk '{print \$3}' | awk -F'/' '{print \$1}' | head -n 1")
+    REMOTE2_IPV6_IP=$(ssh root@$BACK_IP "ifconfig ${remote_fibre2} | grep 'inet6 addr:' | awk '{print \$3}' | awk -F'/' '{print \$1}' | head -n 1")
     process="iperf"
     killall iperf
     iperf -s -V >/dev/null 2>&1 &
@@ -223,8 +223,8 @@ function ipv6_iperf_dual()
             for owNum in $THREAD
             do
                 echo "Run dual port ${netport} ${owNum}thread......"
-                iperf -c ${REMOTE1_IPV6_IP}%${netport} -V -t $IPERFDURATION -i 2 -P ${owNum} > $LOG_DIR/$IPERFDIR/Ipv6_dual_one-way_local_${netport}_${owNum}thread.log &
-                ssh root@$BACK_IP "iperf -c ${LOCAL1_IPV6_IP}%${local_fibre1_ip} -V -t $IPERFDURATION -i 2 -P ${owNum} > $LOG_DIR/$IPERFDIR/Ipv6_dual_one-way_remote_${netport}_${owNum}thread.log &"
+                iperf -c ${REMOTE1_IPV6_IP}%${local_fibre1} -V -t $IPERFDURATION -i 2 -P ${owNum} > $LOG_DIR/$IPERFDIR/Ipv6_dual_one-way_local_${netport}_${owNum}thread.log &
+                ssh root@$BACK_IP "iperf -c ${LOCAL1_IPV6_IP}%${remote_fibre1} -V -t $IPERFDURATION -i 2 -P ${owNum} > $LOG_DIR/$IPERFDIR/Ipv6_dual_one-way_remote_${netport}_${owNum}thread.log &"
                 sleep $IPERFDURATION
                 check_dual_process
                 ipv6_data_integration
@@ -234,8 +234,8 @@ function ipv6_iperf_dual()
             for owNum in $THREAD
             do
                 echo "Run dual port $netport ${owNum}thread......"
-                iperf -c ${REMOTE2_IPV6_IP}%${netport} -V -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_one-way_local_${netport}_${owNum}thread.log &
-                ssh root@$BACK_IP "iperf -c ${LOCAL2_IPV6_IP}%${local_fibre2_ip} -V -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_one-way_remote_${netport}_${owNum}thread.log &"
+                iperf -c ${REMOTE2_IPV6_IP}%${local_fibre2} -V -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_one-way_local_${netport}_${owNum}thread.log &
+                ssh root@$BACK_IP "iperf -c ${LOCAL2_IPV6_IP}%${remote_fibre2} -V -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_one-way_remote_${netport}_${owNum}thread.log &"
                 sleep $IPERFDURATION
                 check_dual_process
                 ipv6_data_integration
@@ -255,10 +255,10 @@ function ipv6_iperf_dual()
     for twNum in $THREAD
     do
         echo "Run Two-way ${twNum}thread......"
-        iperf -c ${REMOTE1_IPV6_IP}%${remote_fibre1_ip} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_twoway_local_${NETPORT1}_${twNum}thread.log &
-        iperf -c ${REMOTE2_IPV6_IP}%${remote_fibre2_ip} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_twoway_local_${NETPORT2}_${twNum}thread.log &
-        ssh root@$BACK_IP "iperf -c ${LOCAL1_IPV6_IP}%${local_fibre1_ip} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_two-way_remote_${NETPORT1}_${twNum}thread.log &"
-        ssh root@$BACK_IP "iperf -c ${LOCAL2_IPV6_IP}%${local_fibre2_ip} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_two-way_remote_${NETPORT2}_${twNum}thread.log &"
+        iperf -c ${REMOTE1_IPV6_IP}%${local_fibre1} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_twoway_local_${NETPORT1}_${twNum}thread.log &
+        iperf -c ${REMOTE2_IPV6_IP}%${local_fibre2} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_twoway_local_${NETPORT2}_${twNum}thread.log &
+        ssh root@$BACK_IP "iperf -c ${LOCAL1_IPV6_IP}%${remote_fibre1} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_two-way_remote_${NETPORT1}_${twNum}thread.log &"
+        ssh root@$BACK_IP "iperf -c ${LOCAL2_IPV6_IP}%${remote_fibre2} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_two-way_remote_${NETPORT2}_${twNum}thread.log &"
         sleep $IPERFDURATION
         check_dual_process
         ipv6_data_integration
@@ -578,9 +578,9 @@ function main()
 prepare_log_dir
 
 #ifconfig IP
-ifconfig $NETPORT1 ${local_fibre1_ip}
-ifconfig $NETPORT2 ${local_fibre2_ip}
-ssh root@$BACK_IP "ifconfig $NETPORT1 ${remote_fibre1_ip};ifconfig $NETPORT2 ${remote_fibre2_ip};"
+ifconfig $local_fibre1 ${local_fibre1_ip}
+ifconfig $local_fibre2 ${local_fibre2_ip}
+ssh root@$BACK_IP "ifconfig $remote_fibre1 ${remote_fibre1_ip};ifconfig $remote_fibre2 ${remote_fibre2_ip};"
 
 main
 

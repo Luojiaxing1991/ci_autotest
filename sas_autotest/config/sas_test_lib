@@ -16,8 +16,8 @@ function test_case_function_run()
     then
         #echo "Begin to run testcase: "${TEST_CASE_TITLE}
         ${TEST_CASE_FUNCTION_NAME}
-
-        if [ x"${MESSAGE}" == x"PASS" ]
+        echo "Message is "${MESSAGE}
+        if [ x"${MESSAGE}" = x"PASS" ]
         then
             echo "The result of testcase "${TEST_CASE_TITLE}" is success"
             lava_report "${TEST_CASE_TITLE}" pass
@@ -70,9 +70,10 @@ function get_all_disk_part()
     for name in ${dev_info}
     do
         assert=`echo ${mout_info} | grep ${name}`
-        if [ x"${assert}" == x"" ]
+        if [ x"${assert}" == x"" && x"name" != x"/dev/sda1" ]
         then
             ALL_DISK_PART_NAME[${#ALL_DISK_PART_NAME[*]}]=$name
+            echo "Select disk: "${name}
         fi
         assert=""
     done
