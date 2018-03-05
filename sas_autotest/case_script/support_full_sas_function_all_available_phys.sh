@@ -110,7 +110,7 @@ function cycle_enable_phy()
 # OUT:N/A
 function devmem_single_switch_phy()
 {
-    Test_Case_Title="devmen_single_phy_switch"
+    Test_Case_Title="devmem_single_phy_switch"
 
     sed -i "{s/^runtime=.*/runtime=${LOOP_PHY_TIME}/g;}" fio.conf
     ${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
