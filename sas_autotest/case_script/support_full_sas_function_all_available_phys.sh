@@ -108,7 +108,7 @@ function cycle_enable_phy()
 # disk running business, switch single proximal phy.
 # IN :N/A
 # OUT:N/A
-function devmen_single_switch_phy()
+function devmem_single_switch_phy()
 {
     Test_Case_Title="devmen_single_phy_switch"
 
