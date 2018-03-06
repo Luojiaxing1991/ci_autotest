@@ -103,6 +103,12 @@ OutLogHead()
     local sMsg1=${4}
     local flLog=${5:-/dev/null}
     local bExitErr=${6:-false}
+    local bNewLine=${7:-true}
+
+    local m_cn1=
+    if [ "${bNewLine}" == "true" ]; then
+        m_cn1=$'\n'
+    fi
 
     case "${nStatus}" in
     0)
@@ -115,19 +121,20 @@ OutLogHead()
 
     local sLogA=
     if [ -n "${sHead1}" ]; then
-        sLogA=$(printf "%s%5s[%3d]: %s\n" "${sHead1}" "${sStatus}" "${nStatus}" "${sMsg1}")
+        sLogA=$(printf "%s%5s[%3d]: %s" "${sHead1}" "${sStatus}" "${nStatus}" "${sMsg1}")
     elif [ -n "${sMsg1}" ]; then
         sLogA=${sMsg1}
     fi
 
     case "${nStatus}" in
     0)
-        echo "${sLogA}"
-        echo "${sLogA}" >> "${flLog}"
+        printf "%s${m_cn1}" "${sLogA}"
+        printf "%s${m_cn1}" "${sLogA}" >> "${flLog}"
         ;;
     *)
-        echo "${sLogA}" 1>&2
-        echo "${sLogA}" >> "${flLog}"
+        printf "%s${m_cn1}" "${sLogA}" 1>&2
+        printf "%s${m_cn1}" "${sLogA}" >> "${flLog}"
+
         if [ "${bExitErr}" == "true" ]; then
             exit ${nStatus}
         fi
@@ -194,7 +201,7 @@ RunTable()
     local sR0 sR1 sLevelR1 sLevelR2 sTTitle1 sTTitle2 sScript1 sScript2 sFuncNa
     local sStatus1 nRt1 bRun1 sLineStatus
 
-    local nMaxRow nR1
+    local nMaxRow nR1 nRows1 bUpdate
     nMaxRow=$(sed -n '$=' "${flTableOrigin}")
     nR1=0
     while [ ${nR1} -lt ${nMaxRow} ]; do
@@ -219,6 +226,7 @@ RunTable()
         OutLogHead 0 "" "" "" "${flLog}" false
         OutLogHead 0 "" "" "title: ${sTTitle1}" "${flLog}" false
 
+        g_sMsgCur=
         grep -q "^${sLevelR2}\$" <<< "${g_sLevelRun}"
         if [ $? -ne 0 ]; then
             g_sMsgCur="test case close"
@@ -257,10 +265,12 @@ RunTable()
 
             case ${nRt1} in
             ${g_nPass})
+	        echo "Test is PASS: "${sTTitle1}
 		writePass "PCIE" "${sTESTCASE}"
                 sStatus1=${g_statusPass}
                 ;;
             ${g_nFail})
+                echo "Test is Fail: "${sTTitle1}
 		writeFail "PCIE" "${sTESTCASE}"
                 sStatus1=${g_statusFail}
                 ;;
@@ -279,6 +289,17 @@ RunTable()
                 ;;
             esac
         fi
+        echo "The stat of "${sTTitle1}" is "${sStatus1}
+
+        if [ x"${sStatus1}" = x"[Close]" ];then
+            echo "The test have benn skip!"
+        else
+            if [ x"${sStatus1}" = x"[Pass]" ];then
+               lava_report "${sTTitle1}" pass
+            else
+               lava_report "${sTTitle1}" fail
+            fi
+        fi
 
         OutLogHead 0 "" "" "status: ${sStatus1}" "${flLog}" false
         if [ -z "${sTTitle1}" ]; then
@@ -287,7 +308,21 @@ RunTable()
         else
             sLineStatus=$(grep "${sTTitle2}" <<< "${sStatusTable}")
         fi
+        bUpdate=false;
         if [ -n "${sLineStatus}" ]; then
+            if [ "${g_bTCsReset}" != "true" ]; then
+                nRows1=$(grep "${sTTitle2}" "${flTableOrigin}" |wc -l)
+                if [ ${nRows1} -eq 1 ]; then
+                    bUpdate=true;
+                else
+                    g_sMsgCur="[${nRows1}]rows have the same title[${sTTitle1}]"
+                    g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+                    OutLogHead 1 "Warn" "${g_sHeadCurLine}" "${g_sMsgCur}" "${flLog}" false
+                fi
+            fi
+        fi
+
+        if ${bUpdate}; then
             #更新状态表中这条用例的状态;
             grep -q "^${sPass}${g_sSplit}" <<< "${sLineStatus}"
             if [ $? -ne 0 ]; then
@@ -300,6 +335,8 @@ RunTable()
     done
 
     echo "${sStatusTable}" > "${flTableStatus}"
+
+    echo "The pcie RunTable phase is over!"
 }
 export -f RunTable
 
@@ -360,10 +397,11 @@ export -f GenReport
 
 GenTable()
 {
-    local flTableStatus=${1}
-    local flTableOutput=${2}
-    local sModule=${3}
-    local flLog=${4:-/dev/null}
+    local flTableOrigin=${1}
+    local flTableStatus=${2}
+    local flTableOutput=${3}
+    local sModule=${4}
+    local flLog=${5:-/dev/null}
 
     local sPass sFail sStatus1 sSearch1 sSearch2 sMessage 
     sPass=$(echo "${g_statusPass}" |sed 's#\([]/*[]\)#\\\1#g')
@@ -377,7 +415,7 @@ GenTable()
     fi
 
     local sTCsTable
-    sTCsTable=$(cat "${g_flTCsTable}")${g__n}
+    sTCsTable=$(cat "${flTableOrigin}")${g__n}
 
     while read sR0; do
         sR1=$(echo "${sR0}" |sed "s/^[ \t]\+//;s/[ \t\r]\+\$//")
@@ -388,7 +426,7 @@ GenTable()
         sStatus1=$(echo "${sR1}" |awk -F'\t' '{print $1}')
         sSearch1=$(echo "${sR1}" |awk -F'\t' '{print $2}')
         sSearch2=$(sed 's#\([]/*[]\)#\\\1#g' <<< "${sSearch1}")
-        sTCLine1=$(grep -i "${sSearch2}" "${g_flTCsTable}" |sed "s/\r\+//g")
+        sTCLine1=$(grep -i "${sSearch2}" "${flTableOrigin}" |sed "s/\r\+//g")
         if [ -n "${sTCLine1}" ]; then
             sTCsTable=$(echo "${sTCsTable}" |sed "/${sSearch2}/s/^/${sStatus1}${g_sSplit}/")
         else

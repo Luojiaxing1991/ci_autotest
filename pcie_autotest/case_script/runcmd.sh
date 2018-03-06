@@ -35,15 +35,50 @@ printf "%s[%3d]%5s: Load [${g_pfnCur}] call by [${g_flParent}]\n" "${FUNCNAME[0]
 LoadSourceFileParent "${g_dp_runcmd_common}" "enum.sh" flPath1 "${g_flLog}" true
 $(sed "s#^#. #" <<< "${flPath1}")
 
+LoadSourceFileParent "${g_dp_runcmd_common}" "run_iperf.sh" flPath1 "${g_flLog}" true
+$(sed "s#^#. #" <<< "${flPath1}")
+
+#####################
+declare -A \
+g_dicLib1_B136=(
+    [kDrLoad]=${g_dp_pcie_test_common}
+    [kMDrLog]='${HOME}/tmp/data/logs'
+    [kDrLocalLog]=${HOME}/tmp/data/logs
+)
+
+declare -A \
+g_dicLib1_B175=(
+    [kDrLoad]=${g_dp_pcie_test_common}
+    [kMDrLog]='${HOME}/tmp/data/logs'
+    [kDrLocalLog]=${HOME}/tmp/data/logs
+    [kIP]=${BACK_IP}
+)
+
+g_dicIPs1=(
+    [0]=192.168.12.21
+    [1]=192.168.13.22
+)
+
+g_dicIPs2=(
+    [0]=192.168.12.31
+    [1]=192.168.13.32
+)
+
+g_varDicBoard1=g_dicLib1_B136
+g_varDicBoard2=g_dicLib1_B175
+
+g_loadSourceFile=pcie_test_lib
+
 RunFio()
 {
-    local tRW=${1}
-    local bsU=${2}
-    local nfPerfDef=${3}
-    local sDiskName=${4}
-    local nTimesRun=${5}
-    local sPosName=${6}
-    local flLog=${7:-/dev/null}
+    local varDicMCLogin=${1}
+    local tRW=${2}
+    local bsU=${3}
+    local nfPerfDef=${4}
+    local sDiskName=${5}
+    local nTimesRun=${6}
+    local sPosName=${7}
+    local flLog=${8:-/dev/null}
 
     #####################
     grep -q "^[0-9]\+\$" <<< "${nTimesRun}"
@@ -55,23 +90,15 @@ RunFio()
     fi
 
     #####################
-    declare -A \
-    g_dicLib1_B136=(
-        [kDrLoad]=${g_dp_pcie_test_common}
-	    [kMDrLog]='${HOME}/tmp/data/logs'
-    )
-
     #fio --name=read --rw=read --bs=1M --runtime=30 --filename=/dev/nvme0n1 --numjobs=32 --iodepth=128 --direct=1 --sync=0 --norandommap --group_reporting --time_based
-    local m_sCmd
-    m_sCmd='false'
-    m_sCmd='fio --name=${m_dic[0]} --rw=${m_dic[0]} --bs=${m_dic[1]} --filename=/dev/${m_dic[2]} --runtime=30 --numjobs=32 --iodepth=128 --direct=1 --sync=0 --norandommap --group_reporting --time_based'
-
-    local nCols=0
-    local m_sTrapRuned
-    declare -A m_dicValue=()
-    local nR1 nC1
+    local f_sCmd
+    f_sCmd='false'
+    f_sCmd='fio --name=${m_dic[0]} --rw=${m_dic[0]} --bs=${m_dic[1]} --filename=/dev/${m_dic[2]} --runtime=30 --numjobs=32 --iodepth=128 --direct=1 --sync=0 --norandommap --group_reporting --time_based'
 
     #####################
+    local nCols=0
+    declare -A m_dicValue=()
+    local nR1 nC1
     nR1=0
     nC1=0
     while [ ${nR1} -lt ${nTimesRun} ]; do
@@ -92,13 +119,13 @@ RunFio()
 
     #####################
     local drLocalLogs
-    drLocalLogs=${g_dicLib1_B136[kMDrLog]}
-    drLocalLogs=${HOME}/tmp/data/logs
+    eval drLocalLogs=\${${varDicMCLogin}[kDrLocalLog]}
     SafeRemoveFolder "/logs/" "${drLocalLogs}/${g_dicMCSame[kDrTmpLog]}" "${flLog}"
 
+    local m_sTrapRuned
     m_sTrapRuned="
     "
-    RunACmdsRemote g_dicLib1_B136 "pcie_test_lib" "${m_sCmd}" m_dic ${nCols} m_dicValue 1 m_sTrapRuned true "${flLog}"
+    RunACmdsRemote "${varDicMCLogin}" g_loadSourceFile f_sCmd m_dic "${nCols}" m_dicValue 1 m_sTrapRuned true "${flLog}"
 
     #####################
     local sFlList s1 nPosV nPerf1
@@ -115,9 +142,7 @@ RunFio()
     s1=$(sed -n "/^[ \t]*${tRW}[ \t]*:/{n;/^[ \t]*\(read\|write\)[ \t]*:/p}" ${sFlList})
     IFS=${g_IFS0}
 
-    g_sMsgCur=$'\n'"${s1}"
-    g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
-    OutLogHead 0 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${flLog}" false
+    OutLogHead 0 "" "" $'\n'"${s1}" "${flLog}" false
 
     case "${sPosName}" in
     bw)
@@ -219,11 +244,13 @@ RunFioUser()
 
     case "${tReadWrite}" in
     read|write)
-        RunFio "${tReadWrite}" 1m "${nfPerfDef}" "${sDiskName}" "${nTimesRun}" bw "${g_flLog}"
+        RunFio "${g_varDicBoard1}" "${tReadWrite}" 1m "${nfPerfDef}" "${sDiskName}" "${nTimesRun}" bw "${g_flLog}"
         ;;
     randread|randwrite)
-        RunFio "${tReadWrite}" 4k "${nfPerfDef}" "${sDiskName}" "${nTimesRun}" iops "${g_flLog}"
+        RunFio "${g_varDicBoard1}" "${tReadWrite}" 4k "${nfPerfDef}" "${sDiskName}" "${nTimesRun}" iops "${g_flLog}"
         ;;
     esac
 }
 
+#####################
+#cd ~/tmp2 && scp -P222 -r hezhongyan@htsat.vicp.cc:del/work/testcases .

@@ -48,6 +48,9 @@ if [ -n "${flPub1}" ]; then
     $(sed "s#^#. #" <<< "${flPub1}")
 fi
 
+. ${g_dp_pcie_test_common}/../../config/common_config
+. ${g_dp_pcie_test_common}/../../config/common_lib
+
 #####################
 #Load config
 LoadSourceFileParent "${g_dp_pcie_test_common}" "${g_fn_pcie_test_common%_*}_config" flPath1 "${g_flLog}" true
@@ -237,8 +240,6 @@ export -f ACPICard
 #init2
 g_flTCsTable=$(basename "${g_flTCsTable}")
 LoadSourceFileParent "${g_dp_pcie_test_common}" "${g_flTCsTable}" g_flTCsTable "${g_flLog}" true
-
-g_flStatusTable=$(dirname "${g_flTCsTable}")/$(basename "${g_flStatusTable}")
 
 #####################
 
