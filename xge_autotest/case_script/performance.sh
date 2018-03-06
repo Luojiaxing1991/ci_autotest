@@ -4,6 +4,7 @@ IPERFDIR="iperf_log"
 NETPERFDIR="netperf_log"
 QPERFDIR="qperf_log"
 
+
 NETPORT1="$remote_tp1"
 NETPORT2="$remote_fibre1"
 NETPORTLIST="$remote_tp1 $remote_fibre1"

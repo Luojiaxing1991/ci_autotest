@@ -11,17 +11,17 @@ function ge_vlan_multi_port()
     ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
     ip link add link ${local_tp1} name ${local_tp1}.401 type vlan id 401
     ip link add link ${local_tp1} name ${local_tp1}.400 type vlan id 400
-    ifconfig ${local_tp1}.401 192.168.11.10;ifconfig ${local_tp1}.400 192.168.12.10
+    ifconfig ${local_tp1}.401 192.168.13.10;ifconfig ${local_tp1}.400 192.168.12.10
     sleep 5
 
     ssh root@$BACK_IP "
     ifconfig ${remote_tp1} up; ifconfig ${remote_tp1} ${remote_tp1_ip};\
     ip link add link ${remote_tp1} name ${remote_tp1}.401 type vlan id 401;\
     ip link add link ${remote_tp1} name ${remote_tp1}.400 type vlan id 400;\
-    ifconfig ${remote_tp1}.401 192.168.11.20;ifconfig ${remote_tp1}.400 192.168.12.20;\
+    ifconfig ${remote_tp1}.401 192.168.13.20;ifconfig ${remote_tp1}.400 192.168.12.20;\
     sleep 10"
 
-    for i in "192.168.11.20 192.168.12.20"
+    for i in "192.168.13.20" "192.168.12.20"
     do
         ping $i -c 5 | tee -a ${HNS_TOP_DIR}/data/log/ge_vlan_multi_port.log | grep "received, 0% packet loss"
         if [ $? -eq 0 ];then
@@ -30,6 +30,13 @@ function ge_vlan_multi_port()
             MESSAGE="FAIL\t vlan Ping packet failure"
         fi
     done
+    
+    vconfig rem ${local_tp1}.400
+    ssh root@${BACK_IP} "vconfig rem ${remote_tp1}.400"
+
+    vconfig rem ${local_tp1}.401
+    ssh root@${BACK_IP} "vconfig rem ${remote_tp1}.401"
+
 }
 
 function vlan_fault_tolerant()
@@ -42,6 +49,8 @@ function vlan_fault_tolerant()
     else
         MESSAGE="FAIL\t vlan fault tolerant failure"
     fi
+    #vconfig rem ${local_tp1}.401
+    #ssh root@${BACK_IP} "vconfig rem ${remote_tp1}.401"
 
 }
 
@@ -53,7 +62,7 @@ function ge_set_vlan()
     ifconfig ${local_tp1}.401 192.168.11.10
     sleep 5
     ssh root@$BACK_IP "ifconfig ${remote_tp1} up;\
-    ip link add link $i name ${remote_tp1}.401 type vlan id 401;\
+    ip link add link ${remote_tp1} name ${remote_tp1}.401 type vlan id 401;\
     ifconfig ${remote_tp1}.401 192.168.11.20;\
     sleep 10"
     ping 192.168.11.20 -c 5 | tee -a ${HNS_TOP_DIR}/data/log/ge_set_vlan.log | grep "received, 0% packet loss"
@@ -62,12 +71,15 @@ function ge_set_vlan()
     else
         MESSAGE="FAIL\t vlan Ping packet failure"
     fi
+
+    vconfig rem ${local_tp1}.401
+    ssh root@${BACK_IP} "vconfig rem ${remote_tp1}.401"
 }
 
 function ge_vlan_up_down
 {
     Test_Case_Title="ge_vlan_up_down"
-     ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
+    ifconfig ${local_tp1} up; ifconfig ${local_tp1} ${local_tp1_ip}
     ip link add link ${local_tp1} name ${local_tp1}.401 type vlan id 401
     ifconfig ${local_tp1}.401 192.168.11.10
     sleep 5
@@ -79,6 +91,11 @@ function ge_vlan_up_down
     else
         MESSAGE="FAIL\t vlan up/down failure"
     fi
+
+    vconfig rem ${local_tp1}.401
+    #ssh root@${BACK_IP} "vconfig rem ${remote_tp1}.401"
+
+
 }
 
 
@@ -99,7 +116,7 @@ function xge_vlan_multi_port()
     ifconfig ${remote_fibre1}.401 192.168.21.20;ifconfig ${remote_fibre1}.400 192.168.22.20;\
     sleep 10"
 
-    for i in "192.168.21.20 192.168.22.20"
+    for i in "192.168.21.20" "192.168.22.20"
     do
         ping $i -c 5 | tee -a ${HNS_TOP_DIR}/data/log/xge_vlan_multi_port.log | grep "received, 0% packet loss"
         if [ $? -eq 0 ];then
@@ -108,6 +125,15 @@ function xge_vlan_multi_port()
             MESSAGE="FAIL\t vlan Ping packet failure"
         fi
     done
+
+    vconfig rem ${local_fibre1}.400
+    ssh root@${BACK_IP} "vconfig rem ${remote_fibre1}.400"
+
+    vconfig rem ${local_fibre1}.401
+    ssh root@${BACK_IP} "vconfig rem ${remote_fibre1}.401"
+
+
+
 }
 
 function xge_set_vlan()
@@ -118,7 +144,7 @@ function xge_set_vlan()
     ifconfig ${local_fibre1}.401 192.168.21.10
     sleep 5
     ssh root@$BACK_IP "ifconfig ${remote_fibre1} up;\
-    ip link add link $i name ${remote_fibre1}.401 type vlan id 401;\
+    ip link add link ${remote_fibre1} name ${remote_fibre1}.401 type vlan id 401;\
     ifconfig ${remote_fibre1}.401 192.168.21.20;\
     sleep 10"
     ping 192.168.21.20 -c 5 | tee -a ${HNS_TOP_DIR}/data/log/xge_set_vlan.log | grep "received, 0% packet loss"
@@ -127,6 +153,11 @@ function xge_set_vlan()
     else
         MESSAGE="FAIL\t vlan Ping packet failure"
     fi
+
+    vconfig rem ${local_fibre1}.401
+    ssh root@${BACK_IP} "vconfig rem ${remote_fibre1}.401"
+
+
 }
 
 function xge_vlan_up_down
@@ -144,6 +175,11 @@ function xge_vlan_up_down
     else
         MESSAGE="FAIL\t vlan up/down failure"
     fi
+
+    vconfig rem ${local_fibre1}.401
+    #ssh root@${BACK_IP} "vconfig rem ${remote_fibre1}.400"
+
+
 }
 
 function main()
@@ -153,6 +189,8 @@ function main()
         MESSAGE="FAIL\t Please build VLAN into kernel"
     fi
     test_case_switch
+
+    
 }
 
 main
