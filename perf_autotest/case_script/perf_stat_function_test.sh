@@ -21,19 +21,18 @@ function fun_perf_list()
       cat ${PERF_TOP_DIR}/data/log/perf_statu.log | awk -F '[ \t]+'  '{print $3}' | sed 's/counts//g' > ${PERF_TOP_DIR}/data/log/counts.txt
       sleep 1
       if [ `cat ${PERF_TOP_DIR}/data/log/counts.txt | grep -i "not" | wc -l` -le 0 ];then 
-	echo 1 >> ${PERF_TOP_DIR}/data/log/test_flag.txt
-	echo pass
-	# break
+      	echo 1 >> ${PERF_TOP_DIR}/data/log/test_flag.txt
+      	echo pass
+      	# break
       else
-	echo 0 >> ${PERF_TOP_DIR}/data/log/test_flag.txt
+        echo 0 >> ${PERF_TOP_DIR}/data/log/test_flag.txt
         echo fail
-	MESSAGE="Fail\t $1 Event Run Error!"	
+        MESSAGE="Fail\t $1 Event Run Error!"	
         break
       fi
     done
     if [ `cat ${PERF_TOP_DIR}/data/log/test_flag.txt | grep "0" | wc -l` -le 0 ];then
       MESSAGE="Pass"
-      echo Pass
     fi
   fi
 }
