@@ -15,11 +15,18 @@ function fun_perf_list()
     rand=$(awk 'NR==2 {print $1}' ${PERF_TOP_DIR}/data/log/pmu_event.txt)
     perf stat -a -e $rand -I 200 sleep 10s
     dmesg | tail -200 | grep -i "PERF_WRITE_TEST:" > ${PERF_TOP_DIR}/data/log/write_dmesg.txt
+    cat ${PERF_TOP_DIR}/data/log/write_dmesg.txt | awk -F '[ \t]+'  '{print $6}' > ${PERF_TOP_DIR}/data/log/write_data.txt
+    cat ${PERF_TOP_DIR}/data/log/write_data.txt | sed "s/,//g" |sed '/^[ \t]*$/d' > ${PERF_TOP_DIR}/data/log/write_data.txt
     if [ `cat ${PERF_TOP_DIR}/data/log/write_dmesg.txt | grep -i "PERF_WRITE_TEST:" | wc -l` -lt 1 ];then 
-      MESSAGE="Fail\t $1 Event IRQ Function Test Fail!"
+      MESSAGE="Fail\t $1 Event WRITE Function Test Fail!"
     else
-      sed 's/^[ \t]*L3C_PERF_WRITE_TEST:[ \t]*//' <<< "${sLine}" > ./mytest.txt
-      MESSAGE="Pass"
+      header=`sed -n -e '1p' ${PERF_TOP_DIR}/data/log/write_data.txt`
+      footer=`sed -n -e '$p' ${PERF_TOP_DIR}/data/log/write_data.txt`
+      if [ $((16#$footer)) -lt $((16#$header)) ];then
+        MESSAGE="Fail\t $1 Event WRITE Function Test Fail,data error!"
+      else
+        MESSAGE="Pass"
+      fi
     fi
   fi
 }

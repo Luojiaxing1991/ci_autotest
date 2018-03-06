@@ -13,9 +13,11 @@ function fun_perf_list()
     return
   else 
     rand=$(awk 'NR==2 {print $1}' ${PERF_TOP_DIR}/data/log/pmu_event.txt)
-    rand2=$(awk 'NR==16 {print $1}' ${PERF_TOP_DIR}/data/log/pmu_event.txt)
-    perf stat -a -e $rand -e $rand2 -I 200 sleep 10s >& ${PERF_TOP_DIR}/data/log/perf_statu.log
-    if [ `cat ${PERF_TOP_DIR}/data/log/perf_statu.log | grep -i "irq" | wc -l` -le 1 ];then 
+    perf stat -a -e $rand -I 200 sleep 10s
+    dmesg | tail -200 > ${PERF_TOP_DIR}/data/log/irq_dmesg.txt
+    irqstart=`cat ${PERF_TOP_DIR}/data/log/irq_dmesg.txt | grep "hisi_hrtimer_start PERF_IRQ_TEST irq" | wc -l`
+    irqstop=`cat ${PERF_TOP_DIR}/data/log/irq_dmesg.txt | tail -150 | grep "hisi_hrtimer_stop PERF_IRQ_TEST irq" | wc -l`
+    if [ $irqstart -lt 1 -a $irqstop -lt 1 ];then 
       MESSAGE="Fail\t $1 Event IRQ Function Test Fail!"
     else
       MESSAGE="Pass"
