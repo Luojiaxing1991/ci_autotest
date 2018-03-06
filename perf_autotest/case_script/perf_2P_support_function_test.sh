@@ -52,7 +52,7 @@ function perf_2P_support_function_test()
     MESSAGE="Pass"
     echo ${MESSAGE}
   else
-    MESSAGE="Fail\t No L3C Perf 2P Support Event!"
+    MESSAGE="Fail\t No $1 Perf 2P Support Event!"
   fi
 }
 

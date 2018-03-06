@@ -16,7 +16,7 @@ function fun_perf_list()
     perf stat -a -e $rand -I 200 sleep 10s
     dmesg | tail -150 > ${PERF_TOP_DIR}/data/log/en_dmesg.txt
     en_flag=`cat ${PERF_TOP_DIR}/data/log/en_dmesg.txt | grep "hisi_uncore_pmu_enable_v2" | wc -l`
-    dis_flag=`cat ${PERF_TOP_DIR}/data/log/en_dmesg.txt | tail -150 | grep "hisi_uncore_pmu_disable_v2" | wc -l`
+    dis_flag=`cat ${PERF_TOP_DIR}/data/log/en_dmesg.txt | grep "hisi_uncore_pmu_disable_v2" | wc -l`
     if [ $en_flag -lt 1 -a $dis_flag -lt 1 ];then 
       MESSAGE="Fail\t $1 Event disable/enable Function Test Fail!"
     else
