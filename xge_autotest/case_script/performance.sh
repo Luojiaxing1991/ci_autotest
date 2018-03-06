@@ -19,7 +19,7 @@ NETIP2="$remote_fibre1_ip"
 #ipv6 config
 
 #iperf config
-THREAD="1 5 10"
+THREAD="1"
 IPERFDURATION=20
 
 #netperf config
@@ -158,6 +158,7 @@ function ipv6_iperf_single()
     REMOTE2_IPV6_IP=$(ssh root@$BACK_IP "ifconfig ${NETPORT2} | grep 'inet6 addr:' | awk '{print \$3}' | awk -F'/' '{print \$1}' | head -n 1")
     process="iperf"
     ssh root@$BACK_IP "iperf -s -V >/dev/null 2>&1 &"
+    sleep 5
     echo "#############################"
     echo "Run iperf Single port One-way..."
     echo "#############################"    
@@ -188,7 +189,9 @@ function ipv6_iperf_single()
     sleep 5
 
     #two-way perfornamce
+  if [ 'fefe' = 'fefe'  ];then
     ssh root@$BACK_IP "killall iperf;iperf -s -V >/dev/null 2>&1 &"
+    sleep 5
     echo "#############################"
     echo "Run iperf Single port two-way..."
     echo "#############################"
@@ -202,6 +205,7 @@ function ipv6_iperf_single()
         check_single_process
         ipv6_data_integration
     done
+  fi
     Ipv6Single=1
     MESSAGE="PASS"
     return 0
@@ -221,6 +225,7 @@ function ipv6_iperf_dual()
     killall iperf
     iperf -s -V >/dev/null 2>&1 &
     ssh root@$BACK_IP "killall iperf;iperf -s -V >/dev/null 2>&1 &"
+    sleep 5
     echo "#############################"
     echo "Run iperf Dual port one-way..."
     echo "#############################"
@@ -260,6 +265,7 @@ function ipv6_iperf_dual()
     killall iperf
     iperf -s -V >/dev/null 2>&1 &
     ssh root@$BACK_IP "killall iperf;iperf -s -V >/dev/null 2>&1 &"
+    sleep 5
     for twNum in $THREAD
     do
         echo "Run Two-way ${twNum}thread......"
@@ -285,6 +291,7 @@ function iperf_single()
     process="iperf"
     killall iperf
     ssh root@$BACK_IP "killall iperf;iperf -s >/dev/null 2>&1 &"
+    sleep 5
     echo "#############################"
     echo "Run iperf Single port One-way..."
     echo "#############################"    
@@ -315,6 +322,7 @@ function iperf_single()
     sleep 5
     #two-way perfornamce
       ssh root@$BACK_IP "killall iperf;iperf -s >/dev/null 2>&1 &"
+      sleep 5
       echo "#############################"
       echo "Run iperf Single port two-way..."
       echo "#############################"
@@ -343,6 +351,7 @@ function iperf_dual()
     killall iperf
     iperf -s >/dev/null 2>&1 &
     ssh root@$BACK_IP "killall iperf;iperf -s >/dev/null 2>&1 &"
+    sleep 5
     echo "#############################"
     echo "Run iperf Dual port one-way..."
     echo "#############################"
@@ -382,6 +391,7 @@ function iperf_dual()
     killall iperf
     iperf -s >/dev/null 2>&1 &
     ssh root@$BACK_IP "killall iperf;iperf -s >/dev/null 2>&1 &"
+    sleep 5
     for twNum in $THREAD
     do
         echo "Run Two-way ${twNum}thread......"
