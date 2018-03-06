@@ -66,6 +66,7 @@ BACK_ROCE_BORADNO=
 #add by hezhongyan
 ##################
 #init
+export g_IFS0=${IFS}
 export g__t=$'\t'
 export g__n=$'\n'
 export g__r=$'\r'
@@ -77,7 +78,7 @@ export g_defVariablesOneTime=
 export g_drTmp=~/tmp
 mkdir -p ${g_drTmp}
 
-###########
+#####################
 export g_sSplit=$'\t'
 export g_statusPass=[Pass]
 export g_nPass=0
@@ -90,7 +91,7 @@ export g_nNone=10
 export g_statusClose=[Close]
 export g_statusUndef=[Undef]
 
-######
+###########
 #删除状态表, 重新生成;
 export g_bTCsReset=true
 

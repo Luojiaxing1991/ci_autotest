@@ -23,8 +23,12 @@ Sub writeOutData()
         End If
         nR1 = nR1 + 1
     Loop While nCBlank < 5
+    If Dir(ThisWorkbook.Path & "\test_case.txt") <> "" Then
+        Kill ThisWorkbook.Path & "\test_case.txt"
+    End If
     Open ThisWorkbook.Path & "\test_case.txt" For Binary As #1
     Put #1, , result
     Close #1
-    MsgBox "OutPut Success!"
+    MsgBox "Success: " & ThisWorkbook.Path & "\test_case.txt"
 End Sub
+
