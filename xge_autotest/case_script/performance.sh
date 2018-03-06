@@ -5,8 +5,8 @@ NETPERFDIR="netperf_log"
 QPERFDIR="qperf_log"
 
 NETPORT1="$remote_tp1"
-NETPORT2="$remote_fibre2"
-NETPORTLIST="$remote_tp1 $remote_fibre2"
+NETPORT2="$remote_fibre1"
+NETPORTLIST="$remote_tp1 $remote_fibre1"
 
 #ipv6 config
 
@@ -578,9 +578,9 @@ function main()
 prepare_log_dir
 
 #ifconfig IP
+ifconfig $local_tp1 ${local_tp1_ip}
 ifconfig $local_fibre1 ${local_fibre1_ip}
-ifconfig $local_fibre2 ${local_fibre2_ip}
-ssh root@$BACK_IP "ifconfig $remote_fibre1 ${remote_fibre1_ip};ifconfig $remote_fibre2 ${remote_fibre2_ip};"
+ssh root@$BACK_IP "ifconfig $remote_tp1 ${remote_tp1_ip};ifconfig $remote_fibre1 ${remote_fibre1_ip};"
 
 main
 
