@@ -1,0 +1,200 @@
+[  579.800205]  handle_IPI+0x300/0x330
+[  579.800207]  gic_handle_irq+0x94/0x18c
+[  579.800209]  el1_irq+0xb0/0x128
+[  579.800211]  arch_cpu_idle+0x28/0x1a8
+[  579.800214]  default_idle_call+0x20/0x34
+[  579.800217]  do_idle+0x170/0x1d8
+[  579.800219]  cpu_startup_entry+0x2c/0x30
+[  579.800221]  secondary_start_kernel+0x124/0x130
+[  579.800227] hisi_pmu_v2: hisi_hrtimer_start PERF_IRQ_TEST irq
+[  579.800230] CPU: 1 PID: 0 Comm: swapper/1 Not tainted 4.15.0-rc1-g2952836-dirty #27
+[  579.800231] Hardware name: Huawei Taishan 2280 /D05, BIOS Hisilicon D05 IT17 Nemo 2.0 RC0 11/29/2017
+[  579.800233] Call trace:
+[  579.800235]  dump_backtrace+0x0/0x168
+[  579.800238]  show_stack+0x20/0x28
+[  579.800240]  dump_stack+0x88/0xac
+[  579.800242]  hisi_ddrc_start_counters+0x14/0x1c
+[  579.800244]  hisi_uncore_pmu_enable_v2+0x28/0x34
+[  579.800246]  perf_pmu_enable+0x40/0x4c
+[  579.800248]  ctx_resched+0x6c/0xa8
+[  579.800250]  __perf_install_in_context+0xf8/0x164
+[  579.800253]  remote_function+0x5c/0x70
+[  579.800255]  flush_smp_call_function_queue+0xac/0x15c
+[  579.800257]  generic_smp_call_function_single_interrupt+0x18/0x20
+[  579.800260]  handle_IPI+0x300/0x330
+[  579.800262]  gic_handle_irq+0x94/0x18c
+[  579.800263]  el1_irq+0xb0/0x128
+[  579.800266]  arch_cpu_idle+0x28/0x1a8
+[  579.800268]  default_idle_call+0x20/0x34
+[  579.800271]  do_idle+0x170/0x1d8
+[  579.800273]  cpu_startup_entry+0x2c/0x30
+[  579.800275]  secondary_start_kernel+0x124/0x130
+[  580.000384] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  580.000387] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e55ce2
+[  580.200532] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  580.200534] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e55dc8
+[  580.400649] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  580.400652] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e55efc
+[  580.600763] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  580.600765] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e56096
+[  580.800879] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  580.800881] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e561a8
+[  581.000990] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  581.000992] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e5630e
+[  581.201101] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  581.201104] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e563b8
+[  581.401212] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  581.401215] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e564b6
+[  581.601324] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  581.601326] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e56558
+[  581.801431] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  581.801434] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e56676
+[  582.001542] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  582.001545] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e566f6
+[  582.201652] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  582.201654] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e56748
+[  582.401761] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  582.401764] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e5682e
+[  582.601871] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  582.601873] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e568d6
+[  582.800117] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  582.800120] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e569ba
+[  582.801982] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  582.801984] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e569d4
+[  583.002093] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  583.002095] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e56a94
+[  583.202206] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  583.202209] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e56b4e
+[  583.402315] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  583.402318] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e56c10
+[  583.602424] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  583.602427] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e56c8a
+[  583.802538] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  583.802541] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e56d4a
+[  584.002648] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  584.002650] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e56dc6
+[  584.202758] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  584.202761] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e57398
+[  584.402867] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  584.402870] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e5751c
+[  584.602979] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  584.602981] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e575a2
+[  584.803087] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  584.803090] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e5762e
+[  585.003196] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  585.003198] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e576b4
+[  585.203310] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  585.203313] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e5775c
+[  585.403417] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  585.403419] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e57812
+[  585.603523] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  585.603526] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e57862
+[  585.799997] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  585.800000] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e578de
+[  585.803633] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  585.803635] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e57902
+[  586.003751] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  586.003754] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e57990
+[  586.203868] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  586.203870] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e579ea
+[  586.403980] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  586.403983] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e57a70
+[  586.604096] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  586.604098] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e57b02
+[  586.804213] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  586.804216] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e57bb8
+[  587.004330] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  587.004333] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e57c56
+[  587.204447] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  587.204449] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e57cf2
+[  587.404559] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  587.404561] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e57dba
+[  587.604704] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  587.604706] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e57f4c
+[  587.804822] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  587.804825] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e57fec
+[  588.004940] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  588.004942] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e58090
+[  588.205051] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  588.205054] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e5810e
+[  588.405169] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  588.405171] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e581d4
+[  588.605283] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  588.605285] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e58260
+[  588.799871] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  588.799874] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e58308
+[  588.805398] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  588.805400] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e58334
+[  589.005509] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  589.005512] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e5860a
+[  589.205623] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  589.205625] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e5893a
+[  589.405734] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  589.405736] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e58a38
+[  589.605845] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  589.605847] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e58ad8
+[  589.801114] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  589.801116] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e58bb0
+[  589.801190] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  589.801192] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e58be2
+[  589.801206] CPU: 1 PID: 6438 Comm: in:imklog Not tainted 4.15.0-rc1-g2952836-dirty #27
+[  589.801208] Hardware name: Huawei Taishan 2280 /D05, BIOS Hisilicon D05 IT17 Nemo 2.0 RC0 11/29/2017
+[  589.801210] Call trace:
+[  589.801214]  dump_backtrace+0x0/0x168
+[  589.801217]  show_stack+0x20/0x28
+[  589.801219]  dump_stack+0x88/0xac
+[  589.801221]  hisi_ddrc_stop_counters+0x14/0x1c
+[  589.801223]  hisi_uncore_pmu_disable_v2+0x28/0x34
+[  589.801227]  perf_pmu_disable+0x40/0x4c
+[  589.801229]  event_sched_out.isra.96+0x58/0x15c
+[  589.801231]  __perf_remove_from_context+0x40/0x108
+[  589.801234]  event_function+0x98/0xec
+[  589.801236]  remote_function+0x5c/0x70
+[  589.801239]  flush_smp_call_function_queue+0xac/0x15c
+[  589.801241]  generic_smp_call_function_single_interrupt+0x18/0x20
+[  589.801244]  handle_IPI+0x300/0x330
+[  589.801246]  gic_handle_irq+0x94/0x18c
+[  589.801248]  el1_irq+0xb0/0x128
+[  589.801251]  _raw_spin_unlock_irq+0x24/0x54
+[  589.801254]  finish_task_switch+0x88/0x20c
+[  589.801257]  __schedule+0x1d0/0x840
+[  589.801259]  schedule+0x3c/0x9c
+[  589.801261]  do_syslog+0x4ac/0x518
+[  589.801264]  kmsg_read+0x58/0x74
+[  589.801267]  proc_reg_read+0x84/0xb8
+[  589.801271]  __vfs_read+0x44/0x13c
+[  589.801273]  vfs_read+0x88/0x13c
+[  589.801275]  SyS_read+0x54/0xb0
+[  589.801277]  el0_svc_naked+0x20/0x24
+[  589.801279] hisi_pmu_v2: hisi_hrtimer_stop PERF_IRQ_TEST irq
+[  589.801281] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST REG: 380
+[  589.801283] hisi_pmu_v2: hisi_ddrc_read_counter DDRC_PERF_WRITE_TEST: e58c5e
+[  589.801287] CPU: 1 PID: 6438 Comm: in:imklog Not tainted 4.15.0-rc1-g2952836-dirty #27
+[  589.801289] Hardware name: Huawei Taishan 2280 /D05, BIOS Hisilicon D05 IT17 Nemo 2.0 RC0 11/29/2017
+[  589.801291] Call trace:
+[  589.801293]  dump_backtrace+0x0/0x168
+[  589.801296]  show_stack+0x20/0x28
+[  589.801298]  dump_stack+0x88/0xac
+[  589.801300]  hisi_ddrc_start_counters+0x14/0x1c
+[  589.801302]  hisi_uncore_pmu_enable_v2+0x28/0x34
+[  589.801304]  perf_pmu_enable+0x40/0x4c
+[  589.801307]  event_sched_out.isra.96+0xec/0x15c
+[  589.801309]  __perf_remove_from_context+0x40/0x108
+[  589.801312]  event_function+0x98/0xec
+[  589.801314]  remote_function+0x5c/0x70
+[  589.801316]  flush_smp_call_function_queue+0xac/0x15c
+[  589.801319]  generic_smp_call_function_single_interrupt+0x18/0x20
+[  589.801321]  handle_IPI+0x300/0x330
+[  589.801323]  gic_handle_irq+0x94/0x18c
+[  589.801325]  el1_irq+0xb0/0x128
+[  589.801327]  _raw_spin_unlock_irq+0x24/0x54
+[  589.801330]  finish_task_switch+0x88/0x20c
+[  589.801333]  __schedule+0x1d0/0x840
+[  589.801335]  schedule+0x3c/0x9c
+[  589.801337]  do_syslog+0x4ac/0x518
+[  589.801339]  kmsg_read+0x58/0x74
+[  589.801341]  proc_reg_read+0x84/0xb8
+[  589.801343]  __vfs_read+0x44/0x13c
+[  589.801345]  vfs_read+0x88/0x13c
+[  589.801347]  SyS_read+0x54/0xb0
+[  589.801349]  el0_svc_naked+0x20/0x24
