@@ -19,7 +19,7 @@ NETIP2="$remote_fibre1_ip"
 #ipv6 config
 
 #iperf config
-THREAD="1"
+THREAD="1 5 10"
 IPERFDURATION=20
 
 #netperf config
