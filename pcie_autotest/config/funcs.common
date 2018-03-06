@@ -33,29 +33,20 @@ printf "%s[%3d]%5s: Load [${g_pfnCur}] call by [${g_flParent}]\n" "${FUNCNAME[0]
 
 ####################################################################################
 #init
+if false; then
 export g_IFS0=${IFS}
 export g__t=$'\t'
 export g__n=$'\n'
 export g__r=$'\r'
-export g_IPPro=$(ip a |grep "inet[ \t]\+" |grep -v "inet 127\.0\.0\.1" |sed "s/^[ \t]*inet[ \t]\+\([0-9\.]\+\).\+$/\1/")
-export g_variableNameRe='\<[A-Za-z_]\+[0-9A-Za-z_]*\>'
 
-export g_sshFlag="-o ConnectTimeout=60 -o ServerAliveInterval=60 -o ServerAliveCountMax=2"
 export g_argFindMaxDepth="-maxdepth 5"
 
 export g_defVariablesOneTime=
 
-export g_sepExpDo="#:"
-
-export g_sStepExecStatus='[Step    Status: \$?=$?]'
-export g_sStepExecTrap='\[Step    Status: \$\?=([0-9]+)\]'
-export g_sProcExecStatus='[Process Status: \$?=$?]'
-export g_sProcExecTrap='\[Process Status: \$\?=([0-9]+)\]'
-
 export g_drTmp=~/tmp
 mkdir -p ${g_drTmp}
 
-###########
+#####################
 export g_sSplit=$'\t'
 export g_statusPass=[Pass]
 export g_nPass=0
@@ -68,16 +59,121 @@ export g_nNone=10
 export g_statusClose=[Close]
 export g_statusUndef=[Undef]
 
-######
+###########
 #删除状态表, 重新生成;
 export g_bTCsReset=true
 
 export g_sLevelRun="
     on
 "
+fi
+
+#####################
+export g_IPPro=$(ip a |grep "inet[ \t]\+" |grep -v "inet 127\.0\.0\.1" |sed "s/^[ \t]*inet[ \t]\+\([0-9\.]\+\).\+$/\1/")
+export g_variableNameRe='\<[A-Za-z_]\+[0-9A-Za-z_]*\>'
+
+export g_sshFlag="-o ConnectTimeout=60 -o ServerAliveInterval=60 -o ServerAliveCountMax=2"
+export g_sepExpDo="#:"
+
+export g_sStepExecStatus='[Step    Status: \$?=$?]'
+export g_sStepExecTrap='\[Step    Status: \$\?=([0-9]+)\]'
+export g_sProcExecStatus='[Process Status: \$?=$?]'
+export g_sProcExecTrap='\[Process Status: \$\?=([0-9]+)\]'
+
+#倒数第一段, 主机段.
+export g_sIPBaseSect_1=128
+#倒数第二段, 子网段.
+export g_sIPBaseSect_2=128
+
+export g_ipNet=
 
 #####################
 #Alone Functions
+if false; then
+#g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+#OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${flLog}" false
+OutLogHead()
+{
+    local nStatus=${1}
+    local sStatus=${2}
+    local sHead1=${3}
+    local sMsg1=${4}
+    local flLog=${5:-/dev/null}
+    local bExitErr=${6:-false}
+    local bNewLine=${7:-true}
+
+    local m_cn1=
+    if [ "${bNewLine}" == "true" ]; then
+        m_cn1=$'\n'
+    fi
+
+    case "${nStatus}" in
+    0)
+        sStatus=${sStatus:-Info}
+        ;;
+    *)
+        sStatus=${sStatus:-Error}
+        ;;
+    esac
+
+    local sLogA=
+    if [ -n "${sHead1}" ]; then
+        sLogA=$(printf "%s%5s[%3d]: %s" "${sHead1}" "${sStatus}" "${nStatus}" "${sMsg1}")
+    elif [ -n "${sMsg1}" ]; then
+        sLogA=${sMsg1}
+    fi
+
+    case "${nStatus}" in
+    0)
+        printf "%s${m_cn1}" "${sLogA}"
+        printf "%s${m_cn1}" "${sLogA}" >> "${flLog}"
+        ;;
+    *)
+        printf "%s${m_cn1}" "${sLogA}" 1>&2
+        printf "%s${m_cn1}" "${sLogA}" >> "${flLog}"
+
+        if [ "${bExitErr}" == "true" ]; then
+            exit ${nStatus}
+        fi
+        ;;
+    esac
+}
+export -f OutLogHead
+fi
+
+PingStatus()
+{
+    local sIPFr=${1}
+    local sIPTo=${2}
+    local varThrough=${3}
+    local nTimes=${4:-5}
+
+    #此处耗时.
+    local cmdP1 sP1
+    cmdP1="ping -I${sIPFr} ${sIPTo} -c${nTimes}"
+    printf "%s[%3d]%5s: ${cmdP1} start\n" "${FUNCNAME[0]}" ${LINENO} "Info"
+    eval sP1=\$\(${cmdP1}\)
+    printf "%s[%3d]%5s: ${cmdP1} finished\n" "${FUNCNAME[0]}" ${LINENO} "Info"
+
+    local n1=0
+    sP1=$(grep -io ",[ ${g__t}]*[0-9]\+[ ${g__t}]*received[ ${g__t}]*," <<< "${sP1}")
+    if [ -n "${sP1}" ]; then
+        n1=$(sed "s#^[ ${g__t}]*,[ ${g__t}]*\([0-9]\+\)[ ${g__t}]*received[ ${g__t}]*,[ ${g__t}]*\$#\1#I" <<< "${sP1}")
+    fi
+    if [ -n "${varThrough}" ]; then
+        eval ${varThrough}=\${n1}
+    fi
+
+    local n2=0
+    let n2=nTimes/2
+    if [ ${n1} -gt ${n2} ]; then
+        return 0
+    fi
+
+    return 1
+}
+export -f PingStatus
+
 KillAProcs()
 {
     local sKeyProc=${1}
@@ -103,53 +199,10 @@ RunACmd()
 {
     local sCmdRun=${1}
 
-    ${sCmdRun}
+    eval "${sCmdRun}"
     eval "echo \"${g_sProcExecStatus}\""
 }
 export -f RunACmd
-
-#g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
-#OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${flLog}" false
-OutLogHead()
-{
-    local nStatus=${1}
-    local sStatus=${2}
-    local sHead1=${3}
-    local sMsg1=${4}
-    local flLog=${5:-/dev/null}
-    local bExitErr=${6:-false}
-
-    case "${nStatus}" in
-    0)
-        sStatus=${sStatus:-Info}
-        ;;
-    *)
-        sStatus=${sStatus:-Error}
-        ;;
-    esac
-
-    local sLogA=
-    if [ -n "${sHead1}" ]; then
-        sLogA=$(printf "%s%5s[%3d]: %s\n" "${sHead1}" "${sStatus}" "${nStatus}" "${sMsg1}")
-    elif [ -n "${sMsg1}" ]; then
-        sLogA=${sMsg1}
-    fi
-
-    case "${nStatus}" in
-    0)
-        echo "${sLogA}"
-        echo "${sLogA}" >> "${flLog}"
-        ;;
-    *)
-        echo "${sLogA}" 1>&2
-        echo "${sLogA}" >> "${flLog}"
-        if [ "${bExitErr}" == "true" ]; then
-            exit ${nStatus}
-        fi
-        ;;
-    esac
-}
-export -f OutLogHead
 
 CollectInfo()
 {
@@ -164,15 +217,15 @@ GetUnExistFileName()
 {
     local dr1=${1}
     local flNPre=${2}
-    local nPos0=${3}
+    local nWidth=${3}
     local nFrom=${4}
     local flNEnd=${5}
     local varFLN=${6}
 
-    sN1=$(printf "${flNPre}%0${nPos0}d${flNEnd}" "${nFrom}")
+    sN1=$(printf "${flNPre}%0${nWidth}d${flNEnd}" "${nFrom}")
     while [ -e "${dr1}/${sN1}" ]; do
         let nFrom+=1
-        sN1=$(printf "${flNPre}%0${nPos0}d${flNEnd}" "${nFrom}")
+        sN1=$(printf "${flNPre}%0${nWidth}d${flNEnd}" "${nFrom}")
     done
 
     eval ${varFLN}=\${sN1}
@@ -267,31 +320,28 @@ RankKMGT()
     local varRank=${2}
     local varNR1=${3}
 
-    if [ -z "${c1}" ]; then
-        eval ${varRank}=0
-        return 0
-    fi
-
     local nD1=0
-    case "${c1}" in
-    [kK])
-        let nD1=1
-        ;;
-    [mM])
-        let nD1=2
-        ;;
-    [gG])
-        let nD1=3
-        ;;
-    [tT])
-        let nD1=4
-        ;;
-    *)
-        eval ${varNR1}+=1
-        g_sMsgCur="[${c1}] not define"
-        printf "%s[%3d]%s[%3d]%5s: ${g_sMsgCur}\n" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO} "Error" 1>&2
-        return 1
-    esac
+    if [ -n "${c1}" ]; then
+        case "${c1}" in
+        [kK])
+            let nD1=1
+            ;;
+        [mM])
+            let nD1=2
+            ;;
+        [gG])
+            let nD1=3
+            ;;
+        [tT])
+            let nD1=4
+            ;;
+        *)
+            eval ${varNR1}+=1
+            g_sMsgCur="[${c1}] not define"
+            printf "%s[%3d]%s[%3d]%5s: ${g_sMsgCur}\n" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO} "Error" 1>&2
+            return 1
+        esac
+    fi
 
     eval ${varRank}=\${nD1}
     return 0
@@ -306,15 +356,15 @@ NumCmpKMGT()
     local varStat=${4}
 
     local sInt1 sInt2
-    sInt1=$(sed "s/^\([0-9.]\+\)[^0-9.]*\$/\1/" <<< "${sNum1}")
-    sInt2=$(sed "s/^\([0-9.]\+\)[^0-9.]*\$/\1/" <<< "${sNum2}")
+    sInt1=$(sed "s/^[ \t]*\([0-9.]\+\)[ \t]*\([^0-9. \t]*\)[ \t]*\$/\1/" <<< "${sNum1}")
+    sInt2=$(sed "s/^[ \t]*\([0-9.]\+\)[ \t]*\([^0-9. \t]*\)[ \t]*\$/\1/" <<< "${sNum2}")
     DelNumDot "${sInt1}" "${sInt2}" sInt1 sInt2
     g_sMsgCur="[${sInt1}] cmp [${sInt2}]"
     #printf "%s[%3d]%s[%3d]%5s: ${g_sMsgCur}\n" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO} "Info"
 
     local sUnit1 sUnit2
-    sUnit1=$(sed "s/^\([0-9.]\+\)\([^0-9.]*\)\$/\2/" <<< "${sNum1}")
-    sUnit2=$(sed "s/^\([0-9.]\+\)\([^0-9.]*\)\$/\2/" <<< "${sNum2}")
+    sUnit1=$(sed "s/^[ \t]*\([0-9.]\+\)[ \t]*\([^0-9. \t]*\)[ \t]*\$/\2/" <<< "${sNum1}")
+    sUnit2=$(sed "s/^[ \t]*\([0-9.]\+\)[ \t]*\([^0-9. \t]*\)[ \t]*\$/\2/" <<< "${sNum2}")
 
     if [ "${sUnit1}" != "${sUnit2}" ]; then
         local c1 c2 sU1 sU2
@@ -364,8 +414,90 @@ NumCmpKMGT()
 }
 export -f NumCmpKMGT
 
+DicLeftValue()
+{
+    local varDicFr=${1}
+    local varKeys=${2}
+    local varDicTo=${3}
+
+    local k1 sKeysA dic1
+    eval sKeysA=\${!${varDicFr}[*]}
+    for k1 in ${sKeysA}; do
+        eval ${varDicTo}[${k1}]=
+    done
+
+    eval sKeysA=\${${varKeys}}
+    for k1 in ${sKeysA}; do
+        eval ${varDicTo}[${k1}]=\${${varDicFr}[${k1}]}
+    done
+}
+export -f DicLeftValue
+
+SetIPByPairNicName()
+{
+    local varDicNicNm=${1}
+    local varDicIndex=${2}
+    local varDicPair=${3}
+    local varDicIPs=${4}
+
+    local bClue=false
+    if [ -n "${varDicPair}" ]; then
+        declare -p ${varDicPair} 2>/dev/null |grep -q "declare -A ${varDicPair}"
+        if [ $? -eq 0 ]; then
+            bClue=true
+        fi
+    fi
+
+    local nMaxA sKeysA n1 key1 v1
+    eval nMaxA=\${#${varDicIPs}[@]}
+    eval sKeysA=\${!${varDicNicNm}[*]}
+    n1=0
+    if ${bClue}; then
+        for key1 in ${sKeysA}; do
+            eval ${varDicNicNm}[${key1}]=
+        done
+
+        while [ ${n1} -lt ${nMaxA} ]; do
+            eval v1=\${${varDicIndex}[${n1}]}
+            eval v1=\${${varDicPair}[${v1}]}
+            eval ${varDicNicNm}[${v1}]=\${${varDicIPs}[${n1}]}
+            let n1+=1
+        done
+    else
+        eval "${varDicIndex}=()"
+        for key1 in ${sKeysA}; do
+            if [ ${n1} -lt ${nMaxA} ]; then
+                eval ${varDicNicNm}[${key1}]=\${${varDicIPs}[${n1}]}
+                eval ${varDicIndex}[${n1}]=${key1}
+                let n1+=1
+            else
+                eval ${varDicNicNm}[${key1}]=
+            fi
+        done
+    fi
+}
+export -f SetIPByPairNicName
+
+GetNicName()
+{
+    local sDriveName=${1}
+    local varDicName=${2}
+
+    local sIPsA sDriver1
+    sIPsA=$(ip a |grep "^[0-9]\+:" |cut -d: -f2 |sed "s/^[ \t]\+//;s/[ \t]\+\$//;/^lo\$/Id;/sit0@NONE/Id")
+    IFS=$'\n'; for e1 in ${sIPsA}; do IFS=${g_IFS0};
+        #ethtool ${e1} |grep -iq "\(fibre\|fiber\)"
+        sDriver1=$(ethtool -i ${e1} |grep -i "driver:" |sed "s/^[ \t]*driver:[ \t]*//;s/[ \t]\+\$//")
+        if [ "${sDriver1}" == "${sDriveName}" ]; then
+            eval ${varDicName}[${e1}]=
+        fi
+    IFS=$'\n'; done; IFS=${g_IFS0};
+}
+export -f GetNicName
+
 ##########
 #Complex Functions
+if false; then
 LoadSourceFileParent()
 {
     local drCur1=${1}
@@ -395,24 +527,6 @@ LoadSourceFileParent()
 }
 export -f LoadSourceFileParent
 
-FillDicByList()
-{
-    local varKeys=${1}
-    local varDics=${2}
-    local sNameDic=${3}
-
-    local sKeys1 k1 v1
-    eval sKeys1=\${${varKeys}}
-
-    sKeys1=$(sed '/^[ \t]*$/d' <<< "${sKeys1}")
-    IFS=$'\n'; for k1 in ${sKeys1}; do IFS=${g_IFS0};
-        k1=$(sed 's#^[ \t]\+##;s#[ \t]\+$##' <<< "${k1}")
-        GetMCValue "${varDics}" "${k1}" v1
-        eval ${sNameDic}[${k1}]=\${v1}
-    IFS=$'\n'; done; IFS=${g_IFS0};
-}
-export -f FillDicByList
-
 #说明:RunTable 1-Excel文本表 2-要生成的中间结果表 3-脚本所在目录 4-程序打印的日志信息
 #示例:RunTable "data/testcases.table" ~/tmp/status.txt pcie_autotest/case_script ~/tmp/pcie.log
 RunTable()
@@ -438,7 +552,7 @@ RunTable()
     local sR0 sR1 sLevelR1 sLevelR2 sTTitle1 sTTitle2 sScript1 sScript2 sFuncNa
     local sStatus1 nRt1 bRun1 sLineStatus
 
-    local nMaxRow nR1
+    local nMaxRow nR1 nRows1 bUpdate
     nMaxRow=$(sed -n '$=' "${flTableOrigin}")
     nR1=0
     while [ ${nR1} -lt ${nMaxRow} ]; do
@@ -459,6 +573,7 @@ RunTable()
         OutLogHead 0 "" "" "" "${flLog}" false
         OutLogHead 0 "" "" "title: ${sTTitle1}" "${flLog}" false
 
+        g_sMsgCur=
         grep -q "^${sLevelR2}\$" <<< "${g_sLevelRun}"
         if [ $? -ne 0 ]; then
             g_sMsgCur="test case close"
@@ -494,11 +609,9 @@ RunTable()
 
             case ${nRt1} in
             ${g_nPass})
-	        echo "Test is PASS: "${sTTitle1}
                 sStatus1=${g_statusPass}
                 ;;
             ${g_nFail})
-                echo "Test is Fail: "${sTTitle1}
                 sStatus1=${g_statusFail}
                 ;;
             ${g_nBlock})
@@ -516,17 +629,6 @@ RunTable()
                 ;;
             esac
         fi
-        echo "The stat of "${sTTitle1}" is "${sStatus1}
-
-        if [ x"${sStatus1}" = x"[Close]" ];then
-            echo "The test have benn skip!"
-        else
-            if [ x"${sStatus1}" = x"[Pass]" ];then
-               lava_report "${sTTitle1}" pass
-            else
-               lava_report "${sTTitle1}" fail
-            fi
-        fi
 
         OutLogHead 0 "" "" "status: ${sStatus1}" "${flLog}" false
         if [ -z "${sTTitle1}" ]; then
@@ -535,7 +637,21 @@ RunTable()
         else
             sLineStatus=$(grep "${sTTitle2}" <<< "${sStatusTable}")
         fi
+        bUpdate=false;
         if [ -n "${sLineStatus}" ]; then
+            if [ "${g_bTCsReset}" != "true" ]; then
+                nRows1=$(grep "${sTTitle2}" "${flTableOrigin}" |wc -l)
+                if [ ${nRows1} -eq 1 ]; then
+                    bUpdate=true;
+                else
+                    g_sMsgCur="[${nRows1}]rows have the same title[${sTTitle1}]"
+                    g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+                    OutLogHead 1 "Warn" "${g_sHeadCurLine}" "${g_sMsgCur}" "${flLog}" false
+                fi
+            fi
+        fi
+
+        if ${bUpdate}; then
             #更新状态表中这条用例的状态;
             grep -q "^${sPass}${g_sSplit}" <<< "${sLineStatus}"
             if [ $? -ne 0 ]; then
@@ -547,9 +663,7 @@ RunTable()
         fi
     done
 
-    #echo "${sStatusTable}" > "${flTableStatus}"
-
-    echo "The pcie RunTable phase is over!"
+    echo "${sStatusTable}" > "${flTableStatus}"
 }
 export -f RunTable
 
@@ -597,12 +711,10 @@ GenReport()
             echo "${sStatus1}" |grep -q "^${sPass}\$"
             if [ $? -eq 0 ]; then
                 writePass
-                #lava_report "${sTTitle1}" pass
             else
                 echo "${sStatus1}" |grep -q "^${sFail}\$"
                 if [ $? -eq 0 ]; then
                     writeFail "${sMessage}"
-                    #lava_report "${sTTitle1}" fail
                 fi
             fi
         fi
@@ -612,10 +724,11 @@ export -f GenReport
 
 GenTable()
 {
-    local flTableStatus=${1}
-    local flTableOutput=${2}
-    local sModule=${3}
-    local flLog=${4:-/dev/null}
+    local flTableOrigin=${1}
+    local flTableStatus=${2}
+    local flTableOutput=${3}
+    local sModule=${4}
+    local flLog=${5:-/dev/null}
 
     local sPass sFail sStatus1 sSearch1 sSearch2 sMessage 
     sPass=$(echo "${g_statusPass}" |sed 's#\([]/*[]\)#\\\1#g')
@@ -629,7 +742,7 @@ GenTable()
     fi
 
     local sTCsTable
-    sTCsTable=$(cat "${g_flTCsTable}")${g__n}
+    sTCsTable=$(cat "${flTableOrigin}")${g__n}
 
     while read sR0; do
         sR1=$(echo "${sR0}" |sed "s/^[ \t]\+//;s/[ \t\r]\+\$//")
@@ -640,7 +753,7 @@ GenTable()
         sStatus1=$(echo "${sR1}" |awk -F'\t' '{print $1}')
         sSearch1=$(echo "${sR1}" |awk -F'\t' '{print $2}')
         sSearch2=$(sed 's#\([]/*[]\)#\\\1#g' <<< "${sSearch1}")
-        sTCLine1=$(grep -i "${sSearch2}" "${g_flTCsTable}" |sed "s/\r\+//g")
+        sTCLine1=$(grep -i "${sSearch2}" "${flTableOrigin}" |sed "s/\r\+//g")
         if [ -n "${sTCLine1}" ]; then
             sTCsTable=$(echo "${sTCsTable}" |sed "/${sSearch2}/s/^/${sStatus1}${g_sSplit}/")
         else
@@ -652,6 +765,7 @@ GenTable()
     echo "${sTCsTable}" > "${flTableOutput}"
 }
 export -f GenTable
+fi
 
 LineNos()
 {
@@ -784,6 +898,7 @@ ExpectBashC()
         log_file -a "${m_flLog1}"
 
         set m_iStatusExp 1
+        set m_nLogined1 0
         set m_sCmdStatus true
         set m_nDoWhile 1
 
@@ -831,6 +946,7 @@ ExpectBashC()
                 }
                 '"${sPattern}"'
                 -re {Last login: .{10,}} {
+                    incr m_nLogined1 +1
                     #sleep 0.5
                     #exp_send ":\recho ${sStepExecStatus}\r"
                     exp_continue
@@ -899,7 +1015,7 @@ ExpectBashC()
                         } else {
                             set timeout -1
                         }
-                        send_tty "\n#########<normal> timeout\[${timeout}\] status\[${m_iStatusExp}\] mode\[${m_nModeCmd}\] index\[${nT1}\]#########\n"
+                        send_tty "\n#########<normal> timeout\[${timeout}\] next time init status\[${m_iStatusExp}\] mode\[${m_nModeCmd}\] index\[${nT1}\]#########\n"
                         if {[info exists m_dicCmdEx(${nT1})]} {
                             eval "$m_dicCmdEx(${nT1})"
                             exp_continue
@@ -923,7 +1039,7 @@ ExpectBashC()
                         set timeout -1
                         #set m_nModeCmd 1
                     }
-                    send_tty "\n#########<timeout> timeout\[${timeout}\] status\[${m_iStatusExp}\] mode\[${m_nModeCmd}\] index\[${nT1}\]#########\n"
+                    send_tty "\n#########<timeout> timeout\[${timeout}\] next time init status\[${m_iStatusExp}\] mode\[${m_nModeCmd}\] index\[${nT1}\]#########\n"
                     if {[info exists m_dicCmdEx(${nT1})]} {
                         eval "$m_dicCmdEx(${nT1})"
                         if {${m_nDoWhile}<1} {
@@ -957,11 +1073,29 @@ ExpectBashC()
 }
 export -f ExpectBashC
 
+FillDicByList()
+{
+    local varKeys=${1}
+    local varDics=${2}
+    local sNameDic=${3}
+
+    local sKeys1 k1 v1
+    eval sKeys1=\${${varKeys}}
+
+    sKeys1=$(sed '/^[ \t]*$/d' <<< "${sKeys1}")
+    IFS=$'\n'; for k1 in ${sKeys1}; do IFS=${g_IFS0};
+        k1=$(sed 's#^[ \t]\+##;s#[ \t]\+$##' <<< "${k1}")
+        GetMCValue "${varDics}" "${k1}" v1
+        eval ${sNameDic}[${k1}]=\${v1}
+    IFS=$'\n'; done; IFS=${g_IFS0};
+}
+export -f FillDicByList
+
 RunACmdsRemote()
 {
     local varDicMCLogin=${1}
-    local flLoadLib=${2}
-    local sCmdRun=${3}
+    local varLoadFuncs=${2}
+    local varCmds=${3}
     local varDicCols=${4}
     local nCols=${5}
     local varDicValues=${6}
@@ -971,6 +1105,14 @@ RunACmdsRemote()
     local flLog=${10:-/dev/null}
 
     ###################################
+    local fnLoadFuncs
+    eval fnLoadFuncs=\${${varLoadFuncs}}
+    fnLoadFuncs=$(sed "s#'#'\\\''#g" <<< "${fnLoadFuncs}")
+
+    local sCmdRun1 sCmdRun2
+    eval sCmdRun1=\${${varCmds}}
+    #sCmdRun2=$(sed 's@"@\\"@g' <<< "${sCmdRun1}")
+
     grep -q "^[0-9]\+\$" <<< "${nCols}"
     if [ $? -ne 0 ]; then
         g_sMsgCur="nCols need a natural number"
@@ -988,6 +1130,7 @@ RunACmdsRemote()
     sKeysA="
         kOptSsh
         kUsr
+        kPwd
         kIP
         kDrLoad
         kMDrLog
@@ -999,9 +1142,11 @@ RunACmdsRemote()
     "
     FillDicByList sKeysA dicListA m_dicNxt
 
-    local sMcLoginNxt
-    sMcLoginNxt=true
+    local sMcLoginNxt bLogin
+    bLogin=false
+    sMcLoginNxt=:
     if [ -n "${m_dicNxt[kIP]}" ]; then
+        bLogin=true
         sMcLoginNxt="ssh ${m_dicNxt[kOptSsh]} ${m_dicNxt[kUsr]}@${m_dicNxt[kIP]}"
         sMcLoginNxt=$(sed 's/^[ \t]\+//;s/[ \t]\+$//;s/[ \t]\+/ /g' <<< "${sMcLoginNxt}")
     fi
@@ -1011,10 +1156,9 @@ RunACmdsRemote()
     flNamePre=$(sed 's#^g_dic##' <<< "${varDicMCLogin}")
 
     if [ -z "${m_dicNxt[kDrLoad]}" ]; then
-        g_sMsgCur="Load path is empty"
+        g_sMsgCur="Load path is empty, load string directly"
         g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
-        OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${flLog}" false
-        return 1
+        OutLogHead 0 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${flLog}" false
     fi
 
     ###################################
@@ -1031,20 +1175,28 @@ RunACmdsRemote()
     sMapNameKeys=
 
     local sV1 sV2 sVCmd1
+    #declare -A ${varDicCols}
+    sCmdRun2=${sCmdRun1}
     while [ ${nR1} -lt ${nMaxRow} ]; do
         eval sV1=\${${varDicValues}[${nR1}_${nC1}]}
         sV2=$(sed 's/^[ \t]\+//;s/[ \t]\+$//;s/[ \t/]\+/_/g' <<< "${sV1}")
-        sNameKeys=${sNameKeys}_${sV2}
+        if [ -n "${sV2}" ]; then
+            sNameKeys=${sNameKeys}_${sV2}
+        fi
 
-        eval ${varDicCols}[${nC1}]=\${sV1}
+        #eval ${varDicCols}[${nC1}]=\${sV1}
+        sV2=$(sed 's@/@\\/@g' <<< "${sV1}")
+        sCmdRun2=$(sed "s/\(\\\$${varDicCols}\[${nC1}\]\|\\\${${varDicCols}\[${nC1}\]}\)/${sV2}/g" <<< "${sCmdRun2}")
         let nC1+=1
         if [ ${nC1} -ge ${nCols} ]; then
-            let nC1=0
-            eval "sVCmd1=\"${sCmdRun}\""
-            sVCmd1=$(sed 's/^[ \t]\+//;s/[ \t]\+$//;s/[ \t]\+/ /g' <<< "${sVCmd1}")
+            sVCmd1=$(sed 's/^[ \t]\+//;s/[ \t]\+$//;s/[ \t]\+/ /g'";s/'/'\\\''/g" <<< "${sCmdRun2}")
             sMapCmds="${sMapCmds}${g__n}${nR1}${g_sepExpDo} ${sVCmd1}"
+            sNameKeys=$(cut -d' ' -f1 <<< "${sVCmd1}" |sed -n "1p")${sNameKeys}
             sMapNameKeys="${sMapNameKeys}${g__n}${nR1}${g_sepExpDo} ${sNameKeys}"
+
+            let nC1=0
             sNameKeys=
+            sCmdRun2=${sCmdRun1}
             let nR1+=1
         fi
     done
@@ -1055,27 +1207,36 @@ RunACmdsRemote()
     local sCmdA sCmdB sReplyA sTimeExpA
     local m_sVarsSet
     m_sVarsSet="
+        set m_nStatusProc 0
     "
     sCmdA="
         1${g_sepExpDo}
             ${SHELL} -c '
-                ${sMcLoginNxt}
+                if ${bLogin}; then
+                    ${sMcLoginNxt}
+                fi
                 echo \"${g_sStepExecStatus}\"
             '
         2${g_sepExpDo}
-            l_drLoad="${m_dicNxt[kDrLoad]}"
-            l_flLoad="${flLoadLib}"
+            l_drLoad='${m_dicNxt[kDrLoad]}'
+            l_flLoad='${fnLoadFuncs}'
+            iRlt1=0
     "'
-            if [ -n "${l_drLoad}" -a -n "${l_flLoad}" ]; then
-                flPub1=$(find "${l_drLoad}" -maxdepth 5 -name "${l_flLoad}" 2>/dev/null)
+            if [ -n "${l_flLoad}" ]; then
                 iRlt1=1
-                if [ -n "${flPub1}" ]; then
-                    $(sed "s#^#. #" <<< "${flPub1}")
+                if [ -n "${l_drLoad}" ]; then
+                    flPub1=$(find "${l_drLoad}" -maxdepth 5 -name "${l_flLoad}" 2>/dev/null)
+                    if [ -n "${flPub1}" ]; then
+                        $(sed "s#^#. #" <<< "${flPub1}")
+                        iRlt1=$?
+                    fi
+                else
+                    eval "${l_flLoad}"
                     iRlt1=$?
                 fi
-                test ${iRlt1} -eq 0
-                echo "'"${g_sStepExecStatus}"'"
             fi
+            test ${iRlt1} -eq 0
+            echo "'"${g_sStepExecStatus}"'"
     '
     sCmdB="
         1.1${g_sepExpDo}
@@ -1106,16 +1267,18 @@ RunACmdsRemote()
                 if {"${e_bKillProc}"=="true"} {
                     exp_send "KillAProcs \"$e_aryCmds(${e_n1})\"\n"
                 }
-                exp_send "GetUnExistFileName \"${e_drLog}\" \"${e_flPre}$e_aryName(${e_n1})_${e_n1}_\" 2 0 \".log\" l_flLog\n"
+                exp_send "GetUnExistFileName \"${e_drLog}\" \"${e_flPre}_$e_aryName(${e_n1})_${e_n1}_\" 2 0 \".log\" l_flLog\n"
                 exp_send "l_dicFlLog\[${e_n1}\]=\${l_flLog}\n"
+                exp_send "echo \"tmp log: \${g_drTmp}/\${l_flLog}\"\n"
                 exp_send "echo \"$e_aryCmds(${e_n1})\" > \"\${g_drTmp}/\${l_flLog}\"\n"
                 exp_send "CollectInfo \"\${g_drTmp}/\${l_flLog}\"\n"
-                exp_send "RunACmd \"$e_aryCmds(${e_n1})\" 2>&1 |tee -a \"\${g_drTmp}/\${l_flLog}\" &\n"
+                exp_send "RunACmd '\''$e_aryCmds(${e_n1})'\'' 2>&1 |tee -a \"\${g_drTmp}/\${l_flLog}\" &\n"
                 expect {
                     '"${f_sTrapRuned}"'
                     -re "${e_sProcExecTrap}" {
                         set iRt2 $expect_out(1,string)
                         if {${iRt2}} {
+                            set m_nStatusProc ${iRt2}
                             exp_send {
                                 g_sMsgCur="Proc status is Error"
                                 g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
@@ -1124,10 +1287,14 @@ RunACmdsRemote()
                         }
                         exp_send "cp \"\${g_drTmp}/\${l_dicFlLog\[${e_nC}\]}\" \"${e_drLog}\"\n"
                         exp_send "rm \"\${g_drTmp}/\${l_dicFlLog\[${e_nC}\]}\"\n"
+                        if {${e_nC}<${e_n1}} {
+                            incr e_nC +1
+                            exp_continue
+                        }
                         incr e_nC +1
                     }
                 }
-
+                
                 incr e_n1 +1
             }
 
@@ -1137,6 +1304,7 @@ RunACmdsRemote()
                         -re "${e_sProcExecTrap}" {
                             set iRt2 $expect_out(1,string)
                             if {${iRt2}} {
+                                set m_nStatusProc ${iRt2}
                                 exp_send {
                                     g_sMsgCur="Proc status is Error"
                                     g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
@@ -1150,7 +1318,22 @@ RunACmdsRemote()
                     }
                 }
             }
+
             send_tty "${e_drLog}\n"
+            exp_send "
+                test ${m_nStatusProc} -eq 0
+            "
+            exp_send {
+                echo "'"${g_sStepExecStatus}"'"
+            }
+        4'"${g_sepExpDo}"'
+            if {${m_nLogined1}} {
+                exp_send {
+                    if '"${bLogin}"'; then
+                        exit $?
+                    fi
+                }
+            }
             exp_send {
                 echo "'"${g_sStepExecStatus}"'"
             }
@@ -1166,6 +1349,163 @@ RunACmdsRemote()
 }
 export -f RunACmdsRemote
 
+RemoteExecCmds()
+{
+    local varDicMCLogin=${1}
+    local varLoadFuncs=${2}
+    local flLoad=${3}
+    local varCmds=${4}
+    local varCmdsEx=${5}
+    local varTrapRuned=${6}
+    local flLog=${7:-/dev/null}
+
+    #####################
+    local sFLoad=
+    if [ -n "${varLoadFuncs}" ]; then
+        eval sFLoad=\${${varLoadFuncs}}
+        sFLoad='
+            export g_IFS0=${IFS}
+            export g__t=$'\''\t'\''
+            export g__n=$'\''\n'\''
+            export g__r=$'\''\r'\''
+
+            export g_argFindMaxDepth="-maxdepth 5"
+
+            export g_defVariablesOneTime=
+
+            export g_drTmp=~/tmp
+            mkdir -p ${g_drTmp}
+
+            export g_sStepExecStatus='\''[Step    Status: \$?=$?]'\''
+        '"
+            $(declare -f KillAProcs)
+            export -f KillAProcs
+        "${sFLoad}
+        sFLoad=$(sed "s#'#'\\\''#g" <<< "${sFLoad}")
+    fi
+
+    local sCmdRun1 sCmdRun2
+    sCmdRun1=
+    if [ -n "${varCmds}" ]; then
+        eval sCmdRun1=\${${varCmds}}
+    fi
+    sCmdRun2=$(sed "s#'#'\\\''#g" <<< "${sCmdRun1}")
+
+    local sCmdRunEx1 sCmdRunEx2
+    sCmdRunEx1=
+    if [ -n "${varCmdsEx}" ]; then
+        eval sCmdRunEx1=\${${varCmdsEx}}
+    fi
+    sCmdRunEx2=$(sed "s#'#'\\\''#g" <<< "${sCmdRunEx1}")
+
+    #####################
+    local sKeysA dicListA m_dicNxt
+    declare -A m_dicNxt
+    sKeysA="
+        kOptSsh
+        kUsr
+        kPwd
+        kIP
+        kDrLoad
+        kMDrLog
+        kDrTmpLog
+    "
+    dicListA="
+        ${varDicMCLogin}
+        g_dicMCSame
+    "
+    FillDicByList sKeysA dicListA m_dicNxt
+
+    #################
+    local sMcLoginNxt bLogin
+    bLogin=false
+    sMcLoginNxt=:
+    if [ -n "${m_dicNxt[kIP]}" ]; then
+        bLogin=true
+        sMcLoginNxt="ssh ${m_dicNxt[kOptSsh]} ${m_dicNxt[kUsr]}@${m_dicNxt[kIP]}"
+        sMcLoginNxt=$(sed 's/^[ \t]\+//;s/[ \t]\+$//;s/[ \t]\+/ /g' <<< "${sMcLoginNxt}")
+    fi
+
+    #####################
+    local m_sVarsSet=
+    local sTimeExpA sCmdA sCmdB sReplyA
+    sCmdA="
+        1${g_sepExpDo}
+            ${SHELL} -c '
+                if ${bLogin}; then
+                    ${sMcLoginNxt}
+                fi
+                echo \"${g_sStepExecStatus}\"
+            '
+        2${g_sepExpDo}
+            l_sFLoad='${sFLoad}'
+            l_drLoad='${m_dicNxt[kDrLoad]}'
+            l_flLoad='${flLoad}'
+            iRlt1=0
+    "'
+            if [ -n "${l_sFLoad}" ]; then
+                eval "${l_sFLoad}"
+                iRlt1=$?
+            fi
+            if [ -n "${l_flLoad}" ]; then
+                iRlt1=1
+                if [ -n "${l_drLoad}" ]; then
+                    flPub1=$(find "${l_drLoad}" -maxdepth 5 -name "${l_flLoad}" 2>/dev/null)
+                    if [ -n "${flPub1}" ]; then
+                        $(sed "s#^#. #" <<< "${flPub1}")
+                        iRlt1=$?
+                    fi
+                fi
+            fi
+            test ${iRlt1} -eq 0
+            echo "'"${g_sStepExecStatus}"'"
+    '"
+        3${g_sepExpDo}
+            ${SHELL} -c '
+                ${sCmdRun2}
+                echo \"${g_sStepExecStatus}\"
+            '
+    "
+    sCmdB="
+        1.1${g_sepExpDo}
+            set m_nModeCmd 1
+            exp_send {
+                export PS2=
+                echo \"${g_sStepExecStatus}\"
+            }
+        4${g_sepExpDo}
+            ${sCmdRunEx1}
+            exp_send {
+                echo \"${g_sStepExecStatus}\"
+            }
+        5${g_sepExpDo}
+    "'
+            if {${m_nLogined1}} {
+                exp_send {
+                    if '"${bLogin}"'; then
+                        exit $?
+                    fi
+                }
+            }
+            exp_send {
+                echo "'"${g_sStepExecStatus}"'"
+            }
+    '
+    sReplyA="
+        1.1${g_sepExpDo} ${m_dicNxt[kPwd]}
+        3.1${g_sepExpDo} ${m_dicNxt[kPwd]}
+    "
+    sTimeExpA="
+        1${g_sepExpDo} 4
+    "
+    local m_sPattanOther=
+    if [ -n "${varTrapRuned}" ]; then
+        eval m_sPattanOther=\${${varTrapRuned}}
+    fi
+    ExpectBashC sTimeExpA sCmdA sCmdB sReplyA "${g_sepExpDo}" m_sVarsSet m_sPattanOther false "${flLog}"
+}
+export -f RemoteExecCmds
+
 SafeRemoveFolder()
 {
     local sKeyIn=${1}
@@ -1173,14 +1513,14 @@ SafeRemoveFolder()
     local flLog=${3:-/dev/null}
 
     if [ -z "${sKeyIn}" ]; then
-        g_sMsgCur="rm -rf need a key for safe check"
+        g_sMsgCur="rm -rf need a key for safe remove"
         g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
         OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${flLog}" false
         return 1
     fi
     grep -q "${sKeyIn}" <<< "${drPath}"
     if [ $? -ne 0 ]; then
-        g_sMsgCur="directory path not include the key[${sKeyIn}]"
+        g_sMsgCur="[${drPath}] not include the key[${sKeyIn}]"
         g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
         OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${flLog}" false
         return 1
@@ -1188,6 +1528,272 @@ SafeRemoveFolder()
     rm -rf "${drPath}"
 }
 export -f SafeRemoveFolder
+
+GetNicNameRemote()
+{
+    local varDicMCLogin=${1}
+    local sDriverName=${2}
+    local sCardName=${3}
+    local varDicNicName=${4}
+    local flLog=${5:-/dev/null}
+
+    #####################
+    local f_drCfgNic='nic'
+
+    #####################
+    local g_sEnvLoad
+    g_sEnvLoad="
+        $(declare -f KillAProcs)
+        export -f KillAProcs
+        $(declare -f SafeRemoveFolder)
+        export -f SafeRemoveFolder
+        $(declare -f GetUnExistFileName)
+        export -f GetUnExistFileName
+        $(declare -f GetNicName)
+        export -f GetNicName
+    "
+
+    local f_sCmd='
+        l_drCfgNic="${HOME}/tmp/'"${f_drCfgNic}"'"
+        SafeRemoveFolder "/tmp/[^/]\+" "${l_drCfgNic}"
+        mkdir -p "${l_drCfgNic}"
+        GetUnExistFileName "${l_drCfgNic}" "env" 2 0 ".cfg" l_flCfg
+        declare -A m_dicNic1=()
+        GetNicName "${sDriverName}" m_dicNic1
+        sKeysA=${!m_dicNic1[*]}
+        for key1 in ${sKeysA}; do
+            s1=$(ethtool -i "${key1}" |grep "bus-info:" |sed "s/^[ \t]*bus-info://;s/^[ \t]\+//;s/[ \t]\+\$//")
+            if [ -n "${s1}" ]; then
+                lspci -s "${s1}" -k |grep -q "${sCardName}"
+                if [ $? -eq 0 ]; then
+                    echo "'"${varDicNicName}"'[${key1}]=" >> "${g_drTmp}/${l_flCfg}"
+                fi
+            fi
+        done
+        cp "${g_drTmp}/${l_flCfg}" "${l_drCfgNic}/${l_flCfg}"
+        rm "${g_drTmp}/${l_flCfg}"
+    '
+
+    RemoteExecCmds "${varDicMCLogin}" g_sEnvLoad "" f_sCmd "" "" "${flLog}"
+
+    #####################
+    local sIPLogin
+    eval sIPLogin=\${${varDicMCLogin}[kIP]}
+    if [ -n "${sIPLogin}" ]; then
+        grep -q "${sIPLogin}" <<< "${g_IPPro}"
+        if [ $? -ne 0 ]; then
+            SafeRemoveFolder "/tmp/[^/]\+" "${HOME}/tmp/${f_drCfgNic}" "${flLog}"
+            mkdir -p "${HOME}/tmp"
+
+            local sKeysA dicListA
+            sKeysA="
+                kUsr
+            "
+            dicListA="
+                g_dicMCSame
+            "
+            FillDicByList sKeysA dicListA "${varDicMCLogin}"
+            eval sUser1=\${${varDicMCLogin}[kUsr]}
+            local f_sCmd="scp -r ${sUser1}@${sIPLogin}:tmp/'${f_drCfgNic}' '${HOME}/tmp'"
+
+            eval ${varDicMCLogin}[kIP]=
+            RemoteExecCmds "${varDicMCLogin}" "" "" f_sCmd "" "" "${flLog}"
+            eval ${varDicMCLogin}[kIP]=\${sIPLogin}
+        fi
+    fi
+
+    local sFlList=$(find "${HOME}/tmp/${f_drCfgNic}" -maxdepth 1 -type f)
+    if [ -z "${sFlList}" ]; then
+        g_sMsgCur="no data files in [${drLocalLogs}/${g_dicMCSame[kDrTmpLog]}]"
+        g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+        OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${flLog}" false
+        return 1
+    fi
+
+    $(sed "s#^#. #" <<< "${sFlList}")
+}
+export -f GetNicNameRemote
+
+NicPortEnable()
+{
+    local varDicNicName=${1}
+    local flLog=${2:-/dev/null}
+
+    local sKeysA e1 sIP0 nBit sIP1
+    eval sKeysA=\${!${varDicNicName}[*]}
+    for e1 in ${sKeysA}; do
+        eval sIP1=\${${varDicNicName}[${e1}]}
+        printf "%s[%3d]%5s: e1=${e1}; sIP1=${sIP1}\n" "${FUNCNAME[0]}" ${LINENO} "Info"
+        if [ -n "${sIP1}" ]; then
+            sIP0=$(ip addr show "${e1}" |grep "inet[ \t]\+" |sed "s#^[ \t]*inet[ \t]\+\([0-9.]\+\).*\$#\1#")
+            if [ "${sIP0}" != "${sIP1}" ]; then
+                if [ -n "${sIP0}" ]; then
+                    nBit=$(ip addr show "${e1}" |grep "inet[ \t]\+" |sed "s#^[ \t]*inet[ \t]\+\([0-9.]\+\)\(/[0-9]\+\).*\$#\2#")
+                    ip addr del "${sIP0}${nBit}" dev "${e1}"
+                fi
+                #ifconfig ${e1} ${sIP1}
+                #ifconfig eth0:1 192.168.0.1 netmask 255.255.255.0
+                ip addr add "${sIP1}"/24 dev "${e1}"
+                if [ $? -ne 0 ]; then
+                    sLog1=$(printf "%s[%3d]%s[%3d]%s: [${e1}] [${sIP1}]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO} "%5s")
+                    OutLog 1 "${sLog1}" "${flLog}" true
+                    #RTNETLINK answers: File exists
+                fi
+            fi
+            #ifconfig ${e1} up
+            ip link set "${e1}" up
+            #ethtool ${e1} |grep "Link detected: yes"
+        else
+            ip link set "${e1}" down
+        fi
+    done
+}
+export -f NicPortEnable
+
+NicEthEnableRemote()
+{
+    local varDicMCLogin=${1}
+    local varDicNicName=${2}
+    local flLog=${3:-/dev/null}
+
+    local g_sEnvLoad
+    g_sEnvLoad="
+        $(declare -f NicPortEnable)
+        export -f NicPortEnable
+    "
+
+    local f_sCmd="
+        $(declare -p ${varDicNicName})
+        NicPortEnable '${varDicNicName}'
+    "
+    RemoteExecCmds "${varDicMCLogin}" g_sEnvLoad "" f_sCmd "" "" "${flLog}"
+}
+export -f NicEthEnableRemote
+
+PingStatusRemote()
+{
+    local varDicMCLogin=${1}
+    local sIPA=${2}
+    local sIPB=${3}
+    local flLog=${4:-/dev/null}
+
+    local g_sEnvLoad
+    g_sEnvLoad="
+        $(declare -f PingStatus)
+        export -f PingStatus
+    "
+
+    local f_sCmd="
+        PingStatus '${sIPA}' '${sIPB}'
+    "
+    RemoteExecCmds "${varDicMCLogin}" g_sEnvLoad "" f_sCmd "" "" "${flLog}"
+}
+export -f PingStatusRemote
+
+GetLinkIP()
+{
+    local ipPing=${1}
+    local varIPLocal=${2}
+
+    local ipsLink=
+    local s1 s2
+    if [ -z "${ipPing}" ]; then
+        IFS=$'\n'; for s1 in ${g_IPPro}; do IFS=${g_IFS0};
+            s2=$(sed "s/\(\.[0-9]\+\)\{1\}\$//;t;s/^.*\$//" <<< "${s1}")
+            PingStatus "${s1}" "${s2}.1"
+            if [ $? -eq 0 ]; then
+                ipsLink=${ipsLink}${g__n}${s1}
+            fi
+        IFS=$'\n'; done; IFS=${g_IFS0};
+    else
+        IFS=$'\n'; for s1 in ${g_IPPro}; do IFS=${g_IFS0};
+            PingStatus "${s1}" "${ipPing}"
+            if [ $? -eq 0 ]; then
+                ipsLink=${ipsLink}${g__n}${s1}
+            fi
+        IFS=$'\n'; done; IFS=${g_IFS0};
+    fi
+
+    local n1
+    n1=$(sed '1d' <<< "${ipsLink}" |wc -l)
+    if [ ${n1} -ne 1 ]; then
+        g_sMsgCur="not get correct IP[${ipsLink}], maybe need set correct target IP for ping"
+        g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+        OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${flLog}" false
+        return 1
+    fi
+
+    ipsLink=$(sed '1d' <<< "${ipsLink}")
+    eval ${varIPLocal}=\${ipsLink}
+}
+export -f GetLinkIP
+
+NicNamePair()
+{
+    local varDicBoard1=${1}
+    local varDicBoard2=${2}
+    local varDicNicNm1=${3}
+    local varDicNicNm2=${4}
+    local varDicNicPair=${5}
+    local flLog=${6:-/dev/null}
+
+    #设置探测IP;
+    local sIPRemote1 sIPRemote2 sIPNetSect1 sIPNetSect2 n1 sIP1 sIP2
+    eval sIPRemote1=\${${varDicBoard1}[kIP]}
+    if [ -z "${sIPRemote1}" ]; then
+        GetLinkIP "${g_ipNet}" sIPRemote1
+        if [ $? -ne 0 ]; then
+            return 1
+        fi
+    fi
+    sIPNetSect1=$(sed "s/\(\.[0-9]\+\)\{2\}\$//;t;s/^.*\$//" <<< "${sIPRemote1}")
+    let n1=g_sIPBaseSect_1-1
+    sIP1=${sIPNetSect1}.${g_sIPBaseSect_2}.${n1}
+
+    eval sIPRemote2=\${${varDicBoard2}[kIP]}
+    sIPNetSect2=$(sed "s/\(\.[0-9]\+\)\{2\}\$//;t;s/^.*\$//" <<< "${sIPRemote2}")
+    let n1=g_sIPBaseSect_1+1
+    sIP2=${sIPNetSect2}.${g_sIPBaseSect_2}.${n1}
+
+    local sKeys1 key1 sKeys2 key2 sIPA sIPB iR1 iR2 sLog1 dicNic1
+    eval sKeys1=\${!${varDicNicNm1}[*]}
+    for key1 in ${sKeys1}; do
+        eval sKeys2=\${!${varDicNicNm2}[*]}
+        for key2 in ${sKeys2}; do
+            eval ${varDicNicNm1}[${key1}]=\${sIP1}
+            eval ${varDicNicNm2}[${key2}]=\${sIP2}
+
+            declare -A dicNic1=()
+            DicLeftValue "${varDicNicNm1}" key1 dicNic1
+            NicEthEnableRemote "${varDicBoard1}" dicNic1 "${flLog}"
+
+            declare -A dicNic1=()
+            DicLeftValue "${varDicNicNm2}" key2 dicNic1
+            NicEthEnableRemote "${varDicBoard2}" dicNic1 "${flLog}"
+
+            eval sIPB=\${${varDicNicNm2}[${key2}]}
+            PingStatusRemote "${varDicBoard1}" "${key1}" "${sIPB}" "${flLog}"
+            iR1=$?
+            eval sIPA=\${${varDicNicNm1}[${key1}]}
+            PingStatusRemote "${varDicBoard2}" "${key2}" "${sIPA}" "${flLog}"
+            iR2=$?
+            if [ ${iR1} -eq ${iR2} ]; then
+                if [ ${iR1} -eq 0 ]; then
+                    eval ${varDicNicPair}[${key1}]=\${key2}
+                fi
+            else
+                g_sMsgCur="[ ${iR1} -ne ${iR2} ]"
+                g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+                OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${flLog}" false
+            fi
+        done
+    done
+
+    g_sMsgCur="match finished"
+    g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
+    OutLogHead 0 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${flLog}" false
+}
+export -f NicNamePair
 
 #####################
 #init2

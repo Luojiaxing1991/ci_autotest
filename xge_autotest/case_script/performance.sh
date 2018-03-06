@@ -4,10 +4,18 @@ IPERFDIR="iperf_log"
 NETPERFDIR="netperf_log"
 QPERFDIR="qperf_log"
 
-NETPORT1="$remote_tp1"
-NETPORT2="$remote_fibre2"
-NETPORTLIST="$remote_tp1 $remote_fibre2"
+LOCALPORT1="$local_tp1"
+LOCALPORT2="$local_fibre1"
 
+LOCALIP1="$local_tp1_ip"
+LOCALIP2="$local_fibre1_ip"
+
+NETPORT1="$remote_tp1"
+NETPORT2="$remote_fibre1"
+NETPORTLIST="$remote_tp1 $remote_fibre1"
+
+NETIP1="$remote_tp1_ip"
+NETIP2="$remote_fibre1_ip"
 #ipv6 config
 
 #iperf config
@@ -146,10 +154,11 @@ function ipv6_iperf_single()
         MESSAGE="PASS"
         return 0
     fi
-    REMOTE1_IPV6_IP=$(ssh root@$BACK_IP "ifconfig ${remote_fibre1} | grep 'inet6 addr:' | awk '{print \$3}' | awk -F'/' '{print \$1}' | head -n 1")
-    REMOTE2_IPV6_IP=$(ssh root@$BACK_IP "ifconfig ${remote_fibre2} | grep 'inet6 addr:' | awk '{print \$3}' | awk -F'/' '{print \$1}' | head -n 1")
+    REMOTE1_IPV6_IP=$(ssh root@$BACK_IP "ifconfig ${NETPORT1} | grep 'inet6 addr:' | awk '{print \$3}' | awk -F'/' '{print \$1}' | head -n 1")
+    REMOTE2_IPV6_IP=$(ssh root@$BACK_IP "ifconfig ${NETPORT2} | grep 'inet6 addr:' | awk '{print \$3}' | awk -F'/' '{print \$1}' | head -n 1")
     process="iperf"
     ssh root@$BACK_IP "iperf -s -V >/dev/null 2>&1 &"
+    sleep 5
     echo "#############################"
     echo "Run iperf Single port One-way..."
     echo "#############################"    
@@ -161,7 +170,7 @@ function ipv6_iperf_single()
             for owNum in $THREAD
             do
                 echo "Run single port $netport ${owNum}thread......"
-                iperf -c ${REMOTE1_IPV6_IP}%${local_fibre1} -V -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/Ipv6_single_one-way_${netport}_${owNum}thread.log
+                iperf -c ${REMOTE1_IPV6_IP}%${LOCALPORT1} -V -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/Ipv6_single_one-way_${netport}_${owNum}thread.log
                 check_single_process
                 ipv6_data_integration
             done
@@ -170,7 +179,7 @@ function ipv6_iperf_single()
             for owNum in $THREAD
             do
                 echo "Run single port $netport ${owNum}thread......"
-                iperf -c ${REMOTE2_IPV6_IP}%${local_fibre2} -V -t $IPERFDURATION -i 1 -P $owNum > $LOG_DIR/$IPERFDIR/Ipv6_single_one-way_${netport}_${owNum}thread.log
+                iperf -c ${REMOTE2_IPV6_IP}%${LOCALPORT2} -V -t $IPERFDURATION -i 1 -P $owNum > $LOG_DIR/$IPERFDIR/Ipv6_single_one-way_${netport}_${owNum}thread.log
                 check_single_process
                 ipv6_data_integration
             done
@@ -180,7 +189,9 @@ function ipv6_iperf_single()
     sleep 5
 
     #two-way perfornamce
+  if [ 'fefe' = 'fefe'  ];then
     ssh root@$BACK_IP "killall iperf;iperf -s -V >/dev/null 2>&1 &"
+    sleep 5
     echo "#############################"
     echo "Run iperf Single port two-way..."
     echo "#############################"
@@ -188,12 +199,13 @@ function ipv6_iperf_single()
     for twNum in $THREAD
     do
         echo "Run single port two-way ${twNum}thread......"
-        iperf -c ${REMOTE1_IPV6_IP}%${local_fibre1} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_Single_two-way_${NETPORT1}_${twNum}thread.log &
-        iperf -c ${REMOTE2_IPV6_IP}%${local_fibre2} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_Single_two-way_${NETPORT2}_${twNum}thread.log &
+        iperf -c ${REMOTE1_IPV6_IP}%${LOCALPORT1} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_Single_two-way_${NETPORT1}_${twNum}thread.log &
+        iperf -c ${REMOTE2_IPV6_IP}%${LOCALPORT2} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_Single_two-way_${NETPORT2}_${twNum}thread.log &
         sleep 25
         check_single_process
         ipv6_data_integration
     done
+  fi
     Ipv6Single=1
     MESSAGE="PASS"
     return 0
@@ -205,14 +217,15 @@ function ipv6_iperf_dual()
         MESSAGE="PASS"
         return 0
     fi
-    LOCAL1_IPV6_IP=$(ifconfig ${local_fibre1} | grep 'inet6 addr:' | awk '{print $3}' | awk -F'/' '{print $1}' | head -n 1)
-    LOCAL2_IPV6_IP=$(ifconfig ${local_fibre2} | grep 'inet6 addr:' | awk '{print $3}' | awk -F'/' '{print $1}' | head -n 1)
-    REMOTE1_IPV6_IP=$(ssh root@$BACK_IP "ifconfig ${remote_fibre1} | grep 'inet6 addr:' | awk '{print \$3}' | awk -F'/' '{print \$1}' | head -n 1")
-    REMOTE2_IPV6_IP=$(ssh root@$BACK_IP "ifconfig ${remote_fibre2} | grep 'inet6 addr:' | awk '{print \$3}' | awk -F'/' '{print \$1}' | head -n 1")
+    LOCAL1_IPV6_IP=$(ifconfig ${LOCALPORT1} | grep 'inet6 addr:' | awk '{print $3}' | awk -F'/' '{print $1}' | head -n 1)
+    LOCAL2_IPV6_IP=$(ifconfig ${LOCALPORT2} | grep 'inet6 addr:' | awk '{print $3}' | awk -F'/' '{print $1}' | head -n 1)
+    REMOTE1_IPV6_IP=$(ssh root@$BACK_IP "ifconfig ${NETPORT1} | grep 'inet6 addr:' | awk '{print \$3}' | awk -F'/' '{print \$1}' | head -n 1")
+    REMOTE2_IPV6_IP=$(ssh root@$BACK_IP "ifconfig ${NETPORT2} | grep 'inet6 addr:' | awk '{print \$3}' | awk -F'/' '{print \$1}' | head -n 1")
     process="iperf"
     killall iperf
     iperf -s -V >/dev/null 2>&1 &
     ssh root@$BACK_IP "killall iperf;iperf -s -V >/dev/null 2>&1 &"
+    sleep 5
     echo "#############################"
     echo "Run iperf Dual port one-way..."
     echo "#############################"
@@ -223,8 +236,8 @@ function ipv6_iperf_dual()
             for owNum in $THREAD
             do
                 echo "Run dual port ${netport} ${owNum}thread......"
-                iperf -c ${REMOTE1_IPV6_IP}%${local_fibre1} -V -t $IPERFDURATION -i 2 -P ${owNum} > $LOG_DIR/$IPERFDIR/Ipv6_dual_one-way_local_${netport}_${owNum}thread.log &
-                ssh root@$BACK_IP "iperf -c ${LOCAL1_IPV6_IP}%${remote_fibre1} -V -t $IPERFDURATION -i 2 -P ${owNum} > $LOG_DIR/$IPERFDIR/Ipv6_dual_one-way_remote_${netport}_${owNum}thread.log &"
+                iperf -c ${REMOTE1_IPV6_IP}%${LOCALPORT1} -V -t $IPERFDURATION -i 2 -P ${owNum} > $LOG_DIR/$IPERFDIR/Ipv6_dual_one-way_local_${netport}_${owNum}thread.log &
+                ssh root@$BACK_IP "iperf -c ${LOCAL1_IPV6_IP}%${NETPORT1} -V -t $IPERFDURATION -i 2 -P ${owNum} > $LOG_DIR/$IPERFDIR/Ipv6_dual_one-way_remote_${netport}_${owNum}thread.log &"
                 sleep $IPERFDURATION
                 check_dual_process
                 ipv6_data_integration
@@ -234,8 +247,8 @@ function ipv6_iperf_dual()
             for owNum in $THREAD
             do
                 echo "Run dual port $netport ${owNum}thread......"
-                iperf -c ${REMOTE2_IPV6_IP}%${local_fibre2} -V -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_one-way_local_${netport}_${owNum}thread.log &
-                ssh root@$BACK_IP "iperf -c ${LOCAL2_IPV6_IP}%${remote_fibre2} -V -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_one-way_remote_${netport}_${owNum}thread.log &"
+                iperf -c ${REMOTE2_IPV6_IP}%${LOCALPORT2} -V -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_one-way_local_${netport}_${owNum}thread.log &
+                ssh root@$BACK_IP "iperf -c ${LOCAL2_IPV6_IP}%${NETPORT2} -V -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_one-way_remote_${netport}_${owNum}thread.log &"
                 sleep $IPERFDURATION
                 check_dual_process
                 ipv6_data_integration
@@ -252,13 +265,14 @@ function ipv6_iperf_dual()
     killall iperf
     iperf -s -V >/dev/null 2>&1 &
     ssh root@$BACK_IP "killall iperf;iperf -s -V >/dev/null 2>&1 &"
+    sleep 5
     for twNum in $THREAD
     do
         echo "Run Two-way ${twNum}thread......"
-        iperf -c ${REMOTE1_IPV6_IP}%${local_fibre1} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_twoway_local_${NETPORT1}_${twNum}thread.log &
-        iperf -c ${REMOTE2_IPV6_IP}%${local_fibre2} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_twoway_local_${NETPORT2}_${twNum}thread.log &
-        ssh root@$BACK_IP "iperf -c ${LOCAL1_IPV6_IP}%${remote_fibre1} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_two-way_remote_${NETPORT1}_${twNum}thread.log &"
-        ssh root@$BACK_IP "iperf -c ${LOCAL2_IPV6_IP}%${remote_fibre2} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_two-way_remote_${NETPORT2}_${twNum}thread.log &"
+        iperf -c ${REMOTE1_IPV6_IP}%${LOCALPORT1} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_twoway_local_${NETPORT1}_${twNum}thread.log &
+        iperf -c ${REMOTE2_IPV6_IP}%${LOCALPORT2} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_twoway_local_${NETPORT2}_${twNum}thread.log &
+        ssh root@$BACK_IP "iperf -c ${LOCAL1_IPV6_IP}%${NETPORT1} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_two-way_remote_${NETPORT1}_${twNum}thread.log &"
+        ssh root@$BACK_IP "iperf -c ${LOCAL2_IPV6_IP}%${NETPORT2} -V -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Ipv6_dual_two-way_remote_${NETPORT2}_${twNum}thread.log &"
         sleep $IPERFDURATION
         check_dual_process
         ipv6_data_integration
@@ -277,6 +291,7 @@ function iperf_single()
     process="iperf"
     killall iperf
     ssh root@$BACK_IP "killall iperf;iperf -s >/dev/null 2>&1 &"
+    sleep 5
     echo "#############################"
     echo "Run iperf Single port One-way..."
     echo "#############################"    
@@ -288,7 +303,7 @@ function iperf_single()
             for owNum in $THREAD
             do
                 echo "Run single port $netport ${owNum}thread......"
-                iperf -c ${remote_tp1_ip} -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/single_one-way_${netport}_${owNum}thread.log
+                iperf -c ${NETIP1} -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/single_one-way_${netport}_${owNum}thread.log
                 check_single_process
                 data_integration
             done
@@ -297,17 +312,17 @@ function iperf_single()
             for owNum in $THREAD
             do
                 echo "Run single port $netport ${owNum}thread......"
-               # iperf -c ${remote_fibre2_ip} -t $IPERFDURATION -i 1 -P $owNum > $LOG_DIR/$IPERFDIR/single_one-way_${netport}_${owNum}thread.log
-               # check_single_process
-               # data_integration
+                iperf -c ${NETIP2} -t $IPERFDURATION -i 1 -P $owNum > $LOG_DIR/$IPERFDIR/single_one-way_${netport}_${owNum}thread.log
+                check_single_process
+                data_integration
             done
             sleep 5
         fi
     done
     sleep 5
-    if [ "ss" = "fefe"  ];then
     #two-way perfornamce
       ssh root@$BACK_IP "killall iperf;iperf -s >/dev/null 2>&1 &"
+      sleep 5
       echo "#############################"
       echo "Run iperf Single port two-way..."
       echo "#############################"
@@ -315,13 +330,12 @@ function iperf_single()
       for twNum in $THREAD
       do
         echo "Run single port two-way ${twNum}thread......"
-        iperf -c ${remote_fibre1_ip} -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Single_two-way_${NETPORT1}_${twNum}thread.log &
-        iperf -c ${remote_fibre2_ip} -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Single_two-way_${NETPORT2}_${twNum}thread.log &
+        iperf -c ${NETIP1} -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Single_two-way_${NETPORT1}_${twNum}thread.log &
+        iperf -c ${NETIP2} -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Single_two-way_${NETPORT2}_${twNum}thread.log &
         sleep 25
         check_single_process
         data_integration
       done
-    fi
     Ipv4Single=1
     MESSAGE="PASS"
     return 0 
@@ -337,6 +351,7 @@ function iperf_dual()
     killall iperf
     iperf -s >/dev/null 2>&1 &
     ssh root@$BACK_IP "killall iperf;iperf -s >/dev/null 2>&1 &"
+    sleep 5
     echo "#############################"
     echo "Run iperf Dual port one-way..."
     echo "#############################"
@@ -347,8 +362,8 @@ function iperf_dual()
             for owNum in $THREAD
             do
                 echo "Run dual port ${netport} ${owNum}thread......"
-                iperf -c ${remote_fibre1_ip} -t $IPERFDURATION -i 2 -P ${owNum} > $LOG_DIR/$IPERFDIR/dual_one-way_local_${netport}_${owNum}thread.log &
-                ssh root@$BACK_IP "iperf -c ${local_fibre1_ip} -t $IPERFDURATION -i 2 -P ${owNum} > $LOG_DIR/$IPERFDIR/dual_one-way_remote_${netport}_${owNum}thread.log &"
+                iperf -c ${NETIP1} -t $IPERFDURATION -i 2 -P ${owNum} > $LOG_DIR/$IPERFDIR/dual_one-way_local_${netport}_${owNum}thread.log &
+                ssh root@$BACK_IP "iperf -c ${LOCALIP1} -t $IPERFDURATION -i 2 -P ${owNum} > $LOG_DIR/$IPERFDIR/dual_one-way_remote_${netport}_${owNum}thread.log &"
                 sleep $IPERFDURATION
                 check_dual_process
                 data_integration
@@ -358,8 +373,8 @@ function iperf_dual()
             for owNum in $THREAD
             do
                 echo "Run dual port $netport ${owNum}thread......"
-                iperf -c ${remote_fibre2_ip} -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/dual_one-way_local_${netport}_${owNum}thread.log &
-                ssh root@$BACK_IP "iperf -c ${local_fibre2_ip} -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/dual_one-way_remote_${netport}_${owNum}thread.log &"
+                iperf -c ${NETIP2} -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/dual_one-way_local_${netport}_${owNum}thread.log &
+                ssh root@$BACK_IP "iperf -c ${LOCALIP2} -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/dual_one-way_remote_${netport}_${owNum}thread.log &"
                 sleep $IPERFDURATION
                 check_dual_process
                 data_integration
@@ -376,13 +391,14 @@ function iperf_dual()
     killall iperf
     iperf -s >/dev/null 2>&1 &
     ssh root@$BACK_IP "killall iperf;iperf -s >/dev/null 2>&1 &"
+    sleep 5
     for twNum in $THREAD
     do
         echo "Run Two-way ${twNum}thread......"
-        iperf -c ${remote_fibre1_ip} -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/dual_twoway_local_${NETPORT1}_${twNum}thread.log &
-        iperf -c ${remote_fibre2_ip} -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/dual_twoway_local_${NETPORT2}_${twNum}thread.log &
-        ssh root@$BACK_IP "iperf -c ${local_fibre1_ip} -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/dual_twoway_remote_${NETPORT1}_${twNum}thread.log &"
-        ssh root@$BACK_IP "iperf -c ${local_fibre2_ip} -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/dual_twoway_remote_${NETPORT2}_${twNum}thread.log &"
+        iperf -c ${NETIP1} -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/dual_twoway_local_${NETPORT1}_${twNum}thread.log &
+        iperf -c ${NETIP2} -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/dual_twoway_local_${NETPORT2}_${twNum}thread.log &
+        ssh root@$BACK_IP "iperf -c ${LOCALIP1} -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/dual_twoway_remote_${NETPORT1}_${twNum}thread.log &"
+        ssh root@$BACK_IP "iperf -c ${LOCALIP2} -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/dual_twoway_remote_${NETPORT2}_${twNum}thread.log &"
         sleep $IPERFDURATION
         check_dual_process
         data_integration
@@ -409,17 +425,17 @@ function netperf_single()
             for tcpnum in ${TCP_MSS}
             do
                 echo "Run Single port $netport TCP_STREAM $tcpnum Message Size(bytes)..."
-                netperf -H ${remote_fibre1_ip} -l ${NETPERFDURATION} -t TCP_STREAM -- -m ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_TCP_STREAM.log
+                netperf -H ${NETIP1} -l ${NETPERFDURATION} -t TCP_STREAM -- -m ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_TCP_STREAM.log
                 check_single_process
                 echo -e "\n" >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_TCP_STREAM.log
                 
                 echo "Run Single port $netport TCP_RR $tcpnum Message Size(bytes)..."
-                netperf -H ${remote_fibre1_ip} -l ${NETPERFDURATION} -t TCP_RR -- -r ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_TCP_RR.log
+                netperf -H ${NETIP1} -l ${NETPERFDURATION} -t TCP_RR -- -r ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_TCP_RR.log
                 check_single_process
                 echo -e "\n" >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_TCP_RR.log
                 
                 echo "Run Single port $netport TCP_CRR $tcpnum Message Size(bytes)..."
-                netperf -H ${remote_fibre1_ip} -l ${NETPERFDURATION} -t TCP_CRR -- -r ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_TCP_CRR.log
+                netperf -H ${NETIP1} -l ${NETPERFDURATION} -t TCP_CRR -- -r ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_TCP_CRR.log
                 check_single_process
                 echo -e "\n" >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_TCP_CRR.log
             done
@@ -427,12 +443,12 @@ function netperf_single()
             for udpnum in ${UDP_MSS}
             do
                 echo "Run Single port $netport UDP_STREAM $udpnum Message Size(bytes)..."
-                netperf -H ${remote_fibre1_ip} -l ${NETPERFDURATION} -t UDP_STREAM -- -m ${udpnum} >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_UDP_STREAM.log
+                netperf -H ${NETIP1} -l ${NETPERFDURATION} -t UDP_STREAM -- -m ${udpnum} >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_UDP_STREAM.log
                 check_single_process
                 echo -e "\n" >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_UDP_STREAM.log
                 
                 echo "Run Single port $netport UDP_RR $udpnum Message Size(bytes)..."
-                netperf -H ${remote_fibre1_ip} -l ${NETPERFDURATION} -t UDP_RR -- -r ${udpnum} >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_UDP_RR.log
+                netperf -H ${NETIP1} -l ${NETPERFDURATION} -t UDP_RR -- -r ${udpnum} >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_UDP_RR.log
                 check_single_process
                 echo -e "\n" >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_UDP_RR.log
             done
@@ -440,17 +456,17 @@ function netperf_single()
             for tcpnum in ${TCP_MSS}
             do
                 echo "Run Single port $netport TCP_STREAM $tcpnum Message Size(bytes)..."
-                netperf -H ${remote_fibre2_ip} -l ${NETPERFDURATION} -t TCP_STREAM -- -m ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_TCP_STREAM.log
+                netperf -H ${NETIP2} -l ${NETPERFDURATION} -t TCP_STREAM -- -m ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_TCP_STREAM.log
                 check_single_process
                 echo -e "\n" >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_TCP_STREAM.log
                 
                 echo "Run Single port $netport TCP_RR $tcpnum Message Size(bytes)..."
-                netperf -H ${remote_fibre2_ip} -l ${NETPERFDURATION} -t TCP_RR -- -r ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_TCP_RR.log
+                netperf -H ${NETIP2} -l ${NETPERFDURATION} -t TCP_RR -- -r ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_TCP_RR.log
                 check_single_process
                 echo -e "\n" >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_TCP_RR.log
                 
                 echo "Run Single port $netport TCP_CRR $tcpnum Message Size(bytes)..."
-                netperf -H ${remote_fibre2_ip} -l ${NETPERFDURATION} -t TCP_CRR -- -r ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_TCP_CRR.log
+                netperf -H ${NETIP2} -l ${NETPERFDURATION} -t TCP_CRR -- -r ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_TCP_CRR.log
                 check_single_process
                 echo -e "\n" >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_TCP_CRR.log
             done
@@ -458,12 +474,12 @@ function netperf_single()
             for udpnum in ${UDP_MSS}
             do
                 echo "Run Single port $netport UDP_STREAM $udpnum Message Size(bytes)..."
-                netperf -H ${remote_fibre2_ip} -l ${NETPERFDURATION} -t UDP_STREAM -- -m ${udpnum} >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_UDP_STREAM.log
+                netperf -H ${NETIP2} -l ${NETPERFDURATION} -t UDP_STREAM -- -m ${udpnum} >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_UDP_STREAM.log
                 check_single_process
                 echo -e "\n" >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_UDP_STREAM.log
                 
                 echo "Run Single port $netport UDP_RR $udpnum Message Size(bytes)..."
-                netperf -H ${remote_fibre2_ip} -l ${NETPERFDURATION} -t UDP_RR -- -r ${udpnum} >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_UDP_RR.log
+                netperf -H ${NETIP2} -l ${NETPERFDURATION} -t UDP_RR -- -r ${udpnum} >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_UDP_RR.log
                 check_single_process
                 echo -e "\n" >> $LOG_DIR/$NETPERFDIR/Single_port_${netport}_UDP_RR.log
             done
@@ -489,22 +505,22 @@ function netperf_dual
     for tcpnum in ${TCP_MSS}
     do
         echo "Run dual port TCP_STREAM $tcpnum Message Size(bytes)..."
-        netperf -H ${remote_fibre1_ip} -l ${NETPERFDURATION} -t TCP_STREAM -- -m ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Dual_port_TCP_STREAM.log &
-        netperf -H ${remote_fibre2_ip} -l ${NETPERFDURATION} -t TCP_STREAM -- -m ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Dual_port_TCP_STREAM.log &
+        netperf -H ${NETIP1} -l ${NETPERFDURATION} -t TCP_STREAM -- -m ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Dual_port_TCP_STREAM.log &
+        netperf -H ${NETIP2} -l ${NETPERFDURATION} -t TCP_STREAM -- -m ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Dual_port_TCP_STREAM.log &
         sleep ${NETPERFDURATION}
         check_single_process
         echo -e "\n" >> $LOG_DIR/$NETPERFDIR/Dual_port_TCP_STREAM.log
         
         echo "Run dual port TCP_RR $tcpnum Message Size(bytes)..."
-        netperf -H ${remote_fibre1_ip} -l ${NETPERFDURATION} -t TCP_RR -- -r ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Dual_port_TCP_RR.log &
-        netperf -H ${remote_fibre2_ip} -l ${NETPERFDURATION} -t TCP_RR -- -r ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Dual_port_TCP_RR.log &
+        netperf -H ${NETIP1} -l ${NETPERFDURATION} -t TCP_RR -- -r ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Dual_port_TCP_RR.log &
+        netperf -H ${NETIP2} -l ${NETPERFDURATION} -t TCP_RR -- -r ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Dual_port_TCP_RR.log &
         sleep ${NETPERFDURATION}
         check_single_process
         echo -e "\n" >> $LOG_DIR/$NETPERFDIR/Dual_port_TCP_RR.log
         
         echo "Run dual port TCP_CRR $tcpnum Message Size(bytes)..."
-        netperf -H ${remote_fibre1_ip} -l ${NETPERFDURATION} -t TCP_CRR -- -r ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Dual_port_TCP_CRR.log &
-        netperf -H ${remote_fibre2_ip} -l ${NETPERFDURATION} -t TCP_CRR -- -r ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Dual_port_TCP_CRR.log &
+        netperf -H ${NETIP1} -l ${NETPERFDURATION} -t TCP_CRR -- -r ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Dual_port_TCP_CRR.log &
+        netperf -H ${NETIP2} -l ${NETPERFDURATION} -t TCP_CRR -- -r ${tcpnum} >> $LOG_DIR/$NETPERFDIR/Dual_port_TCP_CRR.log &
         sleep ${NETPERFDURATION}
         check_single_process
         echo -e "\n" >> $LOG_DIR/$NETPERFDIR/Dual_port_TCP_CRR.log
@@ -513,15 +529,15 @@ function netperf_dual
     for udpnum in ${UDP_MSS}
     do
         echo "Run dual port UDP_STREAM $udpnum Message Size(bytes)..."
-        netperf -H ${remote_fibre1_ip} -l ${NETPERFDURATION} -t UDP_STREAM -- -m ${udpnum} >> $LOG_DIR/$NETPERFDIR/Dual_port_UDP_STREAM.log &
-        netperf -H ${remote_fibre2_ip} -l ${NETPERFDURATION} -t UDP_STREAM -- -m ${udpnum} >> $LOG_DIR/$NETPERFDIR/Dual_port_UDP_STREAM.log &
+        netperf -H ${NETIP1} -l ${NETPERFDURATION} -t UDP_STREAM -- -m ${udpnum} >> $LOG_DIR/$NETPERFDIR/Dual_port_UDP_STREAM.log &
+        netperf -H ${NETIP2} -l ${NETPERFDURATION} -t UDP_STREAM -- -m ${udpnum} >> $LOG_DIR/$NETPERFDIR/Dual_port_UDP_STREAM.log &
         sleep ${NETPERFDURATION}
         check_single_process
         echo -e "\n" >> $LOG_DIR/$NETPERFDIR/Dual_port_UDP_STREAM.log
         
         echo "Run dual port UDP_RR $udpnum Message Size(bytes)..."
-        netperf -H ${remote_fibre1_ip} -l ${NETPERFDURATION} -t UDP_RR -- -r ${udpnum} >> $LOG_DIR/$NETPERFDIR/Dual_port_UDP_RR.log &
-        netperf -H ${remote_fibre2_ip} -l ${NETPERFDURATION} -t UDP_RR -- -r ${udpnum} >> $LOG_DIR/$NETPERFDIR/Dual_port_UDP_RR.log &
+        netperf -H ${NETIP1} -l ${NETPERFDURATION} -t UDP_RR -- -r ${udpnum} >> $LOG_DIR/$NETPERFDIR/Dual_port_UDP_RR.log &
+        netperf -H ${NETIP2} -l ${NETPERFDURATION} -t UDP_RR -- -r ${udpnum} >> $LOG_DIR/$NETPERFDIR/Dual_port_UDP_RR.log &
         sleep ${NETPERFDURATION}
         check_single_process
         echo -e "\n" >> $LOG_DIR/$NETPERFDIR/Dual_port_UDP_RR.log
@@ -547,19 +563,19 @@ function qperf_test()
     do
         if [ ${netport} == ${NETPORT1} ];then
             echo "Run Single port $netport qperf TCP..."
-            qperf ${remote_fibre1_ip} -oo msg_size:1:64K:*2 -vu tcp_lat tcp_bw >> $LOG_DIR/$QPERFDIR/Single_port_${netport}_tcp.log
+            qperf ${NETIP1} -oo msg_size:1:64K:*2 -vu tcp_lat tcp_bw >> $LOG_DIR/$QPERFDIR/Single_port_${netport}_tcp.log
             check_single_process
             
             echo "Run Single port $netport qperf UCP..."
-            qperf ${remote_fibre1_ip} -oo msg_size:1:64K:*2 -vu udp_lat udp_bw >> $LOG_DIR/$QPERFDIR/Single_port_${netport}_udp.log
+            qperf ${NETIP1} -oo msg_size:1:64K:*2 -vu udp_lat udp_bw >> $LOG_DIR/$QPERFDIR/Single_port_${netport}_udp.log
             check_single_process
         else
             echo "Run Single port $netport qperf TCP..."
-            qperf ${remote_fibre2_ip} -oo msg_size:1:64K:*2 -vu tcp_lat tcp_bw >> $LOG_DIR/$QPERFDIR/Single_port_${netport}_tcp.log
+            qperf ${NETIP2} -oo msg_size:1:64K:*2 -vu tcp_lat tcp_bw >> $LOG_DIR/$QPERFDIR/Single_port_${netport}_tcp.log
             check_single_process
             
             echo "Run Single port $netport qperf UCP..."
-            qperf ${remote_fibre2_ip} -oo msg_size:1:64K:*2 -vu udp_lat udp_bw >> $LOG_DIR/$QPERFDIR/Single_port_${netport}_udp.log
+            qperf ${NETIP2} -oo msg_size:1:64K:*2 -vu udp_lat udp_bw >> $LOG_DIR/$QPERFDIR/Single_port_${netport}_udp.log
             check_single_process
         fi
     done
@@ -578,9 +594,9 @@ function main()
 prepare_log_dir
 
 #ifconfig IP
-ifconfig $local_fibre1 ${local_fibre1_ip}
-ifconfig $local_fibre2 ${local_fibre2_ip}
-ssh root@$BACK_IP "ifconfig $remote_fibre1 ${remote_fibre1_ip};ifconfig $remote_fibre2 ${remote_fibre2_ip};"
+ifconfig $NETPORT1 ${LOCALIP1}
+ifconfig $NETPORT2 ${LOCALIP2}
+ssh root@$BACK_IP "ifconfig $NETPORT1 ${NETIP1};ifconfig $NETPORT2 ${NETIP2};"
 
 main
 

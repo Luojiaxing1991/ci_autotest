@@ -39,7 +39,7 @@
 0                   retry_times
 60000               port_num
 128                 length
-192.168.13.120       servername
+192.168.12.120       servername
 0                   machine_type		//0£ºserver, 1:client
 128                 sq_depth
 128                 rq_depth
@@ -58,7 +58,7 @@
 1                   gid_index
 1024                mtu
 0                   sl
-2                   ib_port
+1                   ib_port
 7                   res_flag
 100000              timeout                     //ms
 
@@ -72,7 +72,7 @@
 0                   retry_times
 60000               port_num
 128                 length
-192.168.13.120       servername
+192.168.12.120       servername
 0                   machine_type		//0£ºserver, 1:client
 128                 sq_depth
 128                 rq_depth
@@ -91,7 +91,7 @@
 1                   gid_index
 1024                mtu
 0                   sl
-2                   ib_port
+1                   ib_port
 0                   res_flag
 100000              timeout                     //ms
 

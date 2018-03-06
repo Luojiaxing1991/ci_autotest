@@ -21,7 +21,7 @@ declare -A ip_map
 ip_map=(
 ["192.168.1.210"]="192.168.1.250"
 ["192.168.1.250"]="192.168.1.210"
-["192.168.3.229"]="192.168.3.237"
+["192.168.3.227"]="192.168.3.197"
 ["192.168.3.237"]="192.168.3.229"
 )
 
@@ -44,7 +44,7 @@ END_INDEX=3
 #     3           eth0(this port cann't be used for testing, since for NFS)
 #     4           eth1
 # The roce's port used for testing
-ROCE_PORT=2
+ROCE_PORT=1
 
 # local_port_ip
 # key: the roce's port
