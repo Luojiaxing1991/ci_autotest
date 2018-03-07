@@ -92,23 +92,6 @@ function setTrustRelation
 ####
 #add by luojiaxing
 ####
-
-
-
-# Get client server ip
-# IN :
-      $1 : MAC address of DHCP server 
-      $2 : MAC address of client server
-# OUT: N/A
-function getIPofClientServer
-{
-    tmpDHCPMacAddr=$1
-    tmpClientMacAddr=$2
-
-    arp | grep ${tmp} | awk '{print $1}'  
-}
-
-
 # Set trust relationship for two boards
 # IN : 
 #     $1 : Ip of target server
@@ -147,6 +130,49 @@ function setTrustRelationUsePara
 
     return 0
 }
+
+
+
+## Get Local IP
+# IN : N/A
+# OUT: Local IP of server
+function initLocalIP()
+{
+    echo "Begin to get local ip"
+    tmpLocalIp=`ifconfig eth0 | grep 'inet addr:' | awk '{print $2}' | awk -F':' '{print $2}'`
+    echo "The local ip of eth0 is "${tmpLocalIp}
+	return $tmpLocalIp
+}
+
+# Get client server ip
+# IN :
+      $1 : MAC address of DHCP server 
+      $2 : MAC address of client server
+	  $3 : username of DHCP server
+	  $4 : password of DHCP server
+# OUT: client ip
+function getIPofClientServer
+{
+    tmpDHCPMacAddr=${1}
+    tmpClientMacAddr=${2}
+    tmpUserName=${3}
+	tmpPassWord=${3}
+	
+	#First we need to get the ip of DHCP server 
+	tmpDHCPIp=`arp | grep ${tmpDHCPMacAddr} | awk '{print $1}'`
+	echo "Get DHCP server IP :"${tmpDHCPIp}
+	
+	#then, we need to set trust relate with DHCP server using ip before
+	#to get the ip of client 
+	setTrustRelationUsePara ${tmpDHCPIp} ${tmpUserName} ${tmpPassWord}
+	
+    #finally,we get ip using ssh-keygen
+	tmpClientIp=`ssh ${tmpUserName}@${tmpDHCPIp} "arp | grep '${tmpClientMacAddr}' | awk '{print \$1}'"`
+	
+	return ${tmpClientIp}
+}
+
+
 
 
 ####################################################################################

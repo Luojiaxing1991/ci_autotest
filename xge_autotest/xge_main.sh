@@ -66,7 +66,13 @@ function main()
 writeLogHeader
 
 #ifconfig IP
-init_net_ip
+#init_local_ip
+initLocalIP 
+LOCAL_IP=$?
+
+#init_client_ip
+getIPofClientServer ${DHCP_SERVER_MAC_ADDR} ${CLIENT_SERVER_MAC_ADDR} ${DHCP_SERVER_USER} ${DHCP_SERVER_PASS}
+BACK_IP=$?
 
 #set passwd
 setTrustRelation

@@ -111,9 +111,11 @@ echo ${CONFIG_LIB_TMP}
 python ${CONFIG_LIB_TMP}/../ci_interface/if/AddPath.py
 
 #MAC of DHCP server
-CISERVER_MAC_ADDR e8:4d:d0:c0:d4:66
-CLIENT_MAC_ADDR c0:a8:02:f0:00:04
+DHCP_SERVER_MAC_ADDR="e8:4d:d0:c0:d4:66"
+CLIENT_SERVER_MAC_ADDR="c0:a8:02:f0:00:04"
  
-
+#User info of DHCP
+DHCP_SERVER_USER="root"
+DHCP_SERVER_PASS="Huawei12#$" 
 ####################################################################################
 
