@@ -168,16 +168,16 @@ function getIPofClientServer
  	#setTrustRelationUsePara ${tmpDHCPIp} ${tmpUserName} ${tmpPassWord}
 	
     #finally,we get ip using ssh-keygen
-     expect -c '
+    expect -c '
         set timeout -1
         set back_ip '${tmpIP}'
         set user_name '${tmpUsername}'
        # set pass_word '${tmpPassword}'
-        spawn ssh $user_name@$back_ip
-       # "arp | grep '${tmpClientMacAddr}' | awk '{print \$(NF-4)}'"
 
+        spawn ssh $user_name@$back_ip
+        sleep 10
         expect -re ".*password:"
-        send "ljx12\#\$\r"
+        send "Huawei12\#\$\r"
 
         expect eof
         exit 0
