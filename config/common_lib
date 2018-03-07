@@ -89,6 +89,66 @@ function setTrustRelation
     return 0
 }
 
+####
+#add by luojiaxing
+####
+
+
+
+# Get client server ip
+# IN :
+      $1 : MAC address of DHCP server 
+      $2 : MAC address of client server
+# OUT: N/A
+function getIPofClientServer
+{
+    tmpDHCPMacAddr=$1
+    tmpClientMacAddr=$2
+
+    arp | grep ${tmp} | awk '{print $1}'  
+}
+
+
+# Set trust relationship for two boards
+# IN : 
+#     $1 : Ip of target server
+      $2 : username to login  target server
+      $3 : password used for username before
+# OUT: N/A
+function setTrustRelationUsePara
+{
+    rm -f ~/.ssh/*
+    
+    tmpIP=$1
+    tmpUsername=$2
+    tmpPassword=$3 
+ 
+    expect -c '
+        set timeout -1
+        set back_ip '${tmpIP}'
+        spawn ssh-keygen -t rsa
+        expect {
+        "*save the key*id_rsa*" { send "\r"; exp_continue }
+        "*verwrite*y/n*" { send "y\r"; exp_continue }
+        "*passphrase*passphrase*" { send "\r"; exp_continue }
+        "*same passphrase*" { send "\r" }
+        }
+
+        spawn scp -r /root/.ssh/id_rsa.pub ${tmpUsername}@${tmpIP}:/root/.ssh/authorized_keys
+        expect "Are you sure you want to continue connecting (yes/no)?"
+        send "yes\r"
+        sleep 10
+        expect -re ".*password:"
+        send "${tmpPassword}\r"
+
+        expect eof
+        exit 0
+    '
+
+    return 0
+}
+
+
 ####################################################################################
 #add by hezhongyan
 ##################
