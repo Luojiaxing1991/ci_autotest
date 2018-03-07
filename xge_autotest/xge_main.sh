@@ -7,8 +7,8 @@ HNS_TOP_DIR=$(cd "`dirname $0`" ; pwd)
 . ${HNS_TOP_DIR}/config/xge_test_lib
 
 # Load the public configuration library
-#. ${XGE_TOP_DIR}/../config/common_config
-#. ${XGE_TOP_DIR}/../config/common_lib
+. ${HNS_TOP_DIR}/../config/common_config
+. ${HNS_TOP_DIR}/../config/common_lib
 
 
 # Main operation function
@@ -69,19 +69,22 @@ writeLogHeader
 #init_local_ip
 initLocalIP 
 LOCAL_IP=${COMMON_LOCAL_IP}
+echo ${LOCAL_IP}
 
 #init_client_ip
+
+echo ${DHCP_SERVER_PASS} ${DHCP_SERVER_MAC_ADDR} ${CLIENT_SERVER_MAC_ADDR}
 getIPofClientServer ${DHCP_SERVER_MAC_ADDR} ${CLIENT_SERVER_MAC_ADDR} ${DHCP_SERVER_USER} ${DHCP_SERVER_PASS}
 BACK_IP=${COMMON_CLIENT_IP}
-
+echo ${BACK_IP}
 #set passwd
-setTrustRelation
+#setTrustRelation
 
 #ifconfig net export
-init_net_export
+#init_net_export
 
 #performance init
-perf_init
+#perf_init
 
 #main
 

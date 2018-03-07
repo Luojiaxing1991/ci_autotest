@@ -1,4 +1,4 @@
-#!/bin/bash
+
 
 
 #############################################################################################################
@@ -109,6 +109,8 @@ function setTrustRelationUsePara
     expect -c '
         set timeout -1
         set back_ip '${tmpIP}'
+        set user_name '${tmpUsername}'
+       # set pass_word '${tmpPassword}'
         spawn ssh-keygen -t rsa
         expect {
         "*save the key*id_rsa*" { send "\r"; exp_continue }
@@ -117,12 +119,12 @@ function setTrustRelationUsePara
         "*same passphrase*" { send "\r" }
         }
 
-        spawn scp -r /root/.ssh/id_rsa.pub ${tmpUsername}@${tmpIP}:/root/.ssh/authorized_keys
+        spawn scp -r /root/.ssh/id_rsa.pub $user_name@$back_ip:/root/.ssh/authorized_keys
         expect "Are you sure you want to continue connecting (yes/no)?"
         send "yes\r"
         sleep 10
         expect -re ".*password:"
-        send "${tmpPassword}\r"
+        send "Huawei12\#\$\r"
 
         expect eof
         exit 0
@@ -155,7 +157,7 @@ function getIPofClientServer
     tmpDHCPMacAddr=${1}
     tmpClientMacAddr=${2}
     tmpUserName=${3}
-	tmpPassWord=${3}
+	tmpPassWord=${4}
 	
 	#First we need to get the ip of DHCP server 
 	tmpDHCPIp=`arp | grep ${tmpDHCPMacAddr} | awk '{print $1}'`
@@ -163,10 +165,25 @@ function getIPofClientServer
 	
 	#then, we need to set trust relate with DHCP server using ip before
 	#to get the ip of client 
-	setTrustRelationUsePara ${tmpDHCPIp} ${tmpUserName} ${tmpPassWord}
+ 	#setTrustRelationUsePara ${tmpDHCPIp} ${tmpUserName} ${tmpPassWord}
 	
     #finally,we get ip using ssh-keygen
-	COMMON_CLIENT_IP=`ssh ${tmpUserName}@${tmpDHCPIp} "arp | grep '${tmpClientMacAddr}' | awk '{print \$1}'"`
+     expect -c '
+        set timeout -1
+        set back_ip '${tmpIP}'
+        set user_name '${tmpUsername}'
+       # set pass_word '${tmpPassword}'
+        spawn ssh $user_name@$back_ip
+       # "arp | grep '${tmpClientMacAddr}' | awk '{print \$(NF-4)}'"
+
+        expect -re ".*password:"
+        send "ljx12\#\$\r"
+
+        expect eof
+        exit 0
+    '
+        echo ${COMMON_CLIENT_IP}
+	#COMMON_CLIENT_IP=`ssh ${tmpUserName}@${tmpDHCPIp} "arp | grep '${tmpClientMacAddr}' | awk '{print \$(NF-4)}'"`
 }
 
 
