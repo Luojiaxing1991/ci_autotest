@@ -76,17 +76,17 @@ echo ${LOCAL_IP}
 echo ${DHCP_SERVER_PASS} ${DHCP_SERVER_MAC_ADDR} ${CLIENT_SERVER_MAC_ADDR}
 getIPofClientServer ${DHCP_SERVER_MAC_ADDR} ${CLIENT_SERVER_MAC_ADDR} ${DHCP_SERVER_USER} ${DHCP_SERVER_PASS}
 BACK_IP=${COMMON_CLIENT_IP}
-echo ${BACK_IP}
+echo "The client ip is "${BACK_IP}
 #set passwd
-#setTrustRelation
+setTrustRelation
 
 #ifconfig net export
-#init_net_export
+init_net_export
 
 #performance init
-#perf_init
+perf_init
 
-#main
+main
 
 # clean exit so lava-test can trust the results
 exit 0

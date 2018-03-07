@@ -158,6 +158,8 @@ function getIPofClientServer
     tmpClientMacAddr=${2}
     tmpUserName=${3}
 	tmpPassWord=${4}
+ 
+    echo ${tmpDHCPMacAddr} ${tmpClientMacAddr} ${tmpUserName} ${tmpPassWord}
 	
 	#First we need to get the ip of DHCP server 
 	tmpDHCPIp=`arp | grep ${tmpDHCPMacAddr} | awk '{print $1}'`
@@ -170,20 +172,21 @@ function getIPofClientServer
     #finally,we get ip using ssh-keygen
     expect -c '
         set timeout -1
-        set back_ip '${tmpIP}'
-        set user_name '${tmpUsername}'
-       # set pass_word '${tmpPassword}'
+        set back_ip '${tmpDHCPIp}'
+        set user_name '${tmpUserName}'
+       # set pass_word '${tmpPassWord}'
 
-        spawn ssh $user_name@$back_ip
+        spawn ssh $user_name@$back_ip  "arp | grep '${tmpClientMacAddr}'"
         sleep 10
         expect -re ".*password:"
-        send "Huawei12\#\$\r"
-
+        send "ljx12\#\$\r"
         expect eof
         exit 0
-    '
-        echo ${COMMON_CLIENT_IP}
-	#COMMON_CLIENT_IP=`ssh ${tmpUserName}@${tmpDHCPIp} "arp | grep '${tmpClientMacAddr}' | awk '{print \$(NF-4)}'"`
+    ' | tee res.log
+    
+        COMMON_CLIENT_IP=`cat res.log | grep 'ether' | awk '{print $1}'`
+        echo "the return value is "${COMMON_CLIENT_IP}
+        rm res.log
 }
 
 
