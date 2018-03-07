@@ -68,11 +68,11 @@ writeLogHeader
 #ifconfig IP
 #init_local_ip
 initLocalIP 
-LOCAL_IP=$?
+LOCAL_IP=${COMMON_LOCAL_IP}
 
 #init_client_ip
 getIPofClientServer ${DHCP_SERVER_MAC_ADDR} ${CLIENT_SERVER_MAC_ADDR} ${DHCP_SERVER_USER} ${DHCP_SERVER_PASS}
-BACK_IP=$?
+BACK_IP=${COMMON_CLIENT_IP}
 
 #set passwd
 setTrustRelation

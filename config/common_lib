@@ -134,13 +134,12 @@ function setTrustRelationUsePara
 
 
 ## Get Local IP
-# IN : 
-#     $1 : return value
-# OUT: Local IP of server
+# IN : N/A
+# OUT: N/A
 function initLocalIP()
 {
     echo "Begin to get local ip"
-    LOCAL_IP=`ifconfig eth0 | grep 'inet addr:' | awk '{print $2}' | awk -F':' '{print $2}'`
+    COMMON_LOCAL_IP=`ifconfig eth0 | grep 'inet addr:' | awk '{print $2}' | awk -F':' '{print $2}'`
     echo "The local ip of eth0 is "${tmpLocalIp}
 }
 
@@ -150,7 +149,7 @@ function initLocalIP()
       $2 : MAC address of client server
 	  $3 : username of DHCP server
 	  $4 : password of DHCP server
-# OUT: client ip
+# OUT: N/A
 function getIPofClientServer
 {
     tmpDHCPMacAddr=${1}
@@ -167,7 +166,7 @@ function getIPofClientServer
 	setTrustRelationUsePara ${tmpDHCPIp} ${tmpUserName} ${tmpPassWord}
 	
     #finally,we get ip using ssh-keygen
-	CLIENT_IP=`ssh ${tmpUserName}@${tmpDHCPIp} "arp | grep '${tmpClientMacAddr}' | awk '{print \$1}'"`
+	COMMON_CLIENT_IP=`ssh ${tmpUserName}@${tmpDHCPIp} "arp | grep '${tmpClientMacAddr}' | awk '{print \$1}'"`
 }
 
 
