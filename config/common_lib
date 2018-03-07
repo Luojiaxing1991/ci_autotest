@@ -141,7 +141,7 @@ function initLocalIP()
     echo "Begin to get local ip"
     tmpLocalIp=`ifconfig eth0 | grep 'inet addr:' | awk '{print $2}' | awk -F':' '{print $2}'`
     echo "The local ip of eth0 is "${tmpLocalIp}
-	return $tmpLocalIp
+	return "${tmpLocalIp}"
 }
 
 # Get client server ip
@@ -169,7 +169,7 @@ function getIPofClientServer
     #finally,we get ip using ssh-keygen
 	tmpClientIp=`ssh ${tmpUserName}@${tmpDHCPIp} "arp | grep '${tmpClientMacAddr}' | awk '{print \$1}'"`
 	
-	return ${tmpClientIp}
+	return "${tmpClientIp}"
 }
 
 
