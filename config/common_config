@@ -117,5 +117,8 @@ CLIENT_SERVER_MAC_ADDR="c0:a8:02:f0:00:04"
 #User info of DHCP
 DHCP_SERVER_USER="root"
 DHCP_SERVER_PASS="Huawei12#$" 
+
+LOCAL_IP="0.0.0.0"
+CLIENT_IP="0.0.0.0"
 ####################################################################################
 
