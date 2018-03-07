@@ -140,7 +140,7 @@ function initLocalIP()
 {
     echo "Begin to get local ip"
     COMMON_LOCAL_IP=`ifconfig eth0 | grep 'inet addr:' | awk '{print $2}' | awk -F':' '{print $2}'`
-    echo "The local ip of eth0 is "${tmpLocalIp}
+    echo "The local ip of eth0 is "${COMMON_LOCAL_IP}
 }
 
 # Get client server ip
