@@ -165,18 +165,16 @@ function getIPofClientServer
 	tmpDHCPIp=`arp | grep ${tmpDHCPMacAddr} | awk '{print $1}'`
 	echo "Get DHCP server IP :"${tmpDHCPIp} 
 	
-	#then, we need to set trust relate with DHCP server using ip before
-	#to get the ip of client 
- 	#setTrustRelationUsePara ${tmpDHCPIp} ${tmpUserName} ${tmpPassWord}
-	
-    #finally,we get ip using ssh-keygen
+    #finally,we get client ip from DHCP server using ssh service
     expect -c '
         set timeout -1
         set back_ip '${tmpDHCPIp}'
         set user_name '${tmpUserName}'
-       # set pass_word '${tmpPassWord}'
-
+        set pass_word '${tmpPassWord}'
+		
+        #show client ip info in arp list in DHCP server using ssh service 
         spawn ssh $user_name@$back_ip  "arp | grep '${tmpClientMacAddr}'"
+		
         sleep 10
         set timeout 50
         expect "Are you sure you want to continue connecting (yes/no)?"
@@ -185,7 +183,7 @@ function getIPofClientServer
         sleep 10
         expect -re ".*password:"
         set timeout 50
-        send "ljx12\#\$\r"
+        send "$pass_word\r"
         expect eof
         exit 0
     ' | tee res.log
