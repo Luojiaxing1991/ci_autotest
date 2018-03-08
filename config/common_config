@@ -120,5 +120,9 @@ DHCP_SERVER_PASS="ljx12\#\$"
 
 COMMON_LOCAL_IP="0.0.0.0"
 COMMON_CLIENT_IP="0.0.0.0"
+
+#Default DHCP server ip. 
+#prepare for DHCP ip no found
+COMMON_DEFAULT_DHCP_IP="192.168.3.100"
 ####################################################################################
 

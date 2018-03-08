@@ -67,11 +67,12 @@ echo ${LOCAL_IP}
 #Get client ip
 getIPofClientServer ${DHCP_SERVER_MAC_ADDR} ${CLIENT_SERVER_MAC_ADDR} ${DHCP_SERVER_USER} ${DHCP_SERVER_PASS}
 
-if [ x"${COMMON_CLIENT_IP}" = x"0.0.0.0" ]
+if [ x"${COMMON_CLIENT_IP}" = x"" ]
 then
-	echo "Can not find the client IP,retry one!"
+	echo "No found client IP,try ping default DHCP ip to update arp list!"
+        ping ${COMMON_DEFAULT_DHCP_IP} -c 5
         getIPofClientServer ${DHCP_SERVER_MAC_ADDR} ${CLIENT_SERVER_MAC_ADDR} ${DHCP_SERVER_USER} ${DHCP_SERVER_PASS}
-        if [ x"${COMMON_CLIENT_IP}" = x"0.0.0.0" ]
+        if [ x"${COMMON_CLIENT_IP}" = x"" ]
         then
 		echo "Can not find the client IP, exit hns test!"
                 exit 0
