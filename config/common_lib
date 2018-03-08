@@ -165,7 +165,7 @@ function getIPofClientServer
 	tmpDHCPIp=`arp | grep ${tmpDHCPMacAddr} | awk '{print $1}'`
 	echo "Get DHCP server IP :"${tmpDHCPIp} 
 	
-    #finally,we get client ip from DHCP server using ssh service
+    #then,we get client ip from DHCP server using ssh service
     expect -c '
         set timeout -1
         set back_ip '${tmpDHCPIp}'
@@ -176,19 +176,32 @@ function getIPofClientServer
         spawn ssh $user_name@$back_ip  "arp | grep '${tmpClientMacAddr}'"
 		
         sleep 10
-        set timeout 50
         expect "Are you sure you want to continue connecting (yes/no)?"
-        set timeout 50
+        set timeout 60
         send "yes\r"
-        sleep 10
         expect -re ".*password:"
-        set timeout 50
+        set timeout 60
         send "$pass_word\r"
         expect eof
         exit 0
     ' | tee res.log
     
-        COMMON_CLIENT_IP=`cat res.log | grep 'ether' | awk '{print $1}'`
+        tmpTargetIpList=`cat res.log | grep 'ether' | awk '{print $1}'`
+        
+        #finish we need to get the using ip form ip list get before using ping
+        for ip in $tmpTargetIpList
+        do
+		ping ${ip} -c 6 > /dev/null
+		if [ $? != 0 ]
+		then
+			echo "The using client ip is not "$ip
+		else
+			echo "The using client ip is "$ip" Get IP success!"
+			COMMON_CLIENT_IP=$ip
+			break
+		fi
+        done
+
         echo "the return value is "${COMMON_CLIENT_IP}
         rm res.log
 }
