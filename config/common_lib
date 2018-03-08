@@ -163,7 +163,7 @@ function getIPofClientServer
 	
 	#First we need to get the ip of DHCP server 
 	tmpDHCPIp=`arp | grep ${tmpDHCPMacAddr} | awk '{print $1}'`
-	echo "Get DHCP server IP :"${tmpDHCPIp}
+	echo "Get DHCP server IP :"${tmpDHCPIp} 
 	
 	#then, we need to set trust relate with DHCP server using ip before
 	#to get the ip of client 
@@ -178,7 +178,13 @@ function getIPofClientServer
 
         spawn ssh $user_name@$back_ip  "arp | grep '${tmpClientMacAddr}'"
         sleep 10
+        set timeout 50
+        expect "Are you sure you want to continue connecting (yes/no)?"
+        set timeout 50
+        send "yes\r"
+        sleep 10
         expect -re ".*password:"
+        set timeout 50
         send "ljx12\#\$\r"
         expect eof
         exit 0

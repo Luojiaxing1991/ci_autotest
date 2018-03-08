@@ -66,17 +66,28 @@ function main()
 writeLogHeader
 
 #ifconfig IP
-#init_local_ip
 initLocalIP 
 LOCAL_IP=${COMMON_LOCAL_IP}
 echo ${LOCAL_IP}
 
 #init_client_ip
 
-echo ${DHCP_SERVER_PASS} ${DHCP_SERVER_MAC_ADDR} ${CLIENT_SERVER_MAC_ADDR}
 getIPofClientServer ${DHCP_SERVER_MAC_ADDR} ${CLIENT_SERVER_MAC_ADDR} ${DHCP_SERVER_USER} ${DHCP_SERVER_PASS}
+
+if [ x"${COMMON_CLIENT_IP}" = x"0.0.0.0" ]
+then
+	echo "Can not find the client IP,retry one!"
+        getIPofClientServer ${DHCP_SERVER_MAC_ADDR} ${CLIENT_SERVER_MAC_ADDR} ${DHCP_SERVER_USER} ${DHCP_SERVER_PASS}
+        if [ x"${COMMON_CLIENT_IP}" = x"0.0.0.0" ]
+        then
+		echo "Can not find the client IP, exit hns test!"
+                exit 0
+        fi
+fi
+
 BACK_IP=${COMMON_CLIENT_IP}
 echo "The client ip is "${BACK_IP}
+
 #set passwd
 setTrustRelation
 
