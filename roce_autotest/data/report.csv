@@ -4,13 +4,13 @@ PV-289	R.ROCE.F001.A	ST-ROCE-1	RDMA operations in user space	RDMA²Ù×÷ÀàĞÍ»ìºÏËæ»
 #N/A		ST-ROCE-3		RDMA send»ìºÏ°ü³¤£¬Ë«Ïò·¢ËÍÊı¾İ	codecase.sh	codecase2	off	
 #N/A		ST-ROCE-4		´øÁ¢¼´ÊıµÄRDMA send²Ù×÷£¬Ë«Ïò·¢ËÍÊı¾İ	codecase.sh	codecase3	off	
 #N/A		ST-ROCE-5		RDMA read²Ù×÷£¬Ë«Ïò·¢ËÍÊı¾İ	codecase.sh	codecase4	off	
-#N/A		ST-ROCE-6		RDMA write²Ù×÷£¬Ë«Ïò·¢ËÍÊı¾İ	codecase.sh	codecase5	off	
+#N/A		ST-ROCE-6		RDMA write²Ù×÷£¬Ë«Ïò·¢ËÍÊı¾İ	codecase.sh	codecase5	on	PASS
 #N/A		ST-ROCE-7		´øÁ¢¼´ÊıµÄRDMA write²Ù×÷²âÊÔ£¬Ë«Ïò·¢ËÍÊı¾İ	codecase.sh	codecase6	off	
 #N/A		ST-ROCE-8		send³¬Ê±ÖØ´«²âÊÔ	codecase.sh	codecase7	off	
 #N/A		ST-ROCE-9		RDMA read³¬Ê±ÖØ´«²âÊÔ£¬Ë«Ïò·¢ËÍÊı¾İ	codecase.sh	codecase8	off	
 #N/A		ST-ROCE-10		RDMA write³¬Ê±ÖØ´«²âÊÔ£¬Ë«Ïò·¢ËÍÊı¾İ	codecase.sh	codecase9	off	
 #N/A		ST-ROCE-11		send rnr¶¨Ê±¼ì²â²Ù×÷£¬server¶Ë·¢ËÍÊı¾İ	codecase.sh	codecase10	off	
-#N/A		ST-ROCE-12		´øÁ¢¼´ÊıµÄsend¶¨Ê±¼ì²â²âÊÔ£¬server¶Ë·¢ËÍÊı¾İ	codecase.sh	codecase11	on	FAIL
+#N/A		ST-ROCE-12		´øÁ¢¼´ÊıµÄsend¶¨Ê±¼ì²â²âÊÔ£¬server¶Ë·¢ËÍÊı¾İ	codecase.sh	codecase11	on	PASS
 #N/A		ST-ROCE-13		RDMA write¡¢read¡¢send»ìºÏ²Ù×÷²âÊÔ£¬vaµİÔö£¬Êı¾İ°ü³¤Ëæ»ú£¬Ë«Ïò·¢ËÍÊı¾İ	codecase.sh	codecase12	off	
 #N/A		ST-ROCE-14	Ö§³ÖSolicited Event	±¾¶Ë£¬¶Ô¶ËÅäÖÃCQÎªsolicited eventÄ£Ê½£¬±¾¶ËÌá½»opcodeµÄWR£¨WRµÄ³¤¶È<=MTU£©£¬µÚÒ»´ÎÎªsend²Ù×÷£¬server½«Á½¶ËĞèÒª·¢ËÍµÄÊı¾İ·¢ËÍµ½client¶Ë£¬È»ºómixÍ¨¹ıËæ»úÊı×éÑ¡Ôñ¾ßÌå²Ù×÷ÀàĞÍ£¬±¾¶ËWQEÉèÖÃSEÎª1(¶Ô¶Ë¼ì²âµ½½ÓÊÜ°üÎÄSEÎª1£©£¬¶Ô¶ËWQE³É¹¦´¦ÀíÍêÒÔºó£¬¶Ô¶ËÓ²¼ş»áÉÏ±¨Ò»¸öCQEµÄÍê³ÉÊÂ¼ş	codecase.sh	codecase13	off	
 #N/A		ST-ROCE-15		Ã¿¸öwrÖ§³ÖµÄ×î´óSGEµÄRDMA²Ù×÷»ìºÏ²âÊÔ£¬²Ù×÷ÀàĞÍ»ìºÏ£¬Ö§³ÖµÄ×î´óSGEÎª2	codecase.sh	codecase14	off	
@@ -36,7 +36,7 @@ PV-289	R.ROCE.F001.A	ST-ROCE-1	RDMA operations in user space	RDMA²Ù×÷ÀàĞÍ»ìºÏËæ»
 #N/A		ST-ROCE-35		Ê¹ÓÃÒ»¸ösocket£¬±éÀú4¸öQP£¬opcodeÎªIBV_WR_RDMA_WRITED_WITH_IMM£¬¸ù¾İ2ÖÖÇëÇóÍ¨Öª»úÖÆ½øĞĞ·¢ËÍ£¬compare½ÓÊÕÊı¾İ	codecase.sh	codecase34	off	
 #N/A		ST-ROCE-36		clientÉèÖÃ·´Ñ¹£¬server¶Ë·¢ËÍ2¸ömsg£¬µÚÈı¸ömsg²úÉúsq_sge£¨key£©´íÎó£¬¼ì²éserver¶Ë²úÉúµÄcqe.	codecase.sh	codecase35	off	
 #N/A		ST-ROCE-37		server¶Ë·¢ËÍ1¸ömsg£¬3¸öwr£¬2¸öwrÕı³££¬µÚ3¸öwr²úÉúsq_sge£¨key£©´íÎó£¬¼ì²éserver¶Ë²úÉúµÄcqe.	codecase.sh	codecase36	off	
-#N/A		ST-ROCE-38		S/C¶Ë·Ö±ğ´´½¨2¸öQP£¬S¶Ë´«µİrecv_wr£¬C¶ËÎª´«µİsend_wr£¬Á½´Î´«µİµÄÊı¾İ°ü³¤²»Í¬	codecase.sh	codecase37	on	FAIL
+#N/A		ST-ROCE-38		S/C¶Ë·Ö±ğ´´½¨2¸öQP£¬S¶Ë´«µİrecv_wr£¬C¶ËÎª´«µİsend_wr£¬Á½´Î´«µİµÄÊı¾İ°ü³¤²»Í¬	codecase.sh	codecase37	on	PASS
 PV-288	R.ROCE.F008.A	ST-ROCE-43	Verify establish connection through RDMA CM	Ê¹ÓÃRDMA CM·½Ê½½¨Á¢Á¬½Ó	CM_connect.sh	CM_connect	off	
 #N/A		ST-ROCE-44		Ê¹ÓÃsocket·½Ê½½¨Á¢Á¬½Ó	SupportCQ.sh	One_CQ_One_QP	off	
 PV-335	R.ROCE.F003.A	ST-ROCE-47	Support of Send operation	Ö§³ÖÏòSQÌá½»²Ù×÷ÀàĞÍÎªsendµÄWR£¬WRÌá½»Ó²¼ş·¢ËÍµÄÊı¾İ³¤¶È=MTU£¨×¢£º²âÊÔsend only±¨ÎÄ£©	RoceSend.sh	RoceSend_MTU	off	
@@ -52,7 +52,7 @@ PV-342	R.ROCE.F014.A	ST-ROCE-56	Support of PD.	´´½¨1¸öPD£¬´´½¨³É¹¦£¬´´½¨µÄPDÄÜÊÍ
 PV-342	R.ROCE.F014.A	ST-ROCE-57		´´½¨32767(0x7FFF)¸öPD£¬Ã¿¸ö¶¼ÄÜ´´½¨³É¹¦£¬´´½¨µÄPDÆäPDID»¥²»ÏàÍ¬£¬´´½¨µÄPD¶¼ÄÜÊÍ·Å	SupportPD.sh	Max_PD_32k	off	
 PV-344	R.ROCE.F016.A	ST-ROCE-59	Support of RC QP	Ö§³ÖÍ¬Ê±´´½¨262,144 (0x3FFFF)¸öQP£¬ÇÒÃ¿¸öQP¶¼ÄÜÕı³£¹¤×÷	SupportQP.sh	Up_to_256k_QP	off	
 PV-344	R.ROCE.F016.A	ST-ROCE-61		Ö§³Ö´´½¨µÄQPÆäWQEÉî¶È×î´óÎª16383£¬QPÄÜÕı³£¹¤×÷£¬ÄÜÏòQPÌá½»×î¶à16383¸öWQE¡£	SupportQP.sh	Max_QP_WQE_Depth	off	
-PV-344	R.ROCE.F016.A	ST-ROCE-63		Ö§³Ö´´½¨µÄQPÆäWQEÉî¶È×î´óÎª1Ê±£¬QPÄÜÕı³£¹¤×÷	SupportQP.sh	QP_WQE_One_Depth	off	
+PV-344	R.ROCE.F016.A	ST-ROCE-63		Ö§³Ö´´½¨µÄQPÆäWQEÉî¶È×î´óÎª1Ê±£¬QPÄÜÕı³£¹¤×÷	SupportQP.sh	QP_WQE_One_Depth	on	PASS
 PV-351	R.ROCE.F023.A	ST-ROCE-64	Support of CQ	Ö§³Ö´´½¨1¸öCQ£¬´´½¨µÄCQÄÜÍ¬Ê±ºÍ1¸öQPµÄSQ¡¢RQ¹ØÁª	SupportCQ.sh	One_CQ_One_QP	off	
 PV-351	R.ROCE.F023.A	ST-ROCE-65		Ö§³Ö´´½¨1¸öCQ£¬´´½¨µÄCQÄÜÍ¬Ê±ºÍ¶à¸öQPµÄSQ¡¢RQ¹ØÁª	SupportCQ.sh	One_CQ_Mul_QP	off	
 PV-351	R.ROCE.F023.A	ST-ROCE-66		Ö§³ÖÍ¬Ê±´´½¨65536 (0x10000)¸öCQ	SupportCQ.sh	Max_CQ_64k	off	
@@ -64,9 +64,9 @@ PV-353	R.ROCE.F025.A	ST-ROCE-73		Ö§³Ö×¢²á¾ßÓĞÔ¶³ÌĞ´È¨ÏŞµÄMR	SupportMR.sh	MR_Remo
 PV-353	R.ROCE.F025.A	ST-ROCE-74		Ö§³Ö×¢²á¾ßÓĞÔ¶³Ì¶ÁºÍ±¾µØĞ´È¨ÏŞµÄMR	SupportMR.sh	MR_Remote_Read_Local_Write	off	
 PV-286	R.ROCE.F009.A	ST-ROCE-77	Verify basic RoCE function	Configure  GID according to IP	gid-ip.sh	gid-ip	off	
 PV-287	R.ROCE.F010.A	ST-ROCE-78	Verify basic RoCE function	Configure GID according to MAC address	gid-mac.sh	gid-mac	off	
-PV-340	R.ROCE.F011.A	ST-ROCE-79	Verify basic RoCE feature	Get device attribute	codecase.sh	codecase99	on	FAIL
-PV-341	R.ROCE.F012.A	ST-ROCE-80	Verify basic RoCE feature	Get port information	codecase.sh	codecase99	on	FAIL
-PV-963	R.ROCE.F013.A	ST-ROCE-81	Verify basic RoCE feature	Get GID information	codecase.sh	codecase99	on	FAIL
+PV-340	R.ROCE.F011.A	ST-ROCE-79	Verify basic RoCE feature	Get device attribute	codecase.sh	codecase99	on	PASS
+PV-341	R.ROCE.F012.A	ST-ROCE-80	Verify basic RoCE feature	Get port information	codecase.sh	codecase99	on	PASS
+PV-963	R.ROCE.F013.A	ST-ROCE-81	Verify basic RoCE feature	Get GID information	codecase.sh	codecase99	on	PASS
 PV-352	R.ROCE.F024.A	ST-ROCE-82	Verify Completion Event	 Request completion notification on a CQ and get CQ completion event.	Completion_Event.sh	Completion_Event	off	
 PV-1827	R.ROCE.N004.B	ST-ROCE-84	Support RoCEv1 in hi161x	Verify RoCEv1 in hi161x	codecase.sh	codecase	off	
 PV-366	R.ROCE.N006.B	ST-ROCE-85	Verify rocee is Linux platform device	Check platform device	platformdev.sh	platformdev	off	

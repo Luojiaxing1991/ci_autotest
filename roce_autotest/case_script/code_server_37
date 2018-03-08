@@ -5,6 +5,18 @@ port=18515,servername:(null)!
  [main : 20865] prtest_init_connection ok!
  [main : 20873] pr_socket : name (null), port 18515, machine 0, sockfd 4
  [main : 20884] prtest_find_prdev ok!
- [main : 20901] ibv_open_device ok!
- [prtest_sync : 1508] SERVER READ fail!
- [main : 20963] Unable to sync clent & server!!
+ [main : 20901] ibv_open_device ok! Link type is Ethernet
+ Mtu : 1024
+
+ addr = 0xffffbee06010,lkey = rkey = 0x500
+ addr = 0xffffbef06010,lkey = rkey = 0x600hr_qp->port_num= 0x1
+
+ [prtest_set_up_connection : 332] my_dest->vaddr = 0xbef06010
+ [prtest_set_up_connection : 333] my_dest->rkey  = 0x600
+ [prtest_set_up_connection : 334] my_dest->psn   = 0x74dce
+dest lid      out_reads qpn        psn         rkey     vaddr
+my : 0        16        56       0x74dce     0x600      0xffffbef06010
+rem: 0        16        36       0xbb5c6c    0x600      0xffff98e0b010
+ my_GID:254:128:00:00:00:00:00:00:248:134:87:255:254:190:116:23
+rem_GID:254:128:00:00:00:00:00:00:194:168:02:255:254:240:00:00
+######### total: 40  , pass: 1  , failed :0   ############
