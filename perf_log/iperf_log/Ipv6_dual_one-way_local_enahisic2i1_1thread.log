@@ -1,0 +1,10 @@
+------------------------------------------------------------
+Client connecting to fe80::c2a8:2ff:fef0:5%enahisic2i1, TCP port 5001
+TCP window size: 85.0 KByte (default)
+------------------------------------------------------------
+[  3] local fe80::5ca7:b9ff:fe2e:61b9 port 36798 connected with fe80::c2a8:2ff:fef0:5 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0- 2.0 sec   221 MBytes   927 Mbits/sec
+[  3]  2.0- 4.0 sec   220 MBytes   924 Mbits/sec
+[  3]  4.0- 6.0 sec   221 MBytes   927 Mbits/sec
+[  3]  0.0- 6.8 sec   749 MBytes   926 Mbits/sec
