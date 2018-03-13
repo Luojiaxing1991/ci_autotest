@@ -113,7 +113,8 @@ python ${CONFIG_LIB_TMP}/../ci_interface/if/AddPath.py
 #MAC of DHCP server
 DHCP_SERVER_MAC_ADDR="e8:4d:d0:c0:d4:66"
 CLIENT_SERVER_MAC_ADDR="c0:a8:02:f0:00:04"
- 
+BOARD_159_MAC_ADDR="ee:44:ed:2a:9a:e2"
+
 #User info of DHCP
 DHCP_SERVER_USER="luojiaxing"
 DHCP_SERVER_PASS="ljx12\#\$" 
