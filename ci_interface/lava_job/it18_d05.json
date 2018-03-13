@@ -1,0 +1,62 @@
+{    "actions": [
+            "command": "deploy_linaro_kernel",
+            "metadata": {
+                "boot.type": "ACPI",
+                "image.type": "kernel-ci",
+                "image.url": "http://localhost:8083/plinth/release-plinth-4.16+_+e68bdb6c07e5fef8348c3b33a819d067354f74e4/arm64-defconfig+plinth-config/",
+                "kernel.defconfig": "arm64-defconfig+plinth-config",
+                "kernel.endian": "little",
+                "kernel.tree": "plinth",
+                "kernel.version": "release-plinth-4.16+_+e68bdb6c07e5fef8348c3b33a819d067354f74e4",
+                "platform.fastboot": "false",
+                "test.plan": "sas roce pcie hns debug test"
+            },
+            "parameters": {
+                "bootloadertype": "ipxe",
+                "dtb": "http://localhost:8083/plinth/release-plinth-4.16+_+e68bdb6c07e5fef8348c3b33a819d067354f74e4/arm64-defconfig+plinth-config/dtbs/hisilicon/hip07-d05.dtb",
+                "kernel": "http://localhost:8083/plinth/release-plinth-4.16+_+e68bdb6c07e5fef8348c3b33a819d067354f74e4/arm64-defconfig+plinth-config/Image",
+                "target_type": "ubuntu"
+            }
+        },
+	
+        {
+            "command": "boot_linaro_image",
+            "parameters": {
+                "options": [
+                    "boot_cmds=boot_cmds_disc_acpi"
+                ]
+            }
+        },
+        {
+            "command": "lava_test_shell",
+            "parameters": {
+                "testdef_repos": [
+                    {
+                        "git-repo": "https://github.com/Luojiaxing1991/ci_autotest.git",
+			"parameters":{
+			     "Maintainer": "Luojiaxing"
+			},
+			"testdef": "xge_autotest/xge_autotest.yaml"
+                    }
+                ],
+                "timeout": 172800
+            }
+        },
+
+ 
+
+        {
+            "command": "submit_results",
+            "parameters": {
+                "server": "http://localhost:8089/RPC2/",
+                "stream": "/anonymous/plinth/"
+            }
+        }
+    ],
+    "device_type": "hip07-d05",
+    "job_name": "SAS,PCIE,ROCE,HNS Test",
+    "logging_level": "DEBUG",
+    "priority": "high",
+    "timeout": 172800
+}
+
