@@ -213,6 +213,8 @@ function perf_init()
     NetperfSingle=0
     NetperfDual=0
     QperfTest=0
+    VlanSingle=0
+    VlanDual=0
     killall iperf netperf qperf
     ssh root@$BACK_IP "killall iperf netperf qperf"
 }

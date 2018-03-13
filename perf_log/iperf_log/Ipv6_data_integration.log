@@ -1,0 +1,16 @@
+Dual port one-way enahisic2i1 1thread:
+[  3]  0.0-20.0 sec  2.16 GBytes   930 Mbits/sec
+
+
+Dual port one-way enahisic2i1 5thread:
+[SUM]  0.0-20.0 sec  2.17 GBytes   930 Mbits/sec
+
+
+Dual port one-way enahisic2i1 10thread:
+[SUM]  0.0-20.0 sec  2.17 GBytes   932 Mbits/sec
+
+
+Dual port one-way enahisic2i2 1thread:
+[  3]  0.0-20.0 sec  21.6 GBytes  9.26 Gbits/sec
+
+
