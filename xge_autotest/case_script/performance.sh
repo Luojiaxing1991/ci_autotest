@@ -408,6 +408,140 @@ function iperf_dual()
     return 0 
 }
 
+
+function Vlan_iperf_single()
+{
+    ip link add link $LOCALPORT1 name $LOCALPORT1.401 type vlan id 401
+    ip link add link $LOCALPORT2 name $LOCALPORT2.400 type vlan id 400
+    ifconfig $LOCALPORT1.401 ${vlan_local1_ip};ifconfig $LOCALPORT2.400 ${vlan_local2_ip}
+    sleep 5
+    
+    ssh root@$BACK_IP "
+    ip link add link $NETPORT1 name $NETPORT1.401 type vlan id 401;\
+    ip link add link $NETPORT2 name $NETPORT2.400 type vlan id 400;\
+    ifconfig $NETPORT1.401 ${vlan_remote1_ip};ifconfig $NETPORT2.400 ${vlan_remote2_ip};\
+    sleep 5"
+    
+    process="iperf"
+    ssh root@$BACK_IP "iperf -s >/dev/null 2>&1 &"
+    echo "#############################"
+    echo "Run iperf Single port One-way..."
+    echo "#############################"    
+    SendPyte="SingleOne"
+
+    for netport in $NETPORTLIST
+    do
+        if [ ${netport} == ${NETPORT1} ];then
+            for owNum in $THREAD
+            do
+                echo "Run single port $netport ${owNum}thread......"
+                iperf -c ${vlan_remote1_ip} -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/Vlan_single_one-way_${netport}_${owNum}thread.log
+                check_single_process
+            done
+            sleep 5
+        else
+            for owNum in $THREAD
+            do
+                echo "Run single port $netport ${owNum}thread......"
+                iperf -c ${vlan_remote2_ip} -t $IPERFDURATION -i 1 -P $owNum > $LOG_DIR/$IPERFDIR/Vlan_single_one-way_${netport}_${owNum}thread.log
+                check_single_process
+            done
+            sleep 5
+        fi
+    done
+    sleep 5
+
+    #two-way perfornamce
+    ssh root@$BACK_IP "killall iperf;iperf -s -V >/dev/null 2>&1 &"
+    echo "#############################"
+    echo "Run iperf Single port two-way..."
+    echo "#############################"
+    SendPyte="SingleTwo"
+    for twNum in $THREAD
+    do
+        echo "Run single port two-way ${twNum}thread......"
+        iperf -c ${vlan_remote1_ip} -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Vlan_Single_two-way_${NETPORT1}_${twNum}thread.log &
+        iperf -c ${vlan_remote2_ip} -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Vlan_Single_two-way_${NETPORT2}_${twNum}thread.log &
+        sleep 25
+        check_single_process
+    done
+    
+    vconfig rem $NETPORT1.401
+    vconfig rem $NETPORT2.400
+    ssh root@BACK_IP "vconfig rem $NETPORT1.401;vconfig rem $NETPORT2.401"
+}
+
+function Vlan_iperf_dual()
+{
+    ip link add link $LOCALPORT1 name $LOCALPORT1.401 type vlan id 401
+    ip link add link $LOCALPORT2 name $LOCALPORT2.400 type vlan id 400
+    ifconfig $LOCALPORT1.401 ${vlan_local1_ip};ifconfig $LOCALPORT2.400 ${vlan_local2_ip}
+    sleep 5
+    
+    ssh root@$BACK_IP "
+    ip link add link $NETPORT1 name $NETPORT1.401 type vlan id 401;\
+    ip link add link $NETPORT2 name $NETPORT2.400 type vlan id 400;\
+    ifconfig $NETPORT1.401 ${vlan_remote1_ip};ifconfig $NETPORT2.400 ${vlan_remote2_ip};\
+    sleep 5"
+    
+    process="iperf"
+    killall iperf
+    iperf -s >/dev/null 2>&1 &
+    ssh root@$BACK_IP "killall iperf;iperf -s -V >/dev/null 2>&1 &"
+    echo "#############################"
+    echo "Run iperf Dual port one-way..."
+    echo "#############################"
+    SendPyte="DualOne"
+    for netport in $NETPORTLIST
+    do
+        if [ ${netport} == ${NETPORT1} ];then
+            for owNum in $THREAD
+            do
+                echo "Run dual port ${netport} ${owNum}thread......"
+                iperf -c ${vlan_remote1_ip} -t $IPERFDURATION -i 2 -P ${owNum} > $LOG_DIR/$IPERFDIR/Vlan_dual_one-way_local_${netport}_${owNum}thread.log &
+                ssh root@$BACK_IP "iperf -c ${vlan_local1_ip} -t $IPERFDURATION -i 2 -P ${owNum} > $LOG_DIR/$IPERFDIR/Vlan_dual_one-way_remote_${netport}_${owNum}thread.log &"
+                sleep $IPERFDURATION
+                check_dual_process
+            done
+            sleep 5
+        else
+            for owNum in $THREAD
+            do
+                echo "Run dual port $netport ${owNum}thread......"
+                iperf -c ${vlan_remote2_ip} -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/Vlan_dual_one-way_local_${netport}_${owNum}thread.log &
+                ssh root@$BACK_IP "iperf -c ${vlan_local2_ip} -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/Vlan_dual_one-way_remote_${netport}_${owNum}thread.log &"
+                sleep $IPERFDURATION
+                check_dual_process
+            done
+            sleep 5
+        fi
+    done
+    sleep 5
+
+    echo "#############################"
+    echo "Run iperf Dual port two-way..."
+    echo "#############################"
+    SendPyte="DualTwo"
+    killall iperf
+    iperf -s >/dev/null 2>&1 &
+    ssh root@$BACK_IP "killall iperf;iperf -s >/dev/null 2>&1 &"
+    for twNum in $THREAD
+    do
+        echo "Run Two-way ${twNum}thread......"
+        iperf -c ${vlan_remote1_ip} -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Vlan_dual_twoway_local_${NETPORT1}_${twNum}thread.log &
+        iperf -c ${vlan_remote2_ip} -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Vlan_dual_twoway_local_${NETPORT2}_${twNum}thread.log &
+        ssh root@$BACK_IP "iperf -c ${vlan_local1_ip} -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Vlan_dual_two-way_remote_${NETPORT1}_${twNum}thread.log &"
+        ssh root@$BACK_IP "iperf -c ${vlan_local2_ip} -t $IPERFDURATION -i 2 -P $twNum > $LOG_DIR/$IPERFDIR/Vlan_dual_two-way_remote_${NETPORT2}_${twNum}thread.log &"
+        sleep $IPERFDURATION
+        check_dual_process
+    done
+    
+    vconfig rem $NETPORT1.401
+    vconfig rem $NETPORT2.400
+    ssh root@BACK_IP "vconfig rem $NETPORT1.401;vconfig rem $NETPORT2.401"
+}
+
+
 function netperf_single()
 {
     if [ $NetperfSingle -eq 1 ];then
