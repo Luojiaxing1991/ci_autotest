@@ -4,7 +4,7 @@
             "metadata": {
                 "boot.type": "ACPI",
                 "image.type": "kernel-ci",
-                "image.url": "http://localhost:8083/plinth/release-plinth-4.16+_+e68bdb6c07e5fef8348c3b33a819d067354f74e4/arm64-defconfig+plinth-config/",
+                "image.url": "http://localhost:8083/plinth/release-plinth-4.16+_+e8f8559d2a6cf864e4f4c5302cbd6d6f4bbf7750/arm64-defconfig+plinth-config/",
                 "kernel.defconfig": "arm64-defconfig+plinth-config",
                 "kernel.endian": "little",
                 "kernel.tree": "plinth",
@@ -14,9 +14,9 @@
             },
             "parameters": {
                 "bootloadertype": "ipxe",
-                "dtb": "http://localhost:8083/plinth/release-plinth-4.16+_+e68bdb6c07e5fef8348c3b33a819d067354f74e4/arm64-defconfig+plinth-config/dtbs/hisilicon/hip07-d05.dtb",
-                "kernel": "http://localhost:8083/plinth/release-plinth-4.16+_+e68bdb6c07e5fef8348c3b33a819d067354f74e4/arm64-defconfig+plinth-config/Image",
-                "target_type": "ubuntu"
+                "dtb": "http://localhost:8083/plinth/release-plinth-4.16+_+e8f8559d2a6cf864e4f4c5302cbd6d6f4bbf7750/arm64-defconfig+plinth-config/dtbs/hisilicon/hip07-d05.dtb",
+                "kernel": "http://localhost:8083/plinth/release-plinth-4.16+_+e8f8559d2a6cf864e4f4c5302cbd6d6f4bbf7750/arm64-defconfig+plinth-config/Image",
+		"target_type": "ubuntu"
             }
         },
 	
