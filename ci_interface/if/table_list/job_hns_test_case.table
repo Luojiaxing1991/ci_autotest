@@ -10,22 +10,22 @@ PV-434	R.HNS.F001.A	ST_XGE_PORT_CTRL_015		XGE收发包过程中多次打开和关闭网口	enab
 PV-434	R.HNS.F001.A	ST_XGE_PORT_CTRL_020		XGE停止收发包后多次打开和关闭网口	enable_and_disable_interface.sh	xge_continued_enable_and_disable_interface	on	
 PV-435	R.HNS.F002.A	ST_GE_TX_RX_01	GE基本收发报文功能	GE网口与对端ping操作	rx_tx_functionality.sh	ge_two_ends_receiving_and_sending	on	
 PV-435	R.HNS.F002.A	ST_XGE_TX_RX_01	XGE基本收发报文功能	XGE网口与对端ping操作	rx_tx_functionality.sh	xge_two_ends_receiving_and_sending	on	
-PV-438	R.HNS.F005.A	ST_GE_VLAN_01	GE网口Vlan基本功能	GE Vlan ping包功能正常	vlan_tagged_traffic_support.sh	ge_set_vlan	off	
-PV-438	R.HNS.F005.A	ST_GE_VLAN_02		设置Vlan网口	vlan_tagged_traffic_support.sh	ge_set_vlan	off	
-PV-438	R.HNS.F005.A	ST_GE_VLAN_03		多端口Vlan ping包功能正常	vlan_tagged_traffic_support.sh	ge_vlan_multi_port	off	
-PV-438	R.HNS.F005.A	ST_GE_VLAN_04		Vlan配置容错功能测试	vlan_tagged_traffic_support.sh	vlan_fault_tolerant	off	
-#N/A	R.HNS.F005A	ST_GE_VLAN_05		HNS创建GE Vlan后，直接将网口关闭	vlan_tagged_traffic_support.sh	ge_vlan_up_down	off	
-PV-438	R.HNS.F005.A	ST_XGE_VLAN_01	XGE/LGE网口Vlan基本功能	XGE Vlan ping包功能正常	vlan_tagged_traffic_support.sh	xge_set_vlan	off	
-PV-438	R.HNS.F005.A	ST_XGE_VLAN_02		多端口Vlan ping包功能正常	vlan_tagged_traffic_support.sh	xge_vlan_multi_port	off	
-PV-438	R.HNS.F005.A	ST_XGE_VLAN_03		XGE设置Vlan网口	vlan_tagged_traffic_support.sh	xge_set_vlan	off	
-#N/A	R.HNS.F005A	ST_XGE_VLAN_04		HNS创建XGE Vlan后，直接将网口关闭	vlan_tagged_traffic_support.sh	xge_vlan_up_down	off	
+PV-438	R.HNS.F005.A	ST_GE_VLAN_01	GE网口Vlan基本功能	GE Vlan ping包功能正常	vlan_tagged_traffic_support.sh	ge_set_vlan	on	
+PV-438	R.HNS.F005.A	ST_GE_VLAN_02		设置Vlan网口	vlan_tagged_traffic_support.sh	ge_set_vlan	on	
+PV-438	R.HNS.F005.A	ST_GE_VLAN_03		多端口Vlan ping包功能正常	vlan_tagged_traffic_support.sh	ge_vlan_multi_port	on	
+PV-438	R.HNS.F005.A	ST_GE_VLAN_04		Vlan配置容错功能测试	vlan_tagged_traffic_support.sh	vlan_fault_tolerant	on	
+#N/A	R.HNS.F005A	ST_GE_VLAN_05		HNS创建GE Vlan后，直接将网口关闭	vlan_tagged_traffic_support.sh	ge_vlan_up_down	on	
+PV-438	R.HNS.F005.A	ST_XGE_VLAN_01	XGE/LGE网口Vlan基本功能	XGE Vlan ping包功能正常	vlan_tagged_traffic_support.sh	xge_set_vlan	on	
+PV-438	R.HNS.F005.A	ST_XGE_VLAN_02		多端口Vlan ping包功能正常	vlan_tagged_traffic_support.sh	xge_vlan_multi_port	on	
+PV-438	R.HNS.F005.A	ST_XGE_VLAN_03		XGE设置Vlan网口	vlan_tagged_traffic_support.sh	xge_set_vlan	on	
+#N/A	R.HNS.F005A	ST_XGE_VLAN_04		HNS创建XGE Vlan后，直接将网口关闭	vlan_tagged_traffic_support.sh	xge_vlan_up_down	on	
 PV-439	R.HNS.F006.A	ST_GE_RESET_01	GE重新自协商	GE电口重新自协商成功	auto_negotiation_support.sh	ge_restarts_auto_negotiation	on	
-PV-439	R.HNS.F006.A	ST_XGE_RESET_02		GE电口大流量反复重新自协商成功	auto_negotiation_support.sh	ge_iperf_auto_negotiation	off	
+PV-439	R.HNS.F006.A	ST_XGE_RESET_02		GE电口大流量反复重新自协商成功	auto_negotiation_support.sh	ge_iperf_auto_negotiation	on	
 PV-439	R.HNS.F006.A	ST_XGE_RESET_03		GE电口关闭自协商后重新自协商功能正常	auto_negotiation_support.sh		off	
 PV-439	R.HNS.F006.A	ST_XGE_RESET_01		XGE光口重新自协商成功	auto_negotiation_support.sh	xge_restarts_auto_negotiation	on	
 PV-439	R.HNS.F006.A	ST_XGE_RESET_02		XGE光口大流量反复重新自协商成功	auto_negotiation_support.sh	xge_iperf_auto_negotiation	on	
 PV-442	R.HNS.F009.A	ST_GE_PHY_IOCTL_01	通过MiiTools读写ge phy寄存器	GE电口正确读取Phy寄存器	support_of_mdio.sh	ge_read_phy_register	on	
-PV-442	R.HNS.F009.A	ST_GE_PHY_IOCTL_02		GE电口正确写Phy寄存器	support_of_mdio.sh	ge_iperf_read_phy_register	off	
+PV-442	R.HNS.F009.A	ST_GE_PHY_IOCTL_02		GE电口正确写Phy寄存器	support_of_mdio.sh	ge_iperf_read_phy_register	on	
 PV-442	R.HNS.F009.A	ST_XGE_PHY_IOCTL_01		XGE光口读phy寄存器失败	support_of_mdio.sh	xge_read_phy_register	on	
 PV-443	R.HNS.F010.A	ST_GE_MAC_ERROR_01	GE网口MAC地址设置	GE网口Mac地址设置容错测试	support_to_change_mac_address.sh	ge_mac_address_fault_tolerant	on	
 PV-443	R.HNS.F010.A	SET_GE_SET_MAC_01		GE标准mac地址设置成功	support_to_change_mac_address.sh	ge_set_standard_mac_address	on	
@@ -37,10 +37,10 @@ PV-443	R.HNS.F010.A	SET_XGE_SET_MAC_02		XGE线性mac地址设置	support_to_change_mac
 PV-443	R.HNS.F010.A	SET_XGE_SET_MAC_03		XGE电口初始化后mac地址随机生成	support_to_change_mac_address.sh	xge_mac_address_random_generation	on	
 PV-444	R.HNS.F011.A	ST_GE_SET_MTU_01	GE设置MTU	GE MTU修改后功能正常	support_of_mtu_setting.sh	ge_set_mtu_value	on	
 PV-444	R.HNS.F011.A	ST_GE_SET_MTU_04		GE MTU传入错误导致配置失败	support_of_mtu_setting.sh	ge_set_fail_mtu_value	on	
-PV-444	R.HNS.F011.A	ST_GE_SET_MTU_05		GE大流量收发包时MTU修改后功能正常	support_of_mtu_setting.sh	ge_iperf_set_mtu_value	off	
+PV-444	R.HNS.F011.A	ST_GE_SET_MTU_05		GE大流量收发包时MTU修改后功能正常	support_of_mtu_setting.sh	ge_iperf_set_mtu_value	on	
 PV-444	R.HNS.F011.A	ST_XGE_SET_MTU_01	XGE设置MTU	XGE MTU修改后功能正常	support_of_mtu_setting.sh	xge_set_mtu_value	on	
 PV-444	R.HNS.F011.A	ST_XGE_SET_MTU_04		XGE MTU传入错误导致配置失败	support_of_mtu_setting.sh	xge_set_fail_mtu_value	on	
-PV-444	R.HNS.F011.A	ST_XGE_SET_MTU_05		XGE大流量收发包时MTU修改后功能正常	support_of_mtu_setting.sh	xge_iperf_set_mtu_value	off	
+PV-444	R.HNS.F011.A	ST_XGE_SET_MTU_05		XGE大流量收发包时MTU修改后功能正常	support_of_mtu_setting.sh	xge_iperf_set_mtu_value	on	
 PV-446	R.HNS.F013.A	ST_GE_IPV6_01	GE网口IPv6基本功能	GE IPv6 ping包功能正常	support_to_ipv6.sh	ge_ipv6_ping_pack	on	
 PV-446	R.HNS.F013.A	ST_GE_IPV6_02		设置IPv6 地址	support_to_ipv6.sh	ge_set_ipv6_address	on	
 PV-446	R.HNS.F013.A	ST_XGE_IPV6_01	XGE网口IPv6基本功能	XGE IPv6 ping包功能正常	support_to_ipv6.sh	xge_ipv6_ping_pack	on	
@@ -54,18 +54,18 @@ PV-416	R.HNS.F028.A	ST_SGE_GET_DRVINFO_000	XGE网口驱动版本信息查询	XGE网口驱动版
 PV-418	R.HNS.F029.A	ST_GE_RINGBD_000	收发队列BD个数查询	GE网口收发队列BD个数查询正确	support_of_ring_parameter_gettings.sh	ge_query_ring_parameter_gettings	on	
 PV-418	R.HNS.F029.A	ST_XGE_RINGBD_000		XGE网口收发队列BD个数查询正确	support_of_ring_parameter_gettings.sh	xge_query_ring_parameter_gettings	on	
 PV-418	R.HNS.F029.A	ST_SGE_GET_RINGBD_ERROR_000		网口收发队列BD个数查询容错测试	support_of_ring_parameter_gettings.sh	query_ring_parameter_fault_tolerant	on	
-PV-438	R.HNS.F005.A	ST_GE_VLAN_PERF_01	GE Vlan包网口带宽测试	GE单网口 vlan iperf 测试-单板作为客户端	performance.sh		off	
-PV-438	R.HNS.F005.A	ST_GE_VLAN_PERF_02		GE单网口 vlan iperf 测试-单板作为服务器端	performance.sh		off	
-PV-438	R.HNS.F005.A	ST_GE_VLAN_PERF_03		GE单网口 vlan iperf 测试-单板同时作为服务器端和客户端	performance.sh		off	
-PV-438	R.HNS.F005.A	ST_GE_VLAN_PERF_04		GE双网口 vlan iperf 测试-单板作为客户端	performance.sh		off	
-PV-438	R.HNS.F005.A	ST_GE_VLAN_PERF_05		GE双网口 vlan iperf 测试-单板作为服务器端	performance.sh		off	
-PV-438	R.HNS.F005.A	ST_GE_VLAN_PERF_06		GE双网口 vlan iperf 测试-单板同时作为服务器端和客户端	performance.sh		off	
-PV-438	R.HNS.F005.A	ST_XGE_VLAN_PERF_01	XGE Vlan包网口带宽测试	XGE单网口 vlan iperf 测试-单板作为客户端	performance.sh		off	
-PV-438	R.HNS.F005.A	ST_XGE_VLAN_PERF_02		XGE单网口 vlan iperf 测试-单板作为服务器端	performance.sh		off	
-PV-438	R.HNS.F005.A	ST_XGE_VLAN_PERF_03		XGE单网口 vlan iperf 测试-单板同时作为服务器端和客户端	performance.sh		off	
-PV-438	R.HNS.F005.A	ST_XGE_VLAN_PERF_04		XGE双网口 vlan iperf 测试-单板作为客户端	performance.sh		off	
-PV-438	R.HNS.F005.A	ST_XGE_VLAN_PERF_05		XGE双网口 vlan iperf 测试-单板作为服务器端	performance.sh		off	
-PV-438	R.HNS.F005.A	ST_XGE_VLAN_PERF_06		XGE双网口 vlan iperf 测试-单板同时作为服务器端和客户端	performance.sh		off	
+PV-438	R.HNS.F005.A	ST_GE_VLAN_PERF_01	GE Vlan包网口带宽测试	GE单网口 vlan iperf 测试-单板作为客户端	performance.sh	Vlan_iperf_single	off	
+PV-438	R.HNS.F005.A	ST_GE_VLAN_PERF_02		GE单网口 vlan iperf 测试-单板作为服务器端	performance.sh	Vlan_iperf_single	off	
+PV-438	R.HNS.F005.A	ST_GE_VLAN_PERF_03		GE单网口 vlan iperf 测试-单板同时作为服务器端和客户端	performance.sh	Vlan_iperf_dual	off	
+PV-438	R.HNS.F005.A	ST_GE_VLAN_PERF_04		GE双网口 vlan iperf 测试-单板作为客户端	performance.sh	Vlan_iperf_single	off	
+PV-438	R.HNS.F005.A	ST_GE_VLAN_PERF_05		GE双网口 vlan iperf 测试-单板作为服务器端	performance.sh	Vlan_iperf_single	off	
+PV-438	R.HNS.F005.A	ST_GE_VLAN_PERF_06		GE双网口 vlan iperf 测试-单板同时作为服务器端和客户端	performance.sh	Vlan_iperf_dual	off	
+PV-438	R.HNS.F005.A	ST_XGE_VLAN_PERF_01	XGE Vlan包网口带宽测试	XGE单网口 vlan iperf 测试-单板作为客户端	performance.sh	Vlan_iperf_single	off	
+PV-438	R.HNS.F005.A	ST_XGE_VLAN_PERF_02		XGE单网口 vlan iperf 测试-单板作为服务器端	performance.sh	Vlan_iperf_single	off	
+PV-438	R.HNS.F005.A	ST_XGE_VLAN_PERF_03		XGE单网口 vlan iperf 测试-单板同时作为服务器端和客户端	performance.sh	Vlan_iperf_dual	off	
+PV-438	R.HNS.F005.A	ST_XGE_VLAN_PERF_04		XGE双网口 vlan iperf 测试-单板作为客户端	performance.sh	Vlan_iperf_single	off	
+PV-438	R.HNS.F005.A	ST_XGE_VLAN_PERF_05		XGE双网口 vlan iperf 测试-单板作为服务器端	performance.sh	Vlan_iperf_single	off	
+PV-438	R.HNS.F005.A	ST_XGE_VLAN_PERF_06		XGE双网口 vlan iperf 测试-单板同时作为服务器端和客户端	performance.sh	Vlan_iperf_dual	off	
 PV-446	R.HNS.F013.A	ST_GE_IPV6_PERF_01	GE IPv6网口带宽测试	GE单网口 IPv6 iperf 测试-单板作为客户端	performance.sh	ipv6_iperf_single	on	
 PV-446	R.HNS.F013.A	ST_GE_IPV6_PERF_02		GE单网口 IPv6 iperf 测试-单板作为服务器端	performance.sh	ipv6_iperf_single	on	
 PV-446	R.HNS.F013.A	ST_GE_IPV6_PERF_03		GE单网口 IPv6 iperf 测试-单板同时作为服务器端和客户端	performance.sh	ipv6_iperf_dual	on	
