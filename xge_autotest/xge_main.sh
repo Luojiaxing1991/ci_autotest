@@ -74,7 +74,7 @@ echo ${LOCAL_IP}
 
 getIPofClientServer ${DHCP_SERVER_MAC_ADDR} ${CLIENT_SERVER_MAC_ADDR} ${DHCP_SERVER_USER} ${DHCP_SERVER_PASS}
 
-if [ x"${COMMON_CLIENT_IP}" = x"" || x"${COMMON_CLIENT_IP}" = x"0.0.0.0" ]
+if [ x"${COMMON_CLIENT_IP}" = x"" ] || [ x"${COMMON_CLIENT_IP}" = x"0.0.0.0" ]
 then
 	echo "No found client IP,try ping default DHCP ip to update arp list!"
         ping ${COMMON_DEFAULT_DHCP_IP} -c 5

@@ -45,13 +45,13 @@ PV-446	R.HNS.F013.A	ST_GE_IPV6_01	GE网口IPv6基本功能	GE IPv6 ping包功能正常	supp
 PV-446	R.HNS.F013.A	ST_GE_IPV6_02		设置IPv6 地址	support_to_ipv6.sh	ge_set_ipv6_address	on	
 PV-446	R.HNS.F013.A	ST_XGE_IPV6_01	XGE网口IPv6基本功能	XGE IPv6 ping包功能正常	support_to_ipv6.sh	xge_ipv6_ping_pack	on	
 PV-446	R.HNS.F013.A	ST_XGE_IPV6_02		XGE设置IPv6 地址	support_to_ipv6.sh	xge_set_ipv6_address	on	
-PV-411	R.HNS.F026.A	ST_GE_LINK_GET_015	GE link状态查询	GE通过电口连接查询link状态正确	support_to_query_port_status.sh	ge_query_link_state	on	
-PV-411	R.HNS.F026.A	ST_GE_LINK_GET_ERROR_015		GE网口链路状态查询容错测试	support_to_query_port_status.sh	ge_link_state_fault_tolerant	on	
+PV-411	R.HNS.F026.A	ST_GE_LINK_GET_015	GE link状态查询	GE通过电口连接查询link状态正确	support_to_query_port_status.sh	ge_query_link_state	off	
+PV-411	R.HNS.F026.A	ST_GE_LINK_GET_ERROR_015		GE网口链路状态查询容错测试	support_to_query_port_status.sh	ge_link_state_fault_tolerant	off	
 PV-411	R.HNS.F026.A	ST_GE_LINK_GET_015	XGE link状态查询	XGE光口连接查询link状态正确	support_to_query_port_status.sh	xge_query_link_state	off	
 PV-416	R.HNS.F028.A	ST_SGE_GET_DRVINFO_000	GE网口驱动版本信息查询	GE网口驱动版本信息查询正确	support_to_get_driver_informations.sh	ge_query_driven_version_information	on	
-PV-416	R.HNS.F028.A	ST_SGE_GET_DRVINFO_ERROR_000		GE网口驱动版本信息查询容错测试	support_to_get_driver_informations.sh	ge_query_driven_version_fault_tolerant	on	
+PV-416	R.HNS.F028.A	ST_SGE_GET_DRVINFO_ERROR_000		GE网口驱动版本信息查询容错测试	support_to_get_driver_informations.sh	ge_query_driven_version_fault_tolerant	off	
 PV-416	R.HNS.F028.A	ST_SGE_GET_DRVINFO_000	XGE网口驱动版本信息查询	XGE网口驱动版本信息查询正确	support_to_get_driver_informations.sh	xge_query_driven_version_information	on	
-PV-418	R.HNS.F029.A	ST_GE_RINGBD_000	收发队列BD个数查询	GE网口收发队列BD个数查询正确	support_of_ring_parameter_gettings.sh	ge_query_ring_parameter_gettings	on	
+PV-418	R.HNS.F029.A	ST_GE_RINGBD_000	收发队列BD个数查询	GE网口收发队列BD个数查询正确	support_of_ring_parameter_gettings.sh	ge_query_ring_parameter_gettings	off	
 PV-418	R.HNS.F029.A	ST_XGE_RINGBD_000		XGE网口收发队列BD个数查询正确	support_of_ring_parameter_gettings.sh	xge_query_ring_parameter_gettings	off	
 PV-418	R.HNS.F029.A	ST_SGE_GET_RINGBD_ERROR_000		网口收发队列BD个数查询容错测试	support_of_ring_parameter_gettings.sh	query_ring_parameter_fault_tolerant	off	
 PV-438	R.HNS.F005.A	ST_GE_VLAN_PERF_01	GE Vlan包网口带宽测试	GE单网口 vlan iperf 测试-单板作为客户端	performance.sh		off	
