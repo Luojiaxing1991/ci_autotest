@@ -1,4 +1,5 @@
 {    "actions": [
+	{
             "command": "deploy_linaro_kernel",
             "metadata": {
                 "boot.type": "ACPI",
