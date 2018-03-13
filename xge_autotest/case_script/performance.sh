@@ -446,7 +446,7 @@ function iperf_single()
                sleep 5
 
                 echo "Run single port $netport ${owNum}thread......"
-                iperf -c ${NETIP1} -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/single_one-way_${netport}_${owNum}thread.log
+                iperf -c ${NETIP1} -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/single_one-way_${netport}_${owNum}thread.log &
                 check_single_process
                 data_integration
                 iperf_killer
@@ -459,7 +459,7 @@ function iperf_single()
                 sleep 5
 
                 echo "Run single port $netport ${owNum}thread......"
-                iperf -c ${NETIP2} -t $IPERFDURATION -i 1 -P $owNum > $LOG_DIR/$IPERFDIR/single_one-way_${netport}_${owNum}thread.log
+                iperf -c ${NETIP2} -t $IPERFDURATION -i 1 -P $owNum > $LOG_DIR/$IPERFDIR/single_one-way_${netport}_${owNum}thread.log &
                 check_single_process
                 data_integration
                 iperf_killer
@@ -619,7 +619,8 @@ function Vlan_iperf_single()
                 sleep 5
    
                 echo "Run single port $netport ${owNum}thread......"
-                iperf -c ${vlan_remote1_ip} -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/Vlan_single_one-way_${netport}_${owNum}thread.log
+                iperf -c ${vlan_remote1_ip} -t $IPERFDURATION -i 2 -P $owNum > $LOG_DIR/$IPERFDIR/Vlan_single_one-way_${netport}_${owNum}thread.log &
+                sleep 25
                 check_single_process
                 iperf_killer
                 sleep 5
@@ -635,7 +636,8 @@ function Vlan_iperf_single()
                 ssh root@$BACK_IP "killall iperf;iperf -s >/dev/null 2>&1 &"
                 sleep 5
                 echo "Run single port $netport ${owNum}thread......"
-                iperf -c ${vlan_remote2_ip} -t $IPERFDURATION -i 1 -P $owNum > $LOG_DIR/$IPERFDIR/Vlan_single_one-way_${netport}_${owNum}thread.log
+                iperf -c ${vlan_remote2_ip} -t $IPERFDURATION -i 1 -P $owNum > $LOG_DIR/$IPERFDIR/Vlan_single_one-way_${netport}_${owNum}thread.log &
+                sleep 25
                 check_single_process
                 iperf_killer
                 sleep 10
