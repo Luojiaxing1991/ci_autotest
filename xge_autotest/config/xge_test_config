@@ -51,3 +51,8 @@ local_fibre1_ipv6_ip="fe80::0db8:0:f101:2/64"
 remote_tp1_ip="192.168.1.20"
 remote_fibre1_ip="192.168.11.210"
 remote_fibre2_ip="192.168.12.220"
+
+vlan_local1_ip="192.168.13.10"
+vlan_local2_ip="192.168.12.10"
+vlan_remote1_ip="192.168.13.20"
+vlan_remote2_ip="192.168.12.20"
