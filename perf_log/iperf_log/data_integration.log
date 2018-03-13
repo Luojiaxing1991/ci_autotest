@@ -1,0 +1,12 @@
+Single port one-way enahisic2i1 1thread:
+[  3]  0.0-20.0 sec  2.19 GBytes   943 Mbits/sec
+
+
+Single port one-way enahisic2i1 5thread:
+[SUM]  0.0-20.0 sec  2.20 GBytes   943 Mbits/sec
+
+
+Single port one-way enahisic2i1 10thread:
+[SUM]  0.0-20.0 sec  2.20 GBytes   943 Mbits/sec
+
+
