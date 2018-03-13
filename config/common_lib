@@ -176,18 +176,43 @@ function getIPofClientServer
         spawn ssh $user_name@$back_ip  "arp | grep '${tmpClientMacAddr}'"
 		
         sleep 10
+        set timeout 120
         expect "Are you sure you want to continue connecting (yes/no)?"
-        set timeout 60
         send "yes\r"
         expect -re ".*password:"
-        set timeout 60
+        #set timeout 120
         send "$pass_word\r"
         expect eof
         exit 0
     ' | tee res.log
-    
+
         tmpTargetIpList=`cat res.log | grep 'ether' | awk '{print $1}'`
         
+        if [ x"$tmpTargetIpList" = x"" ]
+        then
+            expect -c '
+        	set timeout -1
+        	set back_ip '${tmpDHCPIp}'
+        	set user_name '${tmpUserName}'
+       	 	set pass_word '${tmpPassWord}'
+		
+        	#show client ip info in arp list in DHCP server using ssh service 
+        	spawn ssh $user_name@$back_ip  "arp | grep '${tmpClientMacAddr}'"
+		
+        	sleep 10
+        	expect "Are you sure you want to continue connecting (yes/no)?"
+        	set timeout 60
+        	send "yes\r"
+        	expect -re ".*password:"
+        	set timeout 60
+        	send "$pass_word\r"
+        	expect eof
+        	exit 0
+    		' | tee res.log
+
+        	tmpTargetIpList=`cat res.log | grep 'ether' | awk '{print $1}'`
+        fi
+
         #finish we need to get the using ip form ip list get before using ping
         for ip in $tmpTargetIpList
         do
