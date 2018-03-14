@@ -1,10 +1,5 @@
 PING 192.168.1.20 (192.168.1.20) 56(84) bytes of data.
-From 192.168.1.10 icmp_seq=1 Destination Host Unreachable
-From 192.168.1.10 icmp_seq=2 Destination Host Unreachable
-From 192.168.1.10 icmp_seq=3 Destination Host Unreachable
-From 192.168.1.10 icmp_seq=4 Destination Host Unreachable
-From 192.168.1.10 icmp_seq=5 Destination Host Unreachable
 
 --- 192.168.1.20 ping statistics ---
-5 packets transmitted, 0 received, +5 errors, 100% packet loss, time 4089ms
-pipe 4
+5 packets transmitted, 0 received, 100% packet loss, time 4096ms
+

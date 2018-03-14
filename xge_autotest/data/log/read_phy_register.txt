@@ -1,0 +1,7 @@
+enahisic2i1: negotiated 1000baseT-FD flow-control, link ok
+  product info: vendor 00:50:43, model 29 rev 1
+  basic mode:   autonegotiation enabled
+  basic status: autonegotiation complete, link ok
+  capabilities: 1000baseT-FD 100baseTx-FD 100baseTx-HD 10baseT-FD 10baseT-HD
+  advertising:  1000baseT-FD 100baseTx-FD 100baseTx-HD 10baseT-FD 10baseT-HD
+  link partner: 1000baseT-FD 100baseTx-FD 100baseTx-HD 10baseT-FD 10baseT-HD

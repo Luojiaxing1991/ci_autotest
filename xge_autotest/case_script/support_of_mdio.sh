@@ -42,14 +42,14 @@ function ge_iperf_read_phy_register()
     sleep 1
     bandwidth1=$(cat ${HNS_TOP_DIR}/data/log/ge_iperf_read_phy_register.txt | tail -1 | awk '{print $(NF-1)}')
     echo $bandwidth1
-    if [ $bandwidth1 -eq 0 ];then
+    if [ x"${bandwidth1}" = x"0" ];then
         enableok=1
     fi
     echo "Check enableok "${enableok}
     sleep 10
     bandwidth2=$(cat ${HNS_TOP_DIR}/data/log/ge_iperf_read_phy_register.txt | tail -1 | awk '{print $(NF-1)}')
     echo $bandwidth2
-    if [ $bandwidth2 -gt 0 ];then
+    if [ x"${bandwidth2}" = x"0" ];then
         disableok=1
     fi
     echo "Check disableok "${disableok}
