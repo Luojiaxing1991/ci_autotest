@@ -1,27 +1,27 @@
-PV-1538	R.PERF.F001.A	PERF_FUNC_TEST_000	L3C	L3C perf stat function test	perf_stat_function_test.sh	l3c_perf_stat_function_test	off	
-PV-1538	R.PERF.F001.A	PERF_FUNC_TEST_005	MN	MN perf stat function test	perf_stat_function_test.sh	mn_perf_stat_function_test	off	
-PV-1538	R.PERF.F001.A	PERF_FUNC_TEST_010	DDRC	DDRC perf stat function test	perf_stat_function_test.sh	ddrc_perf_stat_function_test	off	
-PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_015	L3C	L3C perf list function test	perf_list_function_test.sh	l3c_perf_list_function_test	off	
-PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_020	MN	MN perf list function test	perf_list_function_test.sh	mn_perf_list_function_test	off	
-PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_015	DDRC	DDRC perf list function test	perf_list_function_test.sh	ddrc_perf_list_function_test	off	
-PV-1548	R.PERF.F003.A	PERF_FUNC_TEST_020	L3C	L3C perf read function test	perf_read_function_test.sh	l3c_perf_read_function_test	off	
-PV-1547	R.PERF.F004.A	PERF_FUNC_TEST_025	MN	MN perf read function test	perf_read_function_test.sh	mn_perf_read_function_test	off	
-PV-1541	R.PERF.F005.A	PERF_FUNC_TEST_030	DDRC	DDRC perf read function test	perf_read_function_test.sh	ddrc_perf_read_function_test	off	
+PV-1538	R.PERF.F001.A	PERF_FUNC_TEST_000	L3C	L3C perf stat function test	perf_stat_function_test.sh	l3c_perf_stat_function_test	on	
+PV-1538	R.PERF.F001.A	PERF_FUNC_TEST_005	MN	MN perf stat function test	perf_stat_function_test.sh	mn_perf_stat_function_test	on	
+PV-1538	R.PERF.F001.A	PERF_FUNC_TEST_010	DDRC	DDRC perf stat function test	perf_stat_function_test.sh	ddrc_perf_stat_function_test	on	
+PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_015	L3C	L3C perf list function test	perf_list_function_test.sh	l3c_perf_list_function_test	on	
+PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_020	MN	MN perf list function test	perf_list_function_test.sh	mn_perf_list_function_test	on	
+PV-1549	R.PERF.F002.A	PERF_FUNC_TEST_015	DDRC	DDRC perf list function test	perf_list_function_test.sh	ddrc_perf_list_function_test	on	
+PV-1548	R.PERF.F003.A	PERF_FUNC_TEST_020	L3C	L3C perf read function test	perf_read_function_test.sh	l3c_perf_read_function_test	on	
+PV-1547	R.PERF.F004.A	PERF_FUNC_TEST_025	MN	MN perf read function test	perf_read_function_test.sh	mn_perf_read_function_test	on	
+PV-1541	R.PERF.F005.A	PERF_FUNC_TEST_030	DDRC	DDRC perf read function test	perf_read_function_test.sh	ddrc_perf_read_function_test	on	
 PV-1786	R.PERF.F006.A	PERF_FUNC_TEST_035	L3C	L3C perf write function test	perf_write_function_test.sh	l3c_perf_write_function_test	on	
 PV-1787	R.PERF.F007.A	PERF_FUNC_TEST_040	MN	MN perf write function test	perf_write_function_test.sh	mn_perf_write_function_test	on	
 PV-1539	R.PERF.F008.A	PERF_FUNC_TEST_045	DDRC	DDRC perf write function test	perf_write_function_test.sh	ddrc_perf_write_function_test	on	
 PV-1546	R.PERF.F009.A	PERF_FUNC_TEST_050	L3C	L3C perf event configure function test	perf_configure_function_test.sh	l3c_perf_configure_function_test	on	
 PV-1545	R.PERF.F010.A	PERF_FUNC_TEST_055	MN	MN perf event configure function test	perf_configure_function_test.sh	mn_perf_configure_function_test	on	
 PV-1544	R.PERF.F011.A	PERF_FUNC_TEST_060	DDRC	DDRC perf event configure function test	perf_configure_function_test.sh	ddrc_perf_configure_function_test	on	
-PV-1543	R.PERF.F012.A	PERF_FUNC_TEST_065	L3C	L3C perf disable/enable function test	perf_enable_function_test.sh	l3c_perf_enable_function_test	off	
-PV-1788	R.PERF.F013.A	PERF_FUNC_TEST_070	MN	MN perf disable/enable function test	perf_enable_function_test.sh	mn_perf_enable_function_test	off		
-PV-1542	R.PERF.F014.A	PERF_FUNC_TEST_075	L3C	L3C perf irq function test	perf_irq_function_test.sh	l3c_perf_irq_function_test	off	
-PV-1533	R.PERF.F015.A	PERF_FUNC_TEST_080	MN	MN perf irq function test	perf_irq_function_test.sh	mn_perf_irq_function_test	off
-PV-1534	R.PERF.F016.A	PERF_FUNC_TEST_085	DDRC	DDRC perf irq function test	perf_irq_function_test.sh	ddrc_perf_irq_function_test	off
-PV-1532	R.PERF.F017.A	PERF_FUNC_TEST_090	L3C	L3C perf 2P support function test	perf_2P_support_function_test.sh	l3c_perf_2P_support_function_test	off	
-PV-1532	R.PERF.F017.A	PERF_FUNC_TEST_095	MN	MN perf 2P support function test	perf_2P_support_function_test.sh	mn_perf_2P_support_function_test	off	
-PV-1532	R.PERF.F017.A	PERF_FUNC_TEST_100	DDRC	DDRC perf 2P support function test	perf_2P_support_function_test.sh	ddrc_perf_2P_support_function_test	off	
-PV-1531	R.PERF.F022.A	PERF_FUNC_TEST_130	L3C	L3C perf ACPI test	perf_acpi_support.sh	l3c_perf_acpi_test	off	
-PV-1531	R.PERF.F022.A	PERF_FUNC_TEST_135	MN	MN perf ACPI test	perf_acpi_support.sh	mn_perf_acpi_test	off	
-PV-1531	R.PERF.F022.A	PERF_FUNC_TEST_140	DDRC	DDRC perf ACPI test	perf_acpi_support.sh	ddrc_perf_acpi_test	off	
+PV-1543	R.PERF.F012.A	PERF_FUNC_TEST_065	L3C	L3C perf disable/enable function test	perf_enable_function_test.sh	l3c_perf_enable_function_test	on	
+PV-1788	R.PERF.F013.A	PERF_FUNC_TEST_070	MN	MN perf disable/enable function test	perf_enable_function_test.sh	mn_perf_enable_function_test	on		
+PV-1542	R.PERF.F014.A	PERF_FUNC_TEST_075	L3C	L3C perf irq function test	perf_irq_function_test.sh	l3c_perf_irq_function_test	on	
+PV-1533	R.PERF.F015.A	PERF_FUNC_TEST_080	MN	MN perf irq function test	perf_irq_function_test.sh	mn_perf_irq_function_test	on
+PV-1534	R.PERF.F016.A	PERF_FUNC_TEST_085	DDRC	DDRC perf irq function test	perf_irq_function_test.sh	ddrc_perf_irq_function_test	on
+PV-1532	R.PERF.F017.A	PERF_FUNC_TEST_090	L3C	L3C perf 2P support function test	perf_2P_support_function_test.sh	l3c_perf_2P_support_function_test	on	
+PV-1532	R.PERF.F017.A	PERF_FUNC_TEST_095	MN	MN perf 2P support function test	perf_2P_support_function_test.sh	mn_perf_2P_support_function_test	on	
+PV-1532	R.PERF.F017.A	PERF_FUNC_TEST_100	DDRC	DDRC perf 2P support function test	perf_2P_support_function_test.sh	ddrc_perf_2P_support_function_test	on	
+PV-1531	R.PERF.F022.A	PERF_FUNC_TEST_130	L3C	L3C perf ACPI test	perf_acpi_support.sh	l3c_perf_acpi_test	on	
+PV-1531	R.PERF.F022.A	PERF_FUNC_TEST_135	MN	MN perf ACPI test	perf_acpi_support.sh	mn_perf_acpi_test	on	
+PV-1531	R.PERF.F022.A	PERF_FUNC_TEST_140	DDRC	DDRC perf ACPI test	perf_acpi_support.sh	ddrc_perf_acpi_test	on	
 PV-1584	R.PERF.F023.A	PERF_FUNC_TEST_145	HHA(only for d06)	Support HHA PMU events	hha_perf_acpi_support.sh	hha_perf_acpi_test	off	
