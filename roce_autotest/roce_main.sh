@@ -59,6 +59,17 @@ function main()
 	done
 }
 
+#roce test is only excute in 159 dash board
+#Find the local MAC
+tmpMAC=`ifconfig eth0 | grep "HWaddr" | awk '{print $NF}'`
+if [ x"${tmpMAC}" = x"${BOARD_159_MAC_ADDR}" ]
+then
+	echo "ROCE test can be excute in this board!"
+else
+	echo "ROCE test can not be excute in this board,exit!"
+	exit 0
+fi
+
 #Get Local IP
 initLocalIP 
 LOCAL_IP=${COMMON_LOCAL_IP}
