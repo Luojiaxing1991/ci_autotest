@@ -70,7 +70,7 @@ function get_all_disk_part()
     for name in ${dev_info}
     do
         assert=`echo ${mout_info} | grep ${name}`
-        if [ x"${assert}" == x"" && x"name" != x"/dev/sda1" ]
+        if [ x"${assert}" == x"" ] && [ x"name" != x"/dev/sda1" ]
         then
             ALL_DISK_PART_NAME[${#ALL_DISK_PART_NAME[*]}]=$name
             echo "Select disk: "${name}
