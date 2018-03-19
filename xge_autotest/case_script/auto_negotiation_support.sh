@@ -33,7 +33,7 @@ function ge_restarts_auto_negotiation()
         ethtool -r ${local_tp1}
         sleep 5
         ifconfig ${local_tp1} up
-        sleep 2
+        sleep 5
         ping ${remote_tp1_ip} -c 5 > ${HNS_TOP_DIR}/data/log/ge_restarts_auto_negotiation.txt &
         sleep 10
         cat ${HNS_TOP_DIR}/data/log/ge_restarts_auto_negotiation.txt | grep "received, 0% packet loss" >/dev/null
@@ -115,7 +115,7 @@ function xge_restarts_auto_negotiation()
         ethtool -r ${local_fibre1}
         sleep 5
         ifconfig ${local_fibre1} up
-        sleep 2
+        sleep 5
         ping ${remote_fibre1_ip} -c 5 > ${HNS_TOP_DIR}/data/log/xge_restarts_auto_negotiation.txt &
         sleep 10
         cat ${HNS_TOP_DIR}/data/log/xge_restarts_auto_negotiation.txt | grep "received, 0% packet loss" >/dev/null

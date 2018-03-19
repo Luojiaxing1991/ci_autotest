@@ -32,7 +32,6 @@ function ecc_injection_process()
     ${DEVMEM} ${INJECT_REG_ADDR_VALUE} w ${ECC_BIT_REG_INJECT_VALUE}
     ${SAS_TOP_DIR}/../${COMMON_TOOL_PATH}/fio fio.conf &
     sleep 10
-
     ${DEVMEM} ${INJECT_REG_ADDR_VALUE} w 0x0
     mid_bit_count=`dmesg | grep ${ECC_INFO_KEY_QUERIES} | wc -l`
 
