@@ -1,0 +1,12 @@
+------------------------------------------------------------
+Client connecting to 192.168.1.20, TCP port 5001
+TCP window size: 85.0 KByte (default)
+------------------------------------------------------------
+[  4] local 192.168.1.10 port 56382 connected with 192.168.1.20 port 5001
+[  3] local 192.168.1.10 port 56380 connected with 192.168.1.20 port 5001
+[  5] local 192.168.1.10 port 56384 connected with 192.168.1.20 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0- 0.0 sec   128 KBytes  1.08 Gbits/sec
+[  3]  0.0- 0.0 sec   128 KBytes  1.96 Gbits/sec
+[  5]  0.0- 0.0 sec   128 KBytes  1.25 Gbits/sec
+[SUM]  0.0- 0.0 sec   384 KBytes  3.24 Gbits/sec

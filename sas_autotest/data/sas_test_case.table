@@ -1,6 +1,6 @@
-PV-1587	R.SAS.F001.A	ST.FUNC.001	The driver must support SSP	SAS盘，直连，混合命令测试	driver_must_support.sh	driver_supports	off	
-PV-1588	R.SAS.F002.A	ST.FUNC.002	The driver must support SMP	SAS盘，expander，混合命令测试	driver_must_support.sh	driver_supports	off	
-PV-1589	R.SAS.F003.A	ST.FUNC.003	The driver must support STP	SATA盘，expander，混合命令测试	driver_must_support.sh	driver_supports	off	
+PV-1587	R.SAS.F001.A	ST.FUNC.001	The driver must support SSP	SAS盘，直连，混合命令测试	driver_must_support.sh	driver_supports	on	
+PV-1588	R.SAS.F002.A	ST.FUNC.002	The driver must support SMP	SAS盘，expander，混合命令测试	driver_must_support.sh	driver_supports	on	
+PV-1589	R.SAS.F003.A	ST.FUNC.003	The driver must support STP	SATA盘，expander，混合命令测试	driver_must_support.sh	driver_supports	on	
 PV-1945	R.SAS.F004.A	ST.FUNC.004	Support Max Devices	SAS盘，SATA盘，expander，满载符合测试	support_max_devices.sh	support_max_devices	off	
 PV-1604	R.SAS.F007.A	ST.FUNC.005	Support 12Gbit/s physical data rate	SAS盘，直连，速率协商测试(1.5Gbit/s, 3Gbit/s, 6Gbit/s, 12Gbits)	physical_data_rate.sh	disk_negotiated_link_rate_query	off	
 PV-1597	R.SAS.F006.A	ST.FUNC.006	6Gbit/s physical data rate	SATA盘，直连，速率协商测试(1.5Gbit/s, 3Gbit/s, 6Gbit/s)	physical_data_rate.sh	disk_negotiated_link_rate_query	off	

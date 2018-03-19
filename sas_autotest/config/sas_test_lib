@@ -70,10 +70,48 @@ function get_all_disk_part()
     for name in ${dev_info}
     do
         assert=`echo ${mout_info} | grep ${name}`
-        if [ x"${assert}" == x"" ] && [ x"name" != x"/dev/sda1" ]
+        if [ x"${assert}" == x"" ]
         then
-            ALL_DISK_PART_NAME[${#ALL_DISK_PART_NAME[*]}]=$name
-            echo "Select disk: "${name}
+	    #***Check the size of disk is fix the need of fio test or not***
+
+            #get disk size infomation
+            disk_size=`fdisk -l | grep ${name} | awk '{print $5}'`
+            echo "The current disk: ${name}'s size is ${disk_size}"
+
+  	    #Get the unit of size
+            disk_unit=`echo ${disk_size:0-1:1}`
+            echo "The unit of disk size is ${disk_unit}"
+
+            case ${disk_unit} in
+                M)
+			cal=1
+			;;
+		G)
+			cal=1024
+			;;
+		T)	
+			cal=1048576
+			;;
+		*)
+			cal=0
+            esac
+
+            #turn the size into common unit of M
+            tmp=`echo ${disk_size:0:NF-1}`
+            result=`echo "scale=3; $tmp * $cal" | bc`
+            
+            echo "The size of disk is $result M"
+
+            #compare the size of disk between fio config
+            tmp=`awk -v a=1000 -v b=$result 'BEGIN{print(a>b)?"1":"0"}'`
+            echo $tmp 
+            if [ x"${tmp}" = x"0" ]
+	    then
+            	ALL_DISK_PART_NAME[${#ALL_DISK_PART_NAME[*]}]=$name
+            	echo "Select disk: "${name}
+	    else
+		echo "Skip the disk: "${name}
+	    fi
         fi
         assert=""
     done
