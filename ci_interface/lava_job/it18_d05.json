@@ -33,7 +33,7 @@
             "parameters": {
                 "testdef_repos": [
                     {
-                        "git-repo": "https://github.com/Luojiaxing1991/ci_job.git",
+                        "git-repo": "https://github.com/Luojiaxing1991/ci_autotest.git",
 			"parameters":{
 			     "Maintainer": "Luojiaxing"
 			},
@@ -49,7 +49,7 @@
             "parameters": {
                 "testdef_repos": [
                     {
-                        "git-repo": "https://github.com/Luojiaxing1991/ci_job.git",
+                        "git-repo": "https://github.com/Luojiaxing1991/ci_autotest.git",
 			"parameters":{
 			     "Maintainer": "Luojiaxing"
 			},
@@ -64,7 +64,7 @@
             "parameters": {
                 "testdef_repos": [
                     {
-                        "git-repo": "https://github.com/Luojiaxing1991/ci_job.git",
+                        "git-repo": "https://github.com/Luojiaxing1991/ci_autotest.git",
 			"parameters":{
 			     "Maintainer": "Luojiaxing"
 			},
@@ -83,7 +83,7 @@
         }
     ],
     "device_type": "hip07-d05",
-    "job_name": "PERF Test",
+    "job_name": "It18 Test",
     "logging_level": "DEBUG",
     "priority": "high",
     "timeout": 172800
