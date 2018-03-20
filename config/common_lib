@@ -253,7 +253,49 @@ function rebootBoard()
   efibootmgr -v
 
   #***Then, we reboot the board
-  reboot
+  
+}
+
+function recoverBootOrder()
+{
+ #***First, we should change the boot order to make TEST_REBOOT lie on first order***
+
+  #get the first order id of boot order list
+  First_ID=`efibootmgr -v | grep "BootOrder" | awk '{print $2}' | awk -F',' '{print $1}'`
+
+  #get the id of TEST_REBOOT
+  tmp=`efibootmgr -v | grep "EFI Network 2" | awk '{print $1}'`
+  tmp=${tmp:4:4}
+  echo $tmp
+
+  #insert the order of TEST_REBOOT into first order
+  efibootmgr -o $tmp,$First_ID
+
+  efibootmgr -v
+
+
+}
+
+function remoteLogin()
+{
+   #First,reboot
+   #ssh root@192.168.3.197 "reboot"
+   expect -c '
+        	set timeout -1
+        	spawn ssh root@192.168.3.197  "reboot"
+		
+        	sleep 120
+        	expect "login:"
+        	set timeout 120
+        	send "root\r"
+        	expect -re "Password"
+        	set timeout 60
+        	send "root\r"
+        	expect eof
+        	exit 0
+    		' 
+   ssh root@192.168.3.197 "pwd"
+   echo "Success login in the system"
 }
 
 ####
