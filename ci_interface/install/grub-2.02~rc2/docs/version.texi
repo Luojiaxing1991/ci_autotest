@@ -1,4 +1,0 @@
-@set UPDATED 11 February 2017
-@set UPDATED-MONTH February 2017
-@set EDITION 2.02~rc2
-@set VERSION 2.02~rc2
