@@ -231,6 +231,34 @@ function getIPofClientServer
         rm res.log
 }
 
+## Reboot using new Image
+# IN : N/A
+# OUT: N/A
+function rebootBoard()
+{
+
+  #***First, we should change the boot order to make TEST_REBOOT lie on first order***
+
+  #get the first order id of boot order list
+  First_ID=`efibootmgr -v | grep "BootOrder" | awk '{print $2}' | awk -F',' '{print $1}'`
+
+  #get the id of TEST_REBOOT
+  tmp=`efibootmgr -v | grep "TEST_REBOOT" | awk '{print $1}'`
+  tmp=${tmp:4:4}
+  echo $tmp
+
+  #insert the order of TEST_REBOOT into first order
+  efibootmgr -o $tmp,$First_ID
+
+  efibootmgr -v
+
+  #***Then, we reboot the board
+  reboot
+}
+
+####
+#End of luojiaxing edit
+####
 
 
 
