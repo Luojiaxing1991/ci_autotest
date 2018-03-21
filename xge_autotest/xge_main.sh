@@ -110,7 +110,7 @@ init_net_export
 perf_init
 
 rebootBoard
-recoverBootOrder
+#recoverBootOrder
 #remoteLogin
 #main
 
