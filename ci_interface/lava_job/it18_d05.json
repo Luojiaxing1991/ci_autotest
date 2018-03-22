@@ -37,20 +37,39 @@
 			"parameters":{
 			     "Maintainer": "Luojiaxing"
 			},
-			"testdef": "xge_autotest/xge_autotest.yaml"
+			"testdef": "pre_autotest/pre_autotest.yaml"
                     }
                 ],
                 "timeout": 172800
             }
         },
+
         {
             "command": "boot_linaro_image",
             "parameters": {
                 "options": [
-                    "boot_cmds=expect 'Move Highlight',sendcontrol '[',sendline '[B',sendcontrol '[',sendline '[B',sendcontrol 'M',sendcontrol M,expect grub>,sendline 'set root=(tftp,192.168.3.100)',expect grub>,sendline 'linux /plinth/hip07-d05_159/.Image rdinit=/init console=ttyAMA0,115200 earlycon=sdsa-uart,mmio,0x602b0000 root=/dev/sda2 rootfstype=ext4 rw ip=:::::eth0:dhcp acpi=force pcie_aspm=off',expect grub>,sendline boot,expect 'login',sendline root,expect 'Password',sendline 'root'"
+                    "boot_cmds=boot_cmds_disc_slefreboot"
                 ]
             }
         },
+
+         {
+            "command": "lava_test_shell",
+            "parameters": {
+                "testdef_repos": [
+                    {
+                        "git-repo": "https://github.com/Luojiaxing1991/ci_autotest.git",
+			"parameters":{
+			     "Maintainer": "Luojiaxing"
+			},
+			"testdef": "end_autotest/end_autotest.yaml"
+                    }
+                ],
+                "timeout": 172800
+            }
+        },
+
+      
         {
             "command": "submit_results",
             "parameters": {

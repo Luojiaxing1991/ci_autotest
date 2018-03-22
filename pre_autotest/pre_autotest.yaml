@@ -1,0 +1,19 @@
+metadata:
+  description: nothing to say
+  devices:
+  - rtsm_fvp_base-aemv8a
+  environment:
+  - lava-test-shell
+  format: Lava-Test-Shell Test Definition 1.0
+  maintainer:
+  - luojiaxing@huawei.com
+  name: pre_autotest
+  os:
+  - ubuntu
+  scope:
+  - functional
+parse:
+  pattern: '(?P<test_case_id>[ /a-zA-Z0-9]+): (?P<result>[A-Z]+)'
+run:
+  steps:
+  - bash ./pre_autotest/pre_main.sh
