@@ -21,7 +21,18 @@ echo "The name of kernel repo is "$tmp
 
 cd ${PRE_TOP_DIR}/../../${tmp}
 
-git branch | grep ${}
+git branch | grep ${BRANCH_NAME}
+
+if [ $? -eq 0 ];then
+	#The same name of branch is exit
+	git checkout -b tmp_luo origin/${BRANCH_NAME}
+	git branch -D ${BRANCH_NAME}
+fi
+
+git checkout -b ${BRANCH_NAME} origin/${BRANCH_NAME}
+git branch -D tmp_luo
+
+bash build.sh
 
 #modify the boot order to Self disk reboot
 #modifyBootOrder
