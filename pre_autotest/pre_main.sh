@@ -12,6 +12,17 @@ PRE_TOP_DIR=$(cd "`dirname $0`" ; pwd)
 
 
 
+#****Clone the repo of kernel and build it
+#cd ${PRE_TOP_DIR}
+
+#cd into the repo
+tmp=`echo ${KERNEL_GITADDR} | awk -F'.' '{print $2}' | awk -F'/' '{print $NF}'`
+echo "The name of kernel repo is "$tmp
+
+cd ${PRE_TOP_DIR}/../../${tmp}
+
+git branch | grep ${}
+
 #modify the boot order to Self disk reboot
 #modifyBootOrder
 

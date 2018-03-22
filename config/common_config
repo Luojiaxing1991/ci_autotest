@@ -125,5 +125,9 @@ COMMON_CLIENT_IP="0.0.0.0"
 #Default DHCP server ip. 
 #prepare for DHCP ip no found
 COMMON_DEFAULT_DHCP_IP="192.168.3.100"
+
+#The repo address of kernel
+KERNEL_GITADDR="https://github.com/hisilicon/kernel-dev.git"
+BRANCH_NAME="release-plinth-4.16.1"
 ####################################################################################
 
