@@ -88,6 +88,7 @@ if [ $envok -eq 0 ];then
 	rm ${PRE_TOP_DIR}/ok.log
 else
 	echo "Test env contruction is success!"
+	lava-report "CI plinth Test prepare: Success" pass
 fi
 
 

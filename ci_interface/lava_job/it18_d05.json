@@ -29,10 +29,25 @@
         },
 
         {
+            "command": "lava_test_shell",
+            "parameters": {
+                "testdef_repos": [
+                    {
+                        "git-repo": "https://github.com/Luojiaxing1991/ci_autotest.git",
+			"parameters":{
+			     "Maintainer": "Luojiaxing"
+			},
+			"testdef": "pre_autotest/pre_autotest.yaml"
+                    }
+                ],
+                "timeout": 172800
+            }
+        },
+        {
             "command": "boot_linaro_image",
             "parameters": {
                 "options": [
-                    "boot_cmds=boot_cmds_disc_slefreboot"
+                    "boot_cmds=boot_cmds_disc_selfreboot"
                 ]
             }
         },
@@ -46,7 +61,7 @@
 			"parameters":{
 			     "Maintainer": "Luojiaxing"
 			},
-			"testdef": "roce_autotest/roce_autotest.yaml"
+			"testdef": "end_autotest/end_autotest.yaml"
                     }
                 ],
                 "timeout": 172800
