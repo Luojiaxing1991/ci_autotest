@@ -59,6 +59,11 @@ function main()
 	done
 }
 
+#
+insmod /home/kernel/output/hns-roce.ko
+insmod /home/kernel/output/hns-roce-hw-v1.ko
+
+
 #roce test is only excute in 159 dash board
 #Find the local MAC
 tmpMAC=`ifconfig eth0 | grep "HWaddr" | awk '{print $NF}'`

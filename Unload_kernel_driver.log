@@ -1,0 +1,3 @@
+Module                  Size  Used by
+hns_roce_hw_v1         53248  0
+hns_roce               86016  2 hns_roce_hw_v1

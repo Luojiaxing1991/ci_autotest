@@ -1,0 +1,12 @@
+[page_0][hi1610_roce_utest_dispatch_cmd : 720]hi1610_utest task 105 start
+[page_0][hi1610_roce_utest_dispatch_cmd_3 : 148]ROCE_TEST CONNECT start!
+[page_0][hi1610_roce_utest_server_connect : 1312]Server test:connect
+[page_0][ctx_init : 300]Alloc recv buff[0].Length(128),addr(0xaa84000),pd(0xaa80f80),flags(7)
+[page_0][ctx_init : 300]Alloc recv buff[1].Length(128),addr(0xaa85000),pd(0xaa80f80),flags(7)
+[page_0][ctx_init : 394]Create QP failed1!
+[page_0][socket_server_connect : 933]Ctxt init failed!
+[page_0][hi1610_roce_utest_dispatch_cmd_3 : 226]ERROR: CONNECT failed
+[page_0][hi1610_roce_utest_dispatch_cmd : 765]hi1610_utest task release start
+[page_0][hi1610_roce_utest_dispatch_cmd : 794]hi1610_utest remote_mr_table release  finish
+[page_0][hi1610_roce_utest_dispatch_cmd : 804]hi1610_utest mr_table release finish
+[page_0][hi1610_roce_utest_dispatch_cmd : 819]hi1610_utest connect release finish

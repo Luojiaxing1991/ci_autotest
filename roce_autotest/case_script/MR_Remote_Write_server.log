@@ -1,0 +1,6 @@
+start_id=22, end_id=22 
+---------test_case_022: mr-write start--------
+test file name: test/server_socket2_79
+test case 22 failed 
+test 0(write) res is -58 
+clean test case success!

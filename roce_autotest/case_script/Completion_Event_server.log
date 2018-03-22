@@ -1,0 +1,6 @@
+start_id=26, end_id=26 
+---------test_case_026: notify start--------
+test file name: test/server_socket2_test_notify
+test case 26 failed 
+test 0(test_notify) res is -58 
+clean test case success!

@@ -1,0 +1,6 @@
+start_id=3, end_id=3 
+---------test_case_003: send2 start--------
+test file name: test/server_socket2_50
+test case 3 failed 
+test 0(send) res is -58 
+clean test case success!

@@ -1,0 +1,6 @@
+start_id=11, end_id=11 
+---------test_case_011: connect start--------
+test file name: test/server_socket2_58
+test case 11 failed 
+test 0(connect) res is -58 
+clean test case success!

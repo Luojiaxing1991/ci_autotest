@@ -36,7 +36,7 @@ PV-289	R.ROCE.F001.A	ST-ROCE-1	RDMA operations in user space	RDMA²Ù×÷ÀàĞÍ»ìºÏËæ»
 #N/A		ST-ROCE-36		clientÉèÖÃ·´Ñ¹£¬server¶Ë·¢ËÍ2¸ömsg£¬µÚÈı¸ömsg²úÉúsq_sge£¨key£©´íÎó£¬¼ì²éserver¶Ë²úÉúµÄcqe.	codecase.sh	codecase35	on	
 #N/A		ST-ROCE-37		server¶Ë·¢ËÍ1¸ömsg£¬3¸öwr£¬2¸öwrÕı³££¬µÚ3¸öwr²úÉúsq_sge£¨key£©´íÎó£¬¼ì²éserver¶Ë²úÉúµÄcqe.	codecase.sh	codecase36	on	
 #N/A		ST-ROCE-38		S/C¶Ë·Ö±ğ´´½¨2¸öQP£¬S¶Ë´«µİrecv_wr£¬C¶ËÎª´«µİsend_wr£¬Á½´Î´«µİµÄÊı¾İ°ü³¤²»Í¬	codecase.sh	codecase37	off	
-PV-288	R.ROCE.F008.A	ST-ROCE-43	Verify establish connection through RDMA CM	Ê¹ÓÃRDMA CM·½Ê½½¨Á¢Á¬½Ó	CM_connect.sh	CM_connect	on	
+PV-288	R.ROCE.F008.A	ST-ROCE-43	Verify establish connection through RDMA CM	Ê¹ÓÃRDMA CM·½Ê½½¨Á¢Á¬½Ó	CM_connect.sh	CM_connect	off	
 #N/A		ST-ROCE-44		Ê¹ÓÃsocket·½Ê½½¨Á¢Á¬½Ó	SupportCQ.sh	One_CQ_One_QP	on	
 PV-335	R.ROCE.F003.A	ST-ROCE-47	Support of Send operation	Ö§³ÖÏòSQÌá½»²Ù×÷ÀàĞÍÎªsendµÄWR£¬WRÌá½»Ó²¼ş·¢ËÍµÄÊı¾İ³¤¶È=MTU£¨×¢£º²âÊÔsend only±¨ÎÄ£©	RoceSend.sh	RoceSend_MTU	on	
 PV-335	R.ROCE.F003.A	ST-ROCE-48		Ö§³ÖÏòSQÌá½»²Ù×÷ÀàĞÍÎªsendµÄWR£¬WRÌá½»Ó²¼ş·¢ËÍµÄÊı¾İ³¤¶È´óÓÚMTUĞ¡ÓÚ2MTU£¨×¢£º²âÊÔsend first+last±¨ÎÄ£©	RoceSend.sh	RoceSend_Gt_MTU	on	
@@ -69,8 +69,8 @@ PV-963	R.ROCE.F013.A	ST-ROCE-81	Verify basic RoCE feature	Get GID information	co
 PV-352	R.ROCE.F024.A	ST-ROCE-82	Verify Completion Event	 Request completion notification on a CQ and get CQ completion event.	Completion_Event.sh	Completion_Event	on	
 PV-1827	R.ROCE.N004.B	ST-ROCE-84	Support RoCEv1 in hi161x	Verify RoCEv1 in hi161x	codecase.sh	codecase	off	
 PV-366	R.ROCE.N006.B	ST-ROCE-85	Verify rocee is Linux platform device	Check platform device	platformdev.sh	platformdev	on	
-#N/A		ST-ROCE-87	Verify load/remove the RoCE kernel driver	Load the RoCE kernel driver	Load_Unload_kernel_driver.sh	 Load_kernel_driver	on	
-#N/A		ST-ROCE-88		Unload the RoCE kernel driver	Load_Unload_kernel_driver.sh	Unload_kernel_driver	on	
+#N/A		ST-ROCE-87	Verify load/remove the RoCE kernel driver	Load the RoCE kernel driver	Load_Unload_kernel_driver.sh	 Load_kernel_driver	off	
+#N/A		ST-ROCE-88		Unload the RoCE kernel driver	Load_Unload_kernel_driver.sh	Unload_kernel_driver	off	
 PV-1482	R.ROCE.F030.A	ST-ROCE-89	Verify RoCEE's basic function on XGE port	send on XGE port	SupportXGE.sh	Send_On_XGE	on	
 PV-1482	R.ROCE.F030.A	ST-ROCE-90		RDMA read on XGE port	SupportXGE.sh	Read_On_XGE	on	
 PV-1482	R.ROCE.F030.A	ST-ROCE-91		RDMA write on XGE port	SupportXGE.sh	Write_On_XGE	on	

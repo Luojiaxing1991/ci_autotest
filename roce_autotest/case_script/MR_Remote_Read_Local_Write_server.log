@@ -1,0 +1,6 @@
+start_id=23, end_id=23 
+---------test_case_023: mr-read start--------
+test file name: test/server_socket2_80
+test case 23 failed 
+test 0(read) res is -58 
+clean test case success!

@@ -1,0 +1,6 @@
+start_id=7, end_id=7 
+---------test_case_007: rdma_read3 start--------
+test file name: test/server_socket2_54
+test case 7 failed 
+test 0(read) res is -58 
+clean test case success!
