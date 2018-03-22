@@ -50,7 +50,7 @@ function main()
     done
     echo "Finish to Run SAS Test"
 }
-rebootBoard
+#rebootBoard
 
 #Output log file header
 writeLogHeader
