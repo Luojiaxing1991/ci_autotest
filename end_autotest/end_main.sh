@@ -7,7 +7,7 @@ END_TOP_DIR=$(cd "`dirname $0`" ; pwd)
 . ${END_TOP_DIR}/../config/common_lib
 
 #Recover the Boot order for CI
-recoverBootOrder
+#recoverBootOrder
 
 exit 0
 
