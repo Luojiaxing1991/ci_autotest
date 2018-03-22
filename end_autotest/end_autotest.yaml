@@ -14,11 +14,6 @@ metadata:
   - functional
 parse:
   pattern: '(?P<test_case_id>[ /a-zA-Z0-9]+): (?P<result>[A-Z]+)'
-install:
-  deps:
-  - python
-  - python-pexpect
 run:
   steps:
-  - bash ./xge_autotest/xge_main.sh
-  - python ./ci_interface/ 
+  - bash ./end_autotest/end_main.sh

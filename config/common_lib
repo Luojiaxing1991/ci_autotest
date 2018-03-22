@@ -250,7 +250,7 @@ function modifyBootOrder()
   #insert the order of TEST_REBOOT into first order
   efibootmgr -o $tmp,$First_ID
 
-  efibootmgr -v
+ # efibootmgr
   
 }
 
@@ -269,7 +269,7 @@ function recoverBootOrder()
   #insert the order of TEST_REBOOT into first order
   efibootmgr -o $tmp,$First_ID
 
-  efibootmgr -v
+  #efibootmgr
 
 }
 

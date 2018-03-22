@@ -13,7 +13,7 @@ PRE_TOP_DIR=$(cd "`dirname $0`" ; pwd)
 
 
 #modify the boot order to Self disk reboot
-modifyBootOrder
+#modifyBootOrder
 
 exit 0
 
