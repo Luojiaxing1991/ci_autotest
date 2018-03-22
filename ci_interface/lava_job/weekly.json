@@ -1,0 +1,121 @@
+{
+    "actions": [
+        {
+            "command": "deploy_linaro_kernel",
+            "metadata": {
+                "boot.type": "ACPI",
+                "image.type": "kernel-ci",
+                "image.url": "http://localhost:8083/plinth/release-plinth-4.16.1+_+091a72e6f276815dea552f219940cdaccf2f25bc/arm64-defconfig+plinth-config/",
+                "kernel.defconfig": "arm64-defconfig+plinth-config",
+                "kernel.endian": "little",
+                "kernel.tree": "plinth",
+                "kernel.version": "release-plinth-4.16.1+_+091a72e6f276815dea552f219940cdaccf2f25bc",
+                "platform.fastboot": "false",
+                "test.plan": "luojiaxing-weekly-test"
+            },
+            "parameters": {
+                "bootloadertype": "ipxe",
+                "dtb": "http://localhost:8083/plinth/release-plinth-4.16.1+_+091a72e6f276815dea552f219940cdaccf2f25bc/arm64-defconfig+plinth-config/dtbs/hisilicon/hip07-d05.dtb",
+                "kernel": "http://localhost:8083/plinth/release-plinth-4.16.1+_+091a72e6f276815dea552f219940cdaccf2f25bc/arm64-defconfig+plinth-config/Image",
+                "target_type": "ubuntu"
+            }
+        },
+        {
+            "command": "boot_linaro_image",
+            "parameters": {
+                "options": [
+                    "boot_cmds=boot_cmds_disc_acpi"
+                ]
+            }
+        },
+
+
+        {
+            "command": "lava_test_shell",
+            "parameters": {
+                "testdef_repos": [
+                    {
+                        "git-repo": "https://github.com/Luojiaxing1991/ci_job.git",
+                        "parameters": {
+                            "Maintainer": "Luojiaxing"
+                        },
+                        "testdef": "sas_autotest/sas_autotest.yaml"
+                    }
+                ],
+                "timeout": 172800
+            }
+        },
+        {
+            "command": "lava_test_shell",
+            "parameters": {
+                "testdef_repos": [
+                    {
+                        "git-repo": "https://github.com/Luojiaxing1991/ci_job.git",
+                        "parameters": {
+                            "Maintainer": "Luojiaxing"
+                        },
+                        "testdef": "xge_autotest/xge_autotest.yaml"
+                    }
+                ],
+                "timeout": 172800
+            }
+        },
+        {
+            "command": "lava_test_shell",
+            "parameters": {
+                "testdef_repos": [
+                    {
+                        "git-repo": "https://github.com/Luojiaxing1991/ci_job.git",
+                        "parameters": {
+                            "Maintainer": "Luojiaxing"
+                        },
+                        "testdef": "pcie_autotest/pcie_autotest.yaml"
+                    }
+                ],
+                "timeout": 172800
+            }
+        },
+        {
+            "command": "lava_test_shell",
+            "parameters": {
+                "testdef_repos": [
+                    {
+                        "git-repo": "https://github.com/Luojiaxing1991/ci_job.git",
+                        "parameters": {
+                            "Maintainer": "Luojiaxing"
+                        },
+                        "testdef": "roce_autotest/roce_autotest.yaml"
+                    }
+                ],
+                "timeout": 172800
+            }
+        },
+        {
+            "command": "lava_test_shell",
+            "parameters": {
+                "testdef_repos": [
+                    {
+                        "git-repo": "https://github.com/Luojiaxing1991/ci_job.git",
+                        "parameters": {
+                            "Maintainer": "Luojiaxing"
+                        },
+                        "testdef": "perf_autotest/perf_autotest.yaml"
+                    }
+                ],
+                "timeout": 172800
+            }
+        },
+        {
+            "command": "submit_results",
+            "parameters": {
+                "server": "http://localhost:8089/RPC2/",
+                "stream": "/anonymous/plinth/"
+            }
+        }
+    ],
+    "device_type": "hip07-d05",
+    "job_name": "luo_plinth-release-plinth-4.16.1+_+hip07-d05-weekly-testing",
+    "logging_level": "DEBUG",
+    "priority": "high",
+    "timeout": 172800
+}
