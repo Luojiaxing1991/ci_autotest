@@ -1,0 +1,69 @@
+Using arch/arm64/configs/defconfig as base
+Merging arch/arm64/configs/plinth-config
+Value of CONFIG_BLK_DEV_NVME is redefined by fragment arch/arm64/configs/plinth-config:
+Previous value: CONFIG_BLK_DEV_NVME=m
+New value: CONFIG_BLK_DEV_NVME=y
+
+Value of CONFIG_IPV6 is redefined by fragment arch/arm64/configs/plinth-config:
+Previous value: CONFIG_IPV6=m
+New value: CONFIG_IPV6=y
+
+Value of CONFIG_MARVELL_PHY is redefined by fragment arch/arm64/configs/plinth-config:
+Previous value: CONFIG_MARVELL_PHY=m
+New value: CONFIG_MARVELL_PHY=y CONFIG_MARVELL_PHY=y
+
+Value of CONFIG_FTRACE is redefined by fragment arch/arm64/configs/plinth-config:
+Previous value: CONFIG_FTRACE=y
+New value: CONFIG_FTRACE=n
+
+Value of CONFIG_ARM_SMMU_V3 is redefined by fragment arch/arm64/configs/plinth-config:
+Previous value: CONFIG_ARM_SMMU_V3=y
+New value: CONFIG_ARM_SMMU_V3=n
+
+Value of CONFIG_CMA is redefined by fragment arch/arm64/configs/plinth-config:
+Previous value: CONFIG_CMA=y
+New value: CONFIG_CMA=n
+
+Value of CONFIG_SCSI_HISI_SAS_PCI is redefined by fragment arch/arm64/configs/plinth-config:
+Previous value: CONFIG_SCSI_HISI_SAS_PCI=y
+New value: CONFIG_SCSI_HISI_SAS_PCI=m
+
+Value of CONFIG_BRIDGE is redefined by fragment arch/arm64/configs/plinth-config:
+Previous value: CONFIG_BRIDGE=m
+New value: CONFIG_BRIDGE=y
+
+Value of CONFIG_BLK_DEV_NBD is redefined by fragment arch/arm64/configs/plinth-config:
+Previous value: CONFIG_BLK_DEV_NBD=m
+New value: CONFIG_BLK_DEV_NBD=y
+
+Value of CONFIG_MACVLAN is redefined by fragment arch/arm64/configs/plinth-config:
+Previous value: CONFIG_MACVLAN=m
+New value: CONFIG_MACVLAN=y
+
+Value of CONFIG_MACVTAP is redefined by fragment arch/arm64/configs/plinth-config:
+Previous value: CONFIG_MACVTAP=m
+New value: CONFIG_MACVTAP=y
+
+#
+# merged configuration written to .config (needs make)
+#
+scripts/kconfig/conf  --alldefconfig Kconfig
+#
+# configuration written to .config
+#
+scripts/kconfig/conf  --silentoldconfig Kconfig
+  CHK     include/config/kernel.release
+  CHK     include/generated/uapi/linux/version.h
+  CHK     scripts/mod/devicetable-offsets.h
+  CHK     include/generated/utsrelease.h
+  CHK     include/generated/bounds.h
+  CHK     include/generated/timeconst.h
+  CHK     include/generated/asm-offsets.h
+  CALL    scripts/checksyscalls.sh
+  CHK     include/generated/compile.h
+  GZIP    kernel/config_data.gz
+  CHK     kernel/config_data.h
+  Building modules, stage 2.
+  MODPOST 352 modules
+Building dtb ...
+  CHK     scripts/mod/devicetable-offsets.h
