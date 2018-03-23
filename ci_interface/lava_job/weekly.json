@@ -35,11 +35,11 @@
             "parameters": {
                 "testdef_repos": [
                     {
-                        "git-repo": "https://github.com/Luojiaxing1991/ci_job.git",
+                        "git-repo": "https://github.com/Luojiaxing1991/ci_autotest.git",
                         "parameters": {
                             "Maintainer": "Luojiaxing"
                         },
-                        "testdef": "sas_autotest/sas_autotest.yaml"
+                        "testdef": "roce_autotest/roce_autotest.yaml"
                     }
                 ],
                 "timeout": 172800
