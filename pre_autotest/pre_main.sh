@@ -72,6 +72,7 @@ fi
 
 mount /dev/sda1 /home/kernel/a1
 cp -f arch/arm64/boot/Image /home/kernel/a1
+cp -rf ${PRE_TOP_DIR}/../ci_interface/install/a1/* /home/kernel/a1
 
 if [ -f "/home/kernel/a1/Image" ];then
 	echo "Finish copy the Image to output dir!"
