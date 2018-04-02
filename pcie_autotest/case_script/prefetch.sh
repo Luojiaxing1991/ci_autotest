@@ -22,10 +22,8 @@ fi
 
 #check loaded already
 sPF1=$(grep -F "${g_pfnCur}" <<< "${g_defSourceFiles}")
-if [ $? -eq 0 ]; then
-    #then [ "${sPF1}" == "${g_pfnCur}" ]
-    #path file name is only one in file system.
-	return 100
+if [ "${sPF1}" == "${g_pfnCur}" ]; then
+    return 0
 fi
 
 export g_defSourceFiles=${g_defSourceFiles}$'\n'${g_pfnCur}
@@ -74,7 +72,11 @@ Nonprefetch32bVGA()
 {
     CheckCard2KeysBA "19e5:1711" "(32-bit, non-prefetchable)"
     if [ $? -ne 0 ]; then
-        return 1
+        g_sMsgCur=
+        CheckCard2KeysBA "\<Huawei .\+ Hi1710\>" "(32-bit, non-prefetchable)"
+        if [ $? -ne 0 ]; then
+            return 1
+        fi
     fi
 
     DmesgCard2KeyBA "VGA" 'BAR [0-9]\+: assigned \[mem [a-fxA-FX0-9-]\+\]'

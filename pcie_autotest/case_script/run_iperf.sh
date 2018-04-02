@@ -22,10 +22,8 @@ fi
 
 #check loaded already
 sPF1=$(grep -F "${g_pfnCur}" <<< "${g_defSourceFiles}")
-if [ $? -eq 0 ]; then
-    #then [ "${sPF1}" == "${g_pfnCur}" ]
-    #path file name is only one in file system.
-	return 100
+if [ "${sPF1}" == "${g_pfnCur}" ]; then
+    return 0
 fi
 
 export g_defSourceFiles=${g_defSourceFiles}$'\n'${g_pfnCur}
@@ -117,7 +115,7 @@ RunIperf()
             set m_nStatusProc 3
         }
     '
-    RunACmdsRemote "${varDicMCLogin}" g_loadSourceFile f_sCmd m_dic "${nCols}" m_dicValue "${f_nWait}" m_sTrapRuned "${bKillProc}" "${flLog}"
+    RunACmdsRemote "${varDicMCLogin}" "" "${g_loadSourceFile}" f_sCmd m_dic "${nCols}" m_dicValue "${f_nWait}" m_sTrapRuned "${bKillProc}" "${flLog}"
     fi
 
     #####################
@@ -214,7 +212,7 @@ RunIperfUser()
         g_sMsgCur="remote ip is empty"
         g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
         OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${g_flLog}" false
-        return 1
+        return ${g_nFail}
     fi
 
     grep -q "^[0-9]\+\$" <<< "${nNetPort}"
@@ -222,7 +220,7 @@ RunIperfUser()
         g_sMsgCur="net port need number"
         g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
         OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${g_flLog}" false
-        return 1
+        return ${g_nFail}
     fi
 
     #####################
@@ -234,7 +232,7 @@ RunIperfUser()
             g_sMsgCur="net port need 0 or 1 for ${sCardName}"
             g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
             OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${g_flLog}" false
-            return 1
+            return ${g_nFail}
         fi
 
         sDriverName=ixgbe
@@ -244,17 +242,20 @@ RunIperfUser()
         g_sMsgCur="card[${sCardName}] not defined"
         g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
         OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${g_flLog}" false
-        return 1
+        return ${g_nFail}
         ;;
     esac
     if [ $? -ne 0 ]; then
         g_sMsgCur="card[${sCardName}] not exist"
         g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
         OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${g_flLog}" false
-        return 1
+        return ${g_nFail}
     fi
 
     InitNicPair "${g_varDicBoard1}" "${g_varDicBoard2}" "${sDriverName}" "${sCardName}" "${g_flLog}"
+    if [ $? -ne 0 ]; then
+        return ${g_nFail}
+    fi
 
     #####################
     local sIP2
@@ -285,7 +286,7 @@ RunIperfUser()
         g_sMsgCur="server not ready"
         g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
         OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${g_flLog}" false
-        return 1
+        return ${g_nFail}
     fi
     fi
 
@@ -295,9 +296,9 @@ RunIperfUser()
         g_sMsgCur="RunIperf failed"
         g_sHeadCurLine=$(printf "%s[%3d]%s[%3d]" "${FUNCNAME[1]}" "${BASH_LINENO[0]}" "${FUNCNAME[0]}" ${LINENO})
         OutLogHead 1 "" "${g_sHeadCurLine}" "${g_sMsgCur}" "${g_flLog}" false
-        return 1
+        return ${g_nFail}
     fi
 
-    return 0
+    return ${g_nPass}
 }
 
