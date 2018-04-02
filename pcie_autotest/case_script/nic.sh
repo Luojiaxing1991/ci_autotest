@@ -23,7 +23,7 @@ fi
 #check loaded already
 sPF1=$(grep -F "${g_pfnCur}" <<< "${g_defSourceFiles}")
 if [ "${sPF1}" == "${g_pfnCur}" ]; then
-	return 100
+    return 0
 fi
 
 export g_defSourceFiles=${g_defSourceFiles}$'\n'${g_pfnCur}
@@ -67,16 +67,23 @@ InitNicPair()
 
     #####################
     if ${f_bRealDo2}; then
+    local flKnow=~/.ssh/known_hosts
+    if [ -f "${flKnow}" ]; then
+        rm "${flKnow}"
+    fi
+
     declare -A m_dicNicName1=()
     GetNicNameRemote "${varDicBoard1}" "${sDriverName}" "${sCardName}" m_dicNicName1 "${flLog}"
+    declare -p m_dicNicName1
 
     declare -A m_dicNicName2=()
     GetNicNameRemote "${varDicBoard2}" "${sDriverName}" "${sCardName}" m_dicNicName2 "${flLog}"
-
-    declare -p m_dicNicName1
     declare -p m_dicNicName2
 
     NicNamePair "${varDicBoard1}" "${varDicBoard2}" m_dicNicName1 m_dicNicName2 m_dicNicPair "${flLog}"
+    if [ $? -ne 0 ]; then
+        return 1
+    fi
     declare -p m_dicNicPair
 
     declare -A m_dicIndexT=()
@@ -85,9 +92,6 @@ InitNicPair()
     
     SetIPByPairNicName m_dicNicName2 m_dicIndexT m_dicNicPair g_dicIPs2
     NicEthEnableRemote "${varDicBoard2}" m_dicNicName2 "${flLog}"
-
-    declare -p m_dicNicName1
-    declare -p m_dicNicName2
     else
     declare -A m_dicNicName1='([enP2p249s0f1]="" [enP2p249s0f0]="" )'
     declare -A m_dicNicName2='([enP2p249s0f1]="" [enP2p249s0f0]="" )'

@@ -22,10 +22,8 @@ fi
 
 #check loaded already
 sPF1=$(grep -F "${g_pfnCur}" <<< "${g_defSourceFiles}")
-if [ $? -eq 0 ]; then
-    #then [ "${sPF1}" == "${g_pfnCur}" ]
-    #path file name is only one in file system.
-	return 100
+if [ "${sPF1}" == "${g_pfnCur}" ]; then
+    return 0
 fi
 
 export g_defSourceFiles=${g_defSourceFiles}$'\n'${g_pfnCur}

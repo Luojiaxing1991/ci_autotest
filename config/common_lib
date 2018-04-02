@@ -477,13 +477,9 @@ RunTable()
 
             case ${nRt1} in
             ${g_nPass})
-	        echo "Test is PASS: "${sTTitle1}
-		writePass "PCIE" "${sTESTCASE}"
                 sStatus1=${g_statusPass}
                 ;;
             ${g_nFail})
-                echo "Test is Fail: "${sTTitle1}
-		writeFail "PCIE" "${sTESTCASE}"
                 sStatus1=${g_statusFail}
                 ;;
             ${g_nBlock})
